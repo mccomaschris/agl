@@ -1,0 +1,42 @@
+.nav-item {
+    @apply w-full block text-white mr-4 py-3 px-6 border-b border-green-600;
+}
+
+.nav-item:hover {
+    @apply text-white;
+}
+
+.off-canvas {
+    @apply invisible;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out;
+    -webkit-transform: translate3d(30rem, 0, 0);
+    transform: translate3d(30rem, 0, 0);
+}
+.off-canvas.active {
+    @apply visible;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+
+@screen lg {
+    .nav-item {
+        @apply w-auto inline-block mt-0 rounded py-2 px-2 mx-0 border-0;
+        transition: all .25s ease-in;
+    }
+
+    .nav-item:hover {
+        @apply bg-white text-green-500;
+    }
+
+    .off-canvas {
+        transform: translateY(0);
+    }
+}
+
+@screen xl {
+    .nav-item {
+        @apply px-3 mx-1;
+    }
+}

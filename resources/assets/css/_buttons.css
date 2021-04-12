@@ -1,0 +1,23 @@
+.btn {
+    @apply px-6 py-3 rounded text-sm font-semibold uppercase tracking-wide;
+    &:focus {
+        @apply outline-none;
+    }
+
+    &.btn-green {
+        @apply bg-green-500 text-white;
+        &:hover {
+            @apply bg-green-600
+        }
+    }
+
+    &.btn-red {
+        @apply bg-red-500 text-white;
+        &:hover {
+            @apply bg-red-900;
+        }
+    }
+}
+
+
+

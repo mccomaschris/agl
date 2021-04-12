@@ -1,0 +1,17 @@
+@import "tailwindcss/base";
+
+
+
+@import "tailwindcss/components";
+
+@import "_buttons";
+@import "_forms";
+@import "_nav";
+@import "_tables";
+@import "_utils";
+@import "_base";
+@import "tailwindcss/utilities";
+
+.large-table {
+    @apply overflow-x-auto;
+}

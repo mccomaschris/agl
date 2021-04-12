@@ -1,0 +1,3 @@
+a { text-decoration: none; }
+a { @apply text-green-500; }
+a:hover { @apply text-green-600; }

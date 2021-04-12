@@ -1,0 +1,67 @@
+.table {
+    @apply text-sm;
+    white-space: nowrap;
+    border-collapse: collapse;
+}
+
+.table tr.score {
+    @apply bg-grey-200;
+}
+
+.table th {
+    @apply bg-green-500 text-white font-normal p-2 border-b-4 border-green-600 font-semibold;
+}
+
+.table tbody tr {
+    @apply bg-white border-b text-grey-600;
+}
+
+.table-striped tr:nth-child(even) {
+    @apply bg-grey-100;
+}
+
+
+.table tr.active-record td {
+    @apply font-semibold bg-green-100 text-grey-800;
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > td {
+    @apply border border-green-800;
+}
+.table-bordered > tbody > tr > th,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > th,
+.table-bordered > tfoot > tr > td {
+    @apply border border-grey-700;
+}
+
+.table td {
+    @apply text-grey-800 px-1 py-2;
+}
+
+.table td.right-wall {
+    border-right: 4px solid theme('colors.grey.900') !important;
+}
+
+.table tr.totals td {
+    @apply bg-grey-200 text-grey-800 font-semibold;
+}
+
+td.eagle-hole { background-color: rgba(254, 225, 115, 0.5); }
+td.birdie-hole { background-color: rgba(129, 200, 162, 0.8); }
+td.par-hole { background-color: #fff; }
+td.bogey-hole { background-color: rgba(242, 118, 130, 0.8); }
+td.double-hole { background-color: rgba(	124, 171, 208, 0.5); }
+td.absent_row {
+    @apply text-grey-200 bg-black-grey border-black-grey;
+}
+
+@screen lg {
+    .table th {
+        @apply px-1 py-2;
+    }
+    .table td {
+        @apply px-1 py-3;
+    }
+}

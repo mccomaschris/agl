@@ -1,0 +1,7 @@
+# Ignore this
+# and this
+YEAR=2017
+TEAMS=6
+
+WEEK_START=2017-04-13
+WEEK_SKIP=2017-07-06
