@@ -1,23 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SiteController;
-use App\Http\Controllers\RuleController;
-use App\Http\Controllers\HistoryController;
-use App\Http\Controllers\WeekController;
-use App\Http\Controllers\HandicapController;
-use App\Http\Controllers\StandingController;
-use App\Http\Controllers\TeamPointsController;
-use App\Http\Controllers\TeamStatsController;
-use App\Http\Controllers\GroupStatsController;
-use App\Http\Controllers\PlayerScoreController;
-use App\Http\Controllers\WeekScoreController;
-use App\Http\Controllers\PlayerController;
-use App\Http\Controllers\LiveScorecardController;
-use App\Http\Controllers\MemberController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PasswordController;
-use App\Http\Controllers\WaitlistController;
 
 Route::get('/', [SiteController::class, 'index']);
 
@@ -33,6 +16,7 @@ Route::get('scores/player/{player}', [PlayerScoreController::class, 'show'])->na
 Route::get('scores/week/{week}', [WeekScoreController::class, 'show'])->name('week-score');
 Route::get('players/{user}', [PlayerController::class, 'show'])->name('player');
 Route::get('scorecard/{week?}', [LiveScorecardController::class, 'show']);
+
 
 Route::group(['auth:sanctum', 'verified'], function () {
     Route::get('members', [MemberController::class, 'index'])->name('members');

@@ -25,6 +25,6 @@ class WeekScoreController extends Controller
 
         $weekly_winners = Score::with('player')->where('foreign_key', $week->id)->where('weekly_winner', 1)->where('score_type', 'weekly_score')->get();
 
-        return view('week-score.show', compact('week', 'weeks', 'matchup_1', 'matchup_2', 'matchup_3', 'weekly_winners'));
+        return view('week-score.show-old', compact('week', 'weeks', 'matchup_1', 'matchup_2', 'matchup_3', 'weekly_winners'));
     }
 }
