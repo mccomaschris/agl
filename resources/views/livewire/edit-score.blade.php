@@ -3,7 +3,7 @@
         @if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
     </td>
     <td class="text-center"><input type="checkbox" wire:model="absent" /></td>
-    <td class="text-center"><input type="checkbox" wire:model="weekly_winner" /></td>
+    <td class="text-center"><input type="checkbox" wire:model="score.weekly_winner" /></td>
     <td class="text-center"><input type="checkbox" wire:model="sustitute" /></td>
     <td class="text-center"><input type="text" class="w-10 text-xs" wire:model="score.hole_1" /></td>
     <td class="text-center"><input type="text" class="w-10 text-xs" wire:model="score.hole_2" /></td>

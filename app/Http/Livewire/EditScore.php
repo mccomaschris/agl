@@ -53,6 +53,7 @@ class EditScore extends Component
         'score.hole_8' => 'integer|nullable',
         'score.hole_9' => 'integer|nullable',
         'score.points' => 'integer|nullable|between:0,2',
+        'score.weekly_winner' => 'integer|nullable',
     ];
 
     public function render()
