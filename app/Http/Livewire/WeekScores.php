@@ -18,7 +18,10 @@ class WeekScores extends Component
     {
         return view('livewire.week-scores', [
             'week' => $this->week,
-            'weeks' => Week::where('year_id', $this->week->year_id)->orderBy('week_order', 'desc')->get()
+            'weeks' => Week::where('year_id', $this->week->year_id)->orderBy('week_order', 'desc')->get(),
+            'matchup_1' => $this->week->matchup('a'),
+            'matchup_2' => $this->week->matchup('b'),
+            'matchup_3' => $this->week->matchup('c'),
         ]);
     }
 }

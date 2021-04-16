@@ -3,10 +3,10 @@
 @section('content')
 <div class="container mx-auto">
 	<h1 class="mb-8 font-bold text-3xl">Quick Tools</h1>
-	
+
 	<div class="flex items-center">
 		<div>
-			<a href="{{ route('admin.week-scores', ['$week' => $last_week->id]) }}" class="btn btn-green">Update Last Week's Scores</a>
+			<a href="{{ route('admin.week-scores', ['week' => $last_week->id]) }}" class="btn btn-green">Update Last Week's Scores</a>
 		</div>
 		<div class="ml-4">
 			<button data-controller="update-button" data-update-button-url="/admin/cache" data-action="update-button#update" class="btn btn-green">Clear Cache</button>

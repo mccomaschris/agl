@@ -1,4 +1,5 @@
-@extends('layouts.admin')
+
+@extends('layouts.default')
 
 @section('content')
 <div class="px-8">
@@ -12,7 +13,7 @@
 			<div class="relative">
 				<select onchange="location = this.value;">
 					@foreach($weeks as $item)
-						<option value="{{ route('admin.week-scores', ['$week' => $item->id]) }}" {{ ($week->id == $item->id) ? 'selected' : ''}}>
+						<option value="{{ route('admin.week-scores', ['week' => $item->id]) }}" {{ ($week->id == $item->id) ? 'selected' : ''}}>
 							Scores for Week {{ $item->week_order }} ({{ date('F d, Y', strtotime($item->week_date)) }})
 						</option>
 					@endforeach
