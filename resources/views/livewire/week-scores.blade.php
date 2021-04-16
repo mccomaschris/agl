@@ -60,7 +60,7 @@
                     @include('_parts.week-score-head')
                 @endadmin
 
-                @foreach ($matchup_1 as $score)
+                @foreach ($matchup_2 as $score)
                     @admin
                         @livewire('edit-score', ['scoreId' => $score->id])
                     @else
@@ -100,7 +100,7 @@
                     @include('_parts.week-score-head')
                 @endadmin
 
-                @foreach ($matchup_1 as $score)
+                @foreach ($matchup_3 as $score)
                     @admin
                         @livewire('edit-score', ['scoreId' => $score->id])
                     @else
