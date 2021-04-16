@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Score;
 use App\Models\Week;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -22,6 +23,7 @@ class WeekScores extends Component
             'matchup_1' => $this->week->matchup('a'),
             'matchup_2' => $this->week->matchup('b'),
             'matchup_3' => $this->week->matchup('c'),
+            'weekly_winners' => Score::with('player')->where('foreign_key', $this->week->id)->where('weekly_winner', 1)->where('score_type', 'weekly_score')->get(),
         ]);
     }
 }
