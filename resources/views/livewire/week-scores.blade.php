@@ -54,28 +54,39 @@
         <h3 class="lg:text-xl mb-2 font-semibold">Matchup #2</h3>
         <div class="overflow-x-scroll">
             <table class="table table-bordered w-full mb-8">
-                @include('_parts.week-score-head')
-                @foreach ($matchup_2 as $score)
-                    @if (($loop->index + 1) % 2 == 0)
-                        <tr style="border-bottom: 4px solid #333;" id="{{ $score->player_id }}">
+                @admin
+                    @include('_parts.week-score-edit-head')
+                @else
+                    @include('_parts.week-score-head')
+                @endadmin
+
+                @foreach ($matchup_1 as $score)
+                    @admin
+                        @livewire('edit-score', ['scoreId' => $score->id])
                     @else
-                        <tr id="{{ $score->player_id }}">
-                    @endif
-                        <td>Team #{{ $score->team_name }}</td>
-                        <td><a href="{{ route('player-score', ['player' => $score->player_id]) }}">{{ $score->player_name }}</a>
-                             @if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
-                        </td>
-                        <td class="text-center">{{ $score->gross > 0 ? $score->gross - $score->net : '' }}</td>
 
-						@if ($score->absent)
-							@include('_parts.absent-row', ['colspan' => 19])
-						@elseif ($score->injury)
-							@include('_parts.injury-row', ['colspan' => 19])
-						@else
-							@include('_parts.week-score-row', ['score' => $score])
-						@endif
-                    </tr>
+                        @if (($loop->index + 1) % 2 == 0)
+                            <tr style="border-bottom: 4px solid #333;" id="{{ $score->player_id }}">
+                        @else
+                            <tr id="{{ $score->player_id }}">
+                        @endif
+                            <td>Team #{{ $score->team_name }}</td>
+                            <td><a href="{{ route('player-score', ['player' => $score->player_id]) }}">{{ $score->player_name }}</a>
+                                @if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
+                            </td>
+                            <td class="text-center">{{ $score->gross > 0 ? $score->gross - $score->net : '' }}</td>
 
+                            @if ($score->absent)
+                                @include('_parts.absent-row', ['colspan' => 19])
+                            @elseif ($score->injury)
+                                @include('_parts.injury-row', ['colspan' => 19])
+                            @elseif (Auth::user() && Auth::user()->isAdmin())
+
+                            @else
+                                @include('_parts.week-score-row', ['score' => $score])
+                            @endif
+                        </tr>
+                    @endadmin
                 @endforeach
             </table>
         </div>
@@ -83,28 +94,39 @@
         <h3 class="lg:text-xl mb-2 font-semibold">Matchup #3</h3>
         <div class="overflow-x-scroll">
             <table class="table table-bordered w-full mb-8">
-                @include('_parts.week-score-head')
-                @foreach ($matchup_3 as $score)
-                    @if (($loop->index + 1) % 2 == 0)
-                        <tr style="border-bottom: 4px solid #333;" id="{{ $score->player_id }}">
+                @admin
+                    @include('_parts.week-score-edit-head')
+                @else
+                    @include('_parts.week-score-head')
+                @endadmin
+
+                @foreach ($matchup_1 as $score)
+                    @admin
+                        @livewire('edit-score', ['scoreId' => $score->id])
                     @else
-                        <tr id="{{ $score->player_id }}">
-                    @endif
-                        <td>Team #{{ $score->team_name }}</td>
-                        <td><a href="{{ route('player-score', ['player' => $score->player_id]) }}">{{ $score->player_name }}</a>
-                             @if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
-                        </td>
-                        <td class="text-center">{{ $score->gross > 0 ? $score->gross - $score->net : '' }}</td>
 
-						@if ($score->absent)
-							@include('_parts.absent-row', ['colspan' => 19])
-						@elseif ($score->injury)
-							@include('_parts.injury-row', ['colspan' => 19])
-						@else
-							@include('_parts.week-score-row', ['score' => $score])
-						@endif
-                    </tr>
+                        @if (($loop->index + 1) % 2 == 0)
+                            <tr style="border-bottom: 4px solid #333;" id="{{ $score->player_id }}">
+                        @else
+                            <tr id="{{ $score->player_id }}">
+                        @endif
+                            <td>Team #{{ $score->team_name }}</td>
+                            <td><a href="{{ route('player-score', ['player' => $score->player_id]) }}">{{ $score->player_name }}</a>
+                                @if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
+                            </td>
+                            <td class="text-center">{{ $score->gross > 0 ? $score->gross - $score->net : '' }}</td>
 
+                            @if ($score->absent)
+                                @include('_parts.absent-row', ['colspan' => 19])
+                            @elseif ($score->injury)
+                                @include('_parts.injury-row', ['colspan' => 19])
+                            @elseif (Auth::user() && Auth::user()->isAdmin())
+
+                            @else
+                                @include('_parts.week-score-row', ['score' => $score])
+                            @endif
+                        </tr>
+                    @endadmin
                 @endforeach
             </table>
         </div>
