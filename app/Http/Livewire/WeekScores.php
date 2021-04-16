@@ -4,12 +4,17 @@ namespace App\Http\Livewire;
 
 use App\Models\Score;
 use App\Models\Week;
-use Carbon\Carbon;
 use Livewire\Component;
 
 class WeekScores extends Component
 {
+    public $weekId;
     public $week;
+
+    public function mount($weekId)
+    {
+        $this->week = Week::find($weekId);
+    }
 
     protected $rules = [
         'week' => 'required',

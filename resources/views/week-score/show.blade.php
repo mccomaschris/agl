@@ -1,5 +1,5 @@
 @extends('layouts.default')
 
 @section('content')
-	<livewire:week-scores :week="$week" />
+    @livewire('week-scores', ['weekId' => $week->id])
 @endsection
