@@ -1,0 +1,12 @@
+{
+    "tighten-lint.exec": "/usr/bin/tlint",
+    "tighten-lint.defaultSeverity": "warning",
+    "tighten-lint.only": [
+        "AlphabeticalImports",
+        "NoInlineVarDocs",
+        "ImportFacades"
+    ],
+    "tighten-lint.severities": {
+        "NoInlineVarDocs": "info"
+    }
+}

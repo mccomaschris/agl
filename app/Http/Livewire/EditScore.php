@@ -18,23 +18,10 @@ class EditScore extends Component
     public $score;
     public $gross = 0;
 
-    public function mount($scoreId)
+    public function mount( $scoreId)
     {
         $this->score = Score::find($scoreId);
-    }
-
-    public function save()
-    {
-        $this->score->save();
-
-        $player = Player::find($this->score->player_id);
-        $year = Year::find($player->year_id);
-
-        UpdateRoundStats::withChain([
-            new UpdatePlayerStats($this->score->player),
-            new UpdateHandicaps($this->score->player),
-            new UpdateRecordVsOpponents($year)
-        ])->dispatch($this->score);
+        $this->gross = $this->score->gross;
     }
 
     public function countGross()
@@ -54,7 +41,23 @@ class EditScore extends Component
         'score.hole_9' => 'integer|nullable',
         'score.points' => 'integer|nullable|between:0,2',
         'score.weekly_winner' => 'integer|nullable',
+        'score.absent' => 'integer|nullable',
+        'score.substitute_id' => 'integer|nullable',
     ];
+
+    public function save()
+    {
+        $this->score->save();
+
+        $player = Player::find($this->score->player_id);
+        $year = Year::find($player->year_id);
+
+        UpdateRoundStats::withChain([
+            new UpdatePlayerStats($this->score->player),
+            new UpdateHandicaps($this->score->player),
+            new UpdateRecordVsOpponents($year)
+        ])->dispatch($this->score);
+    }
 
     public function render()
     {
