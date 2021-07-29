@@ -28,9 +28,11 @@
                 {{ $player->user->last_name }}@if(!$loop->last), @endif
             @endforeach
             <br>
+            <div class="block lg:hidden">
             @foreach ($team->players as $player)
                 {{ $player->points }}@if (!$loop->last)-@endif
             @endforeach
+            </div>
         </span>
         </td>
         <td class="text-center hidden lg:table-cell">{{ $team->won }} </td>
