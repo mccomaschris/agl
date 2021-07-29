@@ -65,7 +65,7 @@ class Player extends Model
 
     public function getTenAttribute()
     {
-        $scores = Score::where('player_id', $this->id)->where('score_type', 'weekly_score')->orderBy('gross', 'asc')->limit(10)->avg('gross');
+        $scores = Score::where('player_id', $this->id)->where('score_type', 'weekly_score')->where('gross', '>', 0)->orderBy('gross', 'asc')->limit(10)->avg('gross');
         return $scores - 37;
     }
 
