@@ -31,7 +31,7 @@
   <div class="overflow-x-scroll">
       @include('_parts.handicap-table', ['players' => $ones])
   </div>
-  
+
   <h3 class="lg:text-xl mb-2 mt-6">Two Players</h3>
   <div class="overflow-x-scroll">
       @include('_parts.handicap-table', ['players' => $twos])

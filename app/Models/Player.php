@@ -12,6 +12,8 @@ class Player extends Model
 
     protected $with = ['user'];
 
+    protected $appends = ['ten'];
+
     public function user()
     {
         return $this->belongsTo(User::class)->orderBy('name', 'asc');
@@ -59,6 +61,12 @@ class Player extends Model
             ->where('user_id', $this->user_id)
             ->orderBy('years.name', 'desc')
             ->get();
+    }
+
+    public function getTenAttribute()
+    {
+        $scores = Score::where('player_id', $this->id)->where('score_type', 'weekly_score')->orderBy('gross', 'asc')->limit(10)->avg('gross');
+        return $scores - 37;
     }
 
     /**
