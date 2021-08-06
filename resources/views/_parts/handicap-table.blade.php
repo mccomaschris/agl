@@ -10,9 +10,7 @@
 			<th class="text-center">18 Hole</th>
 			<th class="text-center">New Year</th>
 			<th class="text-center" colspan="2">Full Handicap/Rank</th>
-            @admin
-                <th class="text-center">Ten Best</th>
-            @endadmin
+            <th class="text-center">Ten Best Avg</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,9 +26,7 @@
 				<td class="text-center">{{ $player->hc_next_year }}</td>
 				<td class="text-center">{{ number_format($player->hc_full, 4, '.', ',') }}</td>
 				<td class="text-center" width="5%">{{ $player->hc_full_rank }}</td>
-                @admin
-                    <td class="text-center">{{ number_format($player->ten, 4, '.', ',') }}</td>
-                @endadmin
+                <td class="text-center">{{ number_format($player->ten, 4, '.', ',') }}</td>
 			</tr>
 		@endforeach
 	</tbody>

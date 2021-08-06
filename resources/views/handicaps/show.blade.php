@@ -22,11 +22,6 @@
 
 @section('content')
 
-{{-- <div class="text-xs bg-grey-200 border-l-4 border-green-500 p-4 leading-medium lg:leading-normal mb-6" role="alert">
-  <p class="mb-2">The <strong>Full Handicap</strong> is a player's handicap based on the best half of all scores for the season. This is the handicap used at the end of the season to determine 1, 2, 3, and 4 players for the following season.</p>
-  <p>The number in partenthesis represents that players current rank in the league based on that handicap. Players ranked 1-6 are in line to be 1 players, players ranked 7-12 are in line to be 2 players, etc.</p>
-</div> --}}
-
   <h3 class="lg:text-xl mb-2">One Players</h3>
   <div class="overflow-x-scroll">
       @include('_parts.handicap-table', ['players' => $ones])
