@@ -50,7 +50,7 @@ class AdminController extends Controller
         $year = Year::where('active', 1)->first();
         $players = Player::with('user')->where('year_id', $year->id)->orderBy('position')->get();
 
-        $callback = function() use ($weeks) {
+        $callback = function() use ($players) {
             $FH = fopen('php://output', 'w');
 
             fputcsv($FH, array('Player', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'));
