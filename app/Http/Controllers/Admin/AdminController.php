@@ -48,7 +48,7 @@ class AdminController extends Controller
 		];
 
         $year = Year::where('active', 1)->first();
-        $players = Player::where('year_id', $year->id)->orderBy('position')->get();
+        $players = Player::with('user')->where('year_id', $year->id)->orderBy('position')->get();
 
         $callback = function() use ($weeks) {
             $FH = fopen('php://output', 'w');
