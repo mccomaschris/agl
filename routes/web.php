@@ -42,6 +42,7 @@ Route::group(['auth:sanctum', 'verified'], function () {
 
 Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
     Route::get('/', 'App\Http\Controllers\Admin\AdminController@index');
+    Route::get('/top10', 'App\Http\Controllers\Admin\AdminController@topten');
     Route::post('scores/{score}', 'App\Http\Controllers\Admin\ScoreController@update')->name('admin.scores.update');
     Route::get('scores/week/{week}/edit', 'App\Http\Controllers\Admin\WeekScoreController@edit')->name('admin.week-scores');
 
