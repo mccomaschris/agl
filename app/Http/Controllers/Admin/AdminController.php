@@ -46,7 +46,7 @@ class AdminController extends Controller
 
         foreach ($players as $player) {
             $scores = Score::where('score_type', 'weekly_score')->whereNotNull('hole_1')->where('player_id', $player->id)->orderBy('gross')->get();
-            $output = array($player->user_id);
+            $output = array($player->user->name);
 
             foreach ($scores as $score) {
                 $output[] = $score->gross;
