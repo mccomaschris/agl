@@ -8,7 +8,7 @@
         <div>
             {{-- <p><strong>Week One Starts May 14th</strong></p> --}}
             <p class="-mt-2">We will be playing 20 weeks. The last week of the regular season will be September 16.</p>
-            <p class="-mt-2">For 2021 we are back to the original sand bunker rules. If you hit your ball in a bunker you must play from the sand. <strong>DO NOT</strong> remove it from the bunker before playing it.</p>
+            <p class="mt-3">For 2021 we are back to the original sand bunker rules. If you hit your ball in a bunker you must play from the sand. <strong>DO NOT</strong> remove it from the bunker before playing it.</p>
             <p class="md:block mt-3">Week {{ $last_week->week_order }} scores are up! You can checkout the week's <a href="{{ route('week-score', ['week' => $last_week->id]) }}" class="font-semibold text-green-bright underline">results</a>!</p>
             <p class="hidden md:block mt-3">You can also check out <a href="{{ route('team-points', ['year' => $activeYear->name]) }}" class="font-semibold text-green-bright underline">team points</a>, <a href="{{ route('handicaps', ['year' => $activeYear->name]) }}"  class="font-semibold text-green-bright underline">handicaps</a>, <a href="{{ route('group-stats', ['year' => $activeYear->name]) }}" class="font-semibold text-green-bright underline">individual stats by group</a>, and <a href="{{ route('team-stats', ['year' => $activeYear->name]) }}"  class="font-semibold text-green-bright underline">individual stats by team</a>.</p>
         </div>
