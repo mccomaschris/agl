@@ -8,6 +8,7 @@ use App\Models\Score;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Models\Player;
+use Illuminate\Support\Facades\Response;
 
 class AdminController extends Controller
 {
@@ -37,22 +38,36 @@ class AdminController extends Controller
     }
 
     public function topten() {
+
+        $headers = [
+			'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+			'Content-type'        => 'text/csv',
+			'Content-Disposition' => 'attachment; filename=topten.csv',
+			'Expires'             => '0',
+			'Pragma'              => 'public'
+		];
+
         $year = Year::where('active', 1)->first();
         $players = Player::where('year_id', $year->id)->orderBy('position')->get();
 
-        $FH = fopen('php://output', 'w');
+        $callback = function() use ($weeks) {
+            $FH = fopen('php://output', 'w');
 
-        fputcsv($FH, array('Player', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'));
+            fputcsv($FH, array('Player', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'));
 
-        foreach ($players as $player) {
-            $scores = Score::where('score_type', 'weekly_score')->whereNotNull('hole_1')->where('player_id', $player->id)->orderBy('gross')->get();
-            $output = array($player->user->name);
+            foreach ($players as $player) {
+                $scores = Score::where('score_type', 'weekly_score')->whereNotNull('hole_1')->where('player_id', $player->id)->orderBy('gross')->get();
+                $output = array($player->user->name);
 
-            foreach ($scores as $score) {
-                $output[] = $score->gross;
+                foreach ($scores as $score) {
+                    $output[] = $score->gross;
+                }
+
+                fputcsv($FH, $output);
             }
+            fclose($FH);
+        };
 
-            fputcsv($FH, $output);
-        }
+        return Response::stream($callback, 200, $headers);
     }
 }
