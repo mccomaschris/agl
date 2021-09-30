@@ -14,7 +14,7 @@
 
 @section('page-heading')
 <div class="flex items-center lg:justify-center mx-auto mt-6 lg:mt-8 mb-2 lg:mb-4 text-darkest-grey">
-    <span class="text-lg lg:text-2xl font-bold">Semifinal Matchups</span>
+    <span class="text-lg lg:text-2xl font-bold">Final Matchups</span>
 </div>
 @endsection
 
@@ -24,71 +24,38 @@
 
 @section('content')
 <div class="flex flex-wrap mb-4">
+	<div class="w-full lg:w-1/3"></div>
     <div class="w-full lg:w-1/3 mb-4 lg:pr-4">
         <table class="table w-full mx-auto table-striped">
             <thead>
                 <tr class="course">
                     <th class="text-center rounded-tl" colspan="2">Team 4</th>
-                    <th class="text-center rounded-tr" colspan="2">Team 2</th>
+                    <th class="text-center rounded-tr" colspan="2">Team 1</th>
                 </tr>
             </thead>
             <tr>
                 <td width="40%">Vance Bunn</td>
                 <td width="10%" class="text-center">2</td>
-                <td width="40%">Bill Clay</td>
-                <td width="10%" class="text-center">2</td>
+                <td width="40%">Rick Reed</td>
+                <td width="10%" class="text-center">-1</td>
             </tr>
             <tr class="border-b border-grey-900">
                 <td class="">Craig Edwards</td>
                 <td class="text-center">7</td>
-                <td class="">Mike Cartwright</td>
-                <td class="text-center">4</td>
+                <td class="">Danny Freeman</td>
+                <td class="text-center">5</td>
             </tr>
             <tr>
                 <td width="40%">Tyler Barker</td>
                 <td width="10%" class="text-center">4</td>
-                <td width="40%">Matt McComas</td>
-                <td width="10%" class="text-center">5</td>
+                <td width="40%">Sean Adkins</td>
+                <td width="10%" class="text-center">8</td>
             </tr>
             <tr>
                 <td width="40%">Mark Cutlip</td>
                 <td width="10%" class="text-center">13</td>
-                <td width="40%">Mike McComas</td>
-                <td width="10%" class="text-center">18</td>
-            </tr>
-        </table>
-    </div>
-    <div class="w-full lg:w-1/3 mb-4 lg:pr-4">
-        <table class="table w-full mx-auto table-striped">
-            <thead>
-                <tr class="course">
-                    <th class="text-center rounded-tl" colspan="2">Team 1</th>
-                    <th class="text-center rounded-tr" colspan="2">Team 5</th>
-                </tr>
-            </thead>
-            <tr>
-                <td width="40%">Rick Reed</td>
-                <td width="10%" class="text-center">-1</td>
-                <td width="40%">Randy Keeney</td>
-                <td width="10%" class="text-center">4</td>
-            </tr>
-            <tr class="border-b border-grey-900">
-                <td class="">Danny Freeman</td>
-                <td class="text-center">5</td>
-                <td class="">Brian McComas</td>
-                <td class="text-center">5</td>
-            </tr>
-            <tr>
-                <td width="40%">Sean Adkins</td>
-                <td width="10%" class="text-center">8</td>
-                <td width="40%">Tim Mills</td>
-                <td width="10%" class="text-center">7</td>
-            </tr>
-            <tr>
                 <td width="40%">Tres Baumgarner</td>
                 <td width="10%" class="text-center">9</td>
-                <td width="40%">Lew Baumgarner</td>
-                <td width="10%" class="text-center">14</td>
             </tr>
         </table>
     </div>
