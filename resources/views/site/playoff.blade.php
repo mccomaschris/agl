@@ -13,9 +13,9 @@
 @endsection
 
 @section('page-heading')
-<div class="flex items-center lg:justify-center mx-auto mt-6 lg:mt-8 mb-2 lg:mb-4 text-darkest-grey">
+{{-- <div class="flex items-center lg:justify-center mx-auto mt-6 lg:mt-8 mb-2 lg:mb-4 text-darkest-grey">
     <span class="text-lg lg:text-2xl font-bold">Final Matchups</span>
-</div>
+</div> --}}
 @endsection
 
 @section('jumbotron')
@@ -24,7 +24,7 @@
 
 @section('content')
 <div class="flex flex-wrap mb-4">
-	<div class="w-full lg:w-1/3"></div>
+	{{-- <div class="w-full lg:w-1/3"></div>
     <div class="w-full lg:w-1/3 mb-4 lg:pr-4">
         <table class="table w-full mx-auto table-striped">
             <thead>
@@ -59,7 +59,7 @@
             </tr>
         </table>
     </div>
-    <div class="w-full lg:w-1/3"></div>
+    <div class="w-full lg:w-1/3"></div> --}}
 </div>
 <div class="flex flex-wrap lg:-mx-4 mb-4">
   <div class="w-full lg:w-2/3 pr-0 lg:px-4 mb-4 lg:mb-0">
