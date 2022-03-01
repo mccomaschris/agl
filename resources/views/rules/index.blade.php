@@ -50,6 +50,10 @@
                 <li><strong>September</strong> - At the dinner after the League Championship we will conduct the election of new officers as well as pass out the winnings for the Championship and year-long winnings.</li>
             </ul>
 
+            <h4 class="mb-2" id="snowball">Snowball Tournament</h4>
+            <p class="mb-3">If a member of your team is missing the 3 players rotate taking the 4th shot every time.</p>
+            <p class="mb-3">To determine the Snowball Tournament winner average the handicap of all golfers present for each team and subtract that average from their gross score.</p>
+
             <h3 class="font-semibold mb-2 lg:text-xl mt-6" id="teams">Teams</h3>
             <p class="mb-3">There are six (6) teams composed of 4 players each.</p>
             <p class="mb-3">At the beginning of each year, players are grouped into one of four groups, "One" players through "Four" players. Returning players handicap is based on their handicap at the end of the previous season (not including playoff rounds). The six players with the lowest handicap will be the #1 players, the next six will be the #2 players, etc. In the event of a tie in handicap to determine the rank of a player, the lowest handicap to four decimal places will be used to determine the ranking. For example, if there are two players that could be #3 players and one player has a handicap of 9.33 and another has 9.35, the 9.33 player will be the #3 player and the 9.35 will be a #4 player. If a tie persists to two decimal points (both players are 9.33), the #3 player will be determined by calculating the lowest HC based on the average of ALL regular season scores of the previous year's matches. If this does not resolve the tie, the #3 player will be drawn out of a hat.</p>
