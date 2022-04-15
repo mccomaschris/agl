@@ -2,16 +2,15 @@
 
 namespace App\Console\Commands;
 
-use App\Team;
-use App\User;
-use App\Week;
-use App\Year;
-use App\Score;
-use App\Player;
-use Carbon\Carbon;
+use App\Jobs\UpdateHandicaps;
+use App\Jobs\UpdatePlayerStats;
+use App\Jobs\UpdateRecordVsOpponents;
+use App\Jobs\UpdateRoundStats;
+use App\Models\Year;
+use App\Models\Week;
+use App\Models\Score;
+use App\Models\Player;
 use Illuminate\Console\Command;
-use \Illuminate\Database\Eloquent\Factory;
-use App\PlayerRecord;
 
 class Testing extends Command {
 	/**
@@ -43,31 +42,17 @@ class Testing extends Command {
 	 * @return mixed
 	 */
 	public function handle() {
+        $scores = Score::where('score_type', 'weekly_score')->where('foreign_key', 163)->get();
 
-		$week = Week::find(44);
-		$year = Year::where('id', $week->year_id)->first();
-        $weeks = Week::where('year_id', $year->id)->where('week_date', '>=', $week->week_date)->orderBy('week_date', 'asc')->get();
+        foreach ( $scores as $score ) {
+            $player = Player::find($score->player_id);
+            $year = Year::find($player->year_id);
 
-        $days = -7;
-
-        foreach ($weeks as $week) {
-			$old = Carbon::parse($week->week_date);
-            $new = Carbon::parse($week->week_date)->addDays($days);
-
-			
-			if ($new == Carbon::parse($year->skip_date)) {
-				$this->info("yes");
-				$new = Carbon::parse($new)->addDays($days);
-			}
-
-			$this->info('Old: ' . $old . ' - ' . ' New: '. $new);
-            // if (Carbon::parse($week->week_date)->addDays($days) == Carbon::parse($year->skip_date)) {
-            //     $week->week_date = Carbon::parse($week->week_date)->addDays($days);
-            // }
-
-            // $week->save();
-
+            UpdateRoundStats::withChain([
+                new UpdatePlayerStats($score->player),
+                new UpdateHandicaps($score->player),
+                new UpdateRecordVsOpponents($year)
+            ])->dispatch($score);
         }
-    
 	}
 }
