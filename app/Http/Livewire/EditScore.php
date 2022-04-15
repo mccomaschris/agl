@@ -18,7 +18,7 @@ class EditScore extends Component
     public $score;
     public $gross = 0;
 
-    public function mount( $scoreId)
+    public function mount( $scoreId )
     {
         $this->score = Score::find($scoreId);
         $this->gross = $this->score->gross;
@@ -39,11 +39,15 @@ class EditScore extends Component
         'score.hole_7' => 'integer|nullable',
         'score.hole_8' => 'integer|nullable',
         'score.hole_9' => 'integer|nullable',
-        'score.points' => 'integer|nullable|between:0,2',
+        'score.points' => 'integer|nullable',
         'score.weekly_winner' => 'integer|nullable',
         'score.absent' => 'integer|nullable',
         'score.substitute_id' => 'integer|nullable',
     ];
+
+    public function formatScore($score) {
+        return number_format($score, 0);
+    }
 
     public function save()
     {

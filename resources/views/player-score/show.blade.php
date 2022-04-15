@@ -295,10 +295,6 @@
 			</div>
 			@endif
 			@endif
-			<div class="w-full mb-6 mt-6">
-				<h3 class="font-semibold uppercase text-black text-base lg:text-lg">{{ $player->team->year->name }} Makeups</h3>
-				<span class="block text-green-500 text-2xl lg:text-3xl font-bold">{{ $player->make_ups }}</span>
-			</div>
         </div>
 
       </div>

@@ -1,5 +1,5 @@
 
-@extends('layouts.default')
+@extends('layouts.admin')
 
 @section('content')
 <div class="px-8">
@@ -44,14 +44,14 @@
 						<th class="px-1 pt-6 pb-4 text-center">7</th>
 						<th class="px-1 pt-6 pb-4 text-center">8</th>
 						<th class="px-1 pt-6 pb-4 text-center">9</th>
-						<th class="px-1 pt-6 pb-4 text-center">SCR</th>
+						<th class="px-1 pt-6 pb-4 text-center">GROSS</th>
 						<th class="px-1 pt-6 pb-4 text-center">PTS</th>
 						<th class="px-1 pt-6 pb-4"></th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach($matchup_1 as $score)
-						@include('admin.week-score.score-row')
+                        <livewire:edit-score :scoreId="$score->id" />
 					@endforeach
 				</tbody>
 			</table>
@@ -76,14 +76,14 @@
 						<th class="px-1 pt-6 pb-4 text-center">7</th>
 						<th class="px-1 pt-6 pb-4 text-center">8</th>
 						<th class="px-1 pt-6 pb-4 text-center">9</th>
-						<th class="px-1 pt-6 pb-4 text-center">SCR</th>
+						<th class="px-1 pt-6 pb-4 text-center">GROSS</th>
 						<th class="px-1 pt-6 pb-4 text-center">PTS</th>
 						<th class="px-1 pt-6 pb-4"></th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach($matchup_2 as $score)
-						@include('admin.week-score.score-row')
+                        <livewire:edit-score :scoreId="$score->id" />
 					@endforeach
 				</tbody>
 			</table>
@@ -108,14 +108,14 @@
 						<th class="px-1 pt-6 pb-4 text-center">7</th>
 						<th class="px-1 pt-6 pb-4 text-center">8</th>
 						<th class="px-1 pt-6 pb-4 text-center">9</th>
-						<th class="px-1 pt-6 pb-4 text-center">SCR</th>
+						<th class="px-1 pt-6 pb-4 text-center">GROSS</th>
 						<th class="px-1 pt-6 pb-4 text-center">PTS</th>
 						<th class="px-1 pt-6 pb-4"></th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach($matchup_3 as $score)
-						@include('admin.week-score.score-row')
+                        <livewire:edit-score :scoreId="$score->id" />
 					@endforeach
 				</tbody>
 			</table>
