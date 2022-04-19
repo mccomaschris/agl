@@ -16,7 +16,7 @@
     <td class="border-t px-2 py-4 text-sm text-center"><input type="text" class="w-20 text-xs" wire:model="score.hole_9" wire:blur="countGross" /></td>
     <td class="border-t px-2 py-4 text-sm text-center">{{ number_format($gross, 0) }}</td>
     <td class="border-t px-2 py-4 text-sm text-center">
-        <select wire:model="score.points" wire:blur="save" class="block appearance-none w-full bg-grey-100 border border-grey-300 text-grey-600 p-2 rounded" name="points">
+        <select wire:model="score.points" wire:blur="save" class="block appearance-none w-14 bg-grey-100 border border-grey-300 text-grey-600 p-2 rounded" name="points">
             <option value=""></option>
             <option value="0">0</option>
             <option value="1">1</option>

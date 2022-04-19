@@ -1,7 +1,5 @@
 @import "tailwindcss/base";
 
-
-
 @import "tailwindcss/components";
 
 @import "_buttons";
@@ -14,4 +12,8 @@
 
 .large-table {
     @apply overflow-x-auto;
+}
+
+x-cloak {
+    display: none;
 }
