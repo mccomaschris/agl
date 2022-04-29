@@ -100,13 +100,13 @@ class UpdatePlayerStats implements ShouldQueue
         $player->tied = 0;
 
         $weeks = Week::where('year_id', $player->year_id)->whereDate('week_date', '<', Carbon::today()->toDateString())->pluck('id');
-        $scores = Score::where('player_id', $player->id)->where('score_type', 'weekly_score')->where('substitute_id', '0')->whereIn('foreign_key', $weeks)->get();
+        $scores = Score::where('player_id', $player->id)->where('score_type', 'weekly_score')->where('substitute', '0')->whereIn('foreign_key', $weeks)->get();
 
         foreach ($scores as $score) {
             $week_order = $score->week->week_order;
 
             if (!$score->absent && $score->hole_1) {
-                if (!$score->substitute_id) {
+                if (!$score->substitute) {
                     $points = $score->points;
                     switch ($points) {
                         case 0:
@@ -131,16 +131,16 @@ class UpdatePlayerStats implements ShouldQueue
             $player->win_pct = $player->won / ($player->won + $player->lost + $player->tied);
             $player->points = ($player->won * 2) + $player->tied;
 
-            $player->gross_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('gross', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('gross');
+            $player->gross_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('gross', '>', 0)->where('absent', 0)->where('substitute', 0)->avg('gross');
             $player->gross_par = $player->gross_average - 37;
 
-            $player->net_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('net', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('net');
+            $player->net_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('net', '>', 0)->where('absent', 0)->where('substitute', 0)->avg('net');
             $player->net_par = $player->net_average - 37;
 
-            $player->low_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('gross', '>', 0)->where('absent', 0)->where('substitute_id', 0)->min('gross');
+            $player->low_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('gross', '>', 0)->where('absent', 0)->where('substitute', 0)->min('gross');
             $player->high_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->max('gross');
 
-            $player->low_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('net', '>', 0)->where('absent', 0)->where('substitute_id', 0)->min('net');
+            $player->low_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('net', '>', 0)->where('absent', 0)->where('substitute', 0)->min('net');
             $player->high_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->max('net');
 
         }
@@ -252,7 +252,7 @@ class UpdatePlayerStats implements ShouldQueue
                         ->where('score_type', 'weekly_score')
                         ->where('gross', '>', 0)
                         ->where('absent', 0)
-                        ->where('substitute_id', 0)
+                        ->where('substitute', 0)
                         ->with('week')->get();
 
             foreach ($scores as $score) {
@@ -310,16 +310,16 @@ class UpdatePlayerStats implements ShouldQueue
 
 
                 if ($player->position == 1) {
-                    $score = Score::where('player_id', $player->id)->where('substitute_id', '>', 0)->sum('points');
+                    $score = Score::where('player_id', $player->id)->where('substitute', '>', 0)->sum('points');
                     $team->p1_points += ($player->points + $score);
                 } elseif ($player->position == 2) {
-                    $score = Score::where('player_id', $player->id)->where('substitute_id', '>', 0)->sum('points');
+                    $score = Score::where('player_id', $player->id)->where('substitute', '>', 0)->sum('points');
                     $team->p2_points += ($player->points + $score);
                 } elseif ($player->position == 3) {
-                    $score = Score::where('player_id', $player->id)->where('substitute_id', '>', 0)->sum('points');
+                    $score = Score::where('player_id', $player->id)->where('substitute', '>', 0)->sum('points');
                     $team->p3_points += ($player->points + $score);
                 } elseif ($player->position == 4) {
-                    $score = Score::where('player_id', $player->id)->where('substitute_id', '>', 0)->sum('points');
+                    $score = Score::where('player_id', $player->id)->where('substitute', '>', 0)->sum('points');
                     $team->p4_points += ($player->points + $score);
                 }
             }
