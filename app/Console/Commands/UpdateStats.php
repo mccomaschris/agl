@@ -212,7 +212,7 @@ class UpdateStats extends Command {
                 $score->save();
 
                 // Calculate Player Record
-                if (!$score->substitute_id) {
+                if (!$score->substitute) {
                     $points = $score->points;
                     switch ($points) {
                         case 0:
@@ -244,16 +244,16 @@ class UpdateStats extends Command {
                 $player->win_pct = $player->won / ($player->won + $player->lost + $player->tied);
                 $player->points = ($player->won * 2) + $player->tied;
 
-                $player->gross_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('gross', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('gross');
+                $player->gross_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('gross', '>', 0)->where('absent', 0)->where('substitute', 0)->avg('gross');
                 $player->gross_par = $player->gross_average - 37;
 
-                $player->net_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('net', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('net');
+                $player->net_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('net', '>', 0)->where('absent', 0)->where('substitute', 0)->avg('net');
                 $player->net_par = $player->net_average - 37;
 
-                $player->low_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('gross', '>', 0)->where('absent', 0)->where('substitute_id', 0)->min('gross');
+                $player->low_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('gross', '>', 0)->where('absent', 0)->where('substitute', 0)->min('gross');
                 $player->high_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->max('gross');
 
-                $player->low_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('net', '>', 0)->where('absent', 0)->where('substitute_id', 0)->min('net');
+                $player->low_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('net', '>', 0)->where('absent', 0)->where('substitute', 0)->min('net');
                 $player->high_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->max('net');
 
             }
@@ -366,7 +366,7 @@ class UpdateStats extends Command {
                         ->where('score_type', 'weekly_score')
                         ->where('gross', '>', 0)
                         ->where('absent', 0)
-                        ->where('substitute_id', 0)
+                        ->where('substitute', 0)
                         ->with('week')->get();
 
             foreach ($scores as $score) {
@@ -466,7 +466,7 @@ class UpdateStats extends Command {
             $scores = Score::where('player_id', $player->id)
                         ->whereNotNull('absent')
                         ->whereNotNull('injury')
-                        ->where('substitute_id', '0')
+                        ->where('substitute', '0')
                         ->whereNotNull('points')
                         ->where('score_type', 'weekly_score')->get();
 
@@ -493,10 +493,10 @@ class UpdateStats extends Command {
                         $opponent = Player::where('position', $player->position)->where('team_id', $week->c_first_id)->first();
                         break;
                 }
-            
+
                 $opp_score = Score::with('player')->where('player_id', $opponent->id)->where('foreign_key', $week->id)->where('score_type', 'weekly_score')->first();
 
-                // 
+                //
 
                 $this->info("Player ID " . $player->id . " vs " . $opponent->id);
 
@@ -517,7 +517,7 @@ class UpdateStats extends Command {
                     $record->save();
                 }
 
-                
+
             }
         }
 	}
