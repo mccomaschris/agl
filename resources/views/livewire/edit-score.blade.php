@@ -1,5 +1,5 @@
 <tr>
-    <td class="border-t px-2 py-4 text-sm text-left"><a href="{{ route('player-score', ['player' => $score->player_id]) }}">{{ $score->player->user->name }}</a>
+    <td id="{{ $score->id }}" class="border-t px-2 py-4 text-sm text-left"><a href="{{ route('player-score', ['player' => $score->player_id]) }}">{{ $score->player->user->name }}</a>
         @if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
     </td>
     <td class="border-t px-2 py-4 text-sm text-center"><input type="checkbox" wire:model="score.absent" /></td>

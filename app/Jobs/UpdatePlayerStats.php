@@ -100,7 +100,7 @@ class UpdatePlayerStats implements ShouldQueue
         $player->tied = 0;
 
         $weeks = Week::where('year_id', $player->year_id)->whereDate('week_date', '<', Carbon::today()->toDateString())->pluck('id');
-        $scores = Score::where('player_id', $player->id)->where('score_type', 'weekly_score')->where('substitute_id', '0')->whereIn('foreign_key', $weeks)->get();
+        $scores = Score::where('player_id', $player->id)->where('score_type', 'weekly_score')->where('substitute_id', 0)->whereIn('foreign_key', $weeks)->get();
 
         foreach ($scores as $score) {
             $week_order = $score->week->week_order;
