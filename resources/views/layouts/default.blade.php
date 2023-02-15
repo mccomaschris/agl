@@ -32,8 +32,6 @@
     <link rel="stylesheet" href="{{ mix('css/main.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
-
-
     @livewireStyles
 </head>
 <body class="h-screen font-sans mb-20 pb-10 @yield('body-css')">
@@ -55,7 +53,7 @@
                         </button>
                     </div>
                     <div class="w-full lg:flex lg:items-center lg:w-auto lg:justify-end">
-                        <div x-bind:class="{ 'active': open }" class="off-canvas h-full lg:h-auto lg:visible lg:flex bg-green-500 text-sm lg:flex-grow z-50 w-full fixed lg:static left-0 lg:left-auto lg:mt-0 pt-4 lg:pt-0">
+                        <div x-bind:class="{ 'active': open }" x-cloak class="off-canvas h-full lg:h-auto lg:visible lg:flex bg-green-500 text-sm lg:flex-grow z-50 w-full fixed lg:static left-0 lg:left-auto lg:mt-0 pt-4 lg:pt-0">
                             <a href="{{ route('team-points', ['year' => $activeYear->name]) }}" class="nav-item border-t lg:hidden">Team Points</a>
                             <a href="{{ route('handicaps', ['year' => $activeYear->name]) }}" class="nav-item lg:hidden">Handicaps</a>
                             <a href="{{ route('group-stats', ['year' => $activeYear->name]) }}" class="nav-item lg:hidden">Group Stats</a>
