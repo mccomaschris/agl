@@ -29,10 +29,17 @@
 
     {{-- <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700" rel="stylesheet"> --}}
     <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:300,400,600,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="{{ mix('css/main.css') }}">
+
+	@vite('resources/assets/css/main.css')
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     @livewireStyles
+
+	<style>
+		[x-cloak] { display: none !important; }
+	</style>
+
 </head>
 <body class="h-screen font-sans mb-20 pb-10 @yield('body-css')">
     <div id="app">
@@ -51,37 +58,62 @@
                             <svg x-on:click="open = true" x-show="open === false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="text-white fill-current h-4 w-4"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
                             <svg x-cloak x-on:click="open = false" x-show="open === true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="text-white fill-current h-4 w-4"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>
                         </button>
+						<div
+							x-cloak
+							x-show="open"
+							x-transition:enter="transition ease-out duration-200"
+							x-transition:enter-start="opacity-0 translate-y-1"
+							x-transition:enter-end="opacity-100 translate-y-0"
+							x-transition:leave="transition ease-in duration-200"
+							x-transition:leave-start="opacity-100 translate-y-0"
+							x-transition:leave-end="opacity-0 translate-y-1"
+							class="absolute z-10 right-0 w-64 mt-2 flex flex-col divide-y divide-gray-900 bg-gray-800 rounded py-6"
+						>
+							<a href="{{ route('team-points', ['year' => $activeYear->name]) }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Team Points</a>
+							<a href="{{ route('handicaps', ['year' => $activeYear->name]) }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Handicaps</a>
+							<a href="{{ route('group-stats', ['year' => $activeYear->name]) }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Group Stats</a>
+							<a href="{{ route('team-stats', ['year' => $activeYear->name]) }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Team Stats</a>
+							<a href="{{ route('standings', ['year' => $activeYear->name]) }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Standings</a>
+							<a href="{{ route('schedule', ['year' => $activeYear->name]) }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Schedule</a>
+							<a href="{{ route('rules') }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Rules</a>
+							<a href="{{ route('history') }}" class="block px-4 py-3 text-white font-semibold hover:text-white">History &amp; Records</a>
+							@if(Auth::check())
+								<a href="{{ route('waitlist.index') }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Waitlist</a>
+								<a href="{{ route('members') }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Members</a>
+								<form action="{{ route('logout') }}" method="POST" class="lg:inline-block">
+									{{ csrf_field() }}
+									<button type="submit" class="block px-4 py-3 text-white font-semibold hover:text-white" name="logout">Logout</button>
+								</form>
+								@if (Auth::user()->isAdmin())
+									<a href="/admin" class="block px-4 py-3 text-white font-semibold hover:text-white">Admin</a>
+								@endif
+							@else
+								<a href="{{ route('login') }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Login</a>
+							@endif
+						</div>
                     </div>
-                    <div class="w-full lg:flex lg:items-center lg:w-auto lg:justify-end">
-                        <div x-bind:class="{ 'active': open }" x-cloak class="off-canvas h-full lg:h-auto lg:visible lg:flex bg-green-500 text-sm lg:flex-grow z-50 w-full fixed lg:static left-0 lg:left-auto lg:mt-0 pt-4 lg:pt-0">
-                            <a href="{{ route('team-points', ['year' => $activeYear->name]) }}" class="nav-item border-t lg:hidden">Team Points</a>
-                            <a href="{{ route('handicaps', ['year' => $activeYear->name]) }}" class="nav-item lg:hidden">Handicaps</a>
-                            <a href="{{ route('group-stats', ['year' => $activeYear->name]) }}" class="nav-item lg:hidden">Group Stats</a>
-                            <a href="{{ route('team-stats', ['year' => $activeYear->name]) }}" class="nav-item lg:hidden">Team Stats</a>
-                            <a href="{{ route('standings', ['year' => $activeYear->name]) }}" class="nav-item lg:hidden">Standings</a>
-                            <a href="{{ route('schedule', ['year' => $activeYear->name]) }}" class="nav-item">Schedule</a>
-                            <a href="{{ route('rules') }}" class="nav-item">Rules</a>
-                            <a href="{{ route('history') }}" class="nav-item">History &amp; Records</a>
-                            @if(Auth::check())
-                                <a href="{{ route('waitlist.index') }}" class="nav-item">Waitlist</a>
-                                <a href="{{ route('members') }}" class="nav-item">Members</a>
-                                <form action="{{ route('logout') }}" method="POST" class="lg:inline-block">
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="nav-item text-left " name="logout">Logout</button>
-                                </form>
-                                @if (Auth::user()->isAdmin())
-                                    <a href="/admin" class="lg:ml-4 nav-item lg:border lg:border-white lg:bg-green-500 hover:bg-white hover:text-green-500">Admin</a>
-                                @endif
-                            @else
-                                <a href="{{ route('login') }}" class="nav-item">Login</a>
-                            @endif
-                        </div>
-                    </div>
+					<div class="hidden lg:flex justify-between divide-x divide-green-600 divide-dotted">
+						<a href="{{ route('schedule', ['year' => $activeYear->name]) }}" class="block px-4 py-3 text-white font-semibold hover:underline hover:text-white">Schedule</a>
+						<a href="{{ route('rules') }}" class="block px-4 py-3 text-white font-semibold hover:underline hover:text-white">Rules</a>
+						<a href="{{ route('history') }}" class="block px-4 py-3 text-white font-semibold hover:underline hover:text-white">History &amp; Records</a>
+						@if(Auth::check())
+							<a href="{{ route('waitlist.index') }}" class="block px-4 py-3 text-white font-semibold hover:underline hover:text-white">Waitlist</a>
+							<a href="{{ route('members') }}" class="block px-4 py-3 text-white font-semibold hover:underline hover:text-white">Members</a>
+							<form action="{{ route('logout') }}" method="POST" class="lg:inline-block">
+								{{ csrf_field() }}
+								<button type="submit" class="block px-4 py-3 text-white font-semibold hover:underline hover:text-white" name="logout">Logout</button>
+							</form>
+							@if (Auth::user()->isAdmin())
+								<a href="/admin" class="block px-4 py-3 text-white font-semibold hover:underline hover:text-white">Admin</a>
+							@endif
+						@else
+							<a href="{{ route('login') }}" class="block px-4 py-3 text-white font-semibold hover:underline hover:text-white">Login</a>
+						@endif
+					</div>
                 </nav>
             </div>
         </div>
         <!-- END NAV START -->
-
         <div class="hidden lg:block bg-grey-900 py-4 mb-12">
             <div class="container mx-auto lg:flex text-sm items-center px-4 xl:px-0">
                 <span class="font-semibold mr-4 text-grey-100 uppercase">2021 Stats:</span>
