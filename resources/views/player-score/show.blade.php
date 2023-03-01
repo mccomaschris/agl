@@ -1,6 +1,4 @@
-@extends('layouts.default')
-
-@section('page-heading')
+<x-main>
 	<div class="flex flex-wrap items-center lg:items-start w-full my-8">
 		<div class="flex flex-col flex-grow leading-snug">
 			<h1 class="text-2xl lg:text-4xl uppercase font-semibold">{{ $player->user->name }}</h1>
@@ -25,28 +23,9 @@
 			</div>
     	</div>
   	</div>
-@endsection
 
-@section('content')
-
-{{--
-  @if ($player->id == 13)
-    <div class="text-sm bg-grey-lighter border-l-4 border-green p-4 mb-4" role="alert">
-        <p>Greg Yablonsky missed part of the season due to injury.</p>
-        <ul>
-          <li>Weeks 2-4 are scores and points by Todd Webb substituting for Greg.</li>
-          <li>Weeks 5-6 are scores from Todd's rounds substituting for Vance, but the points were earned by Greg.</li>
-          <li>Weeks 6-9 are scores and points by Greg.</li>
-          <li>Weeks 11-20 are scores and points earned by Todd.</li>
-        </ul>
-    </div>
-  @endif --}}
-
-  {{-- <div class="text-sm bg-grey-lighter border-l-4 border-green px-4 py-2 leading-medium lg:leading-normal mb-2" role="alert">
-      <p>Check out <a href="/players/{{ $player->user->id }}">{{ str_possessive($player->user->name) }} full league history</a>.</p>
-  </div> --}}
-	<div class="flex flex-wrap -mx-4">
-		<div class="w-full lg:w-3/4 px-4">
+	<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+		<div class="lg:col-span-3">
 			<div class="flex my-2 items-center uppercase">
 				<div class="flex-grow font-semibold lg:text-lg">Season Totals/Averages</div>
 			</div>
@@ -90,30 +69,31 @@
 						<td class="text-center bogey-hole font-semibold">Bg</td>
 						<td class="text-center double-hole font-semibold">DblBg+</td>
 					</tr>
-			<tr class="score totals">
-				<td>Totals</td>
-				<td class="text-center bg-white">{{ number_format($season_avg->hole_1, 1, '.', ',') }}</td>
-				<td class="text-center bg-white">{{ number_format($season_avg->hole_2, 1, '.', ',') }}</td>
-				<td class="text-center bg-white">{{ number_format($season_avg->hole_3, 1, '.', ',') }}</td>
-				<td class="text-center bg-white">{{ number_format($season_avg->hole_4, 1, '.', ',') }}</td>
-				<td class="text-center bg-white">{{ number_format($season_avg->hole_5, 1, '.', ',') }}</td>
-				<td class="text-center bg-white">{{ number_format($season_avg->hole_6, 1, '.', ',') }}</td>
-				<td class="text-center bg-white">{{ number_format($season_avg->hole_7, 1, '.', ',') }}</td>
-				<td class="text-center bg-white">{{ number_format($season_avg->hole_8, 1, '.', ',') }}</td>
-				<td class="text-center bg-white">{{ number_format($season_avg->hole_9, 1, '.', ',') }}</td>
-				<td class="text-center bg-white">{{ number_format($season_avg->gross, 1, '.', ',') }}</td>
-				<td class="text-center bg-white">{{ number_format($season_avg->gross_par, 1, '.', ',') }}</td>
-				<td class="text-center bg-white">{{ number_format($season_avg->net, 1, '.', ',') }}</td>
-				<td class="text-center bg-white">{{ number_format($season_avg->net_par, 1, '.', ',') }}</td>
-				<td class="text-center bg-white">{{ $season_avg->points ? $season_avg->points : '0' }}</td>
-				<td class="text-center bg-white">{{ $season_avg->eagle ? $season_avg->eagle : '0' }}</td>
-				<td class="text-center bg-white">{{ $season_avg->birdie ? $season_avg->birdie : '0' }}</td>
-				<td class="text-center bg-white">{{ $season_avg->par ? $season_avg->par : '0' }}</td>
-				<td class="text-center bg-white">{{ $season_avg->bogey ? $season_avg->bogey : '0' }}</td>
-				<td class="text-center bg-white">{{ $season_avg->double_bogey ? $season_avg->double_bogey : '0' }}</td>
-			</tr>
-		</table>
-	</div>
+					<tr class="score totals">
+						<td>Totals</td>
+						<td class="text-center bg-white">{{ number_format($season_avg->hole_1, 1, '.', ',') }}</td>
+						<td class="text-center bg-white">{{ number_format($season_avg->hole_2, 1, '.', ',') }}</td>
+						<td class="text-center bg-white">{{ number_format($season_avg->hole_3, 1, '.', ',') }}</td>
+						<td class="text-center bg-white">{{ number_format($season_avg->hole_4, 1, '.', ',') }}</td>
+						<td class="text-center bg-white">{{ number_format($season_avg->hole_5, 1, '.', ',') }}</td>
+						<td class="text-center bg-white">{{ number_format($season_avg->hole_6, 1, '.', ',') }}</td>
+						<td class="text-center bg-white">{{ number_format($season_avg->hole_7, 1, '.', ',') }}</td>
+						<td class="text-center bg-white">{{ number_format($season_avg->hole_8, 1, '.', ',') }}</td>
+						<td class="text-center bg-white">{{ number_format($season_avg->hole_9, 1, '.', ',') }}</td>
+						<td class="text-center bg-white">{{ number_format($season_avg->gross, 1, '.', ',') }}</td>
+						<td class="text-center bg-white">{{ number_format($season_avg->gross_par, 1, '.', ',') }}</td>
+						<td class="text-center bg-white">{{ number_format($season_avg->net, 1, '.', ',') }}</td>
+						<td class="text-center bg-white">{{ number_format($season_avg->net_par, 1, '.', ',') }}</td>
+						<td class="text-center bg-white">{{ $season_avg->points ? $season_avg->points : '0' }}</td>
+						<td class="text-center bg-white">{{ $season_avg->eagle ? $season_avg->eagle : '0' }}</td>
+						<td class="text-center bg-white">{{ $season_avg->birdie ? $season_avg->birdie : '0' }}</td>
+						<td class="text-center bg-white">{{ $season_avg->par ? $season_avg->par : '0' }}</td>
+						<td class="text-center bg-white">{{ $season_avg->bogey ? $season_avg->bogey : '0' }}</td>
+						<td class="text-center bg-white">{{ $season_avg->double_bogey ? $season_avg->double_bogey : '0' }}</td>
+					</tr>
+				</table>
+			</div>
+
 			@include('_parts.player-scores-table', [
 				'title' => 'Weeks 1-5',
 				'handicap' => $player->hc_first,
@@ -145,34 +125,33 @@
 		</div>
 
 		<!-- Start Sidebar -->
-		<div class="w-full lg:w-1/4 px-4">
-
-			<div class="flex flex-wrap -mx-2 mb-4">
-				<div class="w-1/2 lg:w-full px-2">
+		<div class="">
+			<div class="grid grid-cols-2 gap-4">
+				<div class="">
 					<div class="flex flex-col p-6 lg:pb-2 bg-grey-900 rounded lg:rounded-b-none">
 						<h3 class="font-semibold uppercase text-white text-base lg:text-lg">Points</h3>
 						<div class="flex flex-wrap items-center mt-2 lg:mt-4 ">
 							<div class="w-1/2 flex flex-col text-green-bright">
-								<span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Total</span>
+								<span class="block uppercase font-semibold tracking-tight text-grey-300">Total</span>
 								<span class="block text-3xl lg:text-3xl font-bold">{{ $player->points }}</span>
 							</div>
 							<div class="w-1/2 flex flex-col text-green-bright">
-								<span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Rank</span>
+								<span class="block uppercase font-semibold tracking-tight text-grey-300">Rank</span>
 								<span class="block text-3xl lg:text-3xl font-bold">{{ ordinal($player->points_rank) }}</span>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="w-1/2 lg:w-full px-2">
+				<div class="">
 					<div class="flex flex-col p-6 lg:pt-2 bg-grey-900 rounded lg:rounded-t-none">
 						<h3 class="font-semibold uppercase text-white text-base lg:text-lg">Wins</h3>
 						<div class="flex flex-wrap items-center mt-2 lg:mt-4 ">
 							<div class="w-1/2 flex flex-col text-green-bright">
-								<span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Total</span>
+								<span class="block uppercase font-semibold tracking-tight text-grey-300">Total</span>
 								<span class="block text-3xl lg:text-3xl font-bold">{{ $player->won }}</span>
 							</div>
 							<div class="w-1/2 flex flex-col text-green-bright">
-								<span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Rank</span>
+								<span class="block uppercase font-semibold tracking-tight text-grey-300">Rank</span>
 								<span class="block text-3xl lg:text-3xl font-bold">{{ ordinal($player->wins_rank) }}</span>
 							</div>
 						</div>
@@ -180,7 +159,7 @@
 				</div>
 			</div>
 
-			<div class="flex flex-wrap mb-6">
+			<div class="flex flex-wrap mt-6">
 				<div class="w-full">
 					<div class="flex flex-col pt-6 px-6 bg-green-500 rounded rounded-b-none">
 						<h3 class="font-semibold uppercase text-white text-base lg:text-lg">Gross Scores</h3>
@@ -267,20 +246,20 @@
                   @endforeach
               </div>
             </div>
-		  @endif
+		@endif
 
-		  @if($player->id != 64)
+		@if($player->id != 64)
 			@if(count($highest))
     <div class="w-full px-0 mb-6">
 				<div class="flex flex-col p-6 bg-grey-900 rounded">
 					<h3 class="font-semibold uppercase text-white text-base lg:text-lg">Handicap</h3>
 					<div class="flex flex-col items-center mt-2 lg:mt-4 ">
 						<div class="w-full flex flex-col text-green-bright">
-							<span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Highest Counting</span>
+							<span class="block uppercase font-semibold tracking-tight text-grey-300">Highest Counting</span>
 							<span class="block text-3xl lg:text-3xl font-bold">{{ $highest ? number_format($highest[0], 0) : '' }}</span>
 						</div>
 						<div class="w-full flex flex-col text-green-bright mt-4">
-							<span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase mb-1">Counted Scores</span>
+							<span class="block uppercase font-semibold tracking-tight text-grey-300 mb-1">Counted Scores</span>
 							<div class="flex">
 								@foreach ($counted as $score)
 									{{ number_format($score, 0, '.', ',') }}@if(!$loop->last), @endif
@@ -293,12 +272,7 @@
 			@endif
 			@endif
         </div>
-
       </div>
-
 	</div>
-
-
-
 <div>
-@endsection
+</x-main>

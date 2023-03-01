@@ -1,6 +1,6 @@
 {
   "resources/assets/css/main.css": {
-    "file": "assets/main-d722a5a0.css",
+    "file": "assets/main-56da310f.css",
     "isEntry": true,
     "src": "resources/assets/css/main.css"
   },
@@ -10,7 +10,7 @@
     "src": "resources/assets/js/stim.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-52f79355.css",
+    "file": "assets/app-607a6a5d.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },

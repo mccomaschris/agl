@@ -43,9 +43,9 @@
 </head>
 <body class="h-screen font-sans mb-20 pb-10 @yield('body-css')">
     <div id="app">
-        <!-- NEW NAV START -->
-        <div class="bg-green-500">
-            <div class="container mx-auto py-6 px-4 xl:px-0">
+         <!-- NEW NAV START -->
+		 <div class="bg-green-500">
+            <div class="w-full lg:max-w-screen-lg xl:max-w-screen-xl mx-auto py-6 px-4 xl:px-0">
                 <nav class="flex items-center justify-between flex-wrap relative" x-data="{ open: false }">
                     <div class="flex items-center flex-no-shrink text-white mr-6">
                         <a href="/" class="inline-flex items-center">
@@ -115,7 +115,7 @@
         </div>
         <!-- END NAV START -->
         <div class="hidden lg:block bg-grey-900 py-4 mb-12">
-            <div class="container mx-auto lg:flex text-sm items-center px-4 xl:px-0">
+            <div class="w-full lg:max-w-screen-lg xl:max-w-screen-xl mx-auto lg:flex text-sm items-center px-4 xl:px-0">
                 <span class="font-semibold mr-4 text-grey-100 uppercase">More Links:</span>
                 <a href="{{ route('team-points', ['year' => $activeYear->name]) }}" class=" mt-0 text-green-bright hover:text-green-bright hover:underline mr-4">Team Points</a>
                 <a href="{{ route('handicaps', ['year' => $activeYear->name]) }}" class=" mt-0 text-green-bright hover:text-green-bright hover:underline mr-4">Handicaps</a>
@@ -125,7 +125,7 @@
             </div>
         </div>
 
-        <div class="lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mt-6 mb-16 px-6 xl:px-0 pb-8 lg:pb-0">
+        <div class="w-full lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mt-6 mb-16 px-6 xl:px-0 pb-8 lg:pb-0">
             {{-- @yield('homepage-alert') --}}
 
             <!-- Page Heading -->
@@ -140,5 +140,6 @@
     <x-notification />
 
     @livewireScripts
+	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </body>
 </html>
