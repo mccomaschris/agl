@@ -12,11 +12,11 @@
                 <h3 class="font-semibold uppercase text-white text-base lg:text-lg">Career Averages</h3>
                 <div class="flex flex-wrap items-center mt-2 lg:mt-4 ">
                     <div class="w-1/2 lg:w-1/2 flex flex-col text-green-bright">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Net</span>
+                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Net</span>
                         <span class="block text-3xl lg:text-4xl font-bold">{{ number_format($net_avg, 2, '.', ',') }}</span>
                     </div>
                     <div class="w-1/2 lg:w-1/2 flex flex-col text-green-bright">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Gross</span>
+                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Gross</span>
                         <span class="block text-3xl lg:text-4xl font-bold">{{ number_format($gross_avg, 2, '.', ',') }}</span>
                     </div>
                 </div>
@@ -27,15 +27,15 @@
                 <h3 class="font-semibold uppercase text-white text-base lg:text-lg">Career Bests</h3>
                 <div class="flex flex-wrap items-center mt-2 lg:mt-4 ">
                     <div class="w-1/3 lg:w-1/3 flex flex-col text-green-bright">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Rounds</span>
+                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Rounds</span>
                         <span class="block text-3xl lg:text-4xl font-bold">{{ $total_scores }}</span>
                     </div>
                     <div class="w-1/3 lg:w-1/3 flex flex-col text-green-bright">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Net</span>
+                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Net</span>
                         <span class="block text-3xl lg:text-4xl font-bold">{{ number_format($low_net, 0, '.', ',') }}</span>
                     </div>
                     <div class="w-1/3 lg:w-1/3 flex flex-col text-green-bright">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Gross</span>
+                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Gross</span>
                         <span class="block text-3xl lg:text-4xl font-bold">{{ number_format($low_gross, 0, '.', ',') }}</span>
                     </div>
                 </div>
@@ -48,28 +48,28 @@
                 <h3 class="font-semibold uppercase text-white text-base lg:text-lg">Scoring</h3>
                 <div class="flex flex-wrap items-center mt-2 lg:mt-4 ">
                     <div class="w-1/3 lg:w-1/6 flex flex-col text-green-bright">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Holes</span>
+                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Holes</span>
                         <span class="block text-3xl lg:text-4xl font-bold">{{ $holes }}</span>
                     </div>
                     <div class="w-1/3 lg:w-1/6 flex flex-col text-green-bright">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Eagle</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ $eagle }}</span>
+                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Eagle</span>
+                        <span class="block text-3xl lg:text-4xl font-bold">{{ $eagle }} <span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($eagle / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
                     <div class="w-1/3 lg:w-1/6 flex flex-col text-green-bright">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Birdie</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ $birdie }}</span>
+                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Birdie</span>
+                        <span class="block text-3xl lg:text-4xl font-bold">{{ $birdie }}<span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($birdie / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
                     <div class="w-1/3 lg:w-1/6 flex flex-col text-green-bright mt-4 lg:mt-0">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Par</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ $par }}</span>
+                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Par</span>
+                        <span class="block text-3xl lg:text-4xl font-bold">{{ $par }}<span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($par / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
                     <div class="w-1/3 lg:w-1/6 flex flex-col text-green-bright mt-4 lg:mt-0">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">Bogey</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ $bogey }}</span>
+                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Bogey</span>
+                        <span class="block text-3xl lg:text-4xl font-bold">{{ $bogey }}<span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($bogey / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
                     <div class="w-1/3 lg:w-1/6 flex flex-col text-green-bright mt-4 lg:mt-0">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300 uppercase">2 Bogey+</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ $double_bogey }}</span>
+                        <span class="block uppercase font-semibold tracking-tight text-grey-300">2 Bogey+</span>
+                        <span class="block text-3xl lg:text-4xl font-bold">{{ $double_bogey }}<span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($double_bogey / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
                 </div>
             </div>
