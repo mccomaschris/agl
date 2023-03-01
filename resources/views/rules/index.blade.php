@@ -121,14 +121,14 @@
             <p class="mb-3">Each team accumulates points based on matches won, lost or tied. To determine the Team Champion for the year, a playoff system has been devised. In the first round, the team finishing the season in 1st place will play the team finishing the season in 4th place and the team finishing the season in 2nd place will play the team finishing in 3rd place. The two winners will then play the championship match. The Team playoffs will begin the week immediately following regular season play.</p>
             <p class="mb-3">Format for the Team Championships will be same as regular season play, match play.</p>
             <p class="mb-3">Teams are ranked in the standings by Total Points, then #1 Player Points, then #2 Player Points, then #3 Player Points, and finally #4 Player Points.</p>
-            <p class="mb-3">In the event of a tie, the winner will be determined by comparing the score of the two most closest handicap opponents starting with the #1 handicap hole (and up, as needed) to determine who had the low net score on that hole. For example:
+            <p class="mb-3">In the event of a tie, the winner will be determined by comparing the score of the two closest handicap opponents starting with the #1 handicap hole (and up, as needed) to determine who had the low net score on that hole. For example:
 				<ul class="mb-4 list-inside list-disc pl-6">
 					<li>One Players: 2 HC vs 3 HC</li>
 					<li>Two Players: 4 HC vs 6 HC</li>
 					<li>Three Players: 9 HC vs 7 HC</li>
 					<li>Four Players: 11 HC vs 11 HC</li>
 				</ul>
-				In this scenario the four players you would compare the score of the number four players starting with the #1 handicap hole (and up, as needed) to determine who had the low net score on that hole.
+				In this scenario you would compare the score of the four players starting with the #1 handicap hole (and up, as needed) to determine who had the low net score on that hole.
 			</p>
             <p class="mb-3">There are no substitutes allowed for playoff matches.</p>
 
