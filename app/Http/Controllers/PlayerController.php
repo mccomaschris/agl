@@ -19,6 +19,8 @@ class PlayerController extends Controller
     {
         $seasons = Player::where('user_id', $user->id)->pluck('id');
 
+		$years = Player::where('user_id', $user->id)->orderBy('year_id', 'desc')->get();
+
         $scores = DB::table('scores')
             ->join('players', 'scores.player_id', '=', 'players.id')
             ->join('users', 'players.user_id', '=', 'users.id')
@@ -68,7 +70,7 @@ class PlayerController extends Controller
             ->orderBy('weeks.week_date', 'desc')
             ->get();
 
-        return view('players.show', compact('user', 'scores', 'gross_avg', 'net_avg', 'total_scores', 'low_gross', 'low_net',
+        return view('players.show', compact('user', 'years', 'scores', 'gross_avg', 'net_avg', 'total_scores', 'low_gross', 'low_net',
                         'holes', 'eagle', 'birdie', 'par', 'bogey', 'double_bogey', 'individual_championships', 'team_championships', 'weekly_wins'));
 
     }

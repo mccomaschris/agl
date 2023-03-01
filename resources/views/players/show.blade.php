@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('page-heading')
-  <h1 class="text-center lg:text-left text-2xl lg:text-3xl tracking-tight leading-none mt-12 mb-6 lg:mb-0 leading-normal lg:leading-none">{{ $user->name }} <br class="lg:hidden">League History</h1>
+  <h1 class="text-center lg:text-left text-2xl lg:text-3xl tracking-tight leading-none mt-12 mb-6 lg:mb-0 lg:leading-none">{{ $user->name }} <br class="lg:hidden">League History</h1>
 @endsection
 
 
@@ -76,6 +76,37 @@
         </div>
     </div>
 
+	<div class="flex flex-wrap -mx-4">
+		<div class="w-full px-4">
+		  <h3 class="text-lg mt-2 mb-2 font-semibold">Season by Season</h3>
+			<div class="overflow-x-scroll">
+				<table class="table table-bordered w-full mb-8">
+					<tr class="course">
+						<th class="text-left">Year</th>
+						<th class="text-center">Won</th>
+						<th class="text-center">Lost</th>
+						<th class="text-center">Tied</th>
+						<th class="text-center">Points</th>
+						<th class="text-center">Points Rank</th>
+						<th class="text-center">Low Net</th>
+						<th class="text-center">Low Gross</th>
+					</tr>
+					@foreach ($years as $year)
+						<tr>
+							<td><a href="{{ route('player-score', ['player' => $year->id]) }}">{{ $year->year->name }}</a></td>
+							<td class="text-center">{{ $year->won }}</td>
+							<td class="text-center">{{ $year->lost }}</td>
+							<td class="text-center">{{ $year->tied }}</td>
+							<td class="text-center">{{ $year->points }}</td>
+							<td class="text-center">{{ $year->points_rank }}</td>
+							<td class="text-center">{{ $year->low_net }}</td>
+							<td class="text-center">{{ $year->low_gross }}</td>
+						</tr>
+					@endforeach
+				</table>
+			</div>
+		</div>
+	</div>
 
     <div class="flex flex-wrap -mx-4">
       <div class="w-full lg:w-3/4 px-4">
