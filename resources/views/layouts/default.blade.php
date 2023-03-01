@@ -116,7 +116,7 @@
         <!-- END NAV START -->
         <div class="hidden lg:block bg-grey-900 py-4 mb-12">
             <div class="container mx-auto lg:flex text-sm items-center px-4 xl:px-0">
-                <span class="font-semibold mr-4 text-grey-100 uppercase">2021 Stats:</span>
+                <span class="font-semibold mr-4 text-grey-100 uppercase">More Links:</span>
                 <a href="{{ route('team-points', ['year' => $activeYear->name]) }}" class=" mt-0 text-green-bright hover:text-green-bright hover:underline mr-4">Team Points</a>
                 <a href="{{ route('handicaps', ['year' => $activeYear->name]) }}" class=" mt-0 text-green-bright hover:text-green-bright hover:underline mr-4">Handicaps</a>
                 <a href="{{ route('group-stats', ['year' => $activeYear->name]) }}" class=" mt-0 text-green-bright hover:text-green-bright hover:underline mr-4">Group Stats</a>

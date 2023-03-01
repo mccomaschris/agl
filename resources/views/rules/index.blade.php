@@ -7,7 +7,7 @@
     <div class="flex mx-0 lg:-mx-8 relative">
         <div class="w-full lg:w-3/4 px-0 lg:px-8">
             <h3 class="font-semibold mb-2 lg:text-xl" id="membership">Membership &amp; Dues</h3>
-            <p class="mb-3">Minimum age for a member is 25 years of age. Membership fees are $65 per year, which includes the $20 kitty for each "side game" played each week (alternating between closest to the pin and low net). Any ties during the weekly "side game" will be split between the winners. This fee must be paid prior to Snowball Tournament. A new member joining the League after the season has begun will be charged an entry fee based on $3.25 per week for the remainder of the weeks in the season. For instance, if he joins in the 5th week, he will be charged $52.00 for the remainder of the season.</p>
+            <p class="mb-3">Minimum age for a member is 25 years of age. Membership fees are $65 per year, which includes the $15 kitty for each "side game" played each week (alternating between closest to the pin, low putts and low net). Any ties during the weekly "side game" will be split between the winners. This fee must be paid prior to Snowball Tournament. A new member joining the League after the season has begun will be charged an entry fee based on $3.25 per week for the remainder of the weeks in the season. For instance, if he joins in the 5th week, he will be charged $52.00 for the remainder of the season.</p>
             <p class="mb-3">If a member needs to take a year off to care for a seriously ill family member, a spot will be held for this member the following year. </p>
 
             <h3 class="font-semibold mb-2 lg:text-xl mt-6" id="officers">Officers</h3>
@@ -85,7 +85,7 @@
             <p class="mb-3">Handicaps for substitutes entering league play in mid-year will be treated exactly as new players starting at the beginning of the year. THe starting handicap will be initially based on as honest an assessment of his rounds at Riviera that can be made. Once he begins league play, his handicap will be based ONLY on the rounds played in LEAGUE PLAY.  The handicap will then change as per league rules. His handicap will be changed every 5 weeks as is league policy. If, for instance, he joins the league in week 8, his handicap will be the same for Week 8, 9, and 10 then will change with the rest of the league for Week 11.</p>
 
             <h3 class="font-semibold mb-2 lg:text-xl mt-6" id="schedule">Schedule and Cancellations</h3>
-            <p class="mb-3">There are 20 regularly scheduled matches each season. In the event of rain, a maximum of two make-up weeks will be played at the end of the regular season. Team Championships (9-holes, match play) will be played the weeks immediately following regular season play. The Individual League Championship (18-holes played on a Sunday) is usually scheduled in mid-September.</p>
+            <p class="mb-3">There are 20 regularly scheduled matches each season. In the event of rain, a maximum of three make-up weeks will be played at the end of the regular season. Team Championships (9-holes, match play) will be played the weeks immediately following regular season play. The Individual League Championship (18-holes played on a Sunday) is usually scheduled in mid-September.</p>
             <p class="mb-3">In the case of a rain-out or cancellation, the cancelled match will be played the following week. In effect, the schedule gets pushed back one week. If rain begins after play begins, the match will be counted as complete only if all groups have completed at least 5 holes. If 5 holes are not completed by all groups, the match is not counted. If a match is completed after 5 holes, the scoring and handicap calculation will be based on how much over or under par that player is. If he is 2-over after 5 holes, the score will be assumed to be 39 and that will be use to calculate the handicap.</p>
             <p class="mb-3">In the event of rain before a match begins, it is each players responsibility to be at the course and ready to play. If, however, you have been called and informed that the match has been cancelled or you have called the course and found that the course is closed, you need not show up. If the course is open, we WILL meet at the course to determine if we will play. If you choose not to come out or not to play, you will be counted as absent.</p>
             <p class="mb-3">Tee times generally begin at 5:30. However, if your group is there and ready to play and the tee is open, you may begin early. If a member of your foursome calls and indicates that he will be late, however, you are obligated to wait until he arrives.</p>
@@ -121,7 +121,15 @@
             <p class="mb-3">Each team accumulates points based on matches won, lost or tied. To determine the Team Champion for the year, a playoff system has been devised. In the first round, the team finishing the season in 1st place will play the team finishing the season in 4th place and the team finishing the season in 2nd place will play the team finishing in 3rd place. The two winners will then play the championship match. The Team playoffs will begin the week immediately following regular season play.</p>
             <p class="mb-3">Format for the Team Championships will be same as regular season play, match play.</p>
             <p class="mb-3">Teams are ranked in the standings by Total Points, then #1 Player Points, then #2 Player Points, then #3 Player Points, and finally #4 Player Points.</p>
-            <p class="mb-3">If there is a tie at the end of the playoff, there will be a sudden-death playoff between one player from each team. The players with equal or the most similar handicap will play each other. For example, if each team has players with a HC of 7, they will compete in the sudden death playoff. If there are no identical HC players on both teams, the two most similar HC's will compete (i.e. a 5 HC player and a 6 HC player).</p>
+            <p class="mb-3">If there is a tie at the end of the playoff, there will be a sudden-death playoff putting contest between the two opponents with the closest handicap. For example:
+				<ul class="mb-4 list-inside list-disc pl-6">
+					<li>One Players: 2 HC vs 3 HC</li>
+					<li>Two Players: 4 HC vs 6 HC</li>
+					<li>Three Players: 9 HC vs 7 HC</li>
+					<li>Four Players: 11 HC vs 11 HC</li>
+				</ul>
+				In this scenario the four players would have a putt off on the 9th green from a spot picked by the league president or vice president.
+			</p>
             <p class="mb-3">There are no substitutes allowed for playoff matches.</p>
 
             <h3 class="font-semibold mb-2 lg:text-xl mt-6" id="individual-championship">Individual Championship</h3>
@@ -136,8 +144,8 @@
             <div class="overflow-x-scroll">
                 <table class="table table-bordered w-full mb-8">
                     <tr>
-                        <td>Weekly Games ($12 x 20 Weeks)</td>
-                        <td>$240</td>
+                        <td>Weekly Games ($15 x 20 Weeks)</td>
+                        <td>$300</td>
                     </tr>
                     <tr>
                         <td>Team Regular Season Champions:</td>
@@ -197,7 +205,7 @@
                     </tr>
                     <tr>
                         <td>League Web Fee:</td>
-                        <td>$190</td>
+                        <td>$130</td>
                     </tr>
                     <tr>
                         <td class="font-bold">Total:</td>

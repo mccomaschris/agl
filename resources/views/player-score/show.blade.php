@@ -4,7 +4,7 @@
 	<div class="flex flex-wrap items-center lg:items-start w-full my-8">
 		<div class="flex flex-col flex-grow leading-snug">
 			<h1 class="text-2xl lg:text-4xl uppercase font-semibold">{{ $player->user->name }}</h1>
-			<span class="text-lg lg:text-xl lg:text-2xl font-normal text-grey-600 uppercase font-semibold">{{ $player->team->year->name }} <span class="font-normal">Season</span></span></h1>
+			<span class="text-lg lg:text-2xl text-grey-600 uppercase font-semibold">{{ $player->team->year->name }} <span class="font-normal">Season</span></span></h1>
 		</div>
 		<div class="mt-6 lg:mt-0 w-full lg:w-auto">
 			<div class="flex flex-col lg:flex-row items-center">
@@ -19,9 +19,6 @@
 									<option value="{{ route('player-score', ['player' => $season->player_id]) }}" {{ ($player->id == $season->player_id) ? 'selected' : '' }}>{{ $player->user->name }} {{ $season->year_name }} Season</option>
 								@endforeach
 							</select>
-							<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grey-700">
-								<svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-							</div>
 						</div>
 					@endif
 				</div>
