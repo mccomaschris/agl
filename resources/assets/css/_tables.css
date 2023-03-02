@@ -9,7 +9,7 @@
 }
 
 .table th {
-    @apply bg-green-500 text-white font-normal p-2 border-b-4 border-green-600 font-semibold;
+    @apply bg-green-500 text-white p-2 border-b-4 border-green-600 font-semibold;
 }
 
 .table tbody tr {
@@ -20,7 +20,6 @@
     @apply bg-grey-100;
 }
 
-
 .table tr.active-record td {
     @apply font-semibold bg-green-100 text-grey-800;
 }
@@ -29,11 +28,16 @@
 .table-bordered > thead > tr > td {
     @apply border border-green-800;
 }
+
 .table-bordered > tbody > tr > th,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > th,
 .table-bordered > tfoot > tr > td {
     @apply border border-grey-700;
+}
+
+.table.table-hover tbody tr:hover {
+	background-color: theme('colors.gray.100');
 }
 
 .table td {

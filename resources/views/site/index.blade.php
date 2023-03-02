@@ -17,7 +17,7 @@
 
 	@include('site.week-table')
 
-	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
+	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12 pb-12">
 		<div class="lg:col-span-2">
 			<h2 class="text-lg mt-2 mb-2 font-semibold">Team Standings</h2>
 			@include('_parts.standings-team', ['show_max' => true])
@@ -25,7 +25,7 @@
 
 		<div class="">
 			<h2 class="text-lg mt-2 mb-2 font-semibold">Individual Standings</h2>
-			@include('_parts.standings-player', ['take' => 5])
+			@include('_parts.standings-player')
 		</div>
 	</div>
 </x-main>

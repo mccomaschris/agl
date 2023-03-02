@@ -1,4 +1,4 @@
-<table class="table w-full  table-striped">
+<table class="table w-full table-striped table-hover">
     <thead>
         <tr>
             <th class="text-center rounded-tl">Rk</th>
@@ -9,7 +9,7 @@
             <th class="text-center rounded-tr">Pts</th>
         </tr>
     </thead>
-    @foreach ($year->playerStandings($take) as $player)
+    @foreach ($year->playerStandings(35) as $player)
         <tr>
             <td class="text-center">{{ $player->points_rank }}</td>
             <td class="font-semibold"><a href="{{ route('player-score', ['player' => $player->id]) }}">{{ $player->user->name }}</a></td>

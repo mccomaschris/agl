@@ -69,27 +69,27 @@
 						<td class="text-center bogey-hole font-semibold">Bg</td>
 						<td class="text-center double-hole font-semibold">DblBg+</td>
 					</tr>
-					<tr class="score totals">
-						<td>Totals</td>
-						<td class="text-center bg-white">{{ number_format($season_avg->hole_1, 1, '.', ',') }}</td>
-						<td class="text-center bg-white">{{ number_format($season_avg->hole_2, 1, '.', ',') }}</td>
-						<td class="text-center bg-white">{{ number_format($season_avg->hole_3, 1, '.', ',') }}</td>
-						<td class="text-center bg-white">{{ number_format($season_avg->hole_4, 1, '.', ',') }}</td>
-						<td class="text-center bg-white">{{ number_format($season_avg->hole_5, 1, '.', ',') }}</td>
-						<td class="text-center bg-white">{{ number_format($season_avg->hole_6, 1, '.', ',') }}</td>
-						<td class="text-center bg-white">{{ number_format($season_avg->hole_7, 1, '.', ',') }}</td>
-						<td class="text-center bg-white">{{ number_format($season_avg->hole_8, 1, '.', ',') }}</td>
-						<td class="text-center bg-white">{{ number_format($season_avg->hole_9, 1, '.', ',') }}</td>
-						<td class="text-center bg-white">{{ number_format($season_avg->gross, 1, '.', ',') }}</td>
-						<td class="text-center bg-white">{{ number_format($season_avg->gross_par, 1, '.', ',') }}</td>
-						<td class="text-center bg-white">{{ number_format($season_avg->net, 1, '.', ',') }}</td>
-						<td class="text-center bg-white">{{ number_format($season_avg->net_par, 1, '.', ',') }}</td>
-						<td class="text-center bg-white">{{ $season_avg->points ? $season_avg->points : '0' }}</td>
-						<td class="text-center bg-white">{{ $season_avg->eagle ? $season_avg->eagle : '0' }}</td>
-						<td class="text-center bg-white">{{ $season_avg->birdie ? $season_avg->birdie : '0' }}</td>
-						<td class="text-center bg-white">{{ $season_avg->par ? $season_avg->par : '0' }}</td>
-						<td class="text-center bg-white">{{ $season_avg->bogey ? $season_avg->bogey : '0' }}</td>
-						<td class="text-center bg-white">{{ $season_avg->double_bogey ? $season_avg->double_bogey : '0' }}</td>
+					<tr class="score totals !bg-white">
+						<td class="!bg-white">Totals</td>
+						<td class="text-center !bg-white">{{ number_format($season_avg->hole_1, 1, '.', ',') }}</td>
+						<td class="text-center !bg-white">{{ number_format($season_avg->hole_2, 1, '.', ',') }}</td>
+						<td class="text-center !bg-white">{{ number_format($season_avg->hole_3, 1, '.', ',') }}</td>
+						<td class="text-center !bg-white">{{ number_format($season_avg->hole_4, 1, '.', ',') }}</td>
+						<td class="text-center !bg-white">{{ number_format($season_avg->hole_5, 1, '.', ',') }}</td>
+						<td class="text-center !bg-white">{{ number_format($season_avg->hole_6, 1, '.', ',') }}</td>
+						<td class="text-center !bg-white">{{ number_format($season_avg->hole_7, 1, '.', ',') }}</td>
+						<td class="text-center !bg-white">{{ number_format($season_avg->hole_8, 1, '.', ',') }}</td>
+						<td class="text-center !bg-white">{{ number_format($season_avg->hole_9, 1, '.', ',') }}</td>
+						<td class="text-center !bg-white">{{ number_format($season_avg->gross, 1, '.', ',') }}</td>
+						<td class="text-center !bg-white">{{ number_format($season_avg->gross_par, 1, '.', ',') }}</td>
+						<td class="text-center !bg-white">{{ number_format($season_avg->net, 1, '.', ',') }}</td>
+						<td class="text-center !bg-white">{{ number_format($season_avg->net_par, 1, '.', ',') }}</td>
+						<td class="text-center !bg-white">{{ $season_avg->points ? $season_avg->points : '0' }}</td>
+						<td class="text-center !bg-white">{{ $season_avg->eagle ? $season_avg->eagle : '0' }}</td>
+						<td class="text-center !bg-white">{{ $season_avg->birdie ? $season_avg->birdie : '0' }}</td>
+						<td class="text-center !bg-white">{{ $season_avg->par ? $season_avg->par : '0' }}</td>
+						<td class="text-center !bg-white">{{ $season_avg->bogey ? $season_avg->bogey : '0' }}</td>
+						<td class="text-center !bg-white">{{ $season_avg->double_bogey ? $season_avg->double_bogey : '0' }}</td>
 					</tr>
 				</table>
 			</div>
@@ -126,7 +126,7 @@
 
 		<!-- Start Sidebar -->
 		<div class="">
-			<div class="grid grid-cols-2 gap-4">
+			<div class="grid grid-cols-1 gap-4">
 				<div class="">
 					<div class="flex flex-col p-6 lg:pb-2 bg-grey-900 rounded lg:rounded-b-none">
 						<h3 class="font-semibold uppercase text-white text-base lg:text-lg">Points</h3>
@@ -225,7 +225,7 @@
           </div> --}}
 
           @if(count($weekly_wins))
-            <div class="mb-6">
+            <div class="mb-6 mt-6">
               <div class="bg-green-500 rounded py-6 px-4">
                   <h3 class="font-semibold uppercase text-white text-base lg:text-lg mb-4">Weekly Winnings</h3>
                   @foreach ($weekly_wins as $week)

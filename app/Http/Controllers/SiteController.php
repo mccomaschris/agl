@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Cache;
 
 class SiteController extends Controller
 {
-
     /**
      * Show the homepage
      *
@@ -27,12 +26,8 @@ class SiteController extends Controller
                 ->where('week_date', '>', Carbon::yesterday())
                 ->first();
 
-
-
         $last_week = Week::where('year_id', $year->id)->where('week_date', '<', Carbon::today())->orderBy('week_date', 'desc')->first();
 
         return view('site.index', compact('year', 'week', 'last_week'));
-        // return view('site.playoff', compact('year', 'last_week'));
-        // return view('site.offseason', compact('year', 'last_week'));
     }
 }

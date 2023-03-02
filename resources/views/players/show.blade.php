@@ -6,68 +6,65 @@
 
 
 @section('content')
-    <div class="flex flex-wrap -mx-4 mt-6 mb-4">
-        <div class="w-full lg:w-1/2 px-4">
-            <div class="flex flex-col p-6 bg-grey-900 rounded ">
-                <h3 class="font-semibold uppercase text-white text-base lg:text-lg">Career Averages</h3>
-                <div class="flex flex-wrap items-center mt-2 lg:mt-4 ">
-                    <div class="w-1/2 lg:w-1/2 flex flex-col text-green-bright">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Net</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ number_format($net_avg, 2, '.', ',') }}</span>
-                    </div>
-                    <div class="w-1/2 lg:w-1/2 flex flex-col text-green-bright">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Gross</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ number_format($gross_avg, 2, '.', ',') }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w-full lg:w-1/2 px-4 mt-4 lg:mt-0">
-            <div class="flex flex-col p-6 bg-grey-900 rounded ">
-                <h3 class="font-semibold uppercase text-white text-base lg:text-lg">Career Bests</h3>
-                <div class="flex flex-wrap items-center mt-2 lg:mt-4 ">
-                    <div class="w-1/3 lg:w-1/3 flex flex-col text-green-bright">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Rounds</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ $total_scores }}</span>
-                    </div>
-                    <div class="w-1/3 lg:w-1/3 flex flex-col text-green-bright">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Net</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ number_format($low_net, 0, '.', ',') }}</span>
-                    </div>
-                    <div class="w-1/3 lg:w-1/3 flex flex-col text-green-bright">
-                        <span class="block uppercase font-semibold tracking-tight text-grey-300">Gross</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ number_format($low_gross, 0, '.', ',') }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="flex flex-wrap -mx-4 mb-6">
+	<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
+		<div class="p-6 bg-grey-900 rounded">
+			<h3 class="font-semibold uppercase text-white text-lg mb-3">Career Averages</h3>
+			<div class=" grid grid-cols-2">
+				<div class="flex flex-col text-green-bright">
+					<span class="block uppercase font-semibold tracking-tight text-grey-300">Net</span>
+					<span class="block text-3xl lg:text-4xl font-bold">{{ number_format($net_avg, 2, '.', ',') }}</span>
+				</div>
+				<div class="flex flex-col text-green-bright">
+					<span class="block uppercase font-semibold tracking-tight text-grey-300">Gross</span>
+					<span class="block text-3xl lg:text-4xl font-bold">{{ number_format($gross_avg, 2, '.', ',') }}</span>
+				</div>
+			</div>
+		</div>
+		<div class="p-6 bg-grey-900 rounded">
+			<h3 class="font-semibold uppercase text-white text-lg mb-3">Career Bests</h3>
+			<div class="grid grid-cols-3">
+				<div class="flex flex-col text-green-bright">
+					<span class="block uppercase font-semibold tracking-tight text-grey-300">Rounds</span>
+					<span class="block text-3xl lg:text-4xl font-bold">{{ $total_scores }}</span>
+				</div>
+				<div class="flex flex-col text-green-bright">
+					<span class="block uppercase font-semibold tracking-tight text-grey-300">Net</span>
+					<span class="block text-3xl lg:text-4xl font-bold">{{ number_format($low_net, 0, '.', ',') }}</span>
+				</div>
+				<div class="flex flex-col text-green-bright">
+					<span class="block uppercase font-semibold tracking-tight text-grey-300">Gross</span>
+					<span class="block text-3xl lg:text-4xl font-bold">{{ number_format($low_gross, 0, '.', ',') }}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <div class="flex flex-wrap -mx-4 mt-6">
         <div class="w-full px-4">
             <div class="flex flex-col p-6 bg-grey-900 rounded ">
-                <h3 class="font-semibold uppercase text-white text-base lg:text-lg">Scoring</h3>
-                <div class="flex flex-wrap items-center mt-2 lg:mt-4 ">
-                    <div class="w-1/3 lg:w-1/6 flex flex-col text-green-bright">
+                <h3 class="font-semibold uppercase text-white text-lg mb-3">Scoring</h3>
+                <div class="grid grid-cols-2 lg:grid-cols-6 gap-4">
+                    <div class="flex flex-col text-green-bright">
                         <span class="block uppercase font-semibold tracking-tight text-grey-300">Holes</span>
                         <span class="block text-3xl lg:text-4xl font-bold">{{ $holes }}</span>
                     </div>
-                    <div class="w-1/3 lg:w-1/6 flex flex-col text-green-bright">
+                    <div class="flex flex-col text-green-bright">
                         <span class="block uppercase font-semibold tracking-tight text-grey-300">Eagle</span>
                         <span class="block text-3xl lg:text-4xl font-bold">{{ $eagle }} <span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($eagle / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
-                    <div class="w-1/3 lg:w-1/6 flex flex-col text-green-bright">
+                    <div class="flex flex-col text-green-bright">
                         <span class="block uppercase font-semibold tracking-tight text-grey-300">Birdie</span>
                         <span class="block text-3xl lg:text-4xl font-bold">{{ $birdie }}<span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($birdie / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
-                    <div class="w-1/3 lg:w-1/6 flex flex-col text-green-bright mt-4 lg:mt-0">
+                    <div class="flex flex-col text-green-bright">
                         <span class="block uppercase font-semibold tracking-tight text-grey-300">Par</span>
                         <span class="block text-3xl lg:text-4xl font-bold">{{ $par }}<span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($par / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
-                    <div class="w-1/3 lg:w-1/6 flex flex-col text-green-bright mt-4 lg:mt-0">
+                    <div class="flex flex-col text-green-bright">
                         <span class="block uppercase font-semibold tracking-tight text-grey-300">Bogey</span>
                         <span class="block text-3xl lg:text-4xl font-bold">{{ $bogey }}<span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($bogey / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
-                    <div class="w-1/3 lg:w-1/6 flex flex-col text-green-bright mt-4 lg:mt-0">
+                    <div class="flex flex-col text-green-bright">
                         <span class="block uppercase font-semibold tracking-tight text-grey-300">2 Bogey+</span>
                         <span class="block text-3xl lg:text-4xl font-bold">{{ $double_bogey }}<span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($double_bogey / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
@@ -76,7 +73,55 @@
         </div>
     </div>
 
-	<div class="flex flex-wrap -mx-4">
+	@if(count($individual_championships))
+	<div class="w-full mt-6">
+		<div class="p-6 bg-grey-900 rounded ">
+			<h3 class="font-semibold uppercase text-white text-lg mb-3">Individual Championships</h3>
+			<div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+				@foreach ($individual_championships as $item)
+					<div class="flex flex-col space-y-4 items-center justify-center py-4">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="stroke-green-bright w-6 h-6 lg:w-12 lg:h-12"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" /></svg>
+						<span class="text-white font-semibold uppercase text-sm text-center">{{ $item->name }} Champion</span>
+					</div>
+				@endforeach
+			</div>
+		</div>
+	</div>
+	@endif
+
+	@if(count($team_championships))
+	<div class="w-full mt-6">
+		<div class="p-6 bg-grey-900 rounded ">
+			<h3 class="font-semibold uppercase text-white text-lg mb-3">Team Championships</h3>
+			<div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+				@foreach ($team_championships as $item)
+					<div class="flex flex-col space-y-4 items-center justify-center py-4">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="stroke-green-bright w-6 h-6 lg:w-12 lg:h-12"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" /></svg>
+						<span class="text-white font-semibold uppercase text-sm text-center">{{ $item->year_name }} Champion Team {{ $item->team_name}}</span>
+					</div>
+				@endforeach
+			</div>
+		</div>
+	</div>
+	@endif
+
+	@if(count($weekly_wins))
+	<div class="w-full mt-6">
+		<div class="p-6 bg-grey-900 rounded ">
+			<h3 class="font-semibold uppercase text-white text-lg mb-3">Weekly Wins</h3>
+			<div class="grid grid-cols-2 lg:grid-cols-8 gap-8">
+				@foreach ($weekly_wins as $item)
+					<div class="flex flex-col space-y-4 items-center justify-center py-4">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="fill-green-bright h-6 w-6"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm1-5h1a3 3 0 0 0 0-6H7.99a1 1 0 0 1 0-2H14V5h-3V3H9v2H8a3 3 0 1 0 0 6h4a1 1 0 1 1 0 2H6v2h3v2h2v-2z"/></svg>
+                        <span class="text-white font-semibold uppercase text-sm text-center">{{ $item->name }} Week {{ $item->week_order }} - {{ $item->side_games }}</span>
+					</div>
+				@endforeach
+			</div>
+		</div>
+	</div>
+	@endif
+
+	<div class="flex flex-wrap -mx-4 mt-6">
 		<div class="w-full px-4">
 		  <h3 class="text-lg mt-2 mb-2 font-semibold">Season by Season</h3>
 			<div class="overflow-x-scroll">
@@ -108,8 +153,7 @@
 		</div>
 	</div>
 
-    <div class="flex flex-wrap -mx-4">
-      <div class="w-full lg:w-3/4 px-4">
+    <div class="">
         <h3 class="text-lg mt-2 mb-2 font-semibold">Historical Scores</h3>
         <div class="overflow-x-scroll">
             <table class="table table-bordered w-full mb-8">
@@ -305,28 +349,6 @@
                 @endforeach
             </table>
         </div>
-        </div>
-        <div class="w-full lg:w-1/4 px-4">
-          @if(count($individual_championships))
-          <h3 class="text-lg mt-2 mb-2 font-semibold">Individual Championships</h3>
-          @foreach ($individual_championships as $item)
-            <p>{{ $item->name }} Champion</p>
-          @endforeach
-          @endif
-
-          @if(count($team_championships))
-          <h3 class="text-lg mt-2 mb-2 font-semibold">Team Championships</h3>
-          @foreach ($team_championships as $item)
-            <p>{{ $item->year_name }} Champion Team {{ $item->team_name}}</p>
-          @endforeach
-          @endif
-
-          @if(count($weekly_wins))
-          <h3 class="text-lg mt-2 mb-2 font-semibold">Weekly Wins</h3>
-          @foreach ($weekly_wins as $item)
-            <p>{{ $item->name }} Week {{ $item->week_order }} - {{ $item->side_games }}</p>
-          @endforeach
-          @endif
         </div>
     </div>
 
