@@ -4,6 +4,8 @@
 <div class="container mx-auto">
 	<h1 class="mb-8 font-bold text-3xl">Quick Tools</h1>
 
+	<livewire:admin-controls />
+
 	<div class="flex items-center">
 		<div>
 			<a href="{{ route('admin.week-scores', ['week' => $last_week->id]) }}" class="btn btn-green">Update Last Week's Scores</a>

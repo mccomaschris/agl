@@ -27,6 +27,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+		'username',
+		'active',
+		'phone',
     ];
 
     /**
@@ -86,6 +89,10 @@ class User extends Authenticatable
 
     public function getLastNameAttribute()
     {
+		if ( ! str_contains($this->name, ' ') ) {
+			return '';
+		}
+
         $last_name = explode(" ", $this->name)[1];
 
         if ($last_name == 'McComas') {

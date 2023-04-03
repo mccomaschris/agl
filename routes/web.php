@@ -18,6 +18,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\WaitlistController;
+use App\Http\Livewire\AdminUsers;
 
 Route::get('/', [SiteController::class, 'index']);
 
@@ -33,7 +34,6 @@ Route::get('scores/player/{player}', [PlayerScoreController::class, 'show'])->na
 Route::get('scores/week/{week}', [WeekScoreController::class, 'show'])->name('week-score');
 Route::get('players/{user}', [PlayerController::class, 'show'])->name('player');
 Route::get('scorecard/{week?}', [LiveScorecardController::class, 'show']);
-
 
 Route::group(['auth:sanctum', 'verified'], function () {
     Route::get('members', [MemberController::class, 'index'])->name('members');
@@ -66,5 +66,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
     Route::get('/cache', 'App\Http\Controllers\CommandController@cache');
 
     Route::patch('adjust-weeks/{week}', 'App\Http\Controllers\Admin\AdjustWeeksController@update');
+
+	Route::get('/users', AdminUsers::class);
 
 });
