@@ -31,6 +31,9 @@ function last_name_clean($last)
     elseif ($last_name == 'Mills') {
         return substr($last, 0, 1) . ". " . $last_name;
     }
+	elseif ($last_name == 'Adkins') {
+        return substr($last, 0, 1) . ". " . $last_name;
+    }
     else {
         return $last_name;
     }

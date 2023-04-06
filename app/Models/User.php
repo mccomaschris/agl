@@ -110,6 +110,9 @@ class User extends Authenticatable
         elseif ($last_name == 'Mills') {
             return substr($this->name, 0, 1) . ". " . $last_name;
         }
+		elseif ($last_name == 'Adkins') {
+            return substr($this->name, 0, 1) . ". " . $last_name;
+        }
         else {
             return $last_name;
         }

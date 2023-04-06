@@ -35,6 +35,8 @@ Route::get('scores/week/{week}', [WeekScoreController::class, 'show'])->name('we
 Route::get('players/{user}', [PlayerController::class, 'show'])->name('player');
 Route::get('scorecard/{week?}', [LiveScorecardController::class, 'show']);
 
+Route::get('scorecard/print/{quarter}', 'App\Http\Controllers\Admin\PrintScorecardController@show');
+
 Route::group(['auth:sanctum', 'verified'], function () {
     Route::get('members', [MemberController::class, 'index'])->name('members');
     Route::resource('waitlist', WaitlistController::class);
@@ -46,7 +48,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
     Route::post('scores/{score}', 'App\Http\Controllers\Admin\ScoreController@update')->name('admin.scores.update');
     Route::get('scores/week/{week}/edit', 'App\Http\Controllers\Admin\WeekScoreController@edit')->name('admin.week-scores');
 
-    Route::get('scorecard/print/{quarter}', 'App\Http\Controllers\Admin\PrintScorecardController@show');
+
     Route::get('scores', 'App\Http\Controllers\Admin\ScoreController@index');
 
     Route::get('rankings', 'App\Http\Controllers\Admin\AdminController@rankings');
