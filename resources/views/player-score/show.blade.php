@@ -250,7 +250,7 @@
 
 		@if($player->id != 64)
 			@if(count($highest))
-    <div class="w-full px-0 mb-6">
+    <div class="w-full px-0 mb-6 mt-6">
 				<div class="flex flex-col p-6 bg-grey-900 rounded">
 					<h3 class="font-semibold uppercase text-white text-base lg:text-lg">Handicap</h3>
 					<div class="flex flex-col items-center mt-2 lg:mt-4 ">
