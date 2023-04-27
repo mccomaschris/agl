@@ -39,6 +39,11 @@ class Player extends Model
         return $this->hasMany(Score::class)->where('score_type', 'weekly_score');
     }
 
+	public function season_avg()
+    {
+        return $this->hasOne(Score::class)->where('score_type', 'season_avg');
+    }
+
     public function opponent_records()
     {
         return $this->hasMany(PlayerRecord::class);
@@ -95,6 +100,14 @@ class Player extends Model
     public function scopeGroup($query, $year, $position)
     {
         return $query->with('team')->where('position', $position)->whereBetween('team_id', [7,12]);
+    }
+
+	/**
+     * Get the players average scores.
+     */
+    public function getEagles()
+    {
+        return Score::where('score_type', 'season_avg')->where('player_id', $this->id)->first(['eagle']);
     }
 
     public function weeks()

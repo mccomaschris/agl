@@ -28,6 +28,11 @@
             <th class="text-center">Low</th>
             <th class="text-center">High</th>
             <th class="text-center">LowNet</th>
+            <th class="text-center">Eg</th>
+            <th class="text-center">Br</th>
+            <th class="text-center">Par</th>
+            <th class="text-center">Bg</th>
+            <th class="text-center">DblBg+</th>
         </tr>
     </thead>
     @foreach ($players as $player)
@@ -51,6 +56,11 @@
         <td class="text-center font-semibold @if ($player->low_gross < 37) low-score @endif">{{ $player->low_gross }}</td>
         <td class="text-center font-semibold @if ($player->high_gross < 37) low-score @endif">{{ $player->high_gross }}</td>
         <td class="text-center font-semibold @if ($player->low_net < 37) low-score @endif">{{ $player->low_net }}</td>
+        <td class="text-center eagle-hole font-semibold">{{ $player->season_avg->eagle }}</td>
+        <td class="text-center birdie-hole font-semibold">{{ $player->season_avg->birdie }}</td>
+        <td class="text-center par-hole font-semibold">{{ $player->season_avg->par }}</td>
+        <td class="text-center bogey-hole font-semibold">{{ $player->season_avg->bogey }}</td>
+        <td class="text-center double-hole font-semibold">{{ $player->season_avg->double_bogey }}</td>
     </tr>
     @endforeach
 </table>
