@@ -73,6 +73,7 @@ class Player extends Model
         $absences = Score::where('player_id', $this->id)->where('score_type', 'weekly_score')->where('absent', 1)->pluck('id');
         $total = 0;
         $scores = Score::where('player_id', $this->id)->where('score_type', 'weekly_score')->where('gross', '>', 0)->orderBy('gross', 'asc')->limit(10)->pluck('gross');
+
         foreach ($scores as $score) {
             $total += $score;
         }
@@ -83,9 +84,9 @@ class Player extends Model
             $denominator = 10;
         }
 
-		if (count($scores) < 10) {
-			$denominator = count($scores);
-		}
+		// if (count($scores) < 10) {
+		// 	$denominator = count($scores);
+		// }
 
         return ($total / $denominator) - 37;
     }
