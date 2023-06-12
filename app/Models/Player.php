@@ -82,6 +82,11 @@ class Player extends Model
         } else {
             $denominator = 10;
         }
+
+		if (count($scores) < 10) {
+			$denominator = count($scores);
+		}
+
         return ($total / $denominator) - 37;
     }
 
