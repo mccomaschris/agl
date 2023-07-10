@@ -2,7 +2,9 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "build-total-holes": "cd nova-components/TotalHoles && npm run dev",
+        "build-total-holes-prod": "cd nova-components/TotalHoles && npm run prod"
     },
     "devDependencies": {
         "@babel/plugin-syntax-class-properties": "^7.12.13",

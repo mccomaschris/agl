@@ -35,15 +35,22 @@ class UpdateHandicaps implements ShouldQueue
      *
      * @return $hc
      */
-    public function calc($scores) {
-
-        if (count($scores) == 0) return 0;
+    public function calc($scores, $scores_to_count = 0) {
+        if (count($scores) == 0) {
+			return 0;
+		}
         $total_scores = count($scores);
-        $counted_scores = round($total_scores / 2, 0);
+        $half_scores = round($total_scores / 2, 0);
         asort($scores, SORT_NUMERIC);
 
-        $total_score = (array_sum(array_slice($scores, 0, $counted_scores, true)));
-        $hc = round(($total_score / $counted_scores) - 37);
+		# if i count 8 scores, but i only have 7 so far, use 7
+		if ( $total_scores < $scores_to_count) {
+			$deno = $total_scores;
+		} else {
+			$deno = $scores_to_count;
+		}
+        $total_score = (array_sum(array_slice($scores, 0, $scores_to_count, true)));
+        $hc = round(($total_score / $deno) - 37);
         return $hc;
 
     }
@@ -90,10 +97,10 @@ class UpdateHandicaps implements ShouldQueue
             }
         }
 
-        $player->hc_second = $this->calc($qtr_1_scores);
-        $player->hc_third = $this->calc($qtr_2_scores);
-        $player->hc_fourth = $this->calc($qtr_3_scores);
-        $player->hc_playoff = $this->calc($qtr_4_scores);
+        $player->hc_second = $this->calc($qtr_1_scores, 3);
+        $player->hc_third = $this->calc($qtr_2_scores, 5);
+        $player->hc_fourth = $this->calc($qtr_3_scores, 8);
+        $player->hc_playoff = $this->calc($qtr_4_scores, 10);
         $player->hc_18 = round($player->hc_playoff * 1.5);
 
         if (count($qtr_4_scores) == 0) {

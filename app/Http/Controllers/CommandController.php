@@ -24,6 +24,7 @@ class CommandController extends Controller
         sleep(1);
         $exitCode = Artisan::call('cache:clear');
         // $request->session()->flash('message.content', 'Cache cleared!');
-        return response()->json();
+		return back()->with(['message' => 'Something you want to pass to front-end']);
+        // return response()->json('data' => 'Something you want to pass to front-end');
     }
 }

@@ -65,7 +65,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
 
     Route::get('/handicaps', 'App\Http\Controllers\CommandController@handicaps');
     Route::get('/stats', 'App\Http\Controllers\CommandController@stats');
-    Route::get('/cache', 'App\Http\Controllers\CommandController@cache');
+    Route::post('/cache', 'App\Http\Controllers\CommandController@cache');
 
     Route::patch('adjust-weeks/{week}', 'App\Http\Controllers\Admin\AdjustWeeksController@update');
 
