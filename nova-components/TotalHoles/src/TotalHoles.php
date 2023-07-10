@@ -32,16 +32,16 @@ class TotalHoles extends Card
 	public function totalScores()
     {
         return $this->withMeta([
-			'totalScores' => Score::where('score_type', 'weekly_score')->where('player.position', '!=', '4')->count(),
-			'hole_1' => Score::where('score_type', 'weekly_score')->where('player.position', '!=', '4')->avg('hole_1'),
-			'hole_2' => Score::where('score_type', 'weekly_score')->where('player.position', '!=', '4')->avg('hole_2'),
-			'hole_3' => Score::where('score_type', 'weekly_score')->where('player.position', '!=', '4')->avg('hole_3'),
-			'hole_4' => Score::where('score_type', 'weekly_score')->where('player.position', '!=', '4')->avg('hole_4'),
-			'hole_5' => Score::where('score_type', 'weekly_score')->where('player.position', '!=', '4')->avg('hole_5'),
-			'hole_6' => Score::where('score_type', 'weekly_score')->where('player.position', '!=', '4')->avg('hole_6'),
-			'hole_7' => Score::where('score_type', 'weekly_score')->where('player.position', '!=', '4')->avg('hole_7'),
-			'hole_8' => Score::where('score_type', 'weekly_score')->where('player.position', '!=', '4')->avg('hole_8'),
-			'hole_9' => Score::where('score_type', 'weekly_score')->where('player.position', '!=', '4')->avg('hole_9'),
+			'totalScores' => Score::where('score_type', 'weekly_score')->count(),
+			'hole_1' => Score::where('score_type', 'weekly_score')->avg('hole_1'),
+			'hole_2' => Score::where('score_type', 'weekly_score')->avg('hole_2'),
+			'hole_3' => Score::where('score_type', 'weekly_score')->avg('hole_3'),
+			'hole_4' => Score::where('score_type', 'weekly_score')->avg('hole_4'),
+			'hole_5' => Score::where('score_type', 'weekly_score')->avg('hole_5'),
+			'hole_6' => Score::where('score_type', 'weekly_score')->avg('hole_6'),
+			'hole_7' => Score::where('score_type', 'weekly_score')->avg('hole_7'),
+			'hole_8' => Score::where('score_type', 'weekly_score')->avg('hole_8'),
+			'hole_9' => Score::where('score_type', 'weekly_score')->avg('hole_9'),
 		]);
     }
 }
