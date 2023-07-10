@@ -5,12 +5,18 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Actions\Actionable;
 
 class Week extends Model
 {
+	use Actionable;
 
     protected $with = ['winners', 'year'];
     protected $appends = ['quarter', 'game_name'];
+
+	protected $casts = [
+		'week_date' => 'date'
+	];
 
     /**
      * Get the year that owns the week.

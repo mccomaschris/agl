@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Agl\TotalHoles\TotalHoles;
 use Cache;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Score extends Model
 {
@@ -22,6 +24,11 @@ class Score extends Model
     {
         return $this->belongsTo(Week::class, 'foreign_key');
     }
+
+	public function year()
+	{
+		return $this->belongsTo(Year::class);
+	}
 
     public function scopeQuarter($query, $quarter)
     {

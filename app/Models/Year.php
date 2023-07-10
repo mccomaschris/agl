@@ -24,6 +24,11 @@ class Year extends Model
 		return $this->hasMany(Week::class)->orderBy('week_date', 'asc');
 	}
 
+	public function scores()
+	{
+		return $this->hasMany(Score::class);
+	}
+
 	public function weeks_desc()
 	{
 		return $this->hasMany(Week::class)->orderBy('week_date', 'desc');
