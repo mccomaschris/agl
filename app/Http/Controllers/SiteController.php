@@ -28,6 +28,7 @@ class SiteController extends Controller
 
         $last_week = Week::where('year_id', $year->id)->where('week_date', '<', Carbon::today())->orderBy('week_date', 'desc')->first();
 
-        return view('site.index', compact('year', 'week', 'last_week'));
+        return view('site.playoff', compact('year', 'week', 'last_week'));
+        // return view('site.index', compact('year', 'week', 'last_week'));
     }
 }
