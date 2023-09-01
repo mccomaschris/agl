@@ -7,12 +7,14 @@
         </div>
     </div>
 
+	@if ($week)
     <div class="flex items-center lg:justify-center mx-auto mt-6 lg:mt-8 mb-2 lg:mb-4 text-darkest-grey">
         <span class="text-center text-lg font-semibold">Week {{ $week->week_order }}, {{ date('F d, Y', strtotime($week->week_date)) }} Matchups - {{ $week->side_games }}</span>
     </div>
 
-	@include('site.week-table')
 
+	@include('site.week-table')
+@endif
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12 pb-12">
 		<div class="lg:col-span-2">
 			<h2 class="text-lg mt-2 mb-2 font-semibold">Team Standings</h2>
