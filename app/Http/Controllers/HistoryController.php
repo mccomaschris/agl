@@ -35,7 +35,7 @@ class HistoryController extends Controller
         });
 
         $season_individual_least_points = Cache::rememberForever('season_individual_least_points', function () use ($year) {
-            return Player::with('year')->whereNotIn('id', [10, 60])->where('year_id', '!=', $year->id)->where('year_id', '!=', 8)->orderBy('points', 'asc')->take(10)->get();
+            return Player::with('year')->whereNotIn('id', [10, 60])->where('year_id', '!=', 8)->orderBy('points', 'asc')->take(10)->get();
         });
 
         $season_individual_most_wins = Cache::rememberForever('season_individual_most_wins', function () use ($year) {
@@ -43,7 +43,7 @@ class HistoryController extends Controller
         });
 
         $season_individual_least_wins = Cache::rememberForever('season_individual_least_wins', function () use ($year) {
-            return Player::with('year')->whereNotIn('id', [10, 60])->where('year_id', '!=', $year->id)->where('year_id', '!=', 8)->orderBy('won', 'asc')->take(10)->get();
+            return Player::with('year')->whereNotIn('id', [10, 60])->where('year_id', '!=', 8)->orderBy('won', 'asc')->take(10)->get();
         });
 
         $season_individual_most_ties = Cache::rememberForever('season_individual_most_ties', function () use ($year) {
@@ -51,7 +51,7 @@ class HistoryController extends Controller
         });
 
         $season_individual_least_ties = Cache::rememberForever('season_individual_least_ties', function () use ($year) {
-            return Player::with('year')->whereNotIn('id', [10, 60])->where('year_id', '!=', $year->id)->orderBy('tied', 'asc')->take(10)->get();
+            return Player::with('year')->whereNotIn('id', [10, 60])->orderBy('tied', 'asc')->take(10)->get();
         });
 
         $season_individual_most_losses = Cache::rememberForever('season_individual_most_losses', function () use ($year) {
@@ -59,7 +59,7 @@ class HistoryController extends Controller
         });
 
         $season_individual_least_losses = Cache::rememberForever('season_individual_least_losses', function () use ($year) {
-            return Player::with('year')->whereNotIn('id', [10, 60])->where('year_id', '!=', $year->id)->where('year_id', '!=', 8)->orderBy('lost', 'asc')->take(10)->get();
+            return Player::with('year')->whereNotIn('id', [10, 60])->where('year_id', '!=', 8)->orderBy('lost', 'asc')->take(10)->get();
         });
 
         $season_individual_gross = Cache::rememberForever('season_individual_gross', function () use ($year) {
@@ -92,27 +92,27 @@ class HistoryController extends Controller
 
 		// 2020 is year 8
         $season_team_points = Cache::rememberForever('season_team_points', function () use ($year) {
-            return Team::with('year', 'players')->where('year_id', '!=', $year->id)->orderBy('points', 'desc')->take(10)->get();
+            return Team::with('year', 'players')->orderBy('points', 'desc')->take(10)->get();
         });
 
         $season_team_wins = Cache::rememberForever('season_team_wins', function () use ($year) {
-            return Team::with('year', 'players')->where('year_id', '!=', $year->id)->orderBy('won', 'desc')->take(10)->get();
+            return Team::with('year', 'players')->orderBy('won', 'desc')->take(10)->get();
         });
 
         $season_team_low_points = Cache::rememberForever('season_team_low_points', function () use ($year) {
-            return Team::with('year', 'players')->where('year_id', '!=', $year->id)->where('year_id', '!=', 8)->orderBy('points', 'asc')->take(10)->get();
+            return Team::with('year', 'players')->where('year_id', '!=', 8)->orderBy('points', 'asc')->take(10)->get();
         });
 
         $season_team_low_wins = Cache::rememberForever('season_team_low_wins', function () use ($year) {
-            return Team::with('year', 'players')->where('year_id', '!=', $year->id)->where('year_id', '!=', 8)->orderBy('won', 'asc')->take(10)->get();
+            return Team::with('year', 'players')->where('year_id', '!=', 8)->orderBy('won', 'asc')->take(10)->get();
         });
 
         $season_team_losses = Cache::rememberForever('season_team_losses', function () use ($year) {
-            return Team::with('year', 'players')->where('year_id', '!=', $year->id)->orderBy('lost', 'desc')->take(10)->get();
+            return Team::with('year', 'players')->orderBy('lost', 'desc')->take(10)->get();
         });
 
         $season_team_low_losses = Cache::rememberForever('season_team_low_losses', function () use ($year) {
-            return Team::with('year', 'players')->where('year_id', '!=', $year->id)->where('year_id', '!=', 8)->orderBy('lost', 'asc')->take(10)->get();
+            return Team::with('year', 'players')->where('year_id', '!=', 8)->orderBy('lost', 'asc')->take(10)->get();
         });
 
         return view('history.index', compact(
