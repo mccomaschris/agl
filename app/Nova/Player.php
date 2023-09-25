@@ -203,6 +203,10 @@ class Player extends Resource
 				->hidefromIndex()
 				->default(0),
 
+			Boolean::make('Champion')
+				->hidefromIndex()
+				->default(0),
+
 			HasMany::make('Scores'),
 
         ];
