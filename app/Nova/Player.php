@@ -51,15 +51,12 @@ class Player extends Resource
             ID::make()->sortable(),
 
 			BelongsTo::make('User')
-				->filterable()
-				->readonly(),
+				->filterable(),
 
-			BelongsTo::make('Team')
-				->readonly(),
+			BelongsTo::make('Team'),
 
 			BelongsTo::make('Year')
-				->filterable()
-				->readonly(),
+				->filterable(),
 
 			Select::make('Tee Selection', 'tee_selection')->options([
 				'yellow' => 'Yellow',
@@ -107,8 +104,6 @@ class Player extends Resource
 				->hidefromIndex()
 				->default(0)
 				->nullable()
-				->min(1)
-				->max(1000)
 				->step('any'),
 
             Number::make('Full Handicap rank', 'hc_full_rank')
@@ -149,32 +144,24 @@ class Player extends Resource
 
             Number::make('Gross Average', 'gross_average')
 				->nullable()
-				->min(1)
-				->max(1000)
 				->step('any')
 				->hidefromIndex()
 				->default(0),
 
             Number::make('Gross to Par', 'gross_par')
 				->nullable()
-			   ->min(1)
-			   ->max(1000)
 			   ->step('any')
 			   ->hidefromIndex()
 			   ->default(0),
 
             Number::make('Net Average', 'net_average')
 				->nullable()
-			   ->min(1)
-			   ->max(1000)
 			   ->step('any')
 			   ->hidefromIndex()
 			   ->default(0),
 
             Number::make('Net to Par', 'net_par')
 				->nullable()
-			   ->min(1)
-			   ->max(1000)
 			   ->step('any')
 			   ->hidefromIndex()
 			   ->default(0),
