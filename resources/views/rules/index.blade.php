@@ -7,7 +7,7 @@
     <div class="flex mx-0 lg:-mx-8 relative">
         <div class="w-full lg:w-3/4 px-0 lg:px-8">
             <h3 class="font-semibold mb-2 lg:text-xl" id="membership">Membership &amp; Dues</h3>
-            <p class="mb-3">Minimum age for a member is 25 years of age. Membership fees are $70 per year, which includes the $12 kitty for each "side game" played each week (alternating between closest to the pin, low putts and low net). Any ties during the weekly "side game" will be split between the winners. This fee must be paid prior to Snowball Tournament. A new member joining the League after the season has begun will be charged an entry fee based on $3.25 per week for the remainder of the weeks in the season. For instance, if he joins in the 5th week, he will be charged $52.00 for the remainder of the season.</p>
+            <p class="mb-3">Minimum age for a member is 25 years of age. Membership fees are $70 per year, which includes the $12 kitty for each "side game" played each week (alternating between closest to the pin, low putts and low net). Any ties during the weekly "side game" will be split between the winners. This fee must be paid prior to Snowball Tournament. A new member joining the League after the season has begun will be charged an entry fee based on $3.50 per week for the remainder of the weeks in the season. For instance, if he joins in the 5th week, he will be charged $52.50 for the remainder of the season.</p>
             <p class="mb-3">If a member needs to take a year off to care for a seriously ill family member, a spot will be held for this member the following year. </p>
 
             <h3 class="font-semibold mb-2 lg:text-xl mt-6" id="officers">Officers</h3>
