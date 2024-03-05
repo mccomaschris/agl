@@ -54,6 +54,8 @@ class Year extends Resource
 			HasMany::make('Teams'),
 
 			HasMany::make('Weeks'),
+
+			HasMany::make('Players'),
         ];
     }
 
