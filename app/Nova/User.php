@@ -51,6 +51,12 @@ class User extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
+			Text::make('username')
+                ->sortable()
+                ->rules('required', 'max:254')
+                ->creationRules('unique:users,username')
+                ->updateRules('unique:users,username,{{resourceId}}'),
+
             Text::make('Email')
                 ->sortable()
                 ->rules('required', 'email', 'max:254')
