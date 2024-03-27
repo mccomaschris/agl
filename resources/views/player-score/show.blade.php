@@ -1,5 +1,17 @@
 <x-main>
+	@if(count($notes))
+			<div class="bg-red-700 w-full px-4 py-4 rounded">
+				<div class="text-white font-bold text-lg uppercase">Note</div>
+				<div class="mt-4 text-white">
+					@foreach ($notes as $note)
+						{{ $note->note }}
+					@endforeach
+				</div>
+			</div>
+		@endif
+
 	<div class="flex flex-wrap items-center lg:items-start w-full my-8">
+
 		<div class="flex flex-col flex-grow leading-snug">
 			<h1 class="text-2xl lg:text-4xl uppercase font-semibold">{{ $player->user->name }}</h1>
 			<span class="text-lg lg:text-2xl text-grey-600 uppercase font-semibold">{{ $player->team->year->name }} <span class="font-normal">Season</span></span></h1>
