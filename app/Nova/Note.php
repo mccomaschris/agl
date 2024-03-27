@@ -7,7 +7,7 @@ use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\TextArea;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Note extends Resource
@@ -52,7 +52,7 @@ class Note extends Resource
             Boolean::make('Active')
 				->filterable(),
 
-			TextArea::make('Note'),
+			Textarea::make('Note'),
         ];
     }
 
