@@ -196,6 +196,8 @@ class Player extends Resource
 
 			HasMany::make('Scores'),
 
+			HasMany::make('Notes'),
+
         ];
     }
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Week;
-use App\Models\Year;
+use App\Models\Note;
 use App\Models\Score;
 use App\Models\Player;
 use App\Models\PlayerRecord;
@@ -54,6 +54,8 @@ class PlayerScoreController extends Controller
             return PlayerRecord::with('opponent')->where('player_id', $player->id)->get();
         });
 
+		$notes = Note::where('player_id', $player->id)->where('active', 1)->get();
+
         $scores =  Cache::remember("query:player:total_scores:{$player->id}", 1440, function () use ($player) {
             return Score::where('score_type', 'weekly_score')
                         ->where('player_id', $player->id)
@@ -66,7 +68,6 @@ class PlayerScoreController extends Controller
         } else {
             $total_count = round(count($scores) / 2);
         }
-
 
         $highest =  Score::where('score_type', 'weekly_score')
                         ->where('player_id', $player->id)
@@ -91,7 +92,7 @@ class PlayerScoreController extends Controller
         $prev_seasons = $player->previous_seasons();
 
         return view('player-score.show',
-            compact('player', 'qtr_1', 'qtr_2', 'qtr_3', 'qtr_4',
+            compact('player', 'qtr_1', 'qtr_2', 'qtr_3', 'qtr_4', 'notes',
                 'qtr_1_avg', 'qtr_2_avg', 'qtr_3_avg', 'qtr_4_avg', 'season_avg',
                 'opponents', 'counted', 'prev_seasons', 'highest', 'weekly_wins'));
     }

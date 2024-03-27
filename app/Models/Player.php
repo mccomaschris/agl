@@ -34,6 +34,12 @@ class Player extends Model
         return $this->hasMany(Score::class);
     }
 
+	public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
+
+
     public function weekly_scores()
     {
         return $this->hasMany(Score::class)->where('score_type', 'weekly_score');
