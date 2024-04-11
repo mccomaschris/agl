@@ -8,7 +8,9 @@
 
 	<div class="flex items-center">
 		<div>
-			<a href="{{ route('admin.week-scores', ['week' => $last_week->id]) }}" class="btn btn-green">Update Last Week's Scores</a>
+			@if ($last_week)
+				<a href="{{ route('admin.week-scores', ['week' => $last_week->id]) }}" class="btn btn-green">Update Last Week's Scores</a>
+			@endif
 		</div>
 		<div class="ml-4">
 			<button data-controller="update-button" data-update-button-url="/admin/cache" data-action="update-button#update" class="btn btn-green">Clear Cache</button>
