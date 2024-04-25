@@ -45,7 +45,7 @@
     <div id="app">
         <!-- NEW NAV START -->
         <div class="bg-green-500">
-            <div class="container mx-auto py-6 px-4 xl:px-0">
+            <div class="w-full lg:max-w-screen-lg xl:max-w-screen-xl mx-auto py-6 px-6">
                 <nav class="flex items-center justify-between flex-wrap relative" x-data="{ open: false }">
                     <div class="flex items-center flex-no-shrink text-white mr-6">
                         <a href="/" class="inline-flex items-center">
@@ -115,7 +115,7 @@
         </div>
         <!-- END NAV START -->
         <div class="hidden lg:block bg-grey-900 py-4 mb-12">
-            <div class="w-full lg:max-w-screen-lg xl:max-w-screen-xl mx-auto lg:flex text-sm items-center px-4 xl:px-0">
+            <div class="w-full lg:max-w-screen-lg xl:max-w-screen-xl mx-auto lg:flex text-sm items-center px-6">
                 <span class="font-semibold mr-4 text-grey-100 uppercase">More Links:</span>
                 <a href="{{ route('team-points', ['year' => $activeYear->name]) }}" class=" mt-0 text-green-bright hover:text-green-bright hover:underline mr-4">Team Points</a>
                 <a href="{{ route('handicaps', ['year' => $activeYear->name]) }}" class=" mt-0 text-green-bright hover:text-green-bright hover:underline mr-4">Handicaps</a>
@@ -127,7 +127,7 @@
 
         @yield('jumbotron')
 
-        <div class="w-full lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mt-6 mb-16 px-6 xl:px-0 pb-8 lg:pb-0">
+        <div class="w-full lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mt-6 mb-16 px-6 pb-8 lg:pb-0">
             @yield('homepage-alert')
             @yield('page-heading')
             @yield('content')
