@@ -20,7 +20,7 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\WaitlistController;
 use App\Livewire\AdminUsers;
 
-Route::get('/', [SiteController::class, 'index']);
+Route::get('/', [SiteController::class, 'index'])->name('home');
 
 Route::get('rules', [RuleController::class, 'show'])->name('rules');
 Route::get('agl-history', [HistoryController::class, 'show'])->name('history');
@@ -72,3 +72,5 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
 	Route::get('/users', AdminUsers::class);
 
 });
+
+require __DIR__.'/auth.php';
