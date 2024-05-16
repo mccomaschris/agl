@@ -31,10 +31,6 @@
     <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:300,400,600,800,900" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('css/main.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
-
-
-    @livewireStyles
 </head>
 <body class="h-screen font-sans mb-20 pb-10 @yield('body-css')">
     <div id="app">
@@ -111,7 +107,6 @@
         </div>
     @endif
 
-    @livewireScripts
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </body>
 </html>

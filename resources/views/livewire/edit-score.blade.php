@@ -1,22 +1,23 @@
 <tr>
     <td id="{{ $score->id }}" class="border-t px-2 py-4 text-sm text-left"><a href="{{ route('player-score', ['player' => $score->player_id]) }}">{{ $score->player->user->name }}</a>
         @if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
+		{{ $score->id }}
     </td>
-    <td class="border-t px-2 py-4 text-sm text-center"><input type="checkbox" wire:model="score.absent" /></td>
-    <td class="border-t px-2 py-4 text-sm text-center"><input type="checkbox" wire:model="score.weekly_winner" /></td>
-    <td class="border-t px-2 py-4 text-sm text-center"><input type="checkbox" wire:model="score.substitute_id" /></td>
-    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model.defer="score.hole_1" /></td>
-    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model.defer="score.hole_2" /></td>
-    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model.defer="score.hole_3" /></td>
-    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model.defer="score.hole_4" /></td>
-    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model.defer="score.hole_5" /></td>
-    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model.defer="score.hole_6" /></td>
-    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model.defer="score.hole_7" /></td>
-    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model.defer="score.hole_8" /></td>
-    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model="score.hole_9" wire:blur="countGross" /></td>
+    <td class="border-t px-2 py-4 text-sm text-center"><input type="checkbox" wire:model="absent" /></td>
+    <td class="border-t px-2 py-4 text-sm text-center"><input type="checkbox" wire:model="weekly_winner" /></td>
+    <td class="border-t px-2 py-4 text-sm text-center"><input type="checkbox" wire:model="substitute_id" /></td>
+    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model="hole_1" /></td>
+    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model="hole_2" /></td>
+    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model="hole_3" /></td>
+    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model="hole_4" /></td>
+    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model="hole_5" /></td>
+    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model="hole_6" /></td>
+    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model="hole_7" /></td>
+    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model="hole_8" /></td>
+    <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model="hole_9" wire:blur="countGross" /></td>
     <td class="border-t px-2 py-4 text-sm text-center">{{ number_format($gross, 0) }}</td>
     <td class="border-t px-2 py-4 text-sm text-center">
-        <select wire:model="score.points" wire:blur="save" class="block appearance-none w-14 bg-grey-100 border border-grey-300 text-grey-600 p-2 rounded" name="points">
+        <select wire:model="points" wire:blur="save" class="block appearance-none w-14 bg-grey-100 border border-grey-300 text-grey-600 p-2 rounded" name="points">
             <option value=""></option>
             <option value="0">0</option>
             <option value="1">1</option>
