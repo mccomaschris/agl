@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Score;
 use App\Models\Week;
@@ -8,12 +8,11 @@ use Livewire\Component;
 
 class WeekScores extends Component
 {
-    public $weekId;
     public $week;
 
-    public function mount($weekId)
+    public function mount(Week $week)
     {
-        $this->week = Week::find($weekId);
+        $this->week = $week;
     }
 
     protected $rules = [

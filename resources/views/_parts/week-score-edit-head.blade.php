@@ -13,8 +13,8 @@
         <th class="px-1 pt-6 pb-4 text-center">7</th>
         <th class="px-1 pt-6 pb-4 text-center">8</th>
         <th class="px-1 pt-6 pb-4 text-center">9</th>
+        <th class="px-1 pt-6 pb-4 text-center">GROSS</th>
         <th class="px-1 pt-6 pb-4 text-center">PTS</th>
-        <th class="px-1 pt-6 pb-4 text-center">SCR</th>
         <th class="px-1 pt-6 pb-4"></th>
     </tr>
 </thead>

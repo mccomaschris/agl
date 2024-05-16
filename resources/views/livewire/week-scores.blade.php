@@ -11,8 +11,7 @@
                     @endif
                     >Week {{ $item->week_order }} - {{ date('F d, Y', strtotime($item->week_date)) }} Results</option>
                     @endforeach
-                </select>
-            </div>
+			</select>
         </div>
     </div>
 
@@ -39,9 +38,8 @@
 
                 @foreach ($matchup_1 as $score)
                     @admin
-                        @livewire('edit-score', ['scoreId' => $score->id])
+                        <livewire:edit-score :score :key="$score->id" />
                     @else
-
                         @if (($loop->index + 1) % 2 == 0)
                             <tr style="border-bottom: 4px solid #333;" id="{{ $score->player_id }}">
                         @else
@@ -79,9 +77,9 @@
 
                 @foreach ($matchup_2 as $score)
                     @admin
-                        @livewire('edit-score', ['scoreId' => $score->id])
+						{{ $score }}
+                        <livewire:edit-score :score :key="$score->id" />
                     @else
-
                         @if (($loop->index + 1) % 2 == 0)
                             <tr style="border-bottom: 4px solid #333;" id="{{ $score->player_id }}">
                         @else
@@ -119,7 +117,7 @@
 
                 @foreach ($matchup_3 as $score)
                     @admin
-                        @livewire('edit-score', ['scoreId' => $score->id])
+                        <livewire:edit-score :score :key="$score->id" />
                     @else
 
                         @if (($loop->index + 1) % 2 == 0)

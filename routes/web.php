@@ -18,7 +18,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\WaitlistController;
-use App\Http\Livewire\AdminUsers;
+use App\Livewire\AdminUsers;
 
 Route::get('/', [SiteController::class, 'index']);
 
