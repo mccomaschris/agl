@@ -18,27 +18,53 @@ class EditScore extends Component
     public $gross = 0;
 
     public Score $score;
+
+	#[Validate('integer|nullable')]
 	public $absent;
+
+	#[Validate('integer|nullable')]
 	public $weekly_winner;
+
+	#[Validate('integer|nullable')]
 	public $substitute_id;
+
+	#[Validate('integer|nullable')]
 	public $hole_1;
+
+	#[Validate('integer|nullable')]
 	public $hole_2;
+
+	#[Validate('integer|nullable')]
 	public $hole_3;
+
+	#[Validate('integer|nullable')]
 	public $hole_4;
+
+	#[Validate('integer|nullable')]
 	public $hole_5;
+
+	#[Validate('integer|nullable')]
 	public $hole_6;
+
+	#[Validate('integer|nullable')]
 	public $hole_7;
+
+	#[Validate('integer|nullable')]
 	public $hole_8;
+
+	#[Validate('integer|nullable')]
 	public $hole_9;
+
+	#[Validate('integer|nullable')]
 	public $points;
 
 	public function mount($scoreId)
 	{
 		$this->score = Score::find($scoreId);
 
-		$this->absent = $this->score->absent;
-		$this->weekly_winner = $this->score->weekly_winner;
-		$this->substitute_id = $this->score->substitute_id;
+		$this->absent = $this->score->absent ? true : false;
+		$this->weekly_winner = $this->score->weekly_winner ? true : false;
+		$this->substitute_id = $this->score->substitute_id ? true : false;
 		$this->hole_1 = $this->score->hole_1;
 		$this->hole_2 = $this->score->hole_2;
 		$this->hole_3 = $this->score->hole_3;
@@ -55,7 +81,7 @@ class EditScore extends Component
 
     public function countGross()
     {
-        $this->gross = $this->score->hole_1 + $this->score->hole_2 + $this->score->hole_3 + $this->score->hole_4 + $this->score->hole_5 + $this->score->hole_6 + $this->score->hole_7 + $this->score->hole_8 + $this->score->hole_9;
+        $this->gross = $this->hole_1 + $this->hole_2 + $this->hole_3 + $this->hole_4 + $this->hole_5 + $this->hole_6 + $this->hole_7 + $this->hole_8 + $this->hole_9;
     }
 
     public function formatScore($score) {
@@ -64,35 +90,19 @@ class EditScore extends Component
 
     public function save()
     {
-		$validated = $this->validate([
-            'hole_1' => 'integer|nullable',
-			'hole_2' => 'integer|nullable',
-			'hole_3' => 'integer|nullable',
-			'hole_4' => 'integer|nullable',
-			'hole_5' => 'integer|nullable',
-			'hole_6' => 'integer|nullable',
-			'hole_7' => 'integer|nullable',
-			'hole_8' => 'integer|nullable',
-			'hole_9' => 'integer|nullable',
-			'points' => 'integer|nullable',
-			'weekly_winner' => 'integer|nullable',
-			'absent' => 'integer|nullable',
-			'substitute_id' => 'integer|nullable',
-        ]);
-
-		$this->score->hole_1 = $validated['hole_1'];
-		$this->score->hole_2 = $validated['hole_2'];
-		$this->score->hole_3 = $validated['hole_3'];
-		$this->score->hole_4 = $validated['hole_4'];
-		$this->score->hole_5 = $validated['hole_5'];
-		$this->score->hole_6 = $validated['hole_6'];
-		$this->score->hole_7 = $validated['hole_7'];
-		$this->score->hole_8 = $validated['hole_8'];
-		$this->score->hole_9 = $validated['hole_9'];
-		$this->score->points = $validated['points'];
-		$this->score->weekly_winner = $validated['weekly_winner'];
-		$this->score->absent = $validated['absent'];
-		$this->score->substitute_id = $validated['substitute_id'];
+		$this->score->hole_1 = $this->hole_1;
+		$this->score->hole_2 = $this->hole_2;
+		$this->score->hole_3 = $this->hole_3;
+		$this->score->hole_4 = $this->hole_4;
+		$this->score->hole_5 = $this->hole_5;
+		$this->score->hole_6 = $this->hole_6;
+		$this->score->hole_7 = $this->hole_7;
+		$this->score->hole_8 = $this->hole_8;
+		$this->score->hole_9 = $this->hole_9;
+		$this->score->points = $this->points;
+		$this->score->weekly_winner = $this->weekly_winner;
+		$this->score->absent = $this->absent;
+		$this->score->substitute_id = $this->substitute_id;
 
         $this->score->save();
 
