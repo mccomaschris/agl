@@ -2,17 +2,13 @@
 
 namespace App\Models;
 
-use Agl\TotalHoles\TotalHoles;
-use Cache;
 use DB;
+use Cache;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Score extends Model
 {
-
-    protected $appends = ['handicap'];
-
     protected $guarded = [];
 
     public function player()
@@ -32,7 +28,6 @@ class Score extends Model
 
     public function scopeQuarter($query, $quarter)
     {
-
         switch ($quarter) {
             case 1:
                 $splice = [1, 5];
@@ -50,19 +45,6 @@ class Score extends Model
 
         $weeks = Week::whereBetween('week_order', $splice)->pluck('id')->toArray();
         return $query->whereIn('foreign_key', $weeks);
-    }
-
-    public function getHandicapAttribute()
-    {
-        // if (in_array($this->week->week_order, [1, 2, 3, 4, 5]) ) {
-        //     return $this->player->hc_first;
-        // } elseif (in_array($this->week->week_order, [6, 7, 8, 9, 10]) ) {
-        //     return $this->player->hc_second;
-        // } elseif (in_array($this->week->week_order, [11, 12, 13, 14, 15]) ) {
-        //     return $this->player->hc_third;
-        // } elseif (in_array($this->week->week_order, [16, 17, 18, 19, 20]) ) {
-        //     return $this->player->hc_four;
-        // }
     }
 
     public function getQuarterAttribute()
@@ -111,7 +93,6 @@ class Score extends Model
 
     public function scopeTotals($query, $quarter, $player)
     {
-
         switch ($quarter) {
             case 1:
                 $splice = [1, 5];

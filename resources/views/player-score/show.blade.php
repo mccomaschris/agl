@@ -106,33 +106,14 @@
 				</table>
 			</div>
 
-			@include('_parts.player-scores-table', [
-				'title' => 'Weeks 1-5',
-				'handicap' => $player->hc_first,
-				'scores' => $qtr_1,
-				'average' => $qtr_1_avg
-            ])
+			<x-tables.player-scores-table :scores="$qtr_1" :average="$qtr_1_avg" :handicap="$player->hc_first" title="Weeks 1-5" />
 
-			@include('_parts.player-scores-table', [
-				'title' => 'Weeks 6-10',
-				'handicap' => $player->hc_second,
-				'scores' => $qtr_2,
-				'average' => $qtr_2_avg
-            ])
-			@include('_parts.player-scores-table', [
-				'title' => 'Weeks 11-15',
-				'handicap' => $player->hc_third,
-				'scores' => $qtr_3,
-				'average' => $qtr_3_avg
-            ])
+			<x-tables.player-scores-table :scores="$qtr_2" :average="$qtr_2_avg" :handicap="$player->hc_second" title="Weeks 6-10" />
+
+			<x-tables.player-scores-table :scores="$qtr_3" :average="$qtr_3_avg" :handicap="$player->hc_third" title="Weeks 11-15" />
 
 			@if ( $player->team->year->name != '2020' )
-				@include('_parts.player-scores-table', [
-					'title' => 'Weeks 16-20',
-					'handicap' => $player->hc_fourth,
-					'scores' => $qtr_4,
-					'average' => $qtr_4_avg
-				])
+				<x-tables.player-scores-table :scores="$qtr_4" :average="$qtr_4_avg" :handicap="$player->hc_fourth" title="Weeks 16-20" />
 			@endif
 		</div>
 

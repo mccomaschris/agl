@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Actions\Actionable;
+use Illuminate\Database\Eloquent\Builder;
 
 class Week extends Model
 {
