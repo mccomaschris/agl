@@ -25,7 +25,7 @@
 			>
 				<div class="py-1" role="none">
 					@foreach ($weeks as $item)
-						<a wire:navigate href="/scores/week/{{ $item->id }}" class="{{ ($week->id == $item->d) ? 'bg-gray-100 text-gray-900' : 'text-gray-700' }} text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Week {{ $item->week_order }} - {{ date('F d, Y', strtotime($item->week_date)) }} Results</a>
+						<a wire:navigate href="/scores/week/{{ $item->id }}" class="{{ ($week->id == $item->id) ? 'bg-gray-100 text-gray-900' : 'text-gray-700' }} text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Week {{ $item->week_order }} - {{ date('F d, Y', strtotime($item->week_date)) }} Results</a>
 					@endforeach
 				</div>
 			</div>

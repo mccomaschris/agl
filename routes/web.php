@@ -1,43 +1,43 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SiteController;
 use App\Http\Controllers\RuleController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\WeekController;
-use App\Http\Controllers\HandicapController;
-use App\Http\Controllers\StandingController;
-use App\Http\Controllers\TeamPointsController;
-use App\Http\Controllers\TeamStatsController;
-use App\Http\Controllers\GroupStatsController;
-use App\Http\Controllers\PlayerScoreController;
-use App\Http\Controllers\WeekScoreController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\LiveScorecardController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ChrisVsMikeController;
-use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\WaitlistController;
 use App\Livewire\AdminUsers;
 use App\Livewire\EditScores;
 use App\Livewire\WeekScores;
 use App\Livewire\PlayerScore;
 use App\Livewire\SiteIndex;
+use App\Livewire\TeamPoints;
+use App\Livewire\Handicaps;
+use App\Livewire\Standings;
+use App\Livewire\GroupStats;
+use App\Livewire\TeamStats;
+use App\Livewire\AllStats;
 
 Route::get('/', SiteIndex::class)->name('home');
 
 Route::get('rules', [RuleController::class, 'show'])->name('rules');
 Route::get('agl-history', [HistoryController::class, 'show'])->name('history');
 Route::get('schedule/{year}', [WeekController::class, 'show'])->name('schedule');
-Route::get('handicaps/{year}', [HandicapController::class, 'show'])->name('handicaps');
-Route::get('standings/{year}', [StandingController::class, 'show'])->name('standings');
-Route::get('team-points/{year}', [TeamPointsController::class, 'show'])->name('team-points');
-Route::get('team-stats/{year}', [TeamStatsController::class, 'show'])->name('team-stats');
-Route::get('group-stats/{year}', [GroupStatsController::class, 'show'])->name('group-stats');
+Route::get('players/{user}', [PlayerController::class, 'show'])->name('player');
+
+Route::get('all-stats/{year}', AllStats::class)->name('all-stats');
+Route::get('team-stats/{year}', TeamStats::class)->name('team-stats');
+Route::get('group-stats/{year}', GroupStats::class)->name('group-stats');
+Route::get('standings/{year}', Standings::class)->name('standings');
+Route::get('handicaps/{year}', Handicaps::class)->name('handicaps');
+Route::get('team-points/{year}', TeamPoints::class)->name('team-points');
 Route::get('scores/player/{player}', PlayerScore::class)->name('player-score');
 Route::get('scores/week/{week}', WeekScores::class)->name('week-score');
 Route::get('scores/week/{week}/edit', EditScores::class)->name('week-score-edit');
-Route::get('players/{user}', [PlayerController::class, 'show'])->name('player');
+
 Route::get('scorecard/{week?}', [LiveScorecardController::class, 'show']);
 
 Route::get('chris-vs-mike', [ChrisVsMikeController::class, 'show']);
