@@ -20,8 +20,10 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\WaitlistController;
 use App\Livewire\AdminUsers;
 use App\Livewire\EditScores;
+use App\Livewire\PlayerScore;
+use App\Livewire\SiteIndex;
 
-Route::get('/', [SiteController::class, 'index'])->name('home');
+Route::get('/', SiteIndex::class)->name('home');
 
 Route::get('rules', [RuleController::class, 'show'])->name('rules');
 Route::get('agl-history', [HistoryController::class, 'show'])->name('history');
@@ -31,7 +33,8 @@ Route::get('standings/{year}', [StandingController::class, 'show'])->name('stand
 Route::get('team-points/{year}', [TeamPointsController::class, 'show'])->name('team-points');
 Route::get('team-stats/{year}', [TeamStatsController::class, 'show'])->name('team-stats');
 Route::get('group-stats/{year}', [GroupStatsController::class, 'show'])->name('group-stats');
-Route::get('scores/player/{player}', [PlayerScoreController::class, 'show'])->name('player-score');
+// Route::get('scores/player/{player}', [PlayerScoreController::class, 'show'])->name('player-score');
+Route::get('scores/player/{player}', PlayerScore::class)->name('player-score');
 Route::get('scores/week/{week}', [WeekScoreController::class, 'show'])->name('week-score');
 Route::get('scores/week/{week}/edit', EditScores::class)->name('week-score-edit');
 Route::get('players/{user}', [PlayerController::class, 'show'])->name('player');
