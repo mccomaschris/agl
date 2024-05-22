@@ -1,10 +1,11 @@
-<x-main>
+<div>
 	@if(count($notes))
 		<div class="bg-red-700 w-full px-4 py-4 rounded">
 			<div class="text-white font-bold text-lg uppercase">Note</div>
+
 			<div class="mt-4 text-white">
 				@foreach ($notes as $note)
-				{{ $note->note }}
+					{{ $note->note }}
 				@endforeach
 			</div>
 		</div>
@@ -139,7 +140,6 @@
 			@endif
 		</div>
 
-		<!-- Start Sidebar -->
 		<div class="">
 			<div class="grid grid-cols-1 gap-4">
 				<div class="">
@@ -212,7 +212,6 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 
 			@if(count($weekly_wins))
@@ -251,7 +250,7 @@
 									<span class="block uppercase font-semibold tracking-tight text-grey-300 mb-1">Counted Scores</span>
 									<div class="flex">
 										@foreach ($counted as $score)
-										{{ number_format($score, 0, '.', ',') }}@if(!$loop->last), @endif
+											{{ number_format($score, 0, '.', ',') }}@if(!$loop->last), @endif
 										@endforeach
 									</div>
 								</div>
@@ -263,5 +262,3 @@
 		</div>
 	</div>
 </div>
-<div>
-</x-main>
