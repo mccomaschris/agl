@@ -16,6 +16,7 @@ class GroupStatsController extends Controller
     public function show(Year $year)
     {
         $years = Year::orderBy('name', 'desc')->get();
+
         $teams = Team::where('year_id', $year->id)->pluck('id');
 
         $ones = Player::with('weekly_scores')->where('year_id', $year->id)->where('position', 1)->get();
