@@ -15,7 +15,7 @@ use App\Http\Controllers\WeekScoreController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\LiveScorecardController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ChrisVsMikeController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\WaitlistController;
 use App\Livewire\AdminUsers;
@@ -34,6 +34,8 @@ Route::get('scores/player/{player}', [PlayerScoreController::class, 'show'])->na
 Route::get('scores/week/{week}', [WeekScoreController::class, 'show'])->name('week-score');
 Route::get('players/{user}', [PlayerController::class, 'show'])->name('player');
 Route::get('scorecard/{week?}', [LiveScorecardController::class, 'show']);
+
+Route::get('chris-vs-mike', [ChrisVsMikeController::class, 'show']);
 
 Route::get('scorecard/print/{quarter}', 'App\Http\Controllers\Admin\PrintScorecardController@show');
 
