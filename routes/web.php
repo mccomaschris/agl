@@ -19,6 +19,7 @@ use App\Http\Controllers\ChrisVsMikeController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\WaitlistController;
 use App\Livewire\AdminUsers;
+use App\Livewire\EditScores;
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
 
@@ -32,6 +33,7 @@ Route::get('team-stats/{year}', [TeamStatsController::class, 'show'])->name('tea
 Route::get('group-stats/{year}', [GroupStatsController::class, 'show'])->name('group-stats');
 Route::get('scores/player/{player}', [PlayerScoreController::class, 'show'])->name('player-score');
 Route::get('scores/week/{week}', [WeekScoreController::class, 'show'])->name('week-score');
+Route::get('scores/week/{week}/edit', EditScores::class)->name('week-score-edit');
 Route::get('players/{user}', [PlayerController::class, 'show'])->name('player');
 Route::get('scorecard/{week?}', [LiveScorecardController::class, 'show']);
 

@@ -39,7 +39,6 @@ class Player extends Model
         return $this->hasMany(Note::class);
     }
 
-
     public function weekly_scores()
     {
         return $this->hasMany(Score::class)->where('score_type', 'weekly_score');
@@ -73,6 +72,11 @@ class Player extends Model
             ->orderBy('years.name', 'desc')
             ->get();
     }
+
+	public function name()
+	{
+		return $this->user->name;
+	}
 
     public function getTenAttribute()
     {
