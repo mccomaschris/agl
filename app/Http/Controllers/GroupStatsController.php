@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Year;
 use App\Models\Team;
 use App\Models\Player;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class GroupStatsController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param  Year  $year
+     * @return View
      */
-    public function show(Year $year)
+    public function show(Year $year): View
     {
         $years = Year::orderBy('name', 'desc')->get();
 

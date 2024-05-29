@@ -2,23 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Player;
+use App\Models\Score;
 use App\Models\Team;
 use App\Models\Week;
-use App\Models\Score;
-use App\Models\Player;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class ScorecardController extends Controller
 {
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param $week
+     * @param  null  $team
+     * @return View
      */
-    public function edit($week, $team = null)
+    public function edit($week, $team = null): View
     {
-
         $week = Week::find($week);
 
         if ($team) {
@@ -36,13 +39,12 @@ class ScorecardController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @param $week
+     * @return RedirectResponse
      */
-    public function update(Request $request, $week)
+    public function update(Request $request, $week): RedirectResponse
     {
-
         $this->validate($request, [
             'score.*.hole_1' => 'required_if:score.*.absent,0|integer|nullable',
             'score.*.hole_2' => 'required_if:score.*.absent,0|integer|nullable',
@@ -74,31 +76,15 @@ class ScorecardController extends Controller
             $new_score->save();
         }
 
-        session()->flash('message', "Scores have been updated");
-        return back();
+        session()->flash('message', 'Scores have been updated');
 
+        return back();
     }
 
     public function matchup($week)
     {
         $week = Week::find($week);
-        $first = Player::where('team_id', '=', $week->a_first_id)->get();
 
-        return $first;
-
-        $second = $week->a_second->players->value('id');
-
-        return $first;
-
-        // $users = Player::with(['scores' => function ($query) {
-        //     $query->orderBy('created_at', 'desc');
-        // }])->get();
-
-        // $scores = Player::whereIn('id', $ids)->with(['scores' => function ($query) use ($week) {
-        //     $query->where('week_id', '=' $week->id);
-        // }])->orderBy('position', 'asc')->get();
-
-        // return $scores;
+        return Player::where('team_id', '=', $week->a_first_id)->get();
     }
-
 }

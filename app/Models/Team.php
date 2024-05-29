@@ -2,51 +2,52 @@
 
 namespace App\Models;
 
-use App\Models\Player;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Team extends Model
 {
-
     protected $appends = ['one_player_last'];
 
     protected $fillable = [
         'name', 'year_id', 'champions',
     ];
 
-    public function year()
+    public function year(): BelongsTo
     {
         return $this->belongsTo(Year::class);
     }
 
-    public function onePlayer()
+    public function onePlayer(): HasOne
     {
         return $this->hasOne(Player::class)->with('user')->where('position', 1);
     }
 
-    public function twoPlayer()
+    public function twoPlayer(): HasOne
     {
         return $this->hasOne(Player::class)->with('user')->where('position', 2);
     }
 
-    public function threePlayer()
+    public function threePlayer(): HasOne
     {
         return $this->hasOne(Player::class)->with('user')->where('position', 3);
     }
 
-    public function fourPlayer()
+    public function fourPlayer(): HasOne
     {
         return $this->hasOne(Player::class)->with('user')->where('position', 4);
     }
 
-    public function getTeamNamesAttribute()
+    public function getTeamNamesAttribute(): string
     {
-        return $this->onePlayer->last_name . ", " . $this->twoPlayer->last_name  . ", " . $this->threePlayer->last_name . ", " . $this->fourPlayer->last_name;
+        return $this->onePlayer->last_name.', '.$this->twoPlayer->last_name.', '.$this->threePlayer->last_name.', '.$this->fourPlayer->last_name;
     }
 
-    public function getOnePlayerLastAttribute()
+    public function getOnePlayerLastAttribute(): string
     {
-        return explode(" ", $this->onePlayer->user->name)[1];
+        return explode(' ', $this->onePlayer->user->name)[1];
     }
 
     public function scopeStats($query, $field, $order)
@@ -54,12 +55,12 @@ class Team extends Model
         return $query->orderBy($field, $order);
     }
 
-    public function players()
+    public function players(): HasMany
     {
         return $this->hasMany(Player::class)->orderby('position', 'asc');
     }
 
-    public function fullName()
+    public function fullName(): string
     {
         return "Team {$this->name}";
     }

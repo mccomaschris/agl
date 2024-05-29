@@ -1,25 +1,25 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RuleController;
+use App\Http\Controllers\ChrisVsMikeController;
 use App\Http\Controllers\HistoryController;
-use App\Http\Controllers\WeekController;
-use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\LiveScorecardController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\ChrisVsMikeController;
+use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\RuleController;
 use App\Http\Controllers\WaitlistController;
+use App\Http\Controllers\WeekController;
 use App\Livewire\AdminUsers;
+use App\Livewire\AllStats;
 use App\Livewire\EditScores;
-use App\Livewire\WeekScores;
+use App\Livewire\GroupStats;
+use App\Livewire\Handicaps;
 use App\Livewire\PlayerScore;
 use App\Livewire\SiteIndex;
-use App\Livewire\TeamPoints;
-use App\Livewire\Handicaps;
 use App\Livewire\Standings;
-use App\Livewire\GroupStats;
+use App\Livewire\TeamPoints;
 use App\Livewire\TeamStats;
-use App\Livewire\AllStats;
+use App\Livewire\WeekScores;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', SiteIndex::class)->name('home');
 
@@ -55,7 +55,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
     Route::post('scores/{score}', 'App\Http\Controllers\Admin\ScoreController@update')->name('admin.scores.update');
     Route::get('scores/week/{week}/edit', 'App\Http\Controllers\Admin\WeekScoreController@edit')->name('admin.week-scores');
 
-
     Route::get('scores', 'App\Http\Controllers\Admin\ScoreController@index');
 
     Route::get('rankings', 'App\Http\Controllers\Admin\AdminController@rankings');
@@ -76,7 +75,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
 
     Route::patch('adjust-weeks/{week}', 'App\Http\Controllers\Admin\AdjustWeeksController@update');
 
-	Route::get('/users', AdminUsers::class);
+    Route::get('/users', AdminUsers::class);
 
 });
 

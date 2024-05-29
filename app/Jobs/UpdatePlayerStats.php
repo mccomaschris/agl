@@ -71,8 +71,17 @@ class UpdatePlayerStats implements ShouldQueue
         $bogey = $this->sumScores($scores, 'bogey');
         $double_bogey = $this->sumScores($scores, 'double_bogey');
 
-        if ($net > 0) { $net_par = $net - 37; } else { $net_par = 0;}
-        if ($gross > 0) { $gross_par = $gross - 37; } else { $gross_par = 0;}
+        if ($net > 0) {
+			$net_par = $net - 37;
+		} else {
+			$net_par = 0;
+		}
+
+		if ($gross > 0) {
+			$gross_par = $gross - 37;
+		} else {
+			$gross_par = 0;
+		}
 
         Score::updateOrCreate(
             ['player_id' => $player, 'score_type' => $score_type, 'foreign_key' => $year],
@@ -127,22 +136,24 @@ class UpdatePlayerStats implements ShouldQueue
         $gp = $player->won + $player->lost + $player->tied;
 
         if (($player->won + $player->lost + $player->tied) > 0) {
-
             $player->win_pct = $player->won / ($player->won + $player->lost + $player->tied);
             $player->points = ($player->won * 2) + $player->tied;
 
-            $player->gross_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('gross', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('gross');
+			// $scores = Score::where('player_id', $player->id)->where('score_type', 'weekly_score')->where('substitute_id', 0)->whereIn('foreign_key', $weeks)->get();
+
+			$weeks = Week::where('year_id', $player->year_id)->where('back_nine', false)->whereDate('week_date', '<', Carbon::today()->toDateString())->pluck('id');
+
+            $player->gross_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('gross', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('gross');
             $player->gross_par = $player->gross_average - 37;
 
-            $player->net_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('net', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('net');
+            $player->net_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('net', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('net');
             $player->net_par = $player->net_average - 37;
 
-            $player->low_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('gross', '>', 0)->where('absent', 0)->where('substitute_id', 0)->min('gross');
-            $player->high_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->max('gross');
+            $player->low_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('gross', '>', 0)->where('absent', 0)->where('substitute_id', 0)->min('gross');
+            $player->high_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->max('gross');
 
-            $player->low_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->where('net', '>', 0)->where('absent', 0)->where('substitute_id', 0)->min('net');
-            $player->high_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->max('net');
-
+            $player->low_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('net', '>', 0)->where('absent', 0)->where('substitute_id', 0)->min('net');
+            $player->high_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->max('net');
         }
 
         $player->save();
@@ -157,7 +168,6 @@ class UpdatePlayerStats implements ShouldQueue
         $players = Player::where('year_id', $year->id)->where('substitute', '0')->stats('points', 'desc')->get();
 
         foreach ($players as $player) {
-
             $count++;
             if ($player->points == $prev) {
                 $player->points_rank = $rank;
@@ -168,7 +178,6 @@ class UpdatePlayerStats implements ShouldQueue
 
             $prev = $player->points;
             $player->save();
-
         }
 
         // Rank Players by Wins
@@ -179,7 +188,6 @@ class UpdatePlayerStats implements ShouldQueue
         $players = Player::where('year_id', $year->id)->where('substitute', '0')->stats('won', 'desc')->get();
 
         foreach ($players as $player) {
-
             $count++;
 
             if ($player->won == $prev) {
@@ -239,7 +247,8 @@ class UpdatePlayerStats implements ShouldQueue
         }
 
         // Calculate Player Quarterly Averages
-        $players = $players = Player::where('year_id', $year->id)->where('substitute', '0')->get();
+        $players = Player::where('year_id', $year->id)->where('substitute', '0')->get();
+		$weeks = Week::where('year_id', $player->year_id)->where('back_nine', false)->whereDate('week_date', '<', Carbon::today()->toDateString())->pluck('id');
 
         foreach ($players as $player) {
             $qtr_1_total = [];
@@ -249,6 +258,7 @@ class UpdatePlayerStats implements ShouldQueue
             $season_total = [];
 
             $scores = Score::where('player_id', $player->id)
+						->whereIn('foreign_key', $weeks)
                         ->where('score_type', 'weekly_score')
                         ->where('gross', '>', 0)
                         ->where('absent', 0)

@@ -54,6 +54,7 @@
                         <span class="hidden lg:inline-block">Week</span>
                         <span class="inline-block lg:hidden">Wk</span>{{ $score->week->week_order }}
                     </a>
+					@if ($score->week->back_nine) <div class="mt-1 font-bold text-xs">(Back 9)</div>@endif
                     @if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
                 </td>
                 @if ($score->absent)

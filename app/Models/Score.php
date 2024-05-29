@@ -2,32 +2,34 @@
 
 namespace App\Models;
 
-use DB;
 use Cache;
+use DB;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Score extends Model
 {
     protected $guarded = [];
 
-    public function player()
+    public function player(): BelongsTo
     {
         return $this->belongsTo(Player::class);
     }
 
-    public function week()
+    public function week(): BelongsTo
     {
         return $this->belongsTo(Week::class, 'foreign_key');
     }
 
-	public function year()
-	{
-		return $this->belongsTo(Year::class);
-	}
+    public function year(): BelongsTo
+    {
+        return $this->belongsTo(Year::class);
+    }
 
     public function scopeQuarter($query, $quarter)
     {
+        $splice = null;
+
         switch ($quarter) {
             case 1:
                 $splice = [1, 5];
@@ -44,29 +46,34 @@ class Score extends Model
         }
 
         $weeks = Week::whereBetween('week_order', $splice)->pluck('id')->toArray();
+
         return $query->whereIn('foreign_key', $weeks);
     }
 
     public function getQuarterAttribute()
     {
-        if (in_array($this->week->week_order, [1, 2, 3, 4, 5]) ) {
-            return "1";
-        } elseif (in_array($this->week->week_order, [6, 7, 8, 9, 10]) ) {
-            return "2";
-        } elseif (in_array($this->week->week_order, [11, 12, 13, 14, 15]) ) {
-            return "2";
-        } elseif (in_array($this->week->week_order, [16, 17, 18, 19, 20]) ) {
-            return "2";
+        if (in_array($this->week->week_order, [1, 2, 3, 4, 5])) {
+            return '1';
+        } elseif (in_array($this->week->week_order, [6, 7, 8, 9, 10])) {
+            return '2';
+        } elseif (in_array($this->week->week_order, [11, 12, 13, 14, 15])) {
+            return '2';
+        } elseif (in_array($this->week->week_order, [16, 17, 18, 19, 20])) {
+            return '2';
         }
     }
 
-    public function opponent()
+    public function opponent(): Player|false
     {
-        if ($this->score_type != 'weekly_score') { return false; }
+        if ($this->score_type != 'weekly_score') {
+            return false;
+        }
 
         $week = Week::find($this->foreign_key);
         $player = Player::find($this->player_id);
         $team = Team::find($player->team_id);
+
+        $opponent_team_id = null;
 
         if ($team->id == $week->a_first_id) {
             $opponent_team_id = $week->a_second_id;
@@ -82,8 +89,7 @@ class Score extends Model
             $opponent_team_id = $week->c_first_id;
         }
 
-        $opponent = Player::where('team_id', $opponent_team_id)->where('position', $player->position)->first();
-        return $opponent;
+        return Player::where('team_id', $opponent_team_id)->where('position', $player->position)->first();
     }
 
     public function scopeCountingScores($query)
@@ -115,7 +121,7 @@ class Score extends Model
         return Cache::remember("totals:{$player->id}:{$quarter}", 1400, function () use ($query, $player, $weeks) {
             return $query->where('player_id', $player->id)->where('absent', 0)
                 ->whereIn('week_id', $weeks)->select(DB::raw(
-                'AVG(hole_1) as hole_1_avg,
+                    'AVG(hole_1) as hole_1_avg,
            AVG(hole_2) as hole_2_avg,
            AVG(hole_3) as hole_3_avg,
            AVG(hole_4) as hole_4_avg,

@@ -4,20 +4,23 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Actions\Actionable;
-use Illuminate\Database\Eloquent\Builder;
 
 class Week extends Model
 {
-	use Actionable;
+    use Actionable;
 
     protected $with = ['winners', 'year'];
+
     protected $appends = ['quarter', 'game_name'];
 
-	protected $casts = [
-		'week_date' => 'date'
-	];
+    protected $casts = [
+        'week_date' => 'date',
+    ];
 
     /**
      * Get the year that owns the week.
@@ -27,7 +30,7 @@ class Week extends Model
         return $this->belongsTo(Year::class);
     }
 
-    public function getQuarterAttribute()
+    public function getQuarterAttribute(): int
     {
         if ($this->week_order >= 1 && $this->week_order <= 5) {
             return 1;
@@ -40,26 +43,26 @@ class Week extends Model
         }
     }
 
-    public function getFormatDateAttribute()
+    public function getFormatDateAttribute(): string
     {
         return Carbon::parse($this->week_date)->toFormattedDateString();
     }
 
-    public function getGameNameAttribute()
+    public function getGameNameAttribute(): string
     {
         if ($this->side_games == 'Net') {
-            return "Low Net";
+            return 'Low Net';
         } elseif ($this->side_games == 'Pin') {
-            return "Closest to the Pin";
+            return 'Closest to the Pin';
         } else {
-            return "Low Putts";
+            return 'Low Putts';
         }
     }
 
     /**
      * Get the team that owns the Match 1, 1st Team.
      */
-    public function team_a()
+    public function team_a(): BelongsTo
     {
         return $this->belongsTo(Team::class, 'a_first_id')->with('onePlayer', 'twoPlayer', 'threePlayer', 'fourPlayer');
     }
@@ -67,15 +70,16 @@ class Week extends Model
     /**
      * Get the team that owns the Match 1, 2nd Team.
      */
-    public function team_b()
+    public function team_b(): BelongsTo
     {
-        return $this->belongsTo(Team::class, 'a_second_id')->with('onePlayer', 'twoPlayer', 'threePlayer', 'fourPlayer');
+        return $this->belongsTo(Team::class, 'a_second_id')->with('onePlayer', 'twoPlayer', 'threePlayer',
+            'fourPlayer');
     }
 
     /**
      * Get the team that owns the Match 2, 1st Team.
      */
-    public function team_c()
+    public function team_c(): BelongsTo
     {
         return $this->belongsTo(Team::class, 'b_first_id')->with('onePlayer', 'twoPlayer', 'threePlayer', 'fourPlayer');
     }
@@ -83,15 +87,16 @@ class Week extends Model
     /**
      * Get the team that owns the Match 2, 2nd Team.
      */
-    public function team_d()
+    public function team_d(): BelongsTo
     {
-        return $this->belongsTo(Team::class, 'b_second_id')->with('onePlayer', 'twoPlayer', 'threePlayer', 'fourPlayer');
+        return $this->belongsTo(Team::class, 'b_second_id')->with('onePlayer', 'twoPlayer', 'threePlayer',
+            'fourPlayer');
     }
 
     /**
      * Get the team that owns the Match 3, 1st Team.
      */
-    public function team_e()
+    public function team_e(): BelongsTo
     {
         return $this->belongsTo(Team::class, 'c_first_id')->with('onePlayer', 'twoPlayer', 'threePlayer', 'fourPlayer');
     }
@@ -99,26 +104,28 @@ class Week extends Model
     /**
      * Get the team that owns the Match 3, 2nd Team.
      */
-    public function team_f()
+    public function team_f(): BelongsTo
     {
-        return $this->belongsTo(Team::class, 'c_second_id')->with('onePlayer', 'twoPlayer', 'threePlayer', 'fourPlayer');
+        return $this->belongsTo(Team::class, 'c_second_id')->with('onePlayer', 'twoPlayer', 'threePlayer',
+            'fourPlayer');
     }
 
     /**
      * Get the scores for the week.
      */
-    public function scores()
+    public function scores(): HasMany
     {
         return $this->hasMany(Score::class);
     }
 
-    public function winners()
+    public function winners(): BelongsToMany
     {
         return $this->belongsToMany(Player::class, 'weekly_winner');
     }
 
     public function scopeQuarter($query, $quarter, $player_id)
     {
+        $splice = null;
 
         switch ($quarter) {
             case 1:
@@ -138,9 +145,11 @@ class Week extends Model
         return $query
             ->where('week_order', '>=', $splice[0])
             ->where('week_order', '<=', $splice[1])
-            ->with(['scores' => function ($query) use ($player_id) {
-                $query->where('player_id', $player_id);
-            }]);
+            ->with([
+                'scores' => function ($query) use ($player_id) {
+                    $query->where('player_id', $player_id);
+                },
+            ]);
     }
 
     public function firstGroup($teamA, $teamB)
@@ -158,7 +167,8 @@ class Week extends Model
         return $players->orderBy('position', 'asc')->orderBy('team_id', 'asc')->get();
     }
 
-    public function matchup( $selected_matchup ) {
+    public function matchup($selected_matchup): \Illuminate\Support\Collection
+    {
         $matchups = [
             'a' => [$this->id, $this->a_first_id, $this->a_second_id],
             'b' => [$this->id, $this->b_first_id, $this->b_second_id],
@@ -166,14 +176,15 @@ class Week extends Model
         ];
 
         return DB::table('scores')
-                    ->join('players', 'scores.player_id', '=', 'players.id')
-                    ->join('teams', 'players.team_id', '=', 'teams.id')
-                    ->join('users', 'players.user_id', '=', 'users.id')
-                    ->join('weeks', 'scores.foreign_key', '=', 'weeks.id')
-                    ->select('teams.name as team_name', 'teams.id', 'users.name as player_name', 'scores.*')
-                    ->whereRaw('weeks.id = ? and score_type = "weekly_score" and (teams.id =? or teams.id = ?)', $matchups[$selected_matchup])
-                    ->orderBy('players.position', 'asc')
-                    ->orderBy('teams.name', 'asc')
-                    ->get();
+            ->join('players', 'scores.player_id', '=', 'players.id')
+            ->join('teams', 'players.team_id', '=', 'teams.id')
+            ->join('users', 'players.user_id', '=', 'users.id')
+            ->join('weeks', 'scores.foreign_key', '=', 'weeks.id')
+            ->select('teams.name as team_name', 'teams.id', 'users.name as player_name', 'scores.*')
+            ->whereRaw('weeks.id = ? and score_type = "weekly_score" and (teams.id =? or teams.id = ?)',
+                $matchups[$selected_matchup])
+            ->orderBy('players.position', 'asc')
+            ->orderBy('teams.name', 'asc')
+            ->get();
     }
 }

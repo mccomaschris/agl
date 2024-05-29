@@ -3,20 +3,20 @@
 namespace App\Livewire;
 
 use App\Models\Year;
-use Livewire\Component;
 use Livewire\Attributes\Url;
+use Livewire\Component;
 
 class AllStats extends Component
 {
-	public Year $year;
+    public Year $year;
 
-	#[Url]
-	public $sortCol = 'gross_avg';
+    #[Url]
+    public $sortCol = 'gross_avg';
 
-	#[Url]
-	public $sortAsc = false;
+    #[Url]
+    public $sortAsc = false;
 
-	public function sortBy($column)
+    public function sortBy($column): void
     {
         if ($this->sortCol === $column) {
             $this->sortAsc = ! $this->sortAsc;
@@ -41,15 +41,17 @@ class AllStats extends Component
 
     public function render()
     {
-		$query = $this->year->players()->with('user')->with(['scores' => function ($query) {
-			$query->where('score_type', 'weekly_score');
-		}]);
+        $query = $this->year->players()->with('user')->with([
+            'scores' => function ($query) {
+                $query->where('score_type', 'weekly_score');
+            },
+        ]);
 
-		$query = $this->applySorting($query);
+        $query = $this->applySorting($query);
 
         return view('livewire.all-stats', [
-			'years' => Year::orderBy('name', 'desc')->get(),
-			'players' => $query->get(),
-		]);
+            'years' => Year::orderBy('name', 'desc')->get(),
+            'players' => $query->get(),
+        ]);
     }
 }

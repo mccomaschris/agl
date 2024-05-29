@@ -2,32 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Waitlist;
 use App\Mail\AddedToWaitlist;
+use App\Models\Waitlist;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 
 class WaitlistController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $members = Waitlist::where('active', 1)->orderby('created_at', 'asc')->get();
+
         return view('waitlist.index', compact('members'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     *wa
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @param  Waitlist  $waitlist
+     * @return RedirectResponse
      */
-    public function store(Request $request, Waitlist $waitlist)
+    public function store(Request $request, Waitlist $waitlist): RedirectResponse
     {
         $this->validate($request, [
             'name' => 'required',

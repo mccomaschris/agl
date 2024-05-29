@@ -32,7 +32,7 @@
 		</div>
 	</div>
 
-    <div class="rounded bg-grey-100 border-grey-300 mb-4 border px-4 py-4 text0s">NOTE: <strong>(S)</strong> denotes the round was played by a substitue.</div>
+    <div class="rounded bg-grey-100 border-grey-300 mb-4 border px-4 py-4 text0s">NOTE: <strong>(S)</strong> denotes the round was played by a substitute.</div>
 
 	@foreach ($teams as $team)
 		<h3 class="mb-2 lg:text-xl text-darkest-grey" id="{{ $team->id }}">Team {{ $team->name }}</h3>

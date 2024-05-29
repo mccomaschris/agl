@@ -46,13 +46,13 @@
             <td class="text-center double-hole font-semibold">DblBg+</td>
         </tr>
 
-
         @foreach ($scores as $score)
             <tr>
                 <td>
                     <a href="{{ route('week-score', ['week' => $score->foreign_key]) }}">
                         <span class="hidden lg:inline-block">Week</span>
                         <span class="inline-block lg:hidden">Wk</span>{{ $score->week->week_order }}
+						@if($score->week->back_nine) <span class="font-bold">(*)</span> @endif
                     </a>
                     @if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
                 </td>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -20,9 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-		'username',
-		'active',
-		'phone',
+        'username',
+        'active',
+        'phone',
     ];
 
     /**
@@ -53,52 +54,49 @@ class User extends Authenticatable
         'last_name',
     ];
 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
-        return !!$this->admin;
+        return (bool) $this->admin;
     }
 
     /**
      * Get the players for the year.
      */
-    public function players()
+    public function players(): HasMany
     {
         return $this->hasMany('App\Models\Player');
     }
 
-    public function first_name()
+    public function first_name(): ?string
     {
-        $split = explode(" ", $this->name);
+        $split = explode(' ', $this->name);
+
         return array_shift($split);
     }
 
-    public function getLastNameAttribute()
+    public function getLastNameAttribute(): string
     {
-		if ( ! str_contains($this->name, ' ') ) {
-			return '';
-		}
+        if (! str_contains($this->name, ' ')) {
+            return '';
+        }
 
-        $last_name = explode(" ", $this->name)[1];
+        $last_name = explode(' ', $this->name)[1];
 
         if ($last_name == 'McComas') {
-            if (substr($this->name, 0, 1) == 'M') {
-                return substr($this->name, 0, 2) . ". " . $last_name;
+            if (str_starts_with($this->name, 'M')) {
+                return substr($this->name, 0, 2).'. '.$last_name;
             }
-            return substr($this->name, 0, 1) . ". " . $last_name;
-        }
-        elseif ($last_name == 'Baumgarner') {
-            return substr($this->name, 0, 1) . ". " . $last_name;
-        }
-        elseif ($last_name == 'Smith') {
-            return substr($this->name, 0, 1) . ". " . $last_name;
-        }
-        elseif ($last_name == 'Mills') {
-            return substr($this->name, 0, 1) . ". " . $last_name;
-        }
-		elseif ($last_name == 'Adkins') {
-            return substr($this->name, 0, 1) . ". " . $last_name;
-        }
-        else {
+
+            return substr($this->name, 0, 1).'. '.$last_name;
+        } elseif ($last_name == 'Baumgarner') {
+            return substr($this->name, 0, 1).'. '.$last_name;
+        } elseif ($last_name == 'Smith') {
+            return substr($this->name, 0, 1).'. '.$last_name;
+        } elseif ($last_name == 'Mills') {
+            return substr($this->name, 0, 1).'. '.$last_name;
+        } elseif ($last_name == 'Adkins') {
+            return substr($this->name, 0, 1).'. '.$last_name;
+        } else {
             return $last_name;
         }
     }
