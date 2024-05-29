@@ -10,21 +10,26 @@ use Livewire\Component;
 
 class AdminControls extends Component
 {
-    public $weeksToAdd = 1;
+    public int $weeksToAdd = 1;
 
-    public function clearCache() {
+    public function clearCache(): void
+    {
         $exitCode = Artisan::call('cache:clear');
         $this->notify('The cache has been cleared.');
     }
-    public function updateHandicaps() {
+
+    public function updateHandicaps()
+    {
         Artisan::call('agl:hc');
         $this->notify('Handicaps have been updated.');
     }
 
-    public function addWeeks() {
+    public function addWeeks(): void
+    {
         $active_year = Year::where('active', true)->first();
-        $weeks = Week::where('year_id', $active_year->id)->where('week_date', '>', Carbon::yesterday())->orderBy('week_date', 'asc')->get();
-        foreach($weeks as $week) {
+        $weeks = Week::where('year_id', $active_year->id)->where('week_date', '>',
+            Carbon::yesterday())->orderBy('week_date', 'asc')->get();
+        foreach ($weeks as $week) {
             $week->week_date = Carbon::create($week->week_date)->addWeeks($this->weeksToAdd);
             $week->save();
         }

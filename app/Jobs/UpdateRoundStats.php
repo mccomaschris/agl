@@ -57,16 +57,26 @@ class UpdateRoundStats implements ShouldQueue
                 break;
         }
 
-        $score->gross_par = $score->gross - 37;
-        $score->net_par = $score->net - 37;
+		if ($week->back_nine) {
+			$score->gross_par = $score->gross - 33;
+			$score->net_par = $score->net - 33;
+		} else {
+			$score->gross_par = $score->gross - 37;
+			$score->net_par = $score->net - 37;
+		}
 
         // Reset Eagle, Birdie, Par, Bogey, and Double Bogey Count
         $score->eagle = $score->birdie = $score->par = $score->bogey = $score->double_bogey = 0;
 
          // Set Par 3, Par 4, and Par 5 holes
-         $par_3s = [$score->hole_2, $score->hole_6];
-         $par_4s = [$score->hole_1, $score->hole_3, $score->hole_4, $score->hole_8];
-         $par_5s = [$score->hole_5, $score->hole_7, $score->hole_9];
+		 if ($week->back_nine) {
+			$par_3s = [$score->hole_4, $score->hole_7, $score->hole_8];
+			$par_4s = [$score->hole_1, $score->hole_2, $score->hole_3, $score->hole_5, $score->hole_6, $score->hole_9];
+		 } else {
+			$par_3s = [$score->hole_2, $score->hole_6];
+			$par_4s = [$score->hole_1, $score->hole_3, $score->hole_4, $score->hole_8];
+			$par_5s = [$score->hole_5, $score->hole_7, $score->hole_9];
+		 }
 
          // Par 3 Eagle, Birdie, Par, Bogey, and Double Bogey Count
          foreach ($par_3s as $hole) {
@@ -99,19 +109,21 @@ class UpdateRoundStats implements ShouldQueue
          }
 
          // Par 5 Eagle, Birdie, Par, Bogey, and Double Bogey Count
-         foreach ($par_5s as $hole) {
-             if ($hole <= 3) {
-                 $score->eagle++;
-             } elseif ($hole == 4) {
-                 $score->birdie++;
-             } elseif ($hole == 5) {
-                 $score->par++;
-             } elseif ($hole == 6) {
-                 $score->bogey++;
-             } elseif ($hole >= 7) {
-                 $score->double_bogey++;
-             }
-         }
+		 if (!$week->back_nine) {
+			foreach ($par_5s as $hole) {
+				if ($hole <= 3) {
+					$score->eagle++;
+				} elseif ($hole == 4) {
+					$score->birdie++;
+				} elseif ($hole == 5) {
+					$score->par++;
+				} elseif ($hole == 6) {
+					$score->bogey++;
+				} elseif ($hole >= 7) {
+					$score->double_bogey++;
+				}
+			}
+		 }
 
         $score->save();
     }

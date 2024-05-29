@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\View\View;
 
 class MemberController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $users = User::where('active', 1)->orderBy('name')->get();
+
         return view('members.index', compact('users'));
     }
 }

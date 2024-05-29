@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Year;
 use App\Models\Week;
 use Carbon\Carbon;
+use Illuminate\View\View;
 
 class StandingController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param  Year  $year
+     * @return View
      */
-    public function show(Year $year)
+    public function show(Year $year): View
     {
         $years = Year::orderBy('name', 'desc')->get();
         $week = Week::where('year_id', $year->id)

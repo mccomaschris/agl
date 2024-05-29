@@ -2,31 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Player;
-use App\Models\Year;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class PlayerController extends Controller
 {
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Player  $player
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return View
      */
-    public function show(User $user)
+    public function show(User $user): View
     {
         $seasons = Player::where('user_id', $user->id)->pluck('id');
 
-		$years = Player::where('user_id', $user->id)->orderBy('year_id', 'desc')->get();
+        $years = Player::where('user_id', $user->id)->orderBy('year_id', 'desc')->get();
 
         $scores = DB::table('scores')
             ->join('players', 'scores.player_id', '=', 'players.id')
             ->join('users', 'players.user_id', '=', 'users.id')
             ->join('weeks', 'scores.foreign_key', '=', 'weeks.id')
             ->join('years', 'weeks.year_id', '=', 'years.id')
-            ->select('weeks.*', 'users.*', 'scores.*', 'years.name as year_name', 'weeks.id as week_id' )
+            ->select('weeks.*', 'users.*', 'scores.*', 'years.name as year_name', 'weeks.id as week_id')
             ->whereIn('scores.player_id', $seasons)
             ->where('absent', 0)
             ->where('scores.gross', '>', 0)
@@ -54,13 +52,14 @@ class PlayerController extends Controller
             ->get();
 
         $teams = Player::where('user_id', $user->id)->pluck('team_id');
+
         $team_championships = DB::table('teams')
-                            ->select('years.name as year_name', 'teams.name as team_name')
-                            ->join('years', 'years.id', '=', 'teams.year_id')
-                            ->whereIn('teams.id', $teams)
-                            ->where('champions', 1)
-                            ->orderBy('years.name', 'desc')
-                            ->get();
+            ->select('years.name as year_name', 'teams.name as team_name')
+            ->join('years', 'years.id', '=', 'teams.year_id')
+            ->whereIn('teams.id', $teams)
+            ->where('champions', 1)
+            ->orderBy('years.name', 'desc')
+            ->get();
 
         $weekly_wins = DB::table('scores')
             ->join('weeks', 'scores.foreign_key', '=', 'weeks.id')
@@ -70,8 +69,9 @@ class PlayerController extends Controller
             ->orderBy('weeks.week_date', 'desc')
             ->get();
 
-        return view('players.show', compact('user', 'years', 'scores', 'gross_avg', 'net_avg', 'total_scores', 'low_gross', 'low_net',
-                        'holes', 'eagle', 'birdie', 'par', 'bogey', 'double_bogey', 'individual_championships', 'team_championships', 'weekly_wins'));
-
+        return view('players.show',
+            compact('user', 'years', 'scores', 'gross_avg', 'net_avg', 'total_scores', 'low_gross', 'low_net',
+                'holes', 'eagle', 'birdie', 'par', 'bogey', 'double_bogey', 'individual_championships',
+                'team_championships', 'weekly_wins'));
     }
 }

@@ -2,54 +2,56 @@
 
 namespace App\Models;
 
-use App\Filters\PlayerFilters;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Player extends Model
 {
-
     protected $guarded = [];
 
     protected $with = ['user'];
 
     protected $appends = ['ten'];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->orderBy('name', 'asc');
     }
 
-    public function team()
+    public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
     }
 
-    public function year()
+    public function year(): BelongsTo
     {
         return $this->belongsTo(Year::class);
     }
 
-    public function scores()
+    public function scores(): HasMany
     {
         return $this->hasMany(Score::class);
     }
 
-	public function notes()
+    public function notes(): HasMany
     {
         return $this->hasMany(Note::class);
     }
 
-    public function weekly_scores()
+    public function weekly_scores(): HasMany
     {
         return $this->hasMany(Score::class)->where('score_type', 'weekly_score');
     }
 
-	public function season_avg()
+    public function season_avg(): HasOne
     {
         return $this->hasOne(Score::class)->where('score_type', 'season_avg');
     }
 
-    public function opponent_records()
+    public function opponent_records(): HasMany
     {
         return $this->hasMany(PlayerRecord::class);
     }
@@ -73,65 +75,49 @@ class Player extends Model
             ->get();
     }
 
-	public function name()
-	{
-		return $this->user->name;
-	}
-
-    public function getTenAttribute()
+    public function name()
     {
-        $absences = Score::where('player_id', $this->id)->where('score_type', 'weekly_score')->where('absent', 1)->pluck('id');
+        return $this->user->name;
+    }
+
+    public function getTenAttribute(): float|int
+    {
+        $absences = Score::where('player_id', $this->id)->where('score_type', 'weekly_score')->where('absent',
+            1)->pluck('id');
         $total = 0;
 
-		if (count($absences) >= 2 && count($absences) <= 3) {
-			$denominator = 9;
-		} else if (count($absences) == 4) {
+        if (count($absences) >= 2 && count($absences) <= 3) {
+            $denominator = 9;
+        } elseif (count($absences) == 4) {
             $denominator = 8;
         } else {
             $denominator = 10;
-		}
+        }
 
-		$scores = Score::where('player_id', $this->id)->where('score_type', 'weekly_score')->where('gross', '>', 0)->orderBy('gross', 'asc')->limit($denominator)->pluck('gross');
+        $scores = Score::where('player_id', $this->id)->where('score_type', 'weekly_score')->where('gross', '>',
+            0)->orderBy('gross', 'asc')->limit($denominator)->pluck('gross');
 
         foreach ($scores as $score) {
             $total += $score;
         }
 
-
-		// if (count($scores) < 10) {
-		// 	$denominator = count($scores);
-		// }
-
-		// return 'Abs: ' . count($absences) . ' Denom: ' . $denominator . ' Total: ' . $scores;
         return ($total / $denominator) - 37;
-    }
-
-    /**
-     * Apply all relevant thread filters.
-     *
-     * @param  Builder       $query
-     * @param  PlayerFilters $filters
-     * @return Builder
-     */
-    public function scopeFilter($query, PlayerFilters $filters)
-    {
-        return $filters->apply($query);
     }
 
     public function scopeGroup($query, $year, $position)
     {
-        return $query->with('team')->where('position', $position)->whereBetween('team_id', [7,12]);
+        return $query->with('team')->where('position', $position)->whereBetween('team_id', [7, 12]);
     }
 
-	/**
+    /**
      * Get the players average scores.
      */
-    public function getEagles()
+    public function getEagles(): Score
     {
         return Score::where('score_type', 'season_avg')->where('player_id', $this->id)->first(['eagle']);
     }
 
-    public function weeks()
+    public function weeks(): BelongsToMany
     {
         return $this->belongsToMany(Week::class, 'weekly_winner');
     }

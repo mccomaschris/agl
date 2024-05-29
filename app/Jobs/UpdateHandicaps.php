@@ -49,10 +49,10 @@ class UpdateHandicaps implements ShouldQueue
 		} else {
 			$deno = $scores_to_count;
 		}
+
         $total_score = (array_sum(array_slice($scores, 0, $scores_to_count, true)));
         $hc = round(($total_score / $deno) - 37);
         return $hc;
-
     }
 
     /**
@@ -77,12 +77,12 @@ class UpdateHandicaps implements ShouldQueue
         $qtr_4_scores = [];
         $total_scores = [];
 
-        $scores = Score::with('week')->where('score_type', 'weekly_score')->where('player_id', $player->id)
+		$weeks = Week::where('year_id', $year->id)->where('back_nine', false)->where('week_date', '<=', Carbon::yesterday())->pluck('id');
+        $scores = Score::with('week')->whereIn('foreign_key', $weeks)->where('score_type', 'weekly_score')->where('player_id', $player->id)
                     ->where('gross', '>', 0)
                     ->where('absent', false)
                     ->where('substitute_id', false)
                     ->get();
-
 
         foreach ($scores as $score) {
             switch ($score->week->week_order) {
@@ -165,6 +165,5 @@ class UpdateHandicaps implements ShouldQueue
             $prev = $player->hc_full;
             $player->save();
         }
-
     }
 }
