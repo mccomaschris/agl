@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use App\Models\Score;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -19,12 +20,14 @@ class PlayerController extends Controller
 
         $years = Player::where('user_id', $user->id)->orderBy('year_id', 'desc')->get();
 
+		$player = Player::where('user_id', $user->id)->first();
+
         $scores = DB::table('scores')
             ->join('players', 'scores.player_id', '=', 'players.id')
             ->join('users', 'players.user_id', '=', 'users.id')
             ->join('weeks', 'scores.foreign_key', '=', 'weeks.id')
             ->join('years', 'weeks.year_id', '=', 'years.id')
-            ->select('weeks.*', 'users.*', 'scores.*', 'years.name as year_name', 'weeks.id as week_id')
+            ->select('weeks.*', 'users.*', 'scores.*', 'years.name as year_name', 'weeks.id as week_id', 'weeks.back_nine as back_nine')
             ->whereIn('scores.player_id', $seasons)
             ->where('absent', 0)
             ->where('scores.gross', '>', 0)

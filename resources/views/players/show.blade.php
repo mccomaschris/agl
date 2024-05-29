@@ -164,7 +164,8 @@
                     @include('_parts.player-career-header')
                 @endif
                 <tr>
-                      <td><a href="{{ route('week-score', ['week' => $score->week_id]) }}">{{ $score->year_name }} Week {{ $score->week_order }}</a></td>
+                      <td><a href="{{ route('week-score', ['week' => $score->week_id]) }}">{{ $score->year_name }} Week {{ $score->week_order }}</a>
+						@if ($score->back_nine) <div class="mt-1 font-bold text-xs">(Back 9)</div>@endif</td>
                         <td class="text-center
                           @if ($score->hole_1 >= 1 and $score->hole_1 <=2)
                             eagle-hole
