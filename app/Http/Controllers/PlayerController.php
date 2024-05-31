@@ -20,8 +20,6 @@ class PlayerController extends Controller
 
         $years = Player::where('user_id', $user->id)->orderBy('year_id', 'desc')->get();
 
-		$player = Player::where('user_id', $user->id)->first();
-
         $scores = DB::table('scores')
             ->join('players', 'scores.player_id', '=', 'players.id')
             ->join('users', 'players.user_id', '=', 'users.id')
