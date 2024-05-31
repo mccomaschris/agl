@@ -1,5 +1,6 @@
 {
     "private": true,
+	"type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
@@ -7,21 +8,14 @@
         "build-total-holes-prod": "cd nova-components/TotalHoles && npm run prod"
     },
     "devDependencies": {
-        "@babel/plugin-syntax-class-properties": "^7.12.13",
         "@tailwindcss/forms": "^0.5.2",
         "@tailwindcss/typography": "^0.5.9",
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.4.2",
-        "axios": "^0.21",
-        "laravel-mix": "^6.0.6",
-        "laravel-vite-plugin": "^0.7.2",
+		"laravel-vite-plugin": "^1.0",
         "lodash": "^4.17.19",
         "postcss": "^8.4.31",
-        "postcss-import": "^12.0.1",
-        "postcss-nesting": "^11.2.1",
-        "stimulus": "^2.0.0",
         "tailwindcss": "^3.1.0",
-        "turbolinks": "^5.2.0",
-        "vite": "^4.0.0"
+        "vite": "^5.0.0"
     }
 }
