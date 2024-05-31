@@ -43,11 +43,12 @@
 						<td class="text-center absent_row">A</td>
 					@elseif ($score->injury)
 						<td class="text-center absent_row">I</td>
+					@elseif ($score->week->back_nine)
+						<td class="text-center back-nine_row">-</td>
 					@else
 						<td class="text-center @if($score->gross < 37) low-score @endif">
 							<span class="text-grey-700">{{ $score->gross ? number_format($score->gross, 0, '.', ',') : '' }}</span>
 							@if($score->substitute_id > 0) <span class="font-bold">(S)</span> @endif
-							@if($score->week->back_nine && $score->gross > 0) <span class="font-bold">(*)</span> @endif
 						</td>
 					@endif
 				@endforeach

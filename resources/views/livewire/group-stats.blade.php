@@ -35,7 +35,6 @@
     <div class="rounded bg-grey-100 border-grey-300 mb-4 border px-4 py-4 text-sm flex flex-col gap-2">
 		<div class="font-bold text-base">NOTE</div>
 		<div><strong>(S)</strong> denotes the round was played by a substitute.</div>
-		<div><strong>(*)</strong> denotes the back nine was played and scores don't count.</div>
 	</div>
 
 	<h3 class="mb-2 lg:text-xl">One Players</h3>
