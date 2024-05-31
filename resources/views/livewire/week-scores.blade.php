@@ -96,6 +96,8 @@
 							<x-tables.absent />
 						@elseif ($score->injury)
 							<x-tables.injury />
+						@elseif ($week->back_nine)
+							<x-tables.back-nine-td :score="$score" />
 						@else
 							<x-tables.week-score-td :score="$score" />
 						@endif
@@ -125,6 +127,8 @@
 							<x-tables.absent />
 						@elseif ($score->injury)
 							<x-tables.injury />
+						@elseif ($week->back_nine)
+							<x-tables.back-nine-td :score="$score" />
 						@else
 							<x-tables.week-score-td :score="$score" />
 						@endif
