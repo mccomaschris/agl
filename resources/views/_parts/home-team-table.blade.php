@@ -20,14 +20,14 @@
             @elseif ($week->quarter == 3)
                 <td>
                     <div class="flex items-center">
-                        <div class="h-4 w-4 border border-black mr-2 {{ $teamA->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow ' : ' bg-white ' }}"></div>
+                        <div class="h-4 w-4 mr-2 rounded-full {{ $teamA->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow ring-2 ring-gray-900/10 ring-inset ' : ' bg-white  ring-2 ring-gray-900/10 ring-inset ' }}"></div>
                         <a wire:navigate href="{{ route('player-score', ['player' => $teamA->fourPlayer->id]) }}">{{ $teamA->fourPlayer->user->name }}</a>
                     </div>
                 </td>
                 <td class="text-center">{{ $teamA->fourPlayer->hc_current }}</td>
                <td>
                 <div class="flex items-center">
-                    <div class="h-4 w-4 border border-black mr-2 {{ $teamB->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow ' : ' bg-white ' }}"></div>
+                    <div class="h-4 w-4 mr-2 rounded-full {{ $teamB->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow ring-2 ring-gray-900/10 ring-inset ' : ' bg-white  ring-2 ring-gray-900/10 ring-inset ' }}"></div>
                         <a wire:navigate href="{{ route('player-score', ['player' => $teamB->fourPlayer->id]) }}">{{ $teamB->fourPlayer->user->name }}</a>
                     </div>
                 </td>
@@ -64,14 +64,14 @@
         @else
              <td>
                 <div class="flex items-center">
-                    <div class="h-4 w-4 border border-black mr-2 {{ $teamA->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow ' : ' bg-white ' }}"></div>
+                    <div class="h-4 w-4 mr-2 rounded-full {{ $teamA->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow ring-2 ring-gray-900/10 ring-inset ' : ' bg-white  ring-2 ring-gray-900/10 ring-inset ' }}"></div>
                     <a wire:navigate href="{{ route('player-score', ['player' => $teamA->fourPlayer->id]) }}">{{ $teamA->fourPlayer->user->name }}</a>
                 </div>
             </td>
             <td class="text-center">{{ $teamA->fourPlayer->hc_current }}</td>
             <td>
                 <div class="flex items-center">
-                <div class="h-4 w-4 border border-black mr-2 {{ $teamB->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow ' : ' bg-white ' }}"></div>
+                <div class="h-4 w-4 mr-2 rounded-full {{ $teamB->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow ring-2 ring-gray-900/10 ring-inset ' : ' bg-white  ring-2 ring-gray-900/10 ring-inset ' }}"></div>
                     <a wire:navigate href="{{ route('player-score', ['player' => $teamB->fourPlayer->id]) }}">{{ $teamB->fourPlayer->user->name }}</a>
                 </div>
             </td>

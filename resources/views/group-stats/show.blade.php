@@ -23,22 +23,22 @@
 	<div class="rounded bg-grey-100 border-grey-300 mb-4 border px-4 py-4 text0s">NOTE: <strong>(S)</strong> denotes the round was played by a substitute.</div>
 
 	<h3 class="mb-2 lg:text-xl">One Players</h3>
-	<div class="overflow-x-scroll">
+	<div class="overflow-x-auto">
 		@include('_parts.stats-table', ['players' => $ones])
 	</div>
 
 	<h3 class="mb-2 lg:text-xl mt-6">Two Players</h3>
-	<div class="overflow-x-scroll">
+	<div class="overflow-x-auto">
 		@include('_parts.stats-table', ['players' => $twos])
 	</div>
 
 	<h3 class="mb-2 lg:text-xl mt-6">Three Players</h3>
-	<div class="overflow-x-scroll">
+	<div class="overflow-x-auto">
 		@include('_parts.stats-table', ['players' => $threes])
 	</div>
 
 	<h3 class="mb-2 lg:text-xl mt-6">Four Players</h3>
-	<div class="overflow-x-scroll">
+	<div class="overflow-x-auto">
 		@include('_parts.stats-table', ['players' => $fours])
 	</div>
 @endsection

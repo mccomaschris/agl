@@ -39,7 +39,7 @@
 
     @foreach ($teams as $team)
 		<h3 class="mb-2 lg:text-xl {{ $loop->first ? 'mt-0' : 'mt-6' }}">Team {{ $team->name }}</h3>
-		<div class="overflow-x-scroll">
+		<div class="overflow-x-auto">
 			<x-tables.stats-table :players="$team->players" />
 		</div>
 	@endforeach

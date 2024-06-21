@@ -141,7 +141,7 @@
             <p class="mb-3">All the payouts will be at the dinner following the League Championship at the end of the year with the exception of payouts for the Snowball Tournament and weekly games.</p>
             <p class="mb-3">Dues are <strong>$65</strong> per person for a total of <strong>$1,560</strong>. Payouts are as follows:</p>
 
-            <div class="overflow-x-scroll">
+            <div class="overflow-x-auto">
                 <table class="table table-bordered w-full mb-8">
                     <tr>
                         <td>Weekly Games ($12 x 20 Weeks)</td>

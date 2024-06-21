@@ -5,7 +5,7 @@
         <div class="ml-1 text-green-500 font-bold text-lg">{{ $handicap }}</div>
     </div>
 </div>
-<div class="overflow-x-scroll">
+<div class="overflow-x-auto">
     <table class="table table-bordered w-full mb-8">
         <thead>
             <tr class="course">
