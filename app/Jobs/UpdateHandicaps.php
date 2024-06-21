@@ -13,6 +13,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 
 class UpdateHandicaps implements ShouldQueue
 {
@@ -35,22 +36,21 @@ class UpdateHandicaps implements ShouldQueue
      *
      * @return $hc
      */
-    public function calc($scores, $scores_to_count = 0) {
+    public function calc($scores, $scores_to_count = 0, $qtr = null) {
         if (count($scores) == 0) {
 			return 0;
 		}
+
         $total_scores = count($scores);
         $half_scores = round($total_scores / 2, 0);
         asort($scores, SORT_NUMERIC);
 
 		# if i count 8 scores, but i only have 7 so far, use 7
-		if ( $total_scores < $scores_to_count) {
-			$deno = $total_scores;
-		} else {
-			$deno = $scores_to_count;
-		}
+		$deno = $half_scores;
 
-        $total_score = (array_sum(array_slice($scores, 0, $scores_to_count, true)));
+		Log::debug('Quarter: ' . $qtr . ' Total Scores: ' . $total_scores . ' Half Scores: ' . $half_scores . ' Deno: ' . $deno . ' Scores to Count: ' . $scores_to_count);
+
+        $total_score = (array_sum(array_slice($scores, 0, $half_scores, true)));
         $hc = round(($total_score / $deno) - 37);
         return $hc;
     }
@@ -78,6 +78,7 @@ class UpdateHandicaps implements ShouldQueue
         $total_scores = [];
 
 		$weeks = Week::where('year_id', $year->id)->where('back_nine', false)->where('week_date', '<=', Carbon::yesterday())->pluck('id');
+
         $scores = Score::with('week')->whereIn('foreign_key', $weeks)->where('score_type', 'weekly_score')->where('player_id', $player->id)
                     ->where('gross', '>', 0)
                     ->where('absent', false)
@@ -97,10 +98,10 @@ class UpdateHandicaps implements ShouldQueue
             }
         }
 
-        $player->hc_second = $this->calc($qtr_1_scores, 3);
-        $player->hc_third = $this->calc($qtr_2_scores, 5);
-        $player->hc_fourth = $this->calc($qtr_3_scores, 8);
-        $player->hc_playoff = $this->calc($qtr_4_scores, 10);
+        $player->hc_second = $this->calc($qtr_1_scores, 3, '2');
+        $player->hc_third = $this->calc($qtr_2_scores, 5, '3');
+        $player->hc_fourth = $this->calc($qtr_3_scores, 8, '4');
+        $player->hc_playoff = $this->calc($qtr_4_scores, 10, 'po');
         $player->hc_18 = round($player->hc_playoff * 1.5);
 
         if (count($qtr_4_scores) == 0) {
