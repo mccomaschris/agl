@@ -124,7 +124,7 @@
 	<div class="flex flex-wrap -mx-4 mt-6">
 		<div class="w-full px-4">
 		  <h3 class="text-lg mt-2 mb-2 font-semibold">Season by Season</h3>
-			<div class="overflow-x-scroll">
+			<div class="overflow-x-auto">
 				<table class="table table-bordered w-full mb-8">
 					<tr class="course">
 						<th class="text-left">Year</th>
@@ -155,7 +155,7 @@
 
     <div class="">
         <h3 class="text-lg mt-2 mb-2 font-semibold">Historical Scores</h3>
-        <div class="overflow-x-scroll">
+        <div class="overflow-x-auto">
             <table class="table table-bordered w-full mb-8">
               @include('_parts.player-career-header')
 

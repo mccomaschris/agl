@@ -64,7 +64,7 @@
 			<div class="flex my-2 items-center uppercase">
 				<div class="flex-grow font-semibold lg:text-lg">Season Totals/Averages</div>
 			</div>
-			<div class="overflow-x-scroll">
+			<div class="overflow-x-auto">
 				<table class="table table-bordered w-full mb-8">
 					<thead>
 						<tr class="course">
@@ -242,10 +242,10 @@
 						<div class="flex flex-col p-6 bg-grey-900 rounded">
 							<h3 class="font-semibold uppercase text-white text-base lg:text-lg">Handicap</h3>
 							<div class="flex flex-col items-center mt-2 lg:mt-4 ">
-								<div class="w-full flex flex-col text-green-bright">
+								{{-- <div class="w-full flex flex-col text-green-bright">
 									<span class="block uppercase font-semibold tracking-tight text-grey-300">Highest Counting</span>
 									<span class="block text-3xl lg:text-3xl font-bold">{{ $highest ? number_format($highest[0], 0) : '' }}</span>
-								</div>
+								</div> --}}
 								<div class="w-full flex flex-col text-green-bright mt-4">
 									<span class="block uppercase font-semibold tracking-tight text-grey-300 mb-1">Counted Scores</span>
 									<div class="flex">

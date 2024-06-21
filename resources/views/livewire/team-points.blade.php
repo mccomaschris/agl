@@ -37,7 +37,7 @@
 	@foreach ($teams as $team)
 		<h3 class="mb-2 lg:text-xl text-darkest-grey" id="{{ $team->id }}">Team {{ $team->name }}</h3>
 
-		<div class="overflow-x-scroll">
+		<div class="overflow-x-auto">
       		<table class="table table-bordered table-striped w-full mb-6 lg:mb-8">
         		<thead>
           			<tr class="course">

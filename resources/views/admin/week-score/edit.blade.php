@@ -27,7 +27,7 @@
 
 
 	<div class="bg-white rounded shadow overflow-hidden">
-		<div class="overflow-x-scroll">
+		<div class="overflow-x-auto">
 			<table class="w-full whitespace-no-wrap">
 				<thead>
 					<tr class="text-left font-bold">
@@ -59,7 +59,7 @@
 	</div>
 
 	<div class="bg-white rounded shadow overflow-hidden mt-6">
-		<div class="overflow-x-scroll">
+		<div class="overflow-x-auto">
 			<table class="w-full whitespace-no-wrap">
 				<thead>
 					<tr class="text-left font-bold">
@@ -91,7 +91,7 @@
 	</div>
 
 	<div class="bg-white rounded shadow overflow-hidden mt-6">
-		<div class="overflow-x-scroll">
+		<div class="overflow-x-auto">
 			<table class="w-full whitespace-no-wrap">
 				<thead>
 					<tr class="text-left font-bold">

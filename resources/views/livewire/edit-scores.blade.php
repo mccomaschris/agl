@@ -20,7 +20,7 @@
     <div class="w-full mb-6">
         <h3 class="lg:text-xl mb-2 font-semibold">Matchup #1</h3>
 
-		<div class="overflow-x-scroll">
+		<div class="overflow-x-auto">
             <table class="table table-bordered w-full mb-8">
 				<x-edit-score-head />
 
@@ -32,7 +32,7 @@
 
         <h3 class="lg:text-xl mb-2 font-semibold">Matchup #2</h3>
 
-		<div class="overflow-x-scroll">
+		<div class="overflow-x-auto">
             <table class="table table-bordered w-full mb-8">
                 <x-edit-score-head />
 
@@ -44,7 +44,7 @@
 
         <h3 class="lg:text-xl mb-2 font-semibold">Matchup #3</h3>
 
-		<div class="overflow-x-scroll">
+		<div class="overflow-x-auto">
             <table class="table table-bordered w-full mb-8">
                 <x-edit-score-head />
 

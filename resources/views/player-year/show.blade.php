@@ -25,7 +25,7 @@
 			<div class="flex my-2 items-center uppercase">
 				<div class="flex-grow font-semibold lg:text-lg">Season Totals/Averages</div>
 			</div>
-			<div class="overflow-x-scroll">
+			<div class="overflow-x-auto">
 				<table class="table table-bordered w-full mb-8">
 					<thead>
 						<tr class="course">

@@ -75,7 +75,7 @@
 		</form>
 	</div>
 
-	<div class="overflow-x-scroll">
+	<div class="overflow-x-auto">
 		<x-tables.stats-table :players="$year->players" />
 	</div>
 </div>

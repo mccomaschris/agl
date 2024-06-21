@@ -33,22 +33,22 @@
 	</div>
 
 	<h3 class="lg:text-xl mb-2">One Players</h3>
-	<div class="overflow-x-scroll">
+	<div class="overflow-x-auto">
 		<x-tables.handicap-table :players="$ones" />
 	</div>
 
 	<h3 class="lg:text-xl mb-2 mt-6">Two Players</h3>
-	<div class="overflow-x-scroll">
+	<div class="overflow-x-auto">
 		<x-tables.handicap-table :players="$twos" />
 	</div>
 
 	<h3 class="lg:text-xl mb-2 mt-6">Three Players</h3>
-	<div class="overflow-x-scroll">
+	<div class="overflow-x-auto">
 		<x-tables.handicap-table :players="$threes" />
 	</div>
 
 	<h3 class="lg:text-xl mb-2 mt-6">Four Players</h3>
-	<div class="overflow-x-scroll">
+	<div class="overflow-x-auto">
 		<x-tables.handicap-table :players="$fours" />
 	</div>
 </div>
