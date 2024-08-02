@@ -49,6 +49,7 @@ class Year extends Model
     {
         return Player::where('year_id', $this->id)
             ->orderBy('points', 'desc')
+			->orderBy('won', 'desc')
             ->take($take)
             ->get();
     }
