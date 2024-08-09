@@ -135,6 +135,7 @@
 						<th class="text-center">Points Rank</th>
 						<th class="text-center">Low Net</th>
 						<th class="text-center">Low Gross</th>
+						<th class="text-center">Gross Avg</th>
 					</tr>
 					@foreach ($years as $year)
 						<tr>
@@ -146,6 +147,7 @@
 							<td class="text-center">{{ $year->points_rank }}</td>
 							<td class="text-center">{{ $year->low_net }}</td>
 							<td class="text-center">{{ $year->low_gross }}</td>
+							<td class="text-center">{{ $year->gross_average ? number_format($year->gross_average, 3, '.', ',') : '' }}</td>
 						</tr>
 					@endforeach
 				</table>
