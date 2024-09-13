@@ -16,6 +16,7 @@ use App\Livewire\End;
 use App\Livewire\GroupStats;
 use App\Livewire\Handicaps;
 use App\Livewire\PlayerScore;
+use App\Livewire\PlayoffIndex;
 use App\Livewire\SiteIndex;
 use App\Livewire\Standings;
 use App\Livewire\TeamPoints;
@@ -25,7 +26,7 @@ use App\Livewire\WeekScores;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', SiteIndex::class)->name('home');
-Route::get('/', [SiteController::class, 'index'])->name('home');
+Route::get('/', PlayoffIndex::class)->name('home');
 
 Route::get('rules', [RuleController::class, 'show'])->name('rules');
 Route::get('agl-history', [HistoryController::class, 'show'])->name('history');
