@@ -6,11 +6,13 @@ use App\Http\Controllers\LiveScorecardController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\RuleController;
+use App\Http\Controllers\SiteController;
 use App\Http\Controllers\WaitlistController;
 use App\Http\Controllers\WeekController;
 use App\Livewire\AdminUsers;
 use App\Livewire\AllStats;
 use App\Livewire\EditScores;
+use App\Livewire\End;
 use App\Livewire\GroupStats;
 use App\Livewire\Handicaps;
 use App\Livewire\PlayerScore;
@@ -22,7 +24,8 @@ use App\Livewire\WeekIndex;
 use App\Livewire\WeekScores;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', SiteIndex::class)->name('home');
+// Route::get('/', SiteIndex::class)->name('home');
+Route::get('/', [SiteController::class, 'index'])->name('home');
 
 Route::get('rules', [RuleController::class, 'show'])->name('rules');
 Route::get('agl-history', [HistoryController::class, 'show'])->name('history');
