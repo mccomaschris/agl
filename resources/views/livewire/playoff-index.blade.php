@@ -48,10 +48,10 @@
 					<td width="10%" class="text-center">3</td>
 				</tr>
 				<tr>
+					<td width="40%">Evans</td>
+					<td width="10%" class="text-center">6</td>
 					<td width="40%">Chandler</td>
 					<td width="10%" class="text-center">8</td>
-					<td width="40%">Adkins</td>
-					<td width="10%" class="text-center">7</td>
 				</tr>
 				<tr>
 					<td width="40%">Mi McComas</td>
