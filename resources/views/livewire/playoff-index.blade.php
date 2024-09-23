@@ -55,7 +55,7 @@
 				</tr>
 				<tr>
 					<td width="40%">Mi McComas</td>
-					<td width="10%" class="text-center">21</td>
+					<td width="10%" class="text-center">14</td>
 					<td width="40%">R Mills</td>
 					<td width="10%" class="text-center">10</td>
 				</tr>
