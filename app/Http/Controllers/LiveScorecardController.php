@@ -10,7 +10,6 @@ use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use Laravel\Nova\Http\Requests\ResourcePreviewRequest;
 
 class LiveScorecardController extends Controller
 {

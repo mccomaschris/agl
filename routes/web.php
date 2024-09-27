@@ -24,6 +24,7 @@ use App\Livewire\TeamStats;
 use App\Livewire\WeekIndex;
 use App\Livewire\WeekScores;
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
 // Route::get('/', SiteIndex::class)->name('home');
 Route::get('/', PlayoffIndex::class)->name('home');
@@ -56,34 +57,10 @@ Route::group(['auth:sanctum', 'verified'], function () {
     Route::resource('waitlist', WaitlistController::class);
 });
 
-// Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
-//     Route::get('/', 'App\Http\Controllers\Admin\AdminController@index');
-//     Route::get('/top10', 'App\Http\Controllers\Admin\AdminController@topten');
-//     Route::post('scores/{score}', 'App\Http\Controllers\Admin\ScoreController@update')->name('admin.scores.update');
-//     Route::get('scores/week/{week}/edit', 'App\Http\Controllers\Admin\WeekScoreController@edit')->name('admin.week-scores');
+Volt::route('/admin/users', 'admin.users.index')->name('admin.users.index');
+Volt::route('/admin/users/{user}', 'admin.users.show')->name('admin.users.show');
 
-//     Route::get('scores', 'App\Http\Controllers\Admin\ScoreController@index');
+Volt::route('/admin/years', 'admin.years.index')->name('admin.years.index');
 
-//     Route::get('rankings', 'App\Http\Controllers\Admin\AdminController@rankings');
-
-//     Route::resource('users', 'App\Http\Controllers\Admin\UserController');
-//     Route::resource('years', 'App\Http\Controllers\Admin\YearController');
-//     Route::resource('teams', 'App\Http\Controllers\Admin\TeamController');
-//     Route::resource('players', 'App\Http\Controllers\Admin\PlayerController');
-
-//     Route::patch('/scorecard/{week}/edit', 'App\Http\Controllers\ScorecardController@update');
-//     Route::get('/scorecard/{week}', 'App\Http\Controllers\ScorecardController@edit');
-//     Route::get('/scorecard/{week}/team/{team}', 'App\Http\Controllers\ScorecardController@edit');
-//     Route::get('/scorecard/{week}/matchup', 'App\Http\Controllers\ScorecardController@matchup');
-
-//     Route::get('/handicaps', 'App\Http\Controllers\CommandController@handicaps');
-//     Route::get('/stats', 'App\Http\Controllers\CommandController@stats');
-//     Route::post('/cache', 'App\Http\Controllers\CommandController@cache');
-
-//     Route::patch('adjust-weeks/{week}', 'App\Http\Controllers\Admin\AdjustWeeksController@update');
-
-//     Route::get('/users', AdminUsers::class);
-
-// });
 
 require __DIR__.'/auth.php';

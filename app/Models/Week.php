@@ -8,12 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
-use Laravel\Nova\Actions\Actionable;
 
 class Week extends Model
 {
-    use Actionable;
-
     protected $with = ['winners', 'year'];
 
     protected $appends = ['quarter', 'game_name'];
