@@ -3,9 +3,7 @@
 	"type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
-        "build-total-holes": "cd nova-components/TotalHoles && npm run dev",
-        "build-total-holes-prod": "cd nova-components/TotalHoles && npm run prod"
+        "build": "vite build"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
