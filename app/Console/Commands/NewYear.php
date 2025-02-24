@@ -2,12 +2,16 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Player;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Week;
 use App\Models\Year;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use function Laravel\Prompts\text;
+use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\select;
 
 class NewYear extends Command {
 	/**
@@ -39,10 +43,6 @@ class NewYear extends Command {
 	 * @return Year database object
 	 */
 	public function create_year($year_name, $year_active) {
-
-		// Only one YEAR should be active at a time.
-		// Make sure all other years are inactive if this one is active.
-
 		if ($year_active) {
 			$years = Year::where('active', 1)->get();
 
@@ -56,7 +56,6 @@ class NewYear extends Command {
 		$year->name = $year_name;
 		$year->active = $year_active;
 		$year->save();
-
 		return $year;
 	}
 
@@ -139,65 +138,191 @@ class NewYear extends Command {
 	 * @return mixed
 	 */
 	public function handle() {
-		// Create Year
-		// Current year is given as default
-		$year_active = false; // default setting
+		$year_name = text(
+			label: 'What is the year?',
+			placeholder: 'E.g. ' . Carbon::now()->year,
+			default: Carbon::now()->year,
+		);
 
-		$year_name = $this->ask('What is the YEAR?', Carbon::now()->year);
-
-		if ($this->confirm('Should this YEAR be set to active?', true)) {
-
-			$year_active = true;
-
-		}
+		$year_active = confirm(
+			label: 'Should this year be set to active?',
+			default: true
+		);
 
 		$year = $this->create_year($year_name, $year_active);
 
-		// Create Teams for created Year
-		// 6 Teams per Year is the default
-		$team_total = $this->ask('How many TEAMS for this season?', 6);
+		$team_total = text(
+			label: 'How many teams this season?',
+			default: '6',
+			validate: 'numeric',
+		);
 
-		if ($team_total > 0) {
-
-			for ($i = 0; $i < intval($team_total); $i++) {
-
-				$team = new Team;
-				$team->year_id = $year->id;
-				$team->name = strval($i + 1);
-				$team->save();
-
-			}
-
-		}
+		$this->create_teams($year->id, $team_total);
 
 		// Create Weeks for created Year
-		// 20 weeks is the default
-		// Enter YYYY-MM-DD for starting Thursday
-		// Enter YYYY-MM-DD for the Thursday traditionally skipped for Greenbrier Classic
-		$week_total = $this->ask('How many weeks this season?', 20);
+		$week_total = text(
+			label: 'How many weeks this season?',
+			default: '20',
+			validate: 'numeric',
+		);
 
 		if ($week_total > 0) {
+			$start_week = new Carbon(
+				text(
+					label: 'What is the start week?',
+					placeholder: 'YYYY-MM-DD',
+					default: '2025-04-10',
+				)
+			);
 
-			$start_week = new Carbon($this->ask('What is the start week? (YYYY-MM-DD)', '2017-04-13'));
+			$skip_week = new Carbon(
+				text(
+					label: 'What is the skip week?',
+					placeholder: 'YYYY-MM-DD',
+				)
+			);
 
-			$skip_week = new Carbon($this->ask('What is the skip week? (YYYY-MM-DD)', '2017-07-06'));
+			$this->create_weeks($year, $week_total, $start_week, $skip_week);
+		}
 
-			$previous_game = "Putts";
-			$week_order = 0;
+		$previous_year = select(
+			label: 'What was the previous year?',
+			options: Year::where('active', 0)->orderBy('name', 'desc')->pluck('name', 'id')->toArray(),
+			scroll: 10
+		);
 
-			for ($i = 0; $i < intval($week_total + 1); $i++) {
+		$teams = Team::where('year_id', $year->id)->get();
+		$players_per_team = 4;
 
-				if ($start_week == $skip_week) {
+        $users = User::orderBy('name')->get(); // Fetch all users sorted alphabetically
 
-					$start_week = $start_week->addWeek();
+		if ($users->isEmpty()) {
+            $this->error('No users found.');
+            return;
+        }
 
+        $assignedPlayers = [];
+
+		for ($teamNumber = 1; $teamNumber <= count($teams); $teamNumber++) {
+			$team = Team::where('year_id', $year->id)->where('name', strval($teamNumber))->first();
+
+            if (!$team) {
+                $this->error("Team {$teamNumber} not found.");
+                continue;
+            }
+
+            for ($position = 1; $position <= $players_per_team; $position++) {
+                $availableUsers = $users->reject(fn($user) => in_array($user->id, $assignedPlayers));
+
+                if ($availableUsers->isEmpty()) {
+                    $this->error('No more available users to assign.');
+                    return;
+                }
+
+                // Select player using Laravel Prompts
+				$selectedUserId = select(
+					label: "Who should be Team {$teamNumber}'s #{$position} player?",
+					options: $availableUsers->pluck('name', 'id')->toArray(),
+					scroll: 10
+				);
+
+                $selectedUser = $users->firstWhere('id', $selectedUserId);
+
+				$previous_player = Player::where('user_id', $selectedUser->id)->where('year_id', $previous_year)->first();
+
+				if ($previous_player) {
+					$use_db_hc = confirm(
+						label: "Do you want to set the handicap for {$selectedUser->name} as {$previous_player->hc_next_year}?",
+						default: true,
+					);
+					$new_hc = $use_db_hc ? $previous_player->hc_next_year : text(
+						label: "What is the handicap for {$selectedUser->name}?",
+						default: $previous_player->hc_next_year,
+						validate: 'numeric',
+					);
 				} else {
-
-					$week_order++;
-					$week = $this->create_week($year->id, $week_order, $start_week, $previous_game);
-					$start_week = $week->week_date->addWeek();
-					$previous_game = $week->side_games;
+					$new_hc = text(
+						label: "What is the handicap for {$selectedUser->name}?",
+						default: '0',
+						validate: 'numeric',
+					);
 				}
+
+				$tee_selection = 'White';
+				if ($position === 4) {
+					$yellow_tees = $confirmed = confirm('Will this player use yellow tees?');
+					$tee_selection = $yellow_tees ? 'Yellow' : 'White';
+				}
+
+                // Store the Player record in the database
+                Player::create([
+                    'team_id' => $team->id,
+                    'user_id' => $selectedUser->id,
+					'year_id' => $year->id,
+					'position' => $position,
+					'tee_selection' => $tee_selection,
+					'on_leave' => false,
+					'substitute' => false,
+					'hc_current' => $new_hc,
+					'hc_first' => $new_hc,
+					'hc_second' => 0,
+					'hc_third' => 0,
+					'hc_fourth' => 0,
+					'hc_playoff' => 0,
+					'hc_next_year' => 0,
+					'hc_18' => 0,
+					'hc_full' => 0,
+					'won' => 0,
+					'lost' => 0,
+					'tied' => 0,
+					'win_pct' => 0,
+					'points' => 0,
+					'points_rank' => 0,
+					'wins_rank' => 0,
+					'gross_average' => 0,
+					'gross_par' => 0,
+					'net_average' => 0,
+					'net_par' => 0,
+					'low_gross' => 0,
+					'low_net' => 0,
+					'high_gross' => 0,
+					'high_net' => 0,
+					'position_net_rank' => 0,
+					'overall_net_rank' => 0,
+					'champion' => false,
+					'make_ups' => 0,
+                ]);
+
+                $assignedPlayers[] = $selectedUser->id;
+
+                $this->info("Assigned {$selectedUser->name} as Team {$teamNumber}'s #{$position} player.");
+            }
+        }
+	}
+
+	private function create_teams($year_id, $team_total) {
+		if ($team_total > 0) {
+			for ($i = 0; $i < intval($team_total); $i++) {
+				$team = new Team;
+				$team->year_id = $year_id;
+				$team->name = strval($i + 1);
+				$team->save();
+			}
+		}
+	}
+
+	private function create_weeks($year, $week_total, $start_week, $skip_week) {
+		$previous_game = "Putts";
+		$week_order = 0;
+
+		for ($i = 0; $i < intval($week_total + 1); $i++) {
+			if ($start_week == $skip_week) {
+				$start_week = $start_week->addWeek();
+			} else {
+				$week_order++;
+				$week = $this->create_week($year->id, $week_order, $start_week, $previous_game);
+				$start_week = $week->week_date->addWeek();
+				$previous_game = $week->side_games;
 			}
 		}
 	}
