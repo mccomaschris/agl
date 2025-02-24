@@ -34,11 +34,11 @@ class AppServiceProvider extends ServiceProvider
             $this->dispatchBrowserEvent('notify', $message);
         });
 
-		if (Schema::hasTable('years')) {
-			View::share('years', Year::orderBy('year', 'desc')->get());
-		} else {
-			View::share('years', collect());
-		}
+		// if (Schema::hasTable('years')) {
+		// 	View::share('years', Year::orderBy('year', 'desc')->get());
+		// } else {
+		// 	View::share('years', collect());
+		// }
 
         Blade::if('admin', function () {
             if (Auth::user() && Auth::user()->isAdmin()) {
