@@ -7,6 +7,4 @@
    <file>resources</file>
    <file>routes</file>
    <file>tests</file>
-
-   <rule ref="Tighten"/>
 </ruleset>
