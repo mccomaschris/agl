@@ -9,7 +9,8 @@
 	<meta name="description" content="A simple HTML5 Template for new projects.">
 	<meta name="author" content="SitePoint">
 
-	<link href="https://fonts.googleapis.com/css?family=Libre+Franklin:300,400,600,800,900" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
 
 	@vite('resources/assets/css/main.css')
 </head>
