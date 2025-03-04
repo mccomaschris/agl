@@ -19,21 +19,39 @@
                 <td class="text-center">{{ $teamB->threePlayer->hc_current }}</td>
             @elseif ($week->quarter == 3)
                 <td>
-                    <div class="flex items-center">
-                        <div class="h-4 w-4 mr-2 rounded-full {{ $teamA->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow-500 ring-2 ring-grey-900/10 ring-inset ' : ' bg-white  ring-2 ring-grey-900/10 ring-inset ' }}"></div>
-                        <a wire:navigate href="{{ route('player-score', ['player' => $teamA->fourPlayer->id]) }}">{{ $teamA->fourPlayer->user->name }}</a>
-                    </div>
+                    @if($teamA->fourPlayer->substitute)
+						{{ $teamA->fourPlayer->sub->name }} (S)
+					@else
+						<div class="flex items-center">
+							<div class="h-4 w-4 mr-2 rounded-full {{ $teamA->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow-500 ring-2 ring-grey-900/10 ring-inset ' : ' bg-white  ring-2 ring-grey-900/10 ring-inset ' }}"></div>
+							<a wire:navigate href="{{ route('player-score', ['player' => $teamA->fourPlayer->id]) }}">{{ $teamA->fourPlayer->user->name }}</a>
+						</div>
+					@endif
                 </td>
-                <td class="text-center">{{ $teamA->fourPlayer->hc_current }}</td>
+                <td class="text-center">
+					@if(!$teamA->fourPlayer->substitute)
+						{{ $teamA->fourPlayer->hc_current }}
+					@else
+						TBD
+					@endif
+				</td>
                <td>
-                <div class="flex items-center">
-                    <div class="h-4 w-4 mr-2 rounded-full {{ $teamB->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow-500 ring-2 ring-grey-900/10 ring-inset ' : ' bg-white  ring-2 ring-grey-900/10 ring-inset ' }}"></div>
-                        <a wire:navigate href="{{ route('player-score', ['player' => $teamB->fourPlayer->id]) }}">{{ $teamB->fourPlayer->user->name }}</a>
-                    </div>
+					@if($teamB->fourPlayer->substitute)
+						{{ $teamB->fourPlayer->sub->name }} (S)
+					@else
+						<div class="flex items-center">
+							<div class="h-4 w-4 mr-2 rounded-full {{ $teamB->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow-500 ring-2 ring-grey-900/10 ring-inset ' : ' bg-white  ring-2 ring-grey-900/10 ring-inset ' }}"></div>
+							<a wire:navigate href="{{ route('player-score', ['player' => $teamB->fourPlayer->id]) }}">{{ $teamB->fourPlayer->user->name }}</a>
+						</div>
+					@endif
                 </td>
-                </div>
-            </td>
-                <td class="text-center">{{ $teamB->fourPlayer->hc_current }}</td>
+                <td class="text-center">
+					@if(!$teamB->fourPlayer->substitute)
+						{{ $teamB->fourPlayer->hc_current }}
+					@else
+						TBD
+					@endif
+				</td>
             @else
                 <td class=""><a wire:navigate href="{{ route('player-score', ['player' => $teamA->twoPlayer->id]) }}">{{ $teamA->twoPlayer->user->name }}</a></td>
                 <td class="text-center">{{ $teamA->twoPlayer->hc_current }}</td>
@@ -63,19 +81,39 @@
             <td class="text-center">{{ $teamB->threePlayer->hc_current }}</td>
         @else
              <td>
-                <div class="flex items-center">
-                    <div class="h-4 w-4 mr-2 rounded-full {{ $teamA->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow-500 ring-2 ring-grey-900/10 ring-inset ' : ' bg-white  ring-2 ring-grey-900/10 ring-inset ' }}"></div>
-                    <a wire:navigate href="{{ route('player-score', ['player' => $teamA->fourPlayer->id]) }}">{{ $teamA->fourPlayer->user->name }}</a>
-                </div>
+                @if($teamA->fourPlayer->substitute)
+					{{ $teamA->fourPlayer->sub->name }} (S)
+				@else
+					<div class="flex items-center">
+						<div class="h-4 w-4 mr-2 rounded-full {{ $teamA->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow-500 ring-2 ring-grey-900/10 ring-inset ' : ' bg-white  ring-2 ring-grey-900/10 ring-inset ' }}"></div>
+						<a wire:navigate href="{{ route('player-score', ['player' => $teamA->fourPlayer->id]) }}">{{ $teamA->fourPlayer->user->name }}</a>
+					</div>
+				@endif
             </td>
-            <td class="text-center">{{ $teamA->fourPlayer->hc_current }}</td>
+            <td class="text-center">
+				@if(!$teamA->fourPlayer->substitute)
+					{{ $teamA->fourPlayer->hc_current }}
+				@else
+					TBD
+				@endif
+			</td>
             <td>
-                <div class="flex items-center">
-                <div class="h-4 w-4 mr-2 rounded-full {{ $teamB->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow-500 ring-2 ring-grey-900/10 ring-inset ' : ' bg-white  ring-2 ring-grey-900/10 ring-inset ' }}"></div>
-                    <a wire:navigate href="{{ route('player-score', ['player' => $teamB->fourPlayer->id]) }}">{{ $teamB->fourPlayer->user->name }}</a>
-                </div>
+				@if($teamB->fourPlayer->substitute)
+					{{ $teamB->fourPlayer->sub->name }} (S)
+				@else
+					<div class="flex items-center">
+						<div class="h-4 w-4 mr-2 rounded-full {{ $teamB->fourPlayer->tee_selection == 'yellow' ? ' bg-yellow-500 ring-2 ring-grey-900/10 ring-inset ' : ' bg-white  ring-2 ring-grey-900/10 ring-inset ' }}"></div>
+						<a wire:navigate href="{{ route('player-score', ['player' => $teamB->fourPlayer->id]) }}">{{ $teamB->fourPlayer->user->name }}</a>
+					</div>
+				@endif
             </td>
-            <td class="text-center">{{ $teamB->fourPlayer->hc_current }}</td>
+            <td class="text-center">
+				@if(!$teamB->fourPlayer->substitute)
+					{{ $teamB->fourPlayer->hc_current }}
+				@else
+					TBD
+				@endif
+			</td>
         @endif
     </tr>
 </table>

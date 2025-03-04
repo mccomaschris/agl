@@ -31,6 +31,11 @@ class Player extends Model
         return $this->belongsTo(Year::class);
     }
 
+	public function sub(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'substitute');
+    }
+
     public function scores(): HasMany
     {
         return $this->hasMany(Score::class);
