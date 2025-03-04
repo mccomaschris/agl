@@ -8,8 +8,7 @@
 	<title>19th Hole</title>
 	<meta name="description" content="A simple HTML5 Template for new projects.">
 	<meta name="author" content="SitePoint">
-
-	<link rel="preconnect" href="https://fonts.bunny.net">
+    <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
 
 	<link rel="stylesheet" href="{{ twcss('/css/main.css') }}">
