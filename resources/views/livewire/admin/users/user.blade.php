@@ -52,6 +52,8 @@ new class extends \Livewire\Volt\Component {
         ]);
 
         $this->modal('user-edit')->close();
+
+		Flux::toast('User has been saved.');
     }
 
     public function remove()

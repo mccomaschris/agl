@@ -65,6 +65,8 @@ new class extends Component {
     public function remove()
     {
         $this->modal('year-remove')->show();
+
+		Flux::toast('Year removed successfully.');
     }
 }; ?>
 

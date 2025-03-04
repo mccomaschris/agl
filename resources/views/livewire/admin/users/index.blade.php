@@ -47,6 +47,8 @@ class extends Component
 		$this->resetPage();
 
         Flux::modal('user-remove')->close();
+
+		Flux::toast('User has been deleted.');
     }
 
 	public function save()
@@ -66,6 +68,8 @@ class extends Component
 		$this->reset([ 'username', 'name', 'email', 'phone', 'admin', 'active' ]);
 
         $this->modal('user-add')->close();
+
+		Flux::toast('User has been created.');
     }
 
 	protected function applySearch($query)
@@ -86,6 +90,11 @@ class extends Component
 
         return [
             'users' => $users,
+			'emails' => User::where('active', 1)
+				->whereNotNull('email')
+				->where('email', '!=', '')
+				->pluck('email')
+				->toArray(),
         ];
     }
 }; ?>
@@ -97,9 +106,27 @@ class extends Component
             <flux:subheading>Manage the site's users and their roles</flux:subheading>
         </div>
 
-        <flux:modal.trigger name="user-add">
-            <flux:button size="sm" icon="user-plus">Add user</flux:button>
-        </flux:modal.trigger>
+		<div class="flex items-center space-x-4">
+			<div
+				x-data="{
+				copyToClipboard(text) {
+					navigator.clipboard.writeText(text).then(() => {
+						Flux.toast({
+							heading: 'Copied',
+							text: 'The email addresses have been copied to the clipboard.',
+							variant: 'success',
+						})
+					});
+				}
+				}"
+			>
+				<flux:button @click="copyToClipboard('{{ implode(', ', $emails) }}')" variant="ghost">Copy All Emails</flux:button>
+			</div>
+
+			<flux:modal.trigger name="user-add">
+				<flux:button size="sm" icon="user-plus">Add user</flux:button>
+			</flux:modal.trigger>
+		</div>
     </div>
 
 	<div class="mt-8 w-full lg:w-1/3">
@@ -122,6 +149,7 @@ class extends Component
             @endforeach
         </flux:table.rows>
     </flux:table>
+
 
     <flux:modal name="user-add" class="md:w-96" variant="flyout">
         <form wire:submit="save" class="space-y-6">
@@ -148,4 +176,5 @@ class extends Component
             </div>
         </form>
     </flux:modal>
+
 </div>
