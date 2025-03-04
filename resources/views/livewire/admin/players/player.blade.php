@@ -28,10 +28,10 @@ new class extends Component {
     #[Validate('integer|required')]
     public $position = '';
 
-	#[Validate('string|nullabe')]
+	#[Validate('string|nullable')]
     public $tee_selection = null;
 
-	#[Validate('integer|nullabe')]
+	#[Validate('integer|nullable')]
 	public $substitute = null;
 
     public function mount()
