@@ -16,6 +16,12 @@ class Player extends Model
 
     protected $appends = ['ten'];
 
+	protected $casts = [
+		'champion' => 'boolean',
+		'on_leave' => 'boolean',
+    ];
+
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->orderBy('name', 'asc');

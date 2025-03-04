@@ -63,7 +63,9 @@ new class extends \Livewire\Volt\Component {
 
 <flux:table.row data-user-id="{{ $user->id }}">
     <flux:table.cell variant="strong">
-		{{ $user->name }}
+		<flux:link href="{{ route('admin.users.show', $user) }}">
+			{{ $user->name }}
+		</flux:link>
 	</flux:table.cell>
 
     <flux:table.cell>{{ $user->email }}</flux:table.cell>
