@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Player;
+use App\Models\Score;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Week;
@@ -71,17 +72,9 @@ class NewYear extends Command {
 		$week->week_date = $start_week;
 
 		// GET PREVIOUS GAME
-		switch ($previous_game) {
-		case "Net":
+		if ('Net' == $previous_game) {
 			$week->side_games = "Pin";
-			break;
-		case "Pin":
-			$week->side_games = "Putts";
-			break;
-		case "Putts":
-			$week->side_games = "Net";
-			break;
-		default:
+		} else {
 			$week->side_games = "Net";
 		}
 
@@ -272,6 +265,7 @@ class NewYear extends Command {
 					'hc_next_year' => 0,
 					'hc_18' => 0,
 					'hc_full' => 0,
+					'hc_full_rank' => 0,
 					'won' => 0,
 					'lost' => 0,
 					'tied' => 0,
@@ -298,6 +292,30 @@ class NewYear extends Command {
                 $this->info("Assigned {$selectedUser->name} as Team {$teamNumber}'s #{$position} player.");
             }
         }
+
+		$create_player_weeks = confirm(
+			label: 'Do you wish to generate blank scorecards for the year?',
+			default: true
+		);
+
+		if ( $create_player_weeks) {
+			$players = Player::where('year_id', $year->id)->get();
+			$weeks = Week::where('year_id', $year->id)->pluck('id')->toArray();
+
+			foreach ($players as $player) {
+				// CREATE WEEKLY STATS
+			   foreach ($weeks as $week) {
+				   $score = Score::firstOrCreate(['player_id' => $player->id, 'score_type' => 'weekly_score', 'foreign_key' => $week]);
+			   }
+
+			   // CREATE QUARTER AND FINAL STATS
+			   $qtr_1_avg = Score::firstOrCreate(['player_id' => $player->id, 'score_type' => 'qtr_1_avg', 'foreign_key' => $year->id]);
+			   $qtr_2_avg = Score::firstOrCreate(['player_id' => $player->id, 'score_type' => 'qtr_2_avg', 'foreign_key' => $year->id]);
+			   $qtr_3_avg = Score::firstOrCreate(['player_id' => $player->id, 'score_type' => 'qtr_3_avg', 'foreign_key' => $year->id]);
+			   $qtr_4_avg = Score::firstOrCreate(['player_id' => $player->id, 'score_type' => 'qtr_4_avg', 'foreign_key' => $year->id]);
+			   $season_avg = Score::firstOrCreate(['player_id' => $player->id, 'score_type' => 'season_avg', 'foreign_key' => $year->id]);
+		   }
+		}
 	}
 
 	private function create_teams($year_id, $team_total) {

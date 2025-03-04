@@ -12,6 +12,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.8",
+        "livewire/flux-pro": "^2.0",
         "livewire/livewire": "^3.0",
         "livewire/volt": "^1.6",
         "predis/predis": "^1.1",
@@ -66,5 +67,11 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "flux-pro": {
+            "type": "composer",
+            "url": "https://composer.fluxui.dev"
+        }
+    }
 }

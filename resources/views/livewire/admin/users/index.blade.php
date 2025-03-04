@@ -8,7 +8,7 @@ use Livewire\Attributes\On;
 use App\Models\User;
 
 new
-#[Layout('layouts.backend')]
+#[Layout('components.layouts.admin')]
 #[Title('All Users')]
 class extends Component
 {
