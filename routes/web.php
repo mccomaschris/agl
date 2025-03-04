@@ -59,6 +59,7 @@ Route::group(['auth:sanctum', 'verified'], function () {
 });
 
 Route::middleware([IsAdmin::class])->group(function () {
+	// Route::get('/posts/create', User::class)->name('admin.users.index');
 	Volt::route('/admin/users', 'admin.users.index')->name('admin.users.index');
 	Volt::route('/admin/years', 'admin.years.index')->name('admin.years.index');
 	Volt::route('/admin/weeks', 'admin.weeks.index')->name('admin.weeks.index');

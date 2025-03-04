@@ -27,6 +27,13 @@ class extends Component {
 	public $ignore_scores = false;
 	public $back_nine = false;
 
+	public $selectedYear = null;
+
+	public function updatedSelectedYear()
+	{
+		$this->resetPage();
+	}
+
 	public function rules()
     {
         return [
@@ -95,10 +102,25 @@ class extends Component {
 		Flux::toast('Week created successfully.');
     }
 
+	protected function applyFilter($query)
+    {
+        return $this->selectedYear === null
+            ? $query
+            : $query
+                ->where('year_id', $this->selectedYear);
+    }
+
     public function with(): array
     {
+		$weeks = Week::query();
+
+		$weeks = $this->applyFilter($weeks);
+
+		$weeks = $weeks->orderby('week_date', 'desc')->paginate(25);
+
         return [
-            'weeks' => Week::orderby('week_date', 'desc')->paginate(25),
+            'weeks' => $weeks,
+			'years' => Year::orderby('name', 'desc')->get(),
         ];
     }
 }; ?>
@@ -114,6 +136,15 @@ class extends Component {
             <flux:button size="sm" icon="user-plus">Add week</flux:button>
         </flux:modal.trigger>
     </div>
+
+	<div class="w-full lg:w-1/3 mt-8">
+		<flux:select wire:model.live="selectedYear" label="Filter by Year">
+			<flux:select.option :value="null">All Years</flux:select.option>
+			@foreach($years as $year)
+				<flux:select.option :value="$year->id">{{ $year->name }}</flux:select.option>
+			@endforeach
+		</flux:select>
+	</div>
 
     <flux:table :paginate="$weeks" class="mt-8">
         <flux:table.columns>

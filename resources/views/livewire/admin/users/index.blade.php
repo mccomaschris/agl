@@ -32,6 +32,14 @@ class extends Component
 	#[Validate('boolean|nullable')]
     public $active = '';
 
+	#[Validate('string|nullable')]
+	public $search = '';
+
+	public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
 	public function remove($id)
     {
 		User::findOrFail($id)->delete();
@@ -60,10 +68,24 @@ class extends Component
         $this->modal('user-add')->close();
     }
 
+	protected function applySearch($query)
+    {
+        return $this->search === ''
+            ? $query
+            : $query
+                ->where('name', 'like', '%'.$this->search.'%');
+    }
+
     public function with(): array
     {
+		$users = User::query();
+
+		$users = $this->applySearch($users);
+
+		$users = $users->orderby('name', 'asc')->paginate(20);
+
         return [
-            'users' => User::orderby('name', 'asc')->paginate(25),
+            'users' => $users,
         ];
     }
 }; ?>
@@ -79,6 +101,10 @@ class extends Component
             <flux:button size="sm" icon="user-plus">Add user</flux:button>
         </flux:modal.trigger>
     </div>
+
+	<div class="mt-8 w-full lg:w-1/3">
+		<flux:input wire:model.live="search" placeholder="Search users..." />
+	</div>
 
     <flux:table :paginate="$users" class="mt-8">
         <flux:table.columns>
