@@ -61,7 +61,7 @@ new class extends \Livewire\Volt\Component {
 }
 ?>
 
-<flux:table.row>
+<flux:table.row data-user-id="{{ $user->id }}">
     <flux:table.cell variant="strong">
 		{{ $user->name }}
 	</flux:table.cell>
