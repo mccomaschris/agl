@@ -1,9 +1,9 @@
 @component('mail::message')
 # Password Reset
 
-{{ $user->name }}, your password has been reset by an administrator. 
+{{ $user->name }}, your password has been reset by an administrator.
 
-As a reminder here's your login information: 
+As a reminder here's your login information:
 
 Username: {{ $user->username }}<br>
 Password: {{ $password }}

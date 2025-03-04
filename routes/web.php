@@ -11,6 +11,7 @@ use App\Http\Controllers\WaitlistController;
 use App\Http\Controllers\WeekController;
 use App\Http\Middleware\IsAdmin;
 use App\Livewire\AdminUsers;
+use Illuminate\Support\Facades\Artisan;
 use App\Livewire\AllStats;
 use App\Livewire\EditScores;
 use App\Livewire\End;
@@ -59,7 +60,19 @@ Route::group(['auth:sanctum', 'verified'], function () {
 });
 
 Route::middleware([IsAdmin::class])->group(function () {
-	// Route::get('/posts/create', User::class)->name('admin.users.index');
+	Route::get('/admin', function() {
+		return redirect()->route('admin.users.index');
+	});
+
+	Route::post('/admin/clear-cache', function () {
+		Artisan::call('cache:clear');
+		Artisan::call('config:clear');
+		Artisan::call('view:clear');
+		Artisan::call('route:clear');
+
+		return response()->json(['success' => true, 'message' => 'The application cache has been cleared.']);
+	})->name('admin.clear-cache');
+
 	Volt::route('/admin/users', 'admin.users.index')->name('admin.users.index');
 	Volt::route('/admin/users/{user}', 'admin.users.show')->name('admin.users.show');
 	Volt::route('/admin/years', 'admin.years.index')->name('admin.years.index');

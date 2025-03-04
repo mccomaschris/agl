@@ -3,6 +3,7 @@
 use Livewire\Attributes\Validate;
 use Livewire\Volt\Component;
 use App\Models\User;
+use App\Jobs\ResetPassword;
 
 new class extends \Livewire\Volt\Component {
     public User $user;
@@ -23,6 +24,8 @@ new class extends \Livewire\Volt\Component {
 
 	#[Validate('boolean|nullable')]
     public $active = false;
+
+	public $newPassword = '';
 
     public function mount()
     {
@@ -55,6 +58,17 @@ new class extends \Livewire\Volt\Component {
 
 		Flux::toast('User has been saved.');
     }
+
+	public function resetPassword()
+	{
+		ResetPassword::dispatch($this->user);
+
+		Flux::toast(
+			heading: 'Password reset',
+			text: 'The user\'s password has been reset and emailed.',
+			variant: 'success',
+		);
+	}
 
     public function remove()
     {
@@ -93,7 +107,8 @@ new class extends \Livewire\Volt\Component {
             <flux:button icon="ellipsis-horizontal" size="sm" variant="ghost" inset="top bottom" />
 
             <flux:menu class="min-w-32">
-                <flux:menu.item wire:click="edit" icon="pencil-square">Edit</flux:menu.item>
+				<flux:menu.item wire:click="edit" icon="pencil-square">Edit</flux:menu.item>
+                <flux:menu.item wire:click="resetPassword" icon="lock-closed">Reset Password</flux:menu.item>
                 <flux:menu.item wire:click="remove" icon="trash" variant="danger">Remove</flux:menu.item>
             </flux:menu>
         </flux:dropdown>

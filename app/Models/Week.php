@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class Week extends Model
 {
+	protected $guarded = [];
+
     protected $with = ['winners', 'year'];
 
     protected $appends = ['quarter', 'game_name'];
