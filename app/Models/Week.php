@@ -17,6 +17,8 @@ class Week extends Model
 
     protected $casts = [
         'week_date' => 'date',
+		'ignore_scores' => 'boolean',
+		'back_nine' => 'boolean',
     ];
 
     /**

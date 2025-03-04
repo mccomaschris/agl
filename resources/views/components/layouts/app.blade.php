@@ -30,7 +30,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
 
-	@vite('resources/assets/css/main.css')
+	<link rel="stylesheet" href="{{ twcss('/css/main.css') }}">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
@@ -64,7 +64,7 @@
 							x-transition:leave="transition ease-in duration-200"
 							x-transition:leave-start="opacity-100 translate-y-0"
 							x-transition:leave-end="opacity-0 translate-y-1"
-							class="absolute z-10 right-0 w-64 mt-2 flex flex-col divide-y divide-gray-900 bg-gray-800 rounded py-6"
+							class="absolute z-10 right-0 w-64 mt-2 flex flex-col divide-y divide-grey-900 bg-grey-800 rounded py-6"
 						>
 							<a href="{{ route('team-points', ['year' => $activeYear->name]) }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Team Points</a>
 							<a href="{{ route('handicaps', ['year' => $activeYear->name]) }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Handicaps</a>

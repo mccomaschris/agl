@@ -63,7 +63,7 @@ class extends Component
     public function with(): array
     {
         return [
-            'users' => User::paginate(25),
+            'users' => User::orderby('name', 'asc')->paginate(25),
         ];
     }
 }; ?>
@@ -81,19 +81,19 @@ class extends Component
     </div>
 
     <flux:table :paginate="$users" class="mt-8">
-        <flux:columns>
-            <flux:column>Name</flux:column>
-            <flux:column>Email</flux:column>
-            <flux:column>Active</flux:column>
-            <flux:column>Admin</flux:column>
-            <flux:column></flux:column>
-        </flux:columns>
+        <flux:table.columns>
+            <flux:table.column>Name</flux:table.column>
+            <flux:table.column>Email</flux:table.column>
+            <flux:table.column>Active</flux:table.column>
+            <flux:table.column>Admin</flux:table.column>
+            <flux:table.column></flux:table.column>
+		</flux:table.columns>
 
-        <flux:rows>
+        <flux:table.rows>
             @foreach ($users as $user)
                 <livewire:admin.users.user :$user :key="$user->id" />
             @endforeach
-        </flux:rows>
+        </flux:table.rows>
     </flux:table>
 
     <flux:modal name="user-add" class="md:w-96" variant="flyout">

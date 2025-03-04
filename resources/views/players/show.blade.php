@@ -50,23 +50,23 @@
                     </div>
                     <div class="flex flex-col text-green-bright">
                         <span class="block uppercase font-semibold tracking-tight text-grey-300">Eagle</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ $eagle }} <span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($eagle / $holes) * 100, 0, '.', ',') }}%)</span></span>
+                        <span class="block text-3xl lg:text-4xl font-bold">{{ $eagle }} <span class="text-xl font-normal text-grey-100 ml-2">({{ number_format(($eagle / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
                     <div class="flex flex-col text-green-bright">
                         <span class="block uppercase font-semibold tracking-tight text-grey-300">Birdie</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ $birdie }}<span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($birdie / $holes) * 100, 0, '.', ',') }}%)</span></span>
+                        <span class="block text-3xl lg:text-4xl font-bold">{{ $birdie }}<span class="text-xl font-normal text-grey-100 ml-2">({{ number_format(($birdie / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
                     <div class="flex flex-col text-green-bright">
                         <span class="block uppercase font-semibold tracking-tight text-grey-300">Par</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ $par }}<span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($par / $holes) * 100, 0, '.', ',') }}%)</span></span>
+                        <span class="block text-3xl lg:text-4xl font-bold">{{ $par }}<span class="text-xl font-normal text-grey-100 ml-2">({{ number_format(($par / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
                     <div class="flex flex-col text-green-bright">
                         <span class="block uppercase font-semibold tracking-tight text-grey-300">Bogey</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ $bogey }}<span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($bogey / $holes) * 100, 0, '.', ',') }}%)</span></span>
+                        <span class="block text-3xl lg:text-4xl font-bold">{{ $bogey }}<span class="text-xl font-normal text-grey-100 ml-2">({{ number_format(($bogey / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
                     <div class="flex flex-col text-green-bright">
                         <span class="block uppercase font-semibold tracking-tight text-grey-300">2 Bogey+</span>
-                        <span class="block text-3xl lg:text-4xl font-bold">{{ $double_bogey }}<span class="text-xl font-normal text-gray-100 ml-2">({{ number_format(($double_bogey / $holes) * 100, 0, '.', ',') }}%)</span></span>
+                        <span class="block text-3xl lg:text-4xl font-bold">{{ $double_bogey }}<span class="text-xl font-normal text-grey-100 ml-2">({{ number_format(($double_bogey / $holes) * 100, 0, '.', ',') }}%)</span></span>
                     </div>
                 </div>
             </div>

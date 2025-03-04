@@ -8,7 +8,7 @@ use Livewire\Volt\Component;
 use App\Models\Year;
 
 new
-#[Layout('layouts.backend')]
+#[Layout('components.layouts.admin')]
 #[Title('All Years')]
 class extends Component {
     use WithPagination;
@@ -88,18 +88,18 @@ class extends Component {
     </div>
 
     <flux:table class="mt-8">
-        <flux:columns>
-            <flux:column>Name</flux:column>
-            <flux:column>Active</flux:column>
-            <flux:column>Start Date</flux:column>
-            <flux:column>Skip Date</flux:column>
-            <flux:column></flux:column>
-        </flux:columns>
+        <flux:table.columns>
+            <flux:table.column>Name</flux:table.column>
+            <flux:table.column>Active</flux:table.column>
+            <flux:table.column>Start Date</flux:table.column>
+            <flux:table.column>Skip Date</flux:table.column>
+            <flux:table.column></flux:table.column>
+        </flux:table.columns>
 
-        <flux:rows>
+        <flux:table.rows>
             @foreach ($years as $year)
                 <livewire:admin.years.year :$year :key="$year->id" />
             @endforeach
-        </flux:rows>
+        </flux:table.rows>
     </flux:table>
 </div>

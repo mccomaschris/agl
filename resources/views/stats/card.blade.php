@@ -71,7 +71,7 @@
             <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold">5</td>
             <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold">37</td>
             <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold"></td>
-        </tr> 
+        </tr>
         <tr>
             <td class="border border-black py-3 px-2">
                 <div class="flex justify-between">

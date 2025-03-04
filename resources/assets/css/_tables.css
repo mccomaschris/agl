@@ -37,7 +37,7 @@
 }
 
 .table.table-hover tbody tr:hover {
-	background-color: theme('colors.gray.100');
+	background-color: theme('colors.grey.100');
 }
 
 .table td {

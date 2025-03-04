@@ -56,6 +56,4 @@ module.exports = {
             textColor: ['responsive', 'hover', 'focus', 'group-hover'],
         },
     },
-
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };

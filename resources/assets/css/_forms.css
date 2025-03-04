@@ -8,7 +8,7 @@ select {
     &:focus {
         @apply outline-none bg-white border-grey-500;
     }
-} 
+}
 
 .form-input {
     @apply shadow appearance-none border rounded w-full p-3 text-grey-700 leading-tight;

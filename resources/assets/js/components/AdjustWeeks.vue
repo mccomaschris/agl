@@ -23,7 +23,7 @@
 <script>
     export default {
         props: ['weeks', 'last_week'],
-        
+
         data() {
             return {
                 loading: false,

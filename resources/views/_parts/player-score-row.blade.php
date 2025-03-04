@@ -179,4 +179,3 @@
 				<td class="text-center">{{ $score->par}}</td>
 				<td class="text-center">{{ $score->bogey}}</td>
 				<td class="text-center">{{ $score->double_bogey }}</td>
-

@@ -28,7 +28,7 @@
 							</td>
 						</tr>
 					@endforeach
-				@empty 
+				@empty
 					<tr>
 						<td class="border-t px-6 py-4" colspan="3">No teams found.</td>
 					</tr>

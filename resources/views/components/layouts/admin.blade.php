@@ -3,12 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>{{ $title ?? 'AGL' }}</title>
 
 	<link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
 
-	@vite('resources/css/admin.css')
+	<link rel="stylesheet" href="{{ twcss('/css/admin.css') }}">
+
 	@fluxAppearance
 </head>
 <body class="min-h-screen bg-white dark:bg-zinc-800">
@@ -21,16 +22,9 @@
 		<flux:input as="button" variant="filled" placeholder="Search..." icon="magnifying-glass" />
 
 		<flux:navlist variant="outline">
-			<flux:navlist.item icon="home" href="#" current>Home</flux:navlist.item>
-			<flux:navlist.item icon="inbox" badge="12" href="#">Inbox</flux:navlist.item>
-			<flux:navlist.item icon="document-text" href="#">Documents</flux:navlist.item>
-			<flux:navlist.item icon="calendar" href="#">Calendar</flux:navlist.item>
-
-			<flux:navlist.group expandable heading="Favorites" class="hidden lg:grid">
-				<flux:navlist.item href="#">Marketing site</flux:navlist.item>
-				<flux:navlist.item href="#">Android app</flux:navlist.item>
-				<flux:navlist.item href="#">Brand guidelines</flux:navlist.item>
-			</flux:navlist.group>
+			<flux:navlist.item icon="users" href="{{ route('admin.users.index') }}">Users</flux:navlist.item>
+			<flux:navlist.item icon="calendar" href="{{ route('admin.years.index') }}">Years</flux:navlist.item>
+			<flux:navlist.item icon="calendar-days" href="{{ route('admin.weeks.index') }}">Weeks</flux:navlist.item>
 		</flux:navlist>
 
 		<flux:spacer />

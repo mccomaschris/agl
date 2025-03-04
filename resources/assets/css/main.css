@@ -1,14 +1,36 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
 
-@import "_buttons";
-@import "_forms";
-@import "_nav";
-@import "_tables";
-@import "_utils";
-@import "_base";
-@import "tailwindcss/utilities";
+@theme {
+    --font-sans: Inter, sans-serif;
+
+	--color-green-100: #e6f6e3;
+	--color-green-200: #caedc4;
+	--color-green-300: #abe2a1;
+	--color-green-400: #86d578;
+	--color-green-500: #00B140;
+	--color-green-600: #18a000;
+	--color-green-700: #158c00;
+	--color-green-800: #117400;
+	--color-green-900: #0c5300;
+	--color-green-bright: #08cd4f;
+	--color-black-grey: #121514;
+	--color-grey-100: #f8f9f8;
+	--color-grey-200: #ebeeec;
+	--color-grey-300: #dde1de;
+	--color-grey-400: #ced4d0;
+	--color-grey-500: #bdc5c0;
+	--color-grey-600: #95a39a;
+	--color-grey-700: #7c8d82;
+	--color-grey-800: #5b7163;
+	--color-grey-900: #121514;
+}
+
+@import "./_buttons.css" layer(components);
+@import "./_forms.css" layer(components);
+@import "./_nav.css" layer(components);
+@import "./_tables.css" layer(components);
+@import "./_utils.css" layer(components);
+@import "./_base.css" layer(components);
 
 .large-table {
     @apply overflow-x-auto;

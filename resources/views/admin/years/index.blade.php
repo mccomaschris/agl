@@ -26,7 +26,7 @@
 							<td class="border-t px-6 py-4 group-hover:text-green-500">
 								@if($year->active)
 									<span class="pill pill-green">Active</span>
-								@else 
+								@else
 									<span class="pill pill-grey">Inactive</span>
                                 @endif
 							</td>
@@ -36,7 +36,7 @@
 								</a>
 							</td>
 						</tr>
-				@empty 
+				@empty
 					<tr>
 						<td class="border-t px-6 py-4" colspan="3">No years found.</td>
 					</tr>

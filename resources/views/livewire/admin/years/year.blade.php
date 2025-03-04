@@ -68,28 +68,28 @@ new class extends Component {
     }
 }; ?>
 
-<flux:row>
-    <flux:cell variant="strong">
+<flux:table.row>
+    <flux:table.cell variant="strong">
 		{{ $year->name }}
-	</flux:cell>
+	</flux:table.cell>
 
-    <flux:cell>
+    <flux:table.cell>
 		@if($year->active)
 			<flux:badge color="emerald" size="sm" inset="top bottom">Active</flux:badge>
 		@else
 			<flux:badge size="sm" inset="top bottom">Inactive</flux:badge>
 		@endif
-	</flux:cell>
+	</flux:table.cell>
 
-	<flux:cell>
+	<flux:table.cell>
 		{{ $year->start_date }}
-	</flux:cell>
+	</flux:table.cell>
 
-	<flux:cell>
+	<flux:table.cell>
 		{{ $year->skip_date }}
-	</flux:cell>
+	</flux:table.cell>
 
-    <flux:cell>
+    <flux:table.cell>
         <flux:dropdown align="end" offset="-15">
             <flux:button icon="ellipsis-horizontal" size="sm" variant="ghost" inset="top bottom" />
 
@@ -140,5 +140,5 @@ new class extends Component {
                 </div>
             </form>
         </flux:modal>
-    </flux:cell>
-</flux:row>
+    </flux:table.cell>
+</flux:table.row>

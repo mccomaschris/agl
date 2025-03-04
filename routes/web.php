@@ -9,6 +9,7 @@ use App\Http\Controllers\RuleController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\WaitlistController;
 use App\Http\Controllers\WeekController;
+use App\Http\Middleware\IsAdmin;
 use App\Livewire\AdminUsers;
 use App\Livewire\AllStats;
 use App\Livewire\EditScores;
@@ -57,11 +58,10 @@ Route::group(['auth:sanctum', 'verified'], function () {
     Route::resource('waitlist', WaitlistController::class);
 });
 
-
-Volt::route('/admin/users', 'admin.users.index')->name('admin.users.index');
-Volt::route('/admin/users/{user}', 'admin.users.show')->name('admin.users.show');
-
-Volt::route('/admin/years', 'admin.years.index')->name('admin.years.index');
-
+Route::middleware([IsAdmin::class])->group(function () {
+	Volt::route('/admin/users', 'admin.users.index')->name('admin.users.index');
+	Volt::route('/admin/years', 'admin.years.index')->name('admin.years.index');
+	Volt::route('/admin/weeks', 'admin.weeks.index')->name('admin.weeks.index');
+});
 
 require __DIR__.'/auth.php';

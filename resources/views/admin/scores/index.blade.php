@@ -4,7 +4,7 @@
     <div class="mb-6 flex justify-between items-center">
 		<h1 class="font-bold text-3xl">Scores</h1>
     </div>
-    
+
     <div class="bg-white rounded shadow overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
             <thead>
@@ -30,7 +30,7 @@
                         </td>
                     </tr>
                     @endforeach
-                @endforeach 
+                @endforeach
             </tbody>
         </table>
     </div>

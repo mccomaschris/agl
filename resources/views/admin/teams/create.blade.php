@@ -5,7 +5,7 @@
         <div class="flex flex-wrap justify-between items-center">
             <h1 class="text-center text-2xl lg:text-3xl mt-6 mb-6 tracking-tight">Create a Team</h1>
         </div>
-    </div> 
+    </div>
 @endsection
 
 @section('content')
@@ -20,4 +20,3 @@
 			])
     </form>
 @endsection
-

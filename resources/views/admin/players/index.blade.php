@@ -8,7 +8,7 @@
 			<span class="hidden md:inline">Player</span>
 		</a>
     </div>
-    
+
     <div class="bg-white rounded shadow overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
             <thead>
@@ -35,7 +35,7 @@
                                     <span class="pill pill-red">Substitute</span>
                                 @elseif($player->on_leave)
                                     <span class="pill pill-grey">On Leave</span>
-                                @endif 
+                                @endif
                             </td>
                             <td class="border-t w-px">
                                 <a href="/admin/players/{{ $player->id }}/edit" class="text-grey-500 group-hover:text-green-500 px-4">
@@ -44,7 +44,7 @@
                             </td>
                         </tr>
                     @endforeach
-                @endforeach 
+                @endforeach
             </tbody>
         </table>
     </div>

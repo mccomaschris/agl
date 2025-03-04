@@ -8,8 +8,7 @@
 		<div class="w-full lg:w-3/4 px-0 lg:px-8">
 			<h3 class="font-semibold mb-2 lg:text-xl" id="membership">Membership &amp; Dues</h3>
 			<p class="mb-3">Minimum age for a member is 25 years of age. Membership fees are $70 per year, which
-				includes the $12 kitty for each "side game" played each week (alternating between closest to the pin,
-				low putts and low net). Any ties during the weekly "side game" will be split between the winners. This
+				includes the $25 kitty for each "side game" played each week (alternating between closest to the pin andd low net). Any ties during the weekly "side game" will be split between the winners. This
 				fee must be paid prior to Snowball Tournament. A new member joining the League after the season has
 				begun will be charged an entry fee based on $3.50 per week for the remainder of the weeks in the season.
 				For instance, if he joins in the 5th week, he will be charged $56.00 for the remainder of the season.
@@ -109,7 +108,7 @@
 			<p class="mb-3">In the event that a substitute player is needed to replace a member for a portion of the
 				season, the money won for team rankings and team performance at year's end will be split between the
 				member and the substitute, proportional to the weeks that each played. Money won for individual
-				performance, i.e. low putts, low net, most points, will be awarded to that particular player.</p>
+				performance, i.e. low net, most points, will be awarded to that particular player.</p>
 			<p class="mb-3">In order to be eligible for the payout money at the end of the year, a player must pay his
 				dues and play at least 10 weeks of the season. Having paid his prorated dues, a substitute player WILL
 				be eligible for all the weekly side game money for the weeks that he competes.</p>
@@ -171,9 +170,7 @@
 				cancelled or you have called the course and found that the course is closed, you need not show up. If
 				the course is open, we WILL meet at the course to determine if we will play. If you choose not to come
 				out or not to play, you will be counted as absent.</p>
-			<p class="mb-3">Tee times generally begin at 5:30. However, if your group is there and ready to play and the
-				tee is open, you may begin early. If a member of your foursome calls and indicates that he will be late,
-				however, you are obligated to wait until he arrives.</p>
+			<p class="mb-3">Tee times generally begin at 5:00. We will tee off in order listed on your scorecard. If all of a group is not there, they will be skipped and put at the end of the line.</p>
 			<p class="mb-3">If we cannot tee off at our designated time (due to weather, etc.) we can have a "shotgun"
 				start w/ groups beginning on #1, #3, and #5.</p>
 
@@ -191,15 +188,14 @@
 			<p class="mb-3">The ball can be played up and can be moved one hand's width (tip of little finger to tip of
 				thumb, both extended) anywhere except the green to improve the lie. We want to have fun playing this
 				gentleman's game.</p>
-			<p class="mb-3">In that Riviera has a history of not manicuring the bunkers players can elect to move the
-				ball from the bunker (no closer to the hole AND not on the green) or lift the ball in the bunker and
-				rake the area where the ball came to rest raked.</p>
+			<p class="mb-3">In that Riviera has a history of not manicuring the bunkers players may lift the ball in the bunker and
+				rake the area where the ball came to rest raked. Shots <strong>MUST</strong> be played from the bunker.</p>
 			<p class="mb-3">Number four players must declare their intention to play white or yellow tees prior to the
 				annual Snowball Tournament. The player will be required to play the ENTIRE season and playoffs from the
-				same set of tees. Only players playing from white tees will be eligible to move up to a higher position
-				for the next season.</p>
+				same set of tees.</p>
 			<p class="mb-3">Any players aged 75 and older, regardless of handicap, will be eligible to play the senior
 				tees.</p>
+			<p class="mb-3">In the event of a tie for the weekly game (low net or closest to the pin), the tie will be broken by the tied player's scoring on individual holes, using handicap, starting on hole 9 and working backward until a tie is broken.</p>
 
 			<h3 class="font-semibold mb-2 lg:text-xl mt-6" id="attendance">Attendance</h3>
 			<p class="mb-3">Any missed matches must be made up within the current quarter of the schedule. All matches
@@ -278,35 +274,15 @@
 			<div class="overflow-x-auto">
 				<table class="table table-bordered w-full mb-8">
 					<tr>
-						<td>Weekly Games ($12 x 20 Weeks)</td>
-						<td>$240</td>
-					</tr>
-					<tr>
-						<td>Team Regular Season Champions:</td>
-						<td>$100 (25/player)</td>
+						<td>Weekly Games ($25 x 20 Weeks)</td>
+						<td>$500</td>
 					</tr>
 					<tr>
 						<td>Team Playoff Champions:</td>
-						<td>$100 (25/player)</td>
+						<td>$120 ($30/player)</td>
 					</tr>
 					<tr>
 						<td>Individual Points Winner:</td>
-						<td>$25</td>
-					</tr>
-					<tr>
-						<td>Low Net Single Score Year:</td>
-						<td>$25</td>
-					</tr>
-					<tr>
-						<td>Low Gross Single Score Year:</td>
-						<td>$25</td>
-					</tr>
-					<tr>
-						<td>Low Net Average Score Year:</td>
-						<td>$25</td>
-					</tr>
-					<tr>
-						<td>Low Gross Average Score Year:</td>
 						<td>$25</td>
 					</tr>
 					<tr>
@@ -315,19 +291,15 @@
 					</tr>
 					<tr>
 						<td>Individual Tournament 1st Place:</td>
-						<td>$100</td>
+						<td>$150</td>
 					</tr>
 					<tr>
 						<td>Individual Tournament 2nd Place:</td>
-						<td>$80</td>
+						<td>$100</td>
 					</tr>
 					<tr>
 						<td>Individual Tournament 3rd Place:</td>
-						<td>$60</td>
-					</tr>
-					<tr>
-						<td>Individual Tournament Low Putts:</td>
-						<td>$20</td>
+						<td>$50</td>
 					</tr>
 					<tr>
 						<td>Individual Tournament Closest to Pin (#6 and #17):</td>
@@ -335,15 +307,15 @@
 					</tr>
 					<tr>
 						<td>Individual Tournament Dinner &amp; Tip:</td>
-						<td>$450</td>
+						<td>$400</td>
 					</tr>
 					<tr>
 						<td>League Web Fee:</td>
-						<td>$190</td>
+						<td>$165</td>
 					</tr>
 					<tr>
 						<td class="font-bold">Total:</td>
-						<td class="font-bold">$1,605</td>
+						<td class="font-bold">$1,660</td>
 					</tr>
 				</table>
 			</div>
@@ -358,16 +330,12 @@
 				<li class="mb-2"><a href="#teams" class="text-grey-dark hover:text-green">Teams</a></li>
 				<li class="mb-2"><a href="#substitutes" class="text-grey-dark hover:text-green">Substitutes</a></li>
 				<li class="mb-2"><a href="#handicaps" class="text-grey-dark hover:text-green">Handicaps</a></li>
-				<li class="mb-2"><a href="#schedule" class="text-grey-dark hover:text-green">Schedule and
-						Cancellations</a></li>
-				<li class="mb-2"><a href="#rules-play" class="text-grey-dark hover:text-green">Rules Governing Play</a>
-				</li>
+				<li class="mb-2"><a href="#schedule" class="text-grey-dark hover:text-green">Schedule and Cancellations</a></li>
+				<li class="mb-2"><a href="#rules-play" class="text-grey-dark hover:text-green">Rules Governing Play</a></li>
 				<li class="mb-2"><a href="#attendance" class="text-grey-dark hover:text-green">Attendance</a></li>
 				<li class="mb-2"><a href="#scoring" class="text-grey-dark hover:text-green">Scoring</a></li>
-				<li class="mb-2"><a href="#team-championship" class="text-grey-dark hover:text-green">Team
-						Championship</a></li>
-				<li class="mb-2"><a href="#individual-championship" class="text-grey-dark hover:text-green">Individual
-						Championship</a></li>
+				<li class="mb-2"><a href="#team-championship" class="text-grey-dark hover:text-green">Team Championship</a></li>
+				<li class="mb-2"><a href="#individual-championship" class="text-grey-dark hover:text-green">Individual Championship</a></li>
 				<li class="mb-2"><a href="#budget" class="text-grey-dark hover:text-green">Budget &amp; Payouts</a></li>
 			</ul>
 		</div>
