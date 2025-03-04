@@ -84,6 +84,7 @@ class extends Component
         <flux:table.columns>
             <flux:table.column>Name</flux:table.column>
             <flux:table.column>Email</flux:table.column>
+            <flux:table.column>Phone</flux:table.column>
             <flux:table.column>Active</flux:table.column>
             <flux:table.column>Admin</flux:table.column>
             <flux:table.column></flux:table.column>

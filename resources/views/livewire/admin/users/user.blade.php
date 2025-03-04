@@ -68,6 +68,8 @@ new class extends \Livewire\Volt\Component {
 
     <flux:table.cell>{{ $user->email }}</flux:table.cell>
 
+	<flux:table.cell>{{ $user->phone }}</flux:table.cell>
+
     <flux:table.cell>
 		@if($user->active)
 			<flux:badge color="emerald" size="sm" inset="top bottom">Active</flux:badge>

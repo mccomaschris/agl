@@ -9,7 +9,11 @@
 		@foreach($users as $user)
 			<div class="w-full lg:w-1/4 mb-6 leading-normal">
 				<p class="font-semibold">{{ $user->name }}</p>
-				<p>{{  $user->phone == '304-123-4567' ? '' : $user->phone }}</p>
+				@if($user->phone == '304-123-4567')
+					<p></p>
+				@else
+					<p><a href="tel:{{ $user->phone }}">{{ $user->phone }}</a></p>
+				@endif
 				<p><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></p>
 			</div>
 		@endforeach
