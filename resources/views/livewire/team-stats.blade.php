@@ -32,15 +32,22 @@
 		</div>
 	</div>
 
-	<div class="rounded bg-zinc-100 border-zinc-300 mb-4 border px-4 py-4 text-sm flex flex-col gap-2">
-		<div class="font-bold text-base">NOTE</div>
-		<div><strong>(S)</strong> denotes the round was played by a substitute.</div>
+	<div class="pointer-events-none sm:flex my-6 lg:my-10">
+		<div class="flex items-center justify-between gap-x-6 bg-green-500 px-6 py-2.5 sm:rounded-xl sm:py-3 sm:pr-3.5 sm:pl-4">
+			<p class="text-sm/6 text-white">
+				<strong class="font-semibold">Note</strong>
+				<svg viewBox="0 0 2 2" class="mx-2 inline size-0.5 fill-current" aria-hidden="true"><circle cx="1" cy="1" r="1" /></svg>
+				<strong>(S)</strong> denotes the round was played by a substitute.
+			</p>
+	 	</div>
 	</div>
 
     @foreach ($teams as $team)
-		<h3 class="mb-2 lg:text-xl {{ $loop->first ? 'mt-0' : 'mt-6' }}">Team {{ $team->name }}</h3>
-		<div class="overflow-x-auto">
-			<x-tables.stats-table :players="$team->players" />
+		<div class="mb-12 last:mb-0">
+			<h3 class="mb-2 lg:text-xl">Team {{ $team->name }}</h3>
+			<div class="overflow-x-auto">
+				<x-tables.stats-table :players="$team->players" />
+			</div>
 		</div>
 	@endforeach
 </div>

@@ -32,23 +32,31 @@
 		</div>
 	</div>
 
-	<h3 class="lg:text-xl mb-2">One Players</h3>
-	<div class="overflow-x-auto">
-		<x-tables.handicap-table :players="$ones" />
+	<div class="mb-12 last:mb-0">
+		<h3 class="lg:text-xl mb-2">One Players</h3>
+		<div class="overflow-x-auto">
+			<x-tables.handicap-table :players="$ones" />
+		</div>
 	</div>
 
-	<h3 class="lg:text-xl mb-2 mt-6">Two Players</h3>
-	<div class="overflow-x-auto">
-		<x-tables.handicap-table :players="$twos" />
+	<div class="mb-12 last:mb-0">
+		<h3 class="lg:text-xl mb-2 mt-6">Two Players</h3>
+		<div class="overflow-x-auto">
+			<x-tables.handicap-table :players="$twos" />
+		</div>
 	</div>
 
-	<h3 class="lg:text-xl mb-2 mt-6">Three Players</h3>
-	<div class="overflow-x-auto">
-		<x-tables.handicap-table :players="$threes" />
+	<div class="mb-12 last:mb-0">
+		<h3 class="lg:text-xl mb-2 mt-6">Three Players</h3>
+		<div class="overflow-x-auto">
+			<x-tables.handicap-table :players="$threes" />
+		</div>
 	</div>
 
-	<h3 class="lg:text-xl mb-2 mt-6">Four Players</h3>
-	<div class="overflow-x-auto">
-		<x-tables.handicap-table :players="$fours" />
+	<div class="mb-12">
+		<h3 class="lg:text-xl mb-2 mt-6">Four Players</h3>
+		<div class="overflow-x-auto">
+			<x-tables.handicap-table :players="$fours" />
+		</div>
 	</div>
 </div>

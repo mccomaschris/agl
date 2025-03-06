@@ -27,7 +27,7 @@
 					@if(count($prev_seasons) > 1)
 						<div x-data="{ open: false }" x-on:click.away="open = false" class="relative inline-block text-left">
 							<div>
-								<button x-on:click="open = true" type="button" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+								<button x-on:click="open = true" type="button" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-1 py-2 text-sm font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
 									More {{ $player->user->name }} Seasons
 									<svg class="-mr-1 h-5 w-5 text-zinc-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 										<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -65,78 +65,97 @@
 				<div class="flex-grow font-semibold lg:text-lg">Season Totals/Averages</div>
 			</div>
 			<div class="overflow-x-auto">
-				<table class="table table-bordered w-full mb-8">
-					<thead>
-						<tr class="course">
-							<th class="text-left">Hole</th>
-							<th class="text-center">1</th>
-							<th class="text-center">2</th>
-							<th class="text-center">3</th>
-							<th class="text-center">4</th>
-							<th class="text-center">5</th>
-							<th class="text-center">6</th>
-							<th class="text-center">7</th>
-							<th class="text-center">8</th>
-							<th class="text-center">9</th>
-							<th colspan="5"></th>
-							<th colspan="5"></th>
-						</tr>
-					</thead>
-					<tr class="score">
-						<td class="">Par</td>
-						<td class="text-center ">4</td>
-						<td class="text-center ">3</td>
-						<td class="text-center ">4</td>
-						<td class="text-center ">4</td>
-						<td class="text-center ">5</td>
-						<td class="text-center ">3</td>
-						<td class="text-center ">5</td>
-						<td class="text-center ">4</td>
-						<td class="text-center ">5</td>
-						<td class="text-center ">Gross</td>
-						<td class="text-center ">Par</td>
-						<td class="text-center ">Net</td>
-						<td class="text-center ">Par</td>
-						<td class="text-center ">Pts</td>
-						<td class="text-center eagle-hole font-semibold">Eg</td>
-						<td class="text-center birdie-hole font-semibold">Br</td>
-						<td class="text-center par-hole font-semibold">Par</td>
-						<td class="text-center bogey-hole font-semibold">Bg</td>
-						<td class="text-center double-hole font-semibold">DblBg+</td>
-					</tr>
-					<tr class="score totals !bg-white">
-						<td class="!bg-white">Totals</td>
-						<td class="text-center !bg-white">{{ number_format($season_avg->hole_1, 1, '.', ',') }}</td>
-						<td class="text-center !bg-white">{{ number_format($season_avg->hole_2, 1, '.', ',') }}</td>
-						<td class="text-center !bg-white">{{ number_format($season_avg->hole_3, 1, '.', ',') }}</td>
-						<td class="text-center !bg-white">{{ number_format($season_avg->hole_4, 1, '.', ',') }}</td>
-						<td class="text-center !bg-white">{{ number_format($season_avg->hole_5, 1, '.', ',') }}</td>
-						<td class="text-center !bg-white">{{ number_format($season_avg->hole_6, 1, '.', ',') }}</td>
-						<td class="text-center !bg-white">{{ number_format($season_avg->hole_7, 1, '.', ',') }}</td>
-						<td class="text-center !bg-white">{{ number_format($season_avg->hole_8, 1, '.', ',') }}</td>
-						<td class="text-center !bg-white">{{ number_format($season_avg->hole_9, 1, '.', ',') }}</td>
-						<td class="text-center !bg-white">{{ number_format($season_avg->gross, 1, '.', ',') }}</td>
-						<td class="text-center !bg-white">{{ number_format($season_avg->gross_par, 1, '.', ',') }}</td>
-						<td class="text-center !bg-white">{{ number_format($season_avg->net, 1, '.', ',') }}</td>
-						<td class="text-center !bg-white">{{ number_format($season_avg->net_par, 1, '.', ',') }}</td>
-						<td class="text-center !bg-white">{{ $season_avg->points ? $season_avg->points : '0' }}</td>
-						<td class="text-center !bg-white">{{ $season_avg->eagle ? $season_avg->eagle : '0' }}</td>
-						<td class="text-center !bg-white">{{ $season_avg->birdie ? $season_avg->birdie : '0' }}</td>
-						<td class="text-center !bg-white">{{ $season_avg->par ? $season_avg->par : '0' }}</td>
-						<td class="text-center !bg-white">{{ $season_avg->bogey ? $season_avg->bogey : '0' }}</td>
-						<td class="text-center !bg-white">{{ $season_avg->double_bogey ? $season_avg->double_bogey : '0' }}</td>
-					</tr>
-				</table>
+				<div class="flow-root">
+					<div class="">
+						<div class="inline-block min-w-full py-2 align-middle">
+							<div class="overflow-hidden ring-1 shadow-sm ring-black/5 rounded-lg mx-1">
+								<div class="overflow-x-auto">
+									<table class="min-w-full divide-y divide-gray-300">
+										<thead class="bg-gray-50">
+											<tr>
+												<th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6 border-r border-zinc-300">Hole</th>
+												<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">1</th>
+												<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">2</th>
+												<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">3</th>
+												<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">4</th>
+												<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">5</th>
+												<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">6</th>
+												<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">7</th>
+												<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">8</th>
+												<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">9</th>
+												<th scope="col" colspan="10" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900"></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="bg-green-600">
+												<td class="py-3.5 pr-3 pl-4 text-left text-sm text-green-100 sm:pl-6 border-r border-green-800">Par</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">4</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">3</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">4</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">4</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">5</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">3</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">5</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">4</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">5</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">Gross</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">Par</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">Net</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">Par</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">Points</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">Eg</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">Br</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">Par</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">Bg</td>
+												<td class="text-center px-1 py-3.5 text-sm text-green-100 border-r border-green-800">Dbg+</td>
+											</tr>
+											<tr class="even:bg-white odd:bg-gray-50/50 border-b border-zinc-300">
+												<td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 border-r border-zinc-300">Totals</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ number_format($season_avg->hole_1, 1, '.', ',') }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ number_format($season_avg->hole_2, 1, '.', ',') }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ number_format($season_avg->hole_3, 1, '.', ',') }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ number_format($season_avg->hole_4, 1, '.', ',') }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ number_format($season_avg->hole_5, 1, '.', ',') }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ number_format($season_avg->hole_6, 1, '.', ',') }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ number_format($season_avg->hole_7, 1, '.', ',') }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ number_format($season_avg->hole_8, 1, '.', ',') }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ number_format($season_avg->hole_9, 1, '.', ',') }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ number_format($season_avg->gross, 1, '.', ',') }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ number_format($season_avg->gross_par, 1, '.', ',') }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ number_format($season_avg->net, 1, '.', ',') }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ number_format($season_avg->net_par, 1, '.', ',') }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ $season_avg->points ? $season_avg->points : '0' }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ $season_avg->eagle ? $season_avg->eagle : '0' }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ $season_avg->birdie ? $season_avg->birdie : '0' }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ $season_avg->par ? $season_avg->par : '0' }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ $season_avg->bogey ? $season_avg->bogey : '0' }}</td>
+												<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300">{{ $season_avg->double_bogey ? $season_avg->double_bogey : '0' }}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 
-			<x-tables.player-scores-table :scores="$qtr_1" :average="$qtr_1_avg" :handicap="$player->hc_first" title="Weeks 1-5" />
+			<div class="mb-12 mt-12 last:mb-0">
+				<x-tables.player-scores-table :scores="$qtr_1" :average="$qtr_1_avg" :handicap="$player->hc_first" title="Weeks 1-5" />
+			</div>
 
-			<x-tables.player-scores-table :scores="$qtr_2" :average="$qtr_2_avg" :handicap="$player->hc_second" title="Weeks 6-10" />
+			<div class="mb-12 last:mb-0">
+				<x-tables.player-scores-table :scores="$qtr_2" :average="$qtr_2_avg" :handicap="$player->hc_second" title="Weeks 6-10" />
+			</div>
 
-			<x-tables.player-scores-table :scores="$qtr_3" :average="$qtr_3_avg" :handicap="$player->hc_third" title="Weeks 11-15" />
+			<div class="mb-12 last:mb-0">
+				<x-tables.player-scores-table :scores="$qtr_3" :average="$qtr_3_avg" :handicap="$player->hc_third" title="Weeks 11-15" />
+			</div>
 
 			@if ( $player->team->year->name != '2020' )
-				<x-tables.player-scores-table :scores="$qtr_4" :average="$qtr_4_avg" :handicap="$player->hc_fourth" title="Weeks 16-20" />
+				<div class="mb-12 last:mb-0">
+					<x-tables.player-scores-table :scores="$qtr_4" :average="$qtr_4_avg" :handicap="$player->hc_fourth" title="Weeks 16-20" />
+				</div>
 			@endif
 		</div>
 

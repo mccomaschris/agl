@@ -40,10 +40,10 @@
 
 </head>
 <body
-	class="h-screen font-sans mb-20 pb-10 bg-gray-50 @yield('body-css')"
+	class="h-screen font-sans mb-20 pb-10 bg-gray-100 @yield('body-css')"
 	x-data="{ mobileOpen: false }"
 >
-    <div id="app">
+    <div id="app" class="pb-12">
 		<nav class="bg-green-500 shadow-sm">
 			<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 				<div class="relative flex h-16 justify-between">
@@ -120,7 +120,7 @@
 			</div>
 		</nav>
 
-        <div class="w-full lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mt-6 mb-16 pb-8 lg:pb-0 px-6 lg:px-0">
+        <div class="w-full lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mt-6 mb-16 pb-8 lg:pb-0 px-6 lg:px-0 pb-16">
 			@if (isset($header))
                 {{ $header }}
             @endif

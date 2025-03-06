@@ -20,6 +20,7 @@
 		<flux:brand href="{{ route('admin.users.index') }}" name="AGL18" class="px-2 hidden dark:flex" />
 
 		<flux:navlist variant="outline">
+			<flux:navlist.item icon="home" href="{{ route('admin.index') }}">Dashboard</flux:navlist.item>
 			<flux:navlist.item icon="users" href="{{ route('admin.users.index') }}">Users</flux:navlist.item>
 			<flux:navlist.item icon="calendar" href="{{ route('admin.years.index') }}">Years</flux:navlist.item>
 			<flux:navlist.item icon="calendar-days" href="{{ route('admin.weeks.index') }}">Weeks</flux:navlist.item>

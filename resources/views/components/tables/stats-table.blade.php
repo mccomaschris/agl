@@ -1,68 +1,76 @@
-<table class="table table-bordered table-striped w-full md:mb-6 mb-8">
-    <thead>
-        <tr class="course">
-            <th>Week</th>
-            <th class="text-center">1</th>
-            <th class="text-center">2</th>
-            <th class="text-center">3</th>
-            <th class="text-center">4</th>
-            <th class="text-center">5</th>
-            <th class="text-center">6</th>
-            <th class="text-center">7</th>
-            <th class="text-center">8</th>
-            <th class="text-center">9</th>
-            <th class="text-center">10</th>
-            <th class="text-center">11</th>
-            <th class="text-center">12</th>
-            <th class="text-center">13</th>
-            <th class="text-center">14</th>
-            <th class="text-center">15</th>
-            <th class="text-center">16</th>
-            <th class="text-center">17</th>
-            <th class="text-center">18</th>
-            <th class="text-center">19</th>
-            <th class="text-ce nter">20</th>
-            <th class="text-center">Avg</th>
-            <th class="text-center">NetAvg</th>
-            {{-- <th class="text-center">Rank</th> --}}
-            <th class="text-center">Low</th>
-            <th class="text-center">High</th>
-            <th class="text-center">LowNet</th>
-            <th class="text-center">Eg</th>
-            <th class="text-center">Br</th>
-            <th class="text-center">Par</th>
-            <th class="text-center">Bg</th>
-            <th class="text-center">DblBg+</th>
-        </tr>
-    </thead>
-    @foreach ($players as $player)
-		<tr>
-			<td><a href="{{ route('player-score', ['player' => $player->id]) }}">{{ $player->user->name }}</a></td>
-				@foreach ($player->weekly_scores as $score)
-					@if ($score->absent)
-						<td class="text-center absent_row">A</td>
-					@elseif ($score->injury)
-						<td class="text-center absent_row">I</td>
-					@elseif ($score->week->back_nine)
-						<td class="text-center back-nine_row">-</td>
-					@else
-						<td class="text-center @if($score->gross < 37) low-score @endif">
-							<span class="text-zinc-700">{{ $score->gross ? number_format($score->gross, 0, '.', ',') : '' }}</span>
-							@if($score->substitute_id > 0) <span class="font-bold">(S)</span> @endif
-						</td>
-					@endif
-				@endforeach
-			<td class="text-center font-semibold @if ($player->gross_average < 37) low-score @endif">{{ number_format($player->gross_average, 1, '.', ',') }}</td>
-			<td class="text-center font-semibold @if ($player->net_average < 37) low-score @endif">{{ number_format($player->net_average, 1, '.', ',') }}</td>
-			{{-- <td class="text-center font-semibold">{{ $player->position_net_rank }}</td> --}}
-			<td class="text-center font-semibold @if ($player->low_gross < 37) low-score @endif">{{ $player->low_gross }}</td>
-			<td class="text-center font-semibold @if ($player->high_gross < 37) low-score @endif">{{ $player->high_gross }}</td>
-			<td class="text-center font-semibold @if ($player->low_net < 37) low-score @endif">{{ $player->low_net }}</td>
-			<td class="text-center eagle-hole font-semibold">{{ $player->season_avg->eagle }}</td>
-			<td class="text-center birdie-hole font-semibold">{{ $player->season_avg->birdie }}</td>
-			<td class="text-center par-hole font-semibold">{{ $player->season_avg->par }}</td>
-			<td class="text-center bogey-hole font-semibold">{{ $player->season_avg->bogey }}</td>
-			<td class="text-center double-hole font-semibold">{{ $player->season_avg->double_bogey }}</td>
-		</tr>
-    @endforeach
-</table>
+<div class="flow-root">
+	<div class="">
+		<div class="inline-block min-w-full py-2 align-middle">
+			<div class="overflow-hidden ring-1 shadow-sm ring-black/5 rounded-lg mx-1">
+				<div class="overflow-x-auto">
+					<table class="min-w-full divide-y divide-gray-300">
+						<thead class="bg-gray-50">
+							<tr>
+								<th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Week</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">1</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">2</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">3</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">4</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">5</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">6</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">7</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">8</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">9</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">10</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">11</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">12</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">13</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">14</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">15</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">16</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">17</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">18</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">19</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">20</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">Avg</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">NetAvg</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">Low</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">High</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">LowNet</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">Eg</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">Br</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">Par</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">Bg</th>
+								<th class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900">DblBg+</th>
+							</tr>
+						</thead>
+						@foreach ($players as $player)
+							<tr class="even:bg-white odd:bg-gray-50/50 border-b border-zinc-300">
+								<td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 border-r border-zinc-300">
+									<a class="font-semibold underline hover:no-underline" href="{{ route('player-score', ['player' => $player->id]) }}">{{ $player->user->name }}</a></td>
+									@foreach ($player->weekly_scores as $score)
+										<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-400 border-r border-zinc-300 {{ $score->absent ? 'absent_row' : '' }}">
+											@if ($score->absent)
+												<span class="text-white">A</span>
+											@elseif ($score->injury)
+												<span class="text-white">-</span>
+											@elseif ($score->week->back_nine)
+												<span class="">-</span>
+											@else
+												<span class="text-zinc-500">{{ $score->gross ? number_format($score->gross, 0, '.', ',') : '' }} @if($score->substitute_id > 0)<span class="font-bold">(S)</span>@endif</span>
+											@endif
+										</td>
+									@endforeach
+								<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-600 border-r border-zinc-300 font-semibold">{{ number_format($player->gross_average, 1, '.', ',') }}</td>
+								<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-600 border-r border-zinc-300 font-semibold">{{ number_format($player->net_average, 1, '.', ',') }}</td>
+								<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-600 border-r border-zinc-300 font-semibold">{{ $player->low_gross }}</td>
+								<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-600 border-r border-zinc-300 font-semibold">{{ $player->high_gross }}</td>
+								<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-600 border-r border-zinc-300 font-semibold">{{ $player->low_net }}</td>
+								<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-yellow-800 border-r border-zinc-300 bg-yellow-200 font-semibold">{{ $player->season_avg->eagle }}</td>
+								<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-green-800 border-r border-zinc-300 bg-green-200 font-semibold">{{ $player->season_avg->birdie }}</td>
+								<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-gray-600 border-r border-zinc-300 par-hole font-semibold">{{ $player->season_avg->par }}</td>
+								<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-red-800 border-r border-zinc-300 bg-red-200 font-semibold">{{ $player->season_avg->bogey }}</td>
+								<td class="text-center px-1 py-4 text-sm whitespace-nowrap text-sky-800 border-r border-zinc-300 bg-sky-200 font-semibold">{{ $player->season_avg->double_bogey }}</td>
+							</tr>
+						@endforeach
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

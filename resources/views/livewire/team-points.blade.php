@@ -32,78 +32,99 @@
 		</div>
 	</div>
 
-    <div class="rounded bg-zinc-100 border-zinc-300 mb-4 border px-4 py-4 text0s">NOTE: <strong>(S)</strong> denotes the round was played by a substitute.</div>
+
+	<div class="pointer-events-none sm:flex my-6 lg:my-10">
+		<div class="flex items-center justify-between gap-x-6 bg-green-500 px-6 py-2.5 sm:rounded-xl sm:py-3 sm:pr-3.5 sm:pl-4">
+			<p class="text-sm/6 text-white">
+				<strong class="font-semibold">Note</strong>
+				<svg viewBox="0 0 2 2" class="mx-2 inline size-0.5 fill-current" aria-hidden="true"><circle cx="1" cy="1" r="1" /></svg>
+				<strong>(S)</strong> denotes the round was played by a substitute.
+			</p>
+	 	</div>
+	</div>
+
 
 	@foreach ($teams as $team)
-		<h3 class="mb-2 lg:text-xl text-darkest-grey" id="{{ $team->id }}">Team {{ $team->name }}</h3>
+		<div class="mb-12 last:mb-0">
+			<h3 class="mb-2 lg:text-xl text-darkest-grey" id="{{ $team->id }}">Team {{ $team->name }}</h3>
 
-		<div class="overflow-x-auto">
-      		<table class="table table-bordered table-striped w-full mb-6 lg:mb-8">
-        		<thead>
-          			<tr class="course">
-            			<th>Week</th>
-						<th class="text-center">1</th>
-						<th class="text-center">2</th>
-						<th class="text-center">3</th>
-						<th class="text-center">4</th>
-						<th class="text-center">5</th>
-						<th class="text-center">6</th>
-						<th class="text-center">7</th>
-						<th class="text-center">8</th>
-						<th class="text-center">9</th>
-						<th class="text-center">10</th>
-						<th class="text-center">11</th>
-						<th class="text-center">12</th>
-						<th class="text-center">13</th>
-						<th class="text-center">14</th>
-						<th class="text-center">15</th>
-						<th class="text-center">16</th>
-						<th class="text-center">17</th>
-						<th class="text-center">18</th>
-						<th class="text-center">19</th>
-						<th class="text-center">20</th>
-						<th class="text-center">Total</th>
-						<th class="text-center">Win %</th>
-						<th class="text-center">Won</th>
-						<th class="text-center">Lost</th>
-						<th class="text-center">Tied</th>
-						<th class="text-center">Win Rank</th>
-					</tr>
-				</thead>
+			<div class="flow-root">
+				<div class="">
+					<div class="inline-block min-w-full py-2 align-middle">
+						<div class="overflow-hidden ring-1 shadow-sm ring-black/5 rounded-lg">
+							<div class="overflow-x-auto">
+								<table class="min-w-full divide-y divide-gray-300">
+									<thead class="bg-gray-50">
+										<tr>
+											<th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Player</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">1</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">2</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">3</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">4</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">5</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">6</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">7</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">8</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">9</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">10</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">11</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">12</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">13</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">14</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">15</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">16</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">17</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">18</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">19</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">20</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">Total</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">W%</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">Won</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">Lost</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">Tied</th>
+											<th scope="col" class="text-center px-3 py-3.5 text-sm font-semibold text-gray-900">W Rk</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach ($team->players as $player)
+											<tr class="even:bg-white odd:bg-gray-50/50 border-b border-zinc-300">
+												<td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 border-r border-zinc-300"><a class="font-semibold underline hover:no-underline" href="{{ route('player-score', ['player' => $player->id]) }}">{{ $player->user->name }}</a></td>
+												@foreach ($player->scores as $score)
+													<td class="text-center px-3 py-4 text-sm whitespace-nowrap text-gray-500 border-r border-zinc-300 {{ $score->absent ? 'absent_row' : '' }}">
+														@if ($score->absent)
+															<span class="text-white">A</span>
+														@elseif ($score->injury)
+															<span>I</span>
+														@else
+															<span class="text-zinc-500">{{ $score->points }} @if($score->substitute_id > 0)<span class="font-bold">(S)</span>@endif</span>
+														@endif
+													</td>
+												@endforeach
 
-				@foreach ($team->players as $player)
-          			<tr>
-						<td><a href="{{ route('player-score', ['player' => $player->id]) }}">{{ $player->user->name }}</a></td>
-
-						@foreach ($player->scores as $score)
-							@if ($score->absent)
-								<td class="text-center absent_row">A</td>
-							@elseif ($score->injury)
-								<td class="text-center absent_row">I</td>
-							@else
-								<td class="text-center"><span class="text-zinc-700">{{ $score->points }} @if($score->substitute_id > 0)<span class="font-bold">(S)</span>@endif</span></td>
-							@endif
-						@endforeach
-
-						<td class="text-center font-semibold">{{ $player->points }}</td>
-						<td class="text-center font-semibold">{{ number_format($player->win_pct, 3, '.', ',') }}</td>
-						<td class="text-center font-semibold">{{ $player->won }}</td>
-						<td class="text-center font-semibold">{{ $player->lost }}</td>
-						<td class="text-center font-semibold">{{ $player->tied }}</td>
-						<td class="text-center font-semibold">{{ $player->wins_rank }}</td>
-					</tr>
-				@endforeach
-
-				<tr class="totals">
-					<td colspan="21">TEAM TOTALS</td>
-					<td class="text-center">{{ $team->points }}</td>
-					<td class="text-center"></td>
-					<td class="text-center">{{ $team->won }}</td>
-					<td class="text-center">{{ $team->lost }}</td>
-					<td class="text-center">{{ $team->tied }}</td>
-					<td class="text-center"></td>
-				</tr>
-			</table>
+												<td class="text-center px-3 py-4 text-sm whitespace-nowrap text-gray-500 font-semibold border-r border-zinc-300">{{ $player->points }}</td>
+												<td class="text-center px-3 py-4 text-sm whitespace-nowrap text-gray-500 font-semibold border-r border-zinc-300">{{ number_format($player->win_pct, 3, '.', ',') }}</td>
+												<td class="text-center px-3 py-4 text-sm whitespace-nowrap text-gray-500 font-semibold border-r border-zinc-300">{{ $player->won }}</td>
+												<td class="text-center px-3 py-4 text-sm whitespace-nowrap text-gray-500 font-semibold border-r border-zinc-300">{{ $player->lost }}</td>
+												<td class="text-center px-3 py-4 text-sm whitespace-nowrap text-gray-500 font-semibold border-r border-zinc-300">{{ $player->tied }}</td>
+												<td class="text-center px-3 py-4 text-sm whitespace-nowrap text-gray-500 font-semibold">{{ $player->wins_rank }}</td>
+											</tr>
+										@endforeach
+										<tr class="totals">
+											<td class="text-right px-3 py-3.5 text-sm font-semibold text-gray-900 sm:pl-6 border-r border-zinc-300" colspan="21">TEAM TOTALS</td>
+											<td class="text-center px-3 py-4 text-sm whitespace-nowrap text-gray-500 font-semibold border-r border-zinc-300">{{ $team->points }}</td>
+											<td class="text-center px-3 py-4 text-sm whitespace-nowrap text-gray-500 font-semibold border-r border-zinc-300"></td>
+											<td class="text-center px-3 py-4 text-sm whitespace-nowrap text-gray-500 font-semibold border-r border-zinc-300">{{ $team->won }}</td>
+											<td class="text-center px-3 py-4 text-sm whitespace-nowrap text-gray-500 font-semibold border-r border-zinc-300">{{ $team->lost }}</td>
+											<td class="text-center px-3 py-4 text-sm whitespace-nowrap text-gray-500 font-semibold border-r border-zinc-300">{{ $team->tied }}</td>
+											<td class="text-center px-3 py-4 text-sm whitespace-nowrap text-gray-500 font-semibold"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	@endforeach
 </div>

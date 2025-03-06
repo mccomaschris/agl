@@ -17,7 +17,8 @@
         "livewire/volt": "^1.6",
         "predis/predis": "^1.1",
         "symfony/http-client": "^6.3",
-        "symfony/mailgun-mailer": "^6.3"
+        "symfony/mailgun-mailer": "^6.3",
+		"mccomaschris/marco-analytics": "dev-main"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -72,6 +73,10 @@
         "flux-pro": {
             "type": "composer",
             "url": "https://composer.fluxui.dev"
-        }
+        },
+		"marco-analytics": {
+			"type": "vcs",
+			"url": "https://github.com/mccomaschris/marco-analytics.git"
+		}
     }
 }

@@ -59,9 +59,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware([IsAdmin::class])->group(function () {
-	Route::get('/admin', function() {
-		return redirect()->route('admin.users.index');
-	});
+	Volt::route('/admin/', 'admin.index')->name('admin.index');
 
 	Route::post('/admin/clear-cache', function () {
 		Artisan::call('cache:clear');

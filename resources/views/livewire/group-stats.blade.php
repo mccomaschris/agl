@@ -32,28 +32,41 @@
 		</div>
 	</div>
 
-    <div class="rounded bg-zinc-100 border-zinc-300 mb-4 border px-4 py-4 text-sm flex flex-col gap-2">
-		<div class="font-bold text-base">NOTE</div>
-		<div><strong>(S)</strong> denotes the round was played by a substitute.</div>
+	<div class="pointer-events-none sm:flex my-6 lg:my-10">
+		<div class="flex items-center justify-between gap-x-6 bg-green-500 px-6 py-2.5 sm:rounded-xl sm:py-3 sm:pr-3.5 sm:pl-4">
+			<p class="text-sm/6 text-white">
+				<strong class="font-semibold">Note</strong>
+				<svg viewBox="0 0 2 2" class="mx-2 inline size-0.5 fill-current" aria-hidden="true"><circle cx="1" cy="1" r="1" /></svg>
+				<strong>(S)</strong> denotes the round was played by a substitute.
+			</p>
+	 	</div>
+  	</div>
+
+	<div class="mb-12 last:mb-0">
+		<h3 class="mb-2 lg:text-xl">One Players</h3>
+		<div class="overflow-x-auto">
+			<x-tables.stats-table :players="$ones" />
+		</div>
 	</div>
 
-	<h3 class="mb-2 lg:text-xl">One Players</h3>
-	<div class="overflow-x-auto">
-		<x-tables.stats-table :players="$ones" />
+	<div class="mb-12 last:mb-0">
+		<h3 class="mb-2 lg:text-xl">Two Players</h3>
+		<div class="overflow-x-auto">
+			<x-tables.stats-table :players="$twos" />
+		</div>
 	</div>
 
-	<h3 class="mb-2 lg:text-xl mt-6">Two Players</h3>
-	<div class="overflow-x-auto">
-		<x-tables.stats-table :players="$twos" />
+	<div class="mb-12 last:mb-0">
+		<h3 class="mb-2 lg:text-xl">Three Players</h3>
+		<div class="overflow-x-auto">
+			<x-tables.stats-table :players="$threes" />
+		</div>
 	</div>
 
-	<h3 class="mb-2 lg:text-xl mt-6">Three Players</h3>
-	<div class="overflow-x-auto">
-		<x-tables.stats-table :players="$threes" />
-	</div>
-
-	<h3 class="mb-2 lg:text-xl mt-6">Four Players</h3>
-	<div class="overflow-x-auto">
-		<x-tables.stats-table :players="$fours" />
+	<div class="mb-12">
+		<h3 class="mb-2 lg:text-xl">Four Players</h3>
+		<div class="overflow-x-auto">
+			<x-tables.stats-table :players="$fours" />
+		</div>
 	</div>
 </div>
