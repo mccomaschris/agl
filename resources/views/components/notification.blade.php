@@ -13,7 +13,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     <div class="ml-3 flex-1 pt-0.5">
-                        <p x-text="message" class="text-sm leading-5 font-medium text-grey-900"></p>
+                        <p x-text="message" class="text-sm leading-5 font-medium text-zinc-900"></p>
                     </div>
                 </div>
             </div>

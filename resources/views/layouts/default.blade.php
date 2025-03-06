@@ -65,7 +65,7 @@
 							x-transition:leave="transition ease-in duration-200"
 							x-transition:leave-start="opacity-100 translate-y-0"
 							x-transition:leave-end="opacity-0 translate-y-1"
-							class="absolute z-10 right-0 w-64 mt-2 flex flex-col divide-y divide-grey-900 bg-grey-800 rounded py-6"
+							class="absolute z-10 right-0 w-64 mt-2 flex flex-col divide-y divide-zinc-900 bg-zinc-800 rounded py-6"
 						>
 							<a href="{{ route('team-points', ['year' => $activeYear->name]) }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Team Points</a>
 							<a href="{{ route('handicaps', ['year' => $activeYear->name]) }}" class="block px-4 py-3 text-white font-semibold hover:text-white">Handicaps</a>
@@ -112,9 +112,9 @@
             </div>
         </div>
         <!-- END NAV START -->
-        <div class="hidden lg:block bg-grey-900 py-4 mb-12">
+        <div class="hidden lg:block bg-zinc-900 py-4 mb-12">
             <div class="w-full lg:max-w-screen-lg xl:max-w-screen-xl mx-auto lg:flex text-sm items-center px-6">
-                <span class="font-semibold mr-4 text-grey-100 uppercase">More Links:</span>
+                <span class="font-semibold mr-4 text-zinc-100 uppercase">More Links:</span>
                 <a href="{{ route('team-points', ['year' => $activeYear->name]) }}" class=" mt-0 text-green-bright hover:text-green-bright hover:underline mr-4">Team Points</a>
                 <a href="{{ route('handicaps', ['year' => $activeYear->name]) }}" class=" mt-0 text-green-bright hover:text-green-bright hover:underline mr-4">Handicaps</a>
                 <a href="{{ route('group-stats', ['year' => $activeYear->name]) }}" class=" mt-0 text-green-bright hover:text-green-bright hover:underline mr-4">Group Stats</a>

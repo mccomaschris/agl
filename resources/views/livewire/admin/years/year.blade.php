@@ -35,11 +35,6 @@ new class extends Component {
         $this->skip_date = $this->year->skip_date;
     }
 
-    public function edit()
-    {
-        $this->modal('year-edit')->show();
-    }
-
     public function update()
     {
         $this->validate();
@@ -51,22 +46,9 @@ new class extends Component {
 			'skip_date' => $this->skip_date,
         ]);
 
-		$others = Year::where('active', 1)->where('id', '!=', $this->year->id)->get();
-
-		if ($this->active) {
-			$others->each->update(['active' => 0]);
-		}
-
-        $this->modal('year-edit')->close();
+        $this->modal('year-edit' . $this->year->id)->close();
 
 		Flux::toast('Year updated successfully.');
-    }
-
-    public function remove()
-    {
-        $this->modal('year-remove')->show();
-
-		Flux::toast('Year removed successfully.');
     }
 }; ?>
 
@@ -96,12 +78,16 @@ new class extends Component {
             <flux:button icon="ellipsis-horizontal" size="sm" variant="ghost" inset="top bottom" />
 
             <flux:menu class="min-w-32">
-                <flux:menu.item wire:click="edit" icon="pencil-square">Edit</flux:menu.item>
-                <flux:menu.item wire:click="remove" icon="trash" variant="danger">Remove</flux:menu.item>
+				<flux:modal.trigger :name="'year-edit-'.$year->id">
+					<flux:menu.item icon="pencil-square">Edit</flux:menu.item>
+				</flux:modal.trigger>
+				<flux:modal.trigger :name="'year-remove-'.$year->id">
+					<flux:menu.item icon="trash" variant="danger">Remove</flux:menu.item>
+				</flux:modal.trigger>
             </flux:menu>
         </flux:dropdown>
 
-        <flux:modal name="year-remove" class="min-w-[22rem]">
+        <flux:modal :name="'year-remove-'.$year->id" class="min-w-[22rem]">
             <form class="space-y-6" wire:submit="$parent.remove({{ $year->id }})">
                 <div>
                     <flux:heading size="lg">Remove year?</flux:heading>
@@ -124,7 +110,7 @@ new class extends Component {
             </form>
         </flux:modal>
 
-        <flux:modal name="year-edit" class="md:w-96" variant="flyout">
+        <flux:modal :name="'year-edit-'.$year->id" class="md:w-96" variant="flyout">
             <form wire:submit="update" class="space-y-6">
                 <div>
                     <flux:heading size="lg">Edit year</flux:heading>

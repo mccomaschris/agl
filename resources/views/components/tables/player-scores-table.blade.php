@@ -1,7 +1,7 @@
 <div class="flex my-2 items-center uppercase">
     <div class="flex-grow font-semibold lg:text-lg">{{ $title }}</div>
     <div class="flex items-center">
-        <div class="text-grey-500">HC</div>
+        <div class="text-zinc-500">HC</div>
         <div class="ml-1 text-green-500 font-bold text-lg">{{ $handicap }}</div>
     </div>
 </div>

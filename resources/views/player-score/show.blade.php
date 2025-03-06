@@ -13,7 +13,7 @@
 	<div class="flex flex-wrap items-center lg:items-start w-full my-8">
 		<div class="flex flex-col flex-grow leading-snug">
 			<h1 class="text-2xl lg:text-4xl uppercase font-semibold">{{ $player->user->name }}</h1>
-			<span class="text-lg lg:text-2xl text-grey-600 uppercase font-semibold">{{ $player->team->year->name }} <span class="font-normal">Season</span></span></h1>
+			<span class="text-lg lg:text-2xl text-zinc-600 uppercase font-semibold">{{ $player->team->year->name }} <span class="font-normal">Season</span></span></h1>
 		</div>
 
 		<div class="mt-6 lg:mt-0 w-full lg:w-auto">
@@ -26,9 +26,9 @@
 					@if(count($prev_seasons) > 1)
 						<div x-data="{ open: false }" x-on:click.away="open = false" class="relative inline-block text-left">
 							<div>
-								<button x-on:click="open = true" type="button" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-grey-900 shadow-sm ring-1 ring-inset ring-grey-300 hover:bg-grey-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+								<button x-on:click="open = true" type="button" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
 									More {{ $player->user->name }} Seasons
-									<svg class="-mr-1 h-5 w-5 text-grey-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+									<svg class="-mr-1 h-5 w-5 text-zinc-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 										<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
 									</svg>
 								</button>
@@ -47,7 +47,7 @@
 							>
 								<div class="py-1" role="none">
 									@foreach ($prev_seasons as $season)
-										<a wire:navigate href="{{ route('player-score', ['player' => $season->player_id]) }}" class="{{ ($player->id == $season->player_id) ? 'bg-grey-100 text-grey-900' : 'text-grey-700' }} text-grey-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">{{ $player->user->name }} {{ $season->year_name }} Season</a>
+										<a wire:navigate href="{{ route('player-score', ['player' => $season->player_id]) }}" class="{{ ($player->id == $season->player_id) ? 'bg-zinc-100 text-zinc-900' : 'text-zinc-700' }} text-zinc-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">{{ $player->user->name }} {{ $season->year_name }} Season</a>
 									@endforeach
 								</div>
 							</div>
@@ -143,15 +143,15 @@
 		<div class="">
 			<div class="grid grid-cols-1 gap-4">
 				<div class="">
-					<div class="flex flex-col p-6 lg:pb-2 bg-grey-900 rounded lg:rounded-b-none">
+					<div class="flex flex-col p-6 lg:pb-2 bg-zinc-900 rounded lg:rounded-b-none">
 						<h3 class="font-semibold uppercase text-white text-base lg:text-lg">Points</h3>
 						<div class="flex flex-wrap items-center mt-2 lg:mt-4 ">
 							<div class="w-1/2 flex flex-col text-green-bright">
-								<span class="block uppercase font-semibold tracking-tight text-grey-300">Total</span>
+								<span class="block uppercase font-semibold tracking-tight text-zinc-300">Total</span>
 								<span class="block text-3xl lg:text-3xl font-bold">{{ $player->points }}</span>
 							</div>
 							<div class="w-1/2 flex flex-col text-green-bright">
-								<span class="block uppercase font-semibold tracking-tight text-grey-300">Rank</span>
+								<span class="block uppercase font-semibold tracking-tight text-zinc-300">Rank</span>
 								<span class="block text-3xl lg:text-3xl font-bold">{{ ordinal($player->points_rank) }}</span>
 							</div>
 						</div>
@@ -159,15 +159,15 @@
 				</div>
 
 				<div class="">
-					<div class="flex flex-col p-6 lg:pt-2 bg-grey-900 rounded lg:rounded-t-none">
+					<div class="flex flex-col p-6 lg:pt-2 bg-zinc-900 rounded lg:rounded-t-none">
 						<h3 class="font-semibold uppercase text-white text-base lg:text-lg">Wins</h3>
 						<div class="flex flex-wrap items-center mt-2 lg:mt-4 ">
 							<div class="w-1/2 flex flex-col text-green-bright">
-								<span class="block uppercase font-semibold tracking-tight text-grey-300">Total</span>
+								<span class="block uppercase font-semibold tracking-tight text-zinc-300">Total</span>
 								<span class="block text-3xl lg:text-3xl font-bold">{{ $player->won }}</span>
 							</div>
 							<div class="w-1/2 flex flex-col text-green-bright">
-								<span class="block uppercase font-semibold tracking-tight text-grey-300">Rank</span>
+								<span class="block uppercase font-semibold tracking-tight text-zinc-300">Rank</span>
 								<span class="block text-3xl lg:text-3xl font-bold">{{ ordinal($player->wins_rank) }}</span>
 							</div>
 						</div>
@@ -180,15 +180,15 @@
 					<div class="flex flex-col pt-6 px-6 bg-green-500 rounded rounded-b-none">
 						<h3 class="font-semibold uppercase text-white text-base lg:text-lg">Gross Scores</h3>
 						<div class="flex flex-wrap items-center mt-2 lg:mt-4 ">
-							<div class="w-1/2 flex flex-col text-grey-900">
+							<div class="w-1/2 flex flex-col text-zinc-900">
 								<span class="block uppercase font-semibold tracking-tight text-green-900">Average</span>
 								<span class="block text-2xl lg:text-3xl font-bold">{{ number_format($player->gross_average, 2) }}</span>
 							</div>
-							<div class="w-1/4 flex flex-col text-grey-900 lg:text-right">
+							<div class="w-1/4 flex flex-col text-zinc-900 lg:text-right">
 								<span class="block uppercase font-semibold tracking-tight text-green-900">Low</span>
 								<span class="block text-2xl lg:text-3xl font-bold">{{ $player->low_gross }}</span>
 							</div>
-							<div class="w-1/4 flex flex-col text-grey-900 lg:text-right">
+							<div class="w-1/4 flex flex-col text-zinc-900 lg:text-right">
 								<span class="block uppercase font-semibold tracking-tight text-green-900">High</span>
 								<span class="block text-2xl lg:text-3xl font-bold">{{ $player->high_gross }}</span>
 							</div>
@@ -197,15 +197,15 @@
 					<div class="flex flex-col pb-6 px-6 pt-6 bg-green-500 rounded rounded-t-none">
 						<h3 class="font-semibold uppercase text-white text-base lg:text-lg">Net Scores</h3>
 						<div class="flex flex-wrap items-center mt-2 lg:mt-4">
-							<div class="w-1/2 flex flex-col text-grey-900">
+							<div class="w-1/2 flex flex-col text-zinc-900">
 								<span class="block uppercase font-semibold tracking-tight text-green-900">Average</span>
 								<span class="block text-2xl lg:text-3xl font-bold">{{ number_format($player->net_average, 2) }}</span>
 							</div>
-							<div class="w-1/4 flex flex-col text-grey-900 lg:text-right">
+							<div class="w-1/4 flex flex-col text-zinc-900 lg:text-right">
 								<span class="block uppercase font-semibold tracking-tight text-green-900">Low</span>
 								<span class="block text-2xl lg:text-3xl font-bold">{{ $player->low_net }}</span>
 							</div>
-							<div class="w-1/4 flex flex-col text-grey-900 lg:text-right">
+							<div class="w-1/4 flex flex-col text-zinc-900 lg:text-right">
 								<span class="block uppercase font-semibold tracking-tight text-green-900">High</span>
 								<span class="block text-2xl lg:text-3xl font-bold">{{ $player->high_net }}</span>
 							</div>
@@ -240,15 +240,15 @@
 			@if($player->id != 64)
 				@if(count($highest))
 					<div class="w-full px-0 mb-6 mt-6">
-						<div class="flex flex-col p-6 bg-grey-900 rounded">
+						<div class="flex flex-col p-6 bg-zinc-900 rounded">
 							<h3 class="font-semibold uppercase text-white text-base lg:text-lg">Handicap</h3>
 							<div class="flex flex-col items-center mt-2 lg:mt-4 ">
 								<div class="w-full flex flex-col text-green-bright">
-									<span class="block uppercase font-semibold tracking-tight text-grey-300">Highest Counting</span>
+									<span class="block uppercase font-semibold tracking-tight text-zinc-300">Highest Counting</span>
 									<span class="block text-3xl lg:text-3xl font-bold">{{ $highest ? number_format($highest[0], 0) : '' }}</span>
 								</div>
 								<div class="w-full flex flex-col text-green-bright mt-4">
-									<span class="block uppercase font-semibold tracking-tight text-grey-300 mb-1">Counted Scores</span>
+									<span class="block uppercase font-semibold tracking-tight text-zinc-300 mb-1">Counted Scores</span>
 									<div class="flex">
 										@foreach ($counted as $score)
 										{{ number_format($score, 0, '.', ',') }}@if(!$loop->last), @endif

@@ -20,7 +20,7 @@
 
 @section('content')
 
-	<div class="rounded bg-grey-100 border-grey-300 mb-4 border px-4 py-4 text0s">NOTE: <strong>(S)</strong> denotes the round was played by a substitute.</div>
+	<div class="rounded bg-zinc-100 border-zinc-300 mb-4 border px-4 py-4 text0s">NOTE: <strong>(S)</strong> denotes the round was played by a substitute.</div>
 
 	<h3 class="mb-2 lg:text-xl">One Players</h3>
 	<div class="overflow-x-auto">

@@ -1,22 +1,22 @@
 label {
-    @apply block text-grey-700 text-sm font-semibold uppercase mb-2;
+    @apply block text-zinc-700 text-sm font-semibold uppercase mb-2;
 }
 
 select {
-    @apply block appearance-none w-full bg-grey-100 border border-grey-200 text-grey-700 py-3 px-4 pr-8 rounded leading-tight;
+    @apply block appearance-none w-full bg-zinc-100 border border-zinc-200 text-zinc-700 py-3 px-4 pr-8 rounded leading-tight;
 
     &:focus {
-        @apply outline-none bg-white border-grey-500;
+        @apply outline-none bg-white border-zinc-500;
     }
 }
 
 .form-input {
-    @apply shadow appearance-none border rounded w-full p-3 text-grey-700 leading-tight;
+    @apply shadow appearance-none border rounded w-full p-3 text-zinc-700 leading-tight;
     &:focus {
-        @apply outline-none text-grey-500 border-green-500;
+        @apply outline-none text-zinc-500 border-green-500;
     }
 }
 
 .score-form-input {
-    @apply bg-grey-100 border border-grey-300 text-grey-600 p-2 rounded text-center text-xs;
+    @apply bg-zinc-100 border border-zinc-300 text-zinc-600 p-2 rounded text-center text-xs;
 }

@@ -21,17 +21,17 @@
             </thead>
             <tbody>
                 @foreach($users as $user)
-                    <tr class="hover:bg-grey-100 focus-within:bg-grey-lightest group text-grey-500">
+                    <tr class="hover:bg-zinc-100 focus-within:bg-zinc-lightest group text-zinc-500">
                         <td class="border-t px-6 py-4  group-hover:text-green-500 ">
                             <div class="flex justify-between items-center">
-                                <a href="/admin/users/{{ $user->id }}/edit" class="{{ $user->active ? 'text-green-500' : 'text-grey-300' }}">{{ $user->name }}</a>
+                                <a href="/admin/users/{{ $user->id }}/edit" class="{{ $user->active ? 'text-green-500' : 'text-zinc-300' }}">{{ $user->name }}</a>
 
                                 @if($user->admin)
                                     <div class="pill pill-green">ADMIN</div>
                                 @endif
                             </div>
                         </td>
-                        <td class="border-t px-6 py-4 group-hover:text-green-500"><a href="mailto:{{ $user->email }}" class="{{ $user->active ? 'text-green-500' : 'text-grey-300' }}">{{ $user->email }}</a></td>
+                        <td class="border-t px-6 py-4 group-hover:text-green-500"><a href="mailto:{{ $user->email }}" class="{{ $user->active ? 'text-green-500' : 'text-zinc-300' }}">{{ $user->email }}</a></td>
                         <td class="border-t px-6 py-4 group-hover:text-green-500">
                             @if($user->email)
                                 <update-button class="btn btn-green cursor-pointer" endpoint="/admin/passwords/{{ $user->id }}">Update Password</update-button>
@@ -44,7 +44,7 @@
                                 <span class="pill pill-grey">Inactive</span>
                             @endif
                         </td><td class="border-t w-px">
-                            <a href="/admin/users/{{ $user->id }}/edit" class="text-grey-500 group-hover:text-green-500 px-4">
+                            <a href="/admin/users/{{ $user->id }}/edit" class="text-zinc-500 group-hover:text-green-500 px-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="block w-6 h-6 fill-current" viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>
                             </a>
                         </td>

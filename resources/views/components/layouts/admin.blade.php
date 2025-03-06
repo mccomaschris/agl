@@ -52,7 +52,7 @@
 				<flux:navlist.item @click="clearCache()" class="cursor-pointer">Clear Cache</flux:navlist.item>
 			</div>
 			<livewire:shiftweeks />
-			<flux:navlist.item href="#">Billing</flux:navlist.item>
+			<livewire:weekteamrecords />
 		</flux:navlist.group>
 	</flux:sidebar>
 
@@ -64,9 +64,6 @@
 		{{ $slot }}
 	</flux:main>
 
-	@persist('toast')
-        <flux:toast />
-    @endpersist
 	@fluxScripts
 </body>
 </html>

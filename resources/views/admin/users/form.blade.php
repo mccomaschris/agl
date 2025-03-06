@@ -52,7 +52,7 @@
     </div>
 </div>
 
-<div class="px-8 py-4 bg-grey-100 border-t border-grey-200 flex items-center">
+<div class="px-8 py-4 bg-zinc-100 border-t border-zinc-200 flex items-center">
     <button type="submit" class="btn btn-green">
         {{ $submitButtonText ?? 'Create User' }}
     </button>

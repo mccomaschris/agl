@@ -45,7 +45,7 @@
                     <td class="text-center absent_row">I</td>
                 @else
                     <td class="text-center @if($score->gross < 37) low-score @endif">
-                        <span class="text-grey-700">{{ $score->gross ? number_format($score->gross, 0, '.', ',') : '' }}</span>
+                        <span class="text-zinc-700">{{ $score->gross ? number_format($score->gross, 0, '.', ',') : '' }}</span>
                         @if($score->substitute_id > 0) <span class="font-bold">(S)</span> @endif
                     </td>
                 @endif

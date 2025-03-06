@@ -16,7 +16,7 @@
             <td class="text-center">{{ $player->won }}</td>
             <td class="text-center">{{ $player->lost }}</td>
             <td class="text-center">{{ $player->tied }}</td>
-            <td class="text-center"><strong class="text-grey-900">{{ $player->points }}</strong></td>
+            <td class="text-center"><strong class="text-zinc-900">{{ $player->points }}</strong></td>
         </tr>
     @endforeach
 </table>

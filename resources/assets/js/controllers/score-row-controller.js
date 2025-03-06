@@ -64,11 +64,11 @@ export default class extends Controller {
       this.saveTarget.firstElementChild.classList.remove('opacity-0')
       this.saveTarget.classList.remove("loader", "loader-green")
       if (response.status === 204) {
-        this.saveTarget.classList.remove("text-grey-400")
+        this.saveTarget.classList.remove("text-zinc-400")
         this.saveTarget.classList.add("text-red-500")
       } else {
         this.saveTarget.classList.remove("text-red-500")
-        this.saveTarget.classList.add("text-grey-400")
+        this.saveTarget.classList.add("text-zinc-400")
       }
     });
   }

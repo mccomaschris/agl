@@ -13,7 +13,7 @@
         <td width="40%"><a href="{{ route('player-score', ['player' => $teamB->onePlayer->id]) }}">{{ $teamB->onePlayer->user->name }}</a></td>
         <td width="10%" class="text-center">{{ $teamB->onePlayer->hc_current }}</td>
     </tr>
-    <tr class="border-b border-grey-900">
+    <tr class="border-b border-zinc-900">
             @if ($week->quarter == 2)
                 <td class=""><a href="{{ route('player-score', ['player' => $teamA->threePlayer->id]) }}">{{ $teamA->threePlayer->user->name }}</a></td>
                 <td class="text-center">{{ $teamA->threePlayer->hc_current }}</td>

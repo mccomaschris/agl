@@ -1,4 +1,4 @@
-<x-main>
+<x-layouts.app>
 	<x-slot name="header">
 		<h1 class="text-center lg:text-left text-2xl lg:text-3xl mt-6 mb-4 tracking-tight">Appliance Golf League Rules
 		</h1>
@@ -323,21 +323,21 @@
 		</div>
 		<div class="hidden lg:block lg:w-1/4 px-8 lg:sticky lg:top-0">
 			<ul class="list-reset">
-				<li class="mb-2"><a href="#membership" class="text-grey-dark hover:text-green">Membership &amp; Dues</a>
+				<li class="mb-2"><a href="#membership" class="text-zinc-dark hover:text-green">Membership &amp; Dues</a>
 				</li>
-				<li class="mb-2"><a href="#officers" class="text-grey-dark hover:text-green">Officers</a></li>
-				<li class="mb-2"><a href="#timeline" class="text-grey-dark hover:text-green">League Timeline</a></li>
-				<li class="mb-2"><a href="#teams" class="text-grey-dark hover:text-green">Teams</a></li>
-				<li class="mb-2"><a href="#substitutes" class="text-grey-dark hover:text-green">Substitutes</a></li>
-				<li class="mb-2"><a href="#handicaps" class="text-grey-dark hover:text-green">Handicaps</a></li>
-				<li class="mb-2"><a href="#schedule" class="text-grey-dark hover:text-green">Schedule and Cancellations</a></li>
-				<li class="mb-2"><a href="#rules-play" class="text-grey-dark hover:text-green">Rules Governing Play</a></li>
-				<li class="mb-2"><a href="#attendance" class="text-grey-dark hover:text-green">Attendance</a></li>
-				<li class="mb-2"><a href="#scoring" class="text-grey-dark hover:text-green">Scoring</a></li>
-				<li class="mb-2"><a href="#team-championship" class="text-grey-dark hover:text-green">Team Championship</a></li>
-				<li class="mb-2"><a href="#individual-championship" class="text-grey-dark hover:text-green">Individual Championship</a></li>
-				<li class="mb-2"><a href="#budget" class="text-grey-dark hover:text-green">Budget &amp; Payouts</a></li>
+				<li class="mb-2"><a href="#officers" class="text-zinc-dark hover:text-green">Officers</a></li>
+				<li class="mb-2"><a href="#timeline" class="text-zinc-dark hover:text-green">League Timeline</a></li>
+				<li class="mb-2"><a href="#teams" class="text-zinc-dark hover:text-green">Teams</a></li>
+				<li class="mb-2"><a href="#substitutes" class="text-zinc-dark hover:text-green">Substitutes</a></li>
+				<li class="mb-2"><a href="#handicaps" class="text-zinc-dark hover:text-green">Handicaps</a></li>
+				<li class="mb-2"><a href="#schedule" class="text-zinc-dark hover:text-green">Schedule and Cancellations</a></li>
+				<li class="mb-2"><a href="#rules-play" class="text-zinc-dark hover:text-green">Rules Governing Play</a></li>
+				<li class="mb-2"><a href="#attendance" class="text-zinc-dark hover:text-green">Attendance</a></li>
+				<li class="mb-2"><a href="#scoring" class="text-zinc-dark hover:text-green">Scoring</a></li>
+				<li class="mb-2"><a href="#team-championship" class="text-zinc-dark hover:text-green">Team Championship</a></li>
+				<li class="mb-2"><a href="#individual-championship" class="text-zinc-dark hover:text-green">Individual Championship</a></li>
+				<li class="mb-2"><a href="#budget" class="text-zinc-dark hover:text-green">Budget &amp; Payouts</a></li>
 			</ul>
 		</div>
 	</div>
-</x-main>
+</x-layouts.app>

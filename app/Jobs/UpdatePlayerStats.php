@@ -300,7 +300,6 @@ class UpdatePlayerStats implements ShouldQueue
         // Rank Team By Stats
         $teams = Team::where('year_id', $year->id)->get();
         foreach ($teams as $team) {
-
             // Reset Each Team
             $team->won = 0;
             $team->lost = 0;

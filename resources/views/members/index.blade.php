@@ -1,10 +1,8 @@
-@extends('layouts.default')
+<x-layouts.app>
+	<x-slot name="header">
+		<h1 class="text-center lg:text-left text-2xl lg:text-3xl tracking-tight mt-6 mb-6 ">Members</h1>
+	</x-slot>
 
-@section('page-heading')
-	<h1 class="text-center lg:text-left text-2xl lg:text-3xl mt-6 mb-4 tracking-tight">Members</h1>
-@endsection
-
-@section('content')
 	<div class="flex flex-wrap mt-6">
 		@foreach($users as $user)
 			<div class="w-full lg:w-1/4 mb-6 leading-normal">
@@ -18,4 +16,4 @@
 			</div>
 		@endforeach
 	</div>
-@endsection
+</x-layouts.app>

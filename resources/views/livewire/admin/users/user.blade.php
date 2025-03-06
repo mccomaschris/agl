@@ -37,11 +37,6 @@ new class extends \Livewire\Volt\Component {
         $this->active = $this->user->active;
     }
 
-    public function edit()
-    {
-        $this->modal('user-edit')->show();
-    }
-
     public function update()
     {
         $this->validate();
@@ -107,13 +102,17 @@ new class extends \Livewire\Volt\Component {
             <flux:button icon="ellipsis-horizontal" size="sm" variant="ghost" inset="top bottom" />
 
             <flux:menu class="min-w-32">
-				<flux:menu.item wire:click="edit" icon="pencil-square">Edit</flux:menu.item>
-                <flux:menu.item wire:click="resetPassword" icon="lock-closed">Reset Password</flux:menu.item>
-                <flux:menu.item wire:click="remove" icon="trash" variant="danger">Remove</flux:menu.item>
+				<flux:modal.trigger :name="'user-edit-'.$user->id">
+					<flux:menu.item icon="pencil-square">Edit</flux:menu.item>
+				</flux:modal.trigger>
+				<flux:menu.item wire:click="resetPassword" icon="lock-closed">Reset Password</flux:menu.item>
+				<flux:modal.trigger :name="'user-remove-'.$user->id">
+					<flux:menu.item icon="trash" variant="danger">Remove</flux:menu.item>
+				</flux:modal.trigger>
             </flux:menu>
         </flux:dropdown>
 
-        <flux:modal name="user-remove" class="min-w-[22rem]">
+        <flux:modal :name="'user-remove-'.$user->id" class="min-w-[22rem]">
             <form class="space-y-6" wire:submit="$parent.remove({{ $user->id }})">
                 <div>
                     <flux:heading size="lg">Remove user?</flux:heading>
@@ -136,7 +135,7 @@ new class extends \Livewire\Volt\Component {
             </form>
         </flux:modal>
 
-        <flux:modal name="user-edit" class="md:w-96" variant="flyout">
+        <flux:modal :name="'user-edit-'.$user->id" class="md:w-96" variant="flyout">
             <form wire:submit="update" class="space-y-6">
                 <div>
                     <flux:heading size="lg">Edit member</flux:heading>

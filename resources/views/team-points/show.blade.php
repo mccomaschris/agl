@@ -19,7 +19,7 @@
 
 @section('content')
 
-  <div class="rounded bg-grey-100 border-grey-300 mb-4 border px-4 py-4 text0s">NOTE: <strong>(S)</strong> denotes the round was played by a substitute.</div>
+  <div class="rounded bg-zinc-100 border-zinc-300 mb-4 border px-4 py-4 text0s">NOTE: <strong>(S)</strong> denotes the round was played by a substitute.</div>
 
   @foreach ($teams as $team)
 
@@ -68,7 +68,7 @@
                 @elseif ($score->injury)
                   <td class="text-center absent_row">I</td>
                 @else
-                  <td class="text-center"><span class="text-grey-700">{{ $score->points }} @if($score->substitute_id > 0)<span class="font-bold">(S)</span>@endif</span></td>
+                  <td class="text-center"><span class="text-zinc-700">{{ $score->points }} @if($score->substitute_id > 0)<span class="font-bold">(S)</span>@endif</span></td>
                 @endif
               @endforeach
 

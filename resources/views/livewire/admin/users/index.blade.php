@@ -133,6 +133,7 @@ class extends Component
 		<flux:input wire:model.live="search" placeholder="Search users..." />
 	</div>
 
+
     <flux:table :paginate="$users" class="mt-8">
         <flux:table.columns>
             <flux:table.column>Name</flux:table.column>

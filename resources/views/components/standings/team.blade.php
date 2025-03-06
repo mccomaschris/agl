@@ -15,13 +15,13 @@
     </thead>
     @foreach ($year->teamStandings as $team)
         @if (($loop->index + 1) % 4 == 0)
-            <tr class="border-b-2 border-grey-900">
+            <tr class="border-b-2 border-zinc-900">
         @else
             <tr>
         @endif
 			<td class="text-center">{{ $team->rank }}</td>
 			<td class="overflow-x-hidden">
-				<strong class="text-grey-900">Team {{ $team->name }}</strong>
+				<strong class="text-zinc-900">Team {{ $team->name }}</strong>
 				<br>
 				<span class="text-xs">
 					@foreach ($team->players as $player)
@@ -38,7 +38,7 @@
 			<td class="text-center hidden lg:table-cell">{{ $team->won }} </td>
 			<td class="text-center hidden lg:table-cell">{{ $team->lost }}</td>
 			<td class="text-center hidden lg:table-cell">{{ $team->tied }}</td>
-			<td class="text-center"><strong class="text-grey-900">{{ $team->points }}</strong></td>
+			<td class="text-center"><strong class="text-zinc-900">{{ $team->points }}</strong></td>
 			<td class="text-center hidden sm:table-cell">{{ $team->p1_points }}</td>
 			<td class="text-center hidden sm:table-cell">{{ $team->p2_points }}</td>
 			<td class="text-center hidden sm:table-cell">{{ $team->p3_points }}</td>

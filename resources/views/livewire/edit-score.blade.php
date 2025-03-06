@@ -17,7 +17,7 @@
     <td class="border-t px-2 py-4 text-sm text-center"><input pattern="[0-9]*" type="number" class="w-20 text-xs" wire:model="hole_9" :disabled="$wire.absent" wire:blur="countGross" /></td>
     <td class="border-t px-2 py-4 text-sm text-center">{{ number_format($gross, 0) }}</td>
     <td class="border-t px-2 py-4 text-sm text-center">
-        <select wire:model="points" wire:blur="save" class="block appearance-none w-14 bg-grey-100 border border-grey-300 text-grey-600 p-2 rounded" name="points">
+        <select wire:model="points" wire:blur="save" class="block appearance-none w-14 bg-zinc-100 border border-zinc-300 text-zinc-600 p-2 rounded" name="points">
             <option value=""></option>
             <option value="0">0</option>
             <option value="1">1</option>
@@ -26,7 +26,7 @@
     </td>
 
     <td class="border-t px-2 py-4 text-sm text-center">
-        <button wire:click="save" class="focus:outline-none text-grey-400 hover:text-green-500" tabindex="-1" wire:loading.remove>
+        <button wire:click="save" class="focus:outline-none text-zinc-400 hover:text-green-500" tabindex="-1" wire:loading.remove>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="fill-current h-6 w-6"><path d="M0 2C0 .9.9 0 2 0h14l4 4v14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5 0v6h10V2H5zm6 1h3v4h-3V3z"></path></svg>
         </button>
         <div class="text-center mx-auto w-full flex items-center justify-center" wire:loading>

@@ -28,7 +28,7 @@
     <script src='https://cdn.polyfill.io/v2/polyfill.min.js'></script>
 
 </head>
-<body class="bg-grey-lightest h-screen font-sans my-20 mx-20 @yield('body-css')">
+<body class="bg-zinc-lightest h-screen font-sans my-20 mx-20 @yield('body-css')">
     <table class="w-full" style="white-space: nowrap; border-collapse: collapse;">
         <tr class="p-2">
             <td class="bg-white text-black border border-black py-3 px-2  font-bold text-left uppercase">White Course</td>
@@ -59,18 +59,18 @@
             <td class="bg-red text-white border border-black py-3 px-2 text-center font-bold"></td>
         </tr>
         <tr>
-            <td class="bg-grey-light text-black border border-black py-3 px-2 font-bold text-left uppercase">PAR</td>
-            <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold">4</td>
-            <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold">3</td>
-            <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold">4</td>
-            <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold">4</td>
-            <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold">5</td>
-            <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold">3</td>
-            <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold">4</td>
-            <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold">4</td>
-            <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold">5</td>
-            <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold">37</td>
-            <td class="bg-grey-light text-black border border-black py-3 px-2 text-center font-bold"></td>
+            <td class="bg-zinc-light text-black border border-black py-3 px-2 font-bold text-left uppercase">PAR</td>
+            <td class="bg-zinc-light text-black border border-black py-3 px-2 text-center font-bold">4</td>
+            <td class="bg-zinc-light text-black border border-black py-3 px-2 text-center font-bold">3</td>
+            <td class="bg-zinc-light text-black border border-black py-3 px-2 text-center font-bold">4</td>
+            <td class="bg-zinc-light text-black border border-black py-3 px-2 text-center font-bold">4</td>
+            <td class="bg-zinc-light text-black border border-black py-3 px-2 text-center font-bold">5</td>
+            <td class="bg-zinc-light text-black border border-black py-3 px-2 text-center font-bold">3</td>
+            <td class="bg-zinc-light text-black border border-black py-3 px-2 text-center font-bold">4</td>
+            <td class="bg-zinc-light text-black border border-black py-3 px-2 text-center font-bold">4</td>
+            <td class="bg-zinc-light text-black border border-black py-3 px-2 text-center font-bold">5</td>
+            <td class="bg-zinc-light text-black border border-black py-3 px-2 text-center font-bold">37</td>
+            <td class="bg-zinc-light text-black border border-black py-3 px-2 text-center font-bold"></td>
         </tr>
         <tr>
             <td class="border border-black py-3 px-2">

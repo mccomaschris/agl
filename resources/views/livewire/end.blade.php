@@ -19,7 +19,7 @@
 						}
 						}">
 						<td class="overflow-x-hidden">
-							<strong class="text-grey-900">Team {{ $team->name }}</strong>
+							<strong class="text-zinc-900">Team {{ $team->name }}</strong>
 							<br>
 							<span class="text-xs">
 								@foreach ($team->players as $player)

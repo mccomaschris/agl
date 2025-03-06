@@ -29,7 +29,6 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 Route::get('/', SiteIndex::class)->name('home');
-// Route::get('/', PlayoffIndex::class)->name('home');
 
 Route::get('rules', [RuleController::class, 'show'])->name('rules');
 Route::get('agl-history', [HistoryController::class, 'show'])->name('history');
@@ -54,8 +53,8 @@ Route::get('scorecard/print/{quarter}', 'App\Http\Controllers\Admin\PrintScoreca
 
 Route::get('/admin/weeks', WeekIndex::class)->name('admin.week.index');
 
-Route::group(['auth:sanctum', 'verified'], function () {
-    Route::get('members', [MemberController::class, 'index'])->name('members');
+Route::middleware(['auth'])->group(function () {
+	Route::get('members', [MemberController::class, 'index'])->name('members');
     Route::resource('waitlist', WaitlistController::class);
 });
 

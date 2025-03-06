@@ -14,15 +14,6 @@
 	--color-green-900: #0c5300;
 	--color-green-bright: #08cd4f;
 	--color-black-grey: #121514;
-	--color-grey-100: #f8f9f8;
-	--color-grey-200: #ebeeec;
-	--color-grey-300: #dde1de;
-	--color-grey-400: #ced4d0;
-	--color-grey-500: #bdc5c0;
-	--color-grey-600: #95a39a;
-	--color-grey-700: #7c8d82;
-	--color-grey-800: #5b7163;
-	--color-grey-900: #121514;
 }
 
 @import "./_buttons.css" layer(components);

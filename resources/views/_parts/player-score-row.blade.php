@@ -170,7 +170,7 @@
 					@elseif ($score->points === 0)
 					text-red-500
 					@else
-					text-grey-500
+					text-zinc-500
 					@endif">
 					{{ $score->points }}</span>
 				</td>

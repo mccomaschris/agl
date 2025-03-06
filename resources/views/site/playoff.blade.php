@@ -1,7 +1,7 @@
 <x-layouts.app>
 
 	@if ($last_week)
-	<div class="flex items-center text-sm bg-grey-900 text-white px-4 lg:pr-8 py-4 lg:py-6 rounded shadow mb-6"
+	<div class="flex items-center text-sm bg-zinc-900 text-white px-4 lg:pr-8 py-4 lg:py-6 rounded shadow mb-6"
 		role="alert">
 		<svg class="h-12 w-12 text-green-bright fill-current mr-4 lg:mr-8" xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 20 20">
@@ -39,7 +39,7 @@
 					<td width="40%">Patton</td>
 					<td width="10%" class="text-center">2</td>
 				</tr>
-				<tr class="border-b border-grey-900">
+				<tr class="border-b border-zinc-900">
 					<td width="40%">T Mills</td>
 					<td width="10%" class="text-center">3</td>
 					<td width="40%">Cartwright</td>
@@ -73,7 +73,7 @@
 					<td width="40%">Bunn</td>
 					<td width="10%" class="text-center">0</td>
 				</tr>
-				<tr class="border-b border-grey-900">
+				<tr class="border-b border-zinc-900">
 					<td width="40%">Yablonsky</td>
 					<td width="10%" class="text-center">3</td>
 					<td width="40%">Edwards</td>

@@ -1,12 +1,12 @@
 
 .admin-form-label {
-    @apply .mb-2 .block .text-grey-darkest .select-none;
+    @apply .mb-2 .block .text-zinc-darkest .select-none;
 }
 
 .admin-form-input,
 .admin-form-textarea,
 .admin-form-select {
-    @apply .p-2 .leading-normal .block .w-full .border .text-grey-darkest .bg-white .font-sans .rounded .text-left .appearance-none .relative;
+    @apply .p-2 .leading-normal .block .w-full .border .text-zinc-darkest .bg-white .font-sans .rounded .text-left .appearance-none .relative;
 
     &:focus,
     &.focus {
@@ -15,7 +15,7 @@
     }
 
     &::placeholder {
-        @apply .text-grey-400 .opacity-100;
+        @apply .text-zinc-400 .opacity-100;
     }
 }
 
@@ -47,5 +47,5 @@
 }
 
 .score-form-input {
-    @apply bg-grey-100 border border-grey-300 text-grey-600 p-2 rounded text-center text-xs;
+    @apply bg-zinc-100 border border-zinc-300 text-zinc-600 p-2 rounded text-center text-xs;
 }

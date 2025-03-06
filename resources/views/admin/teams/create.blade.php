@@ -10,7 +10,7 @@
 
 @section('content')
 
-    <div class="w-full lg:w-1/2 bg-grey-lightest mx-auto py-6 px-4 text-sm text-grey-dark">
+    <div class="w-full lg:w-1/2 bg-zinc-lightest mx-auto py-6 px-4 text-sm text-zinc-dark">
       <p>Any updates made here, other than team name, year, and champions will be automatically replaced by the system when new scores are added.</p>
     </div>
 

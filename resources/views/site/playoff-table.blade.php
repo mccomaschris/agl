@@ -15,7 +15,7 @@
                 <td width="40%">Rick Reed</td>
                 <td width="10%" class="text-center">0</td>
             </tr>
-            <tr class="border-b border-grey-900">
+            <tr class="border-b border-zinc-900">
                 <td class="">Craig Edwards</td>
                 <td class="text-center">6</td>
                 <td class="">Danny Freeman</td>
