@@ -2415,12 +2415,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mccomaschris/marco-analytics.git",
-                "reference": "4ce77f59cd17258a64cde40fccdd1a29812a3506"
+                "reference": "9452ed9715a3374182d52d3b4e9b4b477869b20f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mccomaschris/marco-analytics/zipball/4ce77f59cd17258a64cde40fccdd1a29812a3506",
-                "reference": "4ce77f59cd17258a64cde40fccdd1a29812a3506",
+                "url": "https://api.github.com/repos/mccomaschris/marco-analytics/zipball/9452ed9715a3374182d52d3b4e9b4b477869b20f",
+                "reference": "9452ed9715a3374182d52d3b4e9b4b477869b20f",
                 "shasum": ""
             },
             "require": {
@@ -2446,7 +2446,7 @@
                 "source": "https://github.com/mccomaschris/marco-analytics/tree/main",
                 "issues": "https://github.com/mccomaschris/marco-analytics/issues"
             },
-            "time": "2025-03-06T16:23:41+00:00"
+            "time": "2025-03-06T16:43:20+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
