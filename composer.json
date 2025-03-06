@@ -76,7 +76,7 @@
         },
 		"marco-analytics": {
 			"type": "vcs",
-			"url": "https://github.com/mccomaschris/marco-analytics.git"
+			"url": "git@github.com:mccomaschris/marco-analytics.git"
 		}
     }
 }
