@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "713458529e24eb8c70aefbdbfd7217fd",
+    "content-hash": "5e6c10315dae686612ff37e90e5880d5",
     "packages": [
         {
             "name": "brick/math",
@@ -2414,13 +2414,13 @@
             "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "git@github.com:mccomaschris/marco-analytics.git",
-                "reference": "68a9d18804bbda889972b1dcbf284a7fe7e5d9ab"
+                "url": "https://github.com/mccomaschris/marco-analytics.git",
+                "reference": "4ce77f59cd17258a64cde40fccdd1a29812a3506"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mccomaschris/marco-analytics/zipball/68a9d18804bbda889972b1dcbf284a7fe7e5d9ab",
-                "reference": "68a9d18804bbda889972b1dcbf284a7fe7e5d9ab",
+                "url": "https://api.github.com/repos/mccomaschris/marco-analytics/zipball/4ce77f59cd17258a64cde40fccdd1a29812a3506",
+                "reference": "4ce77f59cd17258a64cde40fccdd1a29812a3506",
                 "shasum": ""
             },
             "require": {
@@ -2446,7 +2446,7 @@
                 "source": "https://github.com/mccomaschris/marco-analytics/tree/main",
                 "issues": "https://github.com/mccomaschris/marco-analytics/issues"
             },
-            "time": "2025-03-06T01:50:58+00:00"
+            "time": "2025-03-06T16:23:41+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
