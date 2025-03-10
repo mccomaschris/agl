@@ -84,7 +84,7 @@ Route::get('/google/redirect', function () {
 });
 
 Route::get('/google/callback', function () {
-    $googleUser = Socialite::driver('github')->user();
+    $googleUser = Socialite::driver('google')->user();
 
 	$user = User::where('email', $googleUser->email)->first();
 
