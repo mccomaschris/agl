@@ -34,7 +34,7 @@ class extends Component {
 	<div class="flex justify-between items-center mb-6">
 		<div class="flex items-center gap-2">
 			<div class="flex items-center gap-2">
-				<flux:select wire:model="timeframe" size="sm" class="">
+				<flux:select wire:model.live="timeframe" size="sm" class="">
 					<option value="1">Last 1 days</option>
 					<option value="7">Last 7 days</option>
 					<option value="14">Last 14 days</option>
