@@ -22,7 +22,7 @@ class GoogleSocialiteController extends Controller
     {
         try {
             // get user data from Google
-            $googleUser = Socialite::driver('google')->user();
+            $googleUser = Socialite::driver('google')->stateless()->user();
 
             // find user in the database where the social id is the same with the id provided by Google
 			$finduser = User::where('email', $googleUser->email)->first();
