@@ -11,14 +11,15 @@
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^12.0",
+        "laravel/socialite": "^5.18",
         "laravel/tinker": "^2.8",
         "livewire/flux-pro": "^2.0",
         "livewire/livewire": "^3.0",
         "livewire/volt": "^1.6",
+        "mccomaschris/marco-analytics": "dev-main",
         "predis/predis": "^1.1",
         "symfony/http-client": "^6.3",
-        "symfony/mailgun-mailer": "^6.3",
-		"mccomaschris/marco-analytics": "dev-main"
+        "symfony/mailgun-mailer": "^6.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

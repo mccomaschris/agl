@@ -76,4 +76,7 @@ Route::middleware([IsAdmin::class])->group(function () {
 	Volt::route('/admin/weeks', 'admin.weeks.index')->name('admin.weeks.index');
 });
 
+Route::get('/google/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('/google/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
+
 require __DIR__.'/auth.php';
