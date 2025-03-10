@@ -27,6 +27,7 @@ use App\Livewire\WeekIndex;
 use App\Livewire\WeekScores;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Http\Controllers\Auth\GoogleSocialiteController;
 
 Route::get('/', SiteIndex::class)->name('home');
 
@@ -76,7 +77,7 @@ Route::middleware([IsAdmin::class])->group(function () {
 	Volt::route('/admin/weeks', 'admin.weeks.index')->name('admin.weeks.index');
 });
 
-Route::get('/google/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
-Route::get('/google/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
+Route::get('auth/google', [GoogleSocialiteController::class, 'redirectToGoogle']);  // redirect to google login
+Route::get('callback/google', [GoogleSocialiteController::class, 'handleCallback']);    // callback route after google account chosen
 
 require __DIR__.'/auth.php';
