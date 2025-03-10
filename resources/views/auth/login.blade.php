@@ -151,7 +151,7 @@
         </div>
     </form>
 	<div class="mt-6">
-		<a href="{{ url('auth/google') }}" class="gsi-material-button flex w-auto">
+		<a href="{{ url('google/redirect') }}" class="gsi-material-button flex w-auto">
 			<div class="gsi-material-button-state"></div>
 			<div class="gsi-material-button-content-wrapper">
 			  <div class="gsi-material-button-icon">

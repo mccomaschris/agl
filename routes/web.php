@@ -27,7 +27,9 @@ use App\Livewire\WeekIndex;
 use App\Livewire\WeekScores;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
-use App\Http\Controllers\Auth\GoogleSocialiteController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', SiteIndex::class)->name('home');
 
@@ -77,7 +79,22 @@ Route::middleware([IsAdmin::class])->group(function () {
 	Volt::route('/admin/weeks', 'admin.weeks.index')->name('admin.weeks.index');
 });
 
-Route::get('auth/google', [GoogleSocialiteController::class, 'redirectToGoogle']);  // redirect to google login
-Route::get('callback/google', [GoogleSocialiteController::class, 'handleCallback']);    // callback route after google account chosen
+Route::get('/google/redirect', function () {
+    return Socialite::driver('google')->redirect();
+});
+
+Route::get('/google/callback', function () {
+    $googleUser = Socialite::driver('github')->user();
+
+	$user = User::where('email', $googleUser->email)->first();
+
+	if ($user) {
+		Auth::login($user);
+
+		return redirect('/');
+	} else {
+		return response('Unauthorized.', 401);
+	}
+});
 
 require __DIR__.'/auth.php';
