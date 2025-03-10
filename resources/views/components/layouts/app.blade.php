@@ -120,7 +120,7 @@
 			</div>
 		</nav>
 
-        <div class="w-full lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mt-6 mb-16 pb-8 lg:pb-0 px-6 lg:px-0 pb-16">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 			@if (isset($header))
                 {{ $header }}
             @endif
