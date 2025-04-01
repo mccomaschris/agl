@@ -11,19 +11,19 @@
 			<div class="overflow-hidden ring-1 shadow-sm ring-black/5 rounded-lg mx-1">
 				<div class="overflow-x-auto">
 					<table class="min-w-full divide-y divide-gray-300">
-						<thead class="bg-gray-50">
+						<thead class="bg-zinc-50">
 							<tr>
-								<th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6 border-r border-zinc-300">Hole</th>
-								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">1</th>
-								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">2</th>
-								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">3</th>
-								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">4</th>
-								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">5</th>
-								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">6</th>
-								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">7</th>
-								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">8</th>
-								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900 border-r border-zinc-300">9</th>
-								<th scope="col" colspan="10" class="text-center px-1 py-3.5 text-sm font-semibold text-gray-900"></th>
+								<th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-zinc-900 sm:pl-6 border-r border-zinc-300">Hole</th>
+								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-zinc-900 border-r border-zinc-300">1</th>
+								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-zinc-900 border-r border-zinc-300">2</th>
+								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-zinc-900 border-r border-zinc-300">3</th>
+								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-zinc-900 border-r border-zinc-300">4</th>
+								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-zinc-900 border-r border-zinc-300">5</th>
+								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-zinc-900 border-r border-zinc-300">6</th>
+								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-zinc-900 border-r border-zinc-300">7</th>
+								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-zinc-900 border-r border-zinc-300">8</th>
+								<th scope="col" class="text-center px-1 py-3.5 text-sm font-semibold text-zinc-900 border-r border-zinc-300">9</th>
+								<th scope="col" colspan="10" class="text-center px-1 py-3.5 text-sm font-semibold text-zinc-900"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -50,8 +50,8 @@
 								<td class="text-center font-semibold px-1 py-3.5 text-sm border-r border-green-800 text-green-100">Dbg+</td>
 							</tr>
 							@foreach ($scores as $score)
-								<tr class="even:bg-white odd:bg-gray-50/50 border-b border-zinc-300">
-									<td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 border-r border-zinc-300">
+								<tr class="even:bg-white odd:bg-zinc-50/50 border-b border-zinc-300">
+									<td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-zinc-900 sm:pl-6 border-r border-zinc-300">
 										<a class="font-semibold underline hover:no-underline" href="{{ route('week-score', ['week' => $score->foreign_key]) }}">
 											Wk {{ $score->week->week_order }}
 										</a>
@@ -70,26 +70,26 @@
 								</tr>
 							@endforeach
 							<tr class="score totals">
-								<td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6 border-r border-zinc-300">Totals</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ number_format($average->hole_1, 1, '.', ',') }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ number_format($average->hole_2, 1, '.', ',') }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ number_format($average->hole_3, 1, '.', ',') }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ number_format($average->hole_4, 1, '.', ',') }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ number_format($average->hole_5, 1, '.', ',') }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ number_format($average->hole_6, 1, '.', ',') }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ number_format($average->hole_7, 1, '.', ',') }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ number_format($average->hole_8, 1, '.', ',') }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ number_format($average->hole_9, 1, '.', ',') }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ number_format($average->gross, 1, '.', ',') }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ number_format($average->gross_par, 1, '.', ',') }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ number_format($average->net, 1, '.', ',') }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ number_format($average->net_par, 1, '.', ',') }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ $average->points ? $average->points : '0' }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-yellow-800 border-r border-zinc-300 bg-gray-100">{{ $average->eagle ? $average->eagle : '0' }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-green-800 border-r border-zinc-300 bg-gray-100">{{ $average->birdie ? $average->birdie : '0' }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-gray-900 border-r border-zinc-300 bg-gray-100">{{ $average->par ? $average->par : '0' }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-red-800 border-r border-zinc-300 bg-gray-100">{{ $average->bogey ? $average->bogey : '0' }}</td>
-								<td class="text-center font-semibold px-1 py-3.5 text-sm text-blue-800 border-r border-zinc-300 bg-gray-100">{{ $average->double_bogey ? $average->double_bogey : '0' }}</td>
+								<td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-zinc-900 sm:pl-6 border-r border-zinc-300">Totals</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ number_format($average->hole_1, 1, '.', ',') }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ number_format($average->hole_2, 1, '.', ',') }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ number_format($average->hole_3, 1, '.', ',') }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ number_format($average->hole_4, 1, '.', ',') }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ number_format($average->hole_5, 1, '.', ',') }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ number_format($average->hole_6, 1, '.', ',') }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ number_format($average->hole_7, 1, '.', ',') }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ number_format($average->hole_8, 1, '.', ',') }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ number_format($average->hole_9, 1, '.', ',') }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ number_format($average->gross, 1, '.', ',') }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ number_format($average->gross_par, 1, '.', ',') }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ number_format($average->net, 1, '.', ',') }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ number_format($average->net_par, 1, '.', ',') }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ $average->points ? $average->points : '0' }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-yellow-800 border-r border-zinc-300 bg-zinc-100">{{ $average->eagle ? $average->eagle : '0' }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-green-800 border-r border-zinc-300 bg-zinc-100">{{ $average->birdie ? $average->birdie : '0' }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-zinc-900 border-r border-zinc-300 bg-zinc-100">{{ $average->par ? $average->par : '0' }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-red-800 border-r border-zinc-300 bg-zinc-100">{{ $average->bogey ? $average->bogey : '0' }}</td>
+								<td class="text-center font-semibold px-1 py-3.5 text-sm text-blue-800 border-r border-zinc-300 bg-zinc-100">{{ $average->double_bogey ? $average->double_bogey : '0' }}</td>
 							</tr>
 						</tbody>
 					</table>

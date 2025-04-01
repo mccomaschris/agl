@@ -37,6 +37,18 @@ new class extends \Livewire\Volt\Component {
         $this->active = $this->user->active;
     }
 
+	protected function rules()
+    {
+        return [
+            'email' => [
+                'required',
+				'email',
+                Rule::unique('users')->ignore($this->user),
+            ],
+            'content' => 'required|min:5',
+        ];
+    }
+
     public function update()
     {
         $this->validate();

@@ -4,11 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Year extends Model
 {
+	use HasFactory;
 
     protected $fillable = ['name', 'active', 'start_date', 'skip_date'];
+
+	protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($year) {
+            if ($year->active) {
+                // Set all other years to inactive
+                Year::where('id', '!=', $year->id)->update(['active' => 0]);
+            }
+        });
+    }
 
     public function teams(): HasMany
     {

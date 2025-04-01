@@ -57,3 +57,14 @@ if (!function_exists('twcss')) {
         return $path; // Return original path if file doesn't exist
     }
 }
+
+function formatWinnersList($scores) {
+    $winners = $scores->map(fn($score) => $score->player->user->name)->unique();
+
+    if ($winners->count() === 1) {
+        return $winners->first();
+    }
+
+    $lastWinner = $winners->pop();
+    return $winners->implode(', ') . ' and ' . $lastWinner;
+}

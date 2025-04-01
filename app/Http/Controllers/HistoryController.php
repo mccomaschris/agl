@@ -14,7 +14,7 @@ class HistoryController extends Controller
     /**
      * @return View
      */
-    public function show(): View
+    public function index(): View
     {
         $year = Year::where('active', 1)->first();
         $years = Year::orderBy('name', 'desc')->get();

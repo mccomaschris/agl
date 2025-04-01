@@ -7,143 +7,105 @@
 
 		@admin
 			<div class="mr-3">
-				<a href="{{ route('week-score-edit', $week) }}">Edit Week</a>
+				<flux:button href="{{ route('week-score-edit', $week) }}" variant="ghost">Edit Week</flux:button>
 			</div>
 		@endadmin
 
-		<div x-data="{ open: false }" x-on:click.away="open = false" class="relative inline-block text-left">
-			<div>
-				<button x-on:click="open = true" type="button" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
-					More {{ $week->year->name }} Weeks
-					<svg class="-mr-1 h-5 w-5 text-zinc-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-						<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-					</svg>
-				</button>
-			</div>
+		<flux:dropdown position="bottom" align="end">
+			<flux:button icon-trailing="chevron-down">More {{ $week->year->name }} Weeks</flux:button>
 
-			<div
-				x-cloak
-				x-show="open"
-				x-transition:enter="transition ease-out duration-100"
-				x-transition:enter-start="transform opacity-0 scale-95"
-				x-transition:enter-end="transform opacity-100 scale-100"
-				x-transition:leave="transition ease-in duration-75"
-				x-transition:leave-start="transform opacity-100 scale-100"
-				x-transition:leave-end="transform opacity-0 scale-95"
-				class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1"
-			>
-				<div class="py-1" role="none">
-					@foreach ($weeks as $item)
-						<a wire:navigate href="/scores/week/{{ $item->id }}" class="{{ ($week->id == $item->id) ? 'bg-zinc-100 text-zinc-900' : 'text-zinc-700' }} text-zinc-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Week {{ $item->week_order }} - {{ date('F d, Y', strtotime($item->week_date)) }} Results</a>
-					@endforeach
-				</div>
-			</div>
-		</div>
+			<flux:navmenu>
+				@foreach ($weeks as $item)
+					<flux:navmenu.item href="{{ route('week-score', ['week' => $item->id]) }}" wire:navigate class="{{ $week->id === $item->id ? 'text-green-700! bg-zinc-50!' : '' }}">Week {{ $item->week_order }} - {{ date('F d, Y', strtotime($item->week_date)) }} Results</flux:navmenu.item>
+				@endforeach
+			</flux:navmenu>
+		</flux:dropdown>
     </div>
 
-    @if(count($weekly_winners))
-		<div class="flex mb-4 items-center text-sm lg:text-base">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="text-green-500 fill-current h-4 w-4"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm1-5h1a3 3 0 0 0 0-6H7.99a1 1 0 0 1 0-2H14V5h-3V3H9v2H8a3 3 0 1 0 0 6h4a1 1 0 1 1 0 2H6v2h3v2h2v-2z"/></svg>
-			<div class="ml-2 font-semibold">{{ $week->game_name }} {{ count($weekly_winners) > 1 ? 'Winners' : 'Winner' }}
-				@foreach ($weekly_winners as $winner)
-					<a href="{{ route('player-score', ['player' => $winner->player->id]) }}">{{ $winner->player->user->name }}</a>@if (!$loop->last), @endif
-				@endforeach
-			</div>
-		</div>
-	@endif
+    @unless(empty($weekly_winners))
+		@php
+			$gameStyles = [
+				'Net' => ['color' => 'orange', 'icon' => 'arrow-trending-down'],
+				'Pin' => ['color' => 'blue', 'icon' => 'flag'],
+				'Putts' => ['color' => 'pink', 'icon' => null],
+			];
 
-    <div class="w-full mb-6">
-        <h3 class="lg:text-xl mb-2 font-semibold">Matchup #1</h3>
-        <div class="overflow-x-auto">
-            <table class="table table-bordered w-full mb-8">
-                <x-tables.week-score-th />
+			$style = $gameStyles[$week->side_games] ?? ['color' => 'gray', 'icon' => 'info']; // Default fallback
+		@endphp
 
-                @foreach ($matchup_1 as $score)
-					@if (($loop->index + 1) % 2 == 0)
-						<tr style="border-bottom: 4px solid #333;" id="{{ $score->player_id }}">
+		@if($weekly_winners->isNotEmpty())
+			<flux:callout color="{{ $style['color'] }}" icon="{{ $style['icon'] }}" class="mb-12">
+				<flux:callout.heading class="flex gap-2 @max-md:flex-col items-start">
+					{{ $week->game_name }} {{ Str::plural('Winner', $weekly_winners->count()) }}
+					<flux:text>Congrats to {{ formatWinnersList($weekly_winners) }}.</flux:text>
+				</flux:callout.heading>
+			</flux:callout>
+		@endif
+	@endunless
+
+    <div class="w-full mb-8 space-y-2">
+		<flux:heading size="lg">Matchup #1</flux:heading>
+		<x-tables.weekly>
+			@foreach ($matchup_1 as $score)
+				<x-table.tr-body class="{{ (($loop->index + 1) % 2 == 0) ? 'border-b-4! border-zinc-500 last:border-b-0!' : '' }}" id="{{ $score->player_id }}">
+					<x-table.td>Team #{{ $score->team_name }}</x-table.td>
+					<x-table.td class="text-left! pl-2!"><a href="{{ route('player-score', ['player' => $score->player_id]) }}">{{ $score->player_name }}</a>
+						@if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
+					</x-table.td>
+					<x-table.td>{{ $score->gross > 0 ? $score->gross - $score->net : '' }}</x-table.td>
+					@if ($score->absent)
+						<x-table.td colspan="19" absent="true">ABSENT</x-table.td>
+					@elseif ($score->injury)
+						<x-table.td colspan="19" injury="true">INJURY</x-table.td>
 					@else
-						<tr id="{{ $score->player_id }}">
+						<x-scorecard.week :score="$score" />
 					@endif
-						<td>Team #{{ $score->team_name }}</td>
-						<td><a href="{{ route('player-score', ['player' => $score->player_id]) }}">{{ $score->player_name }}</a>
-							@if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
-						</td>
-						<td class="text-center">{{ $score->gross > 0 ? $score->gross - $score->net : '' }}</td>
+				</x-table.tr-body>
+			@endforeach
+		</x-tables.weekly>
+    </div>
 
-						@if ($score->absent)
-							<x-tables.absent />
-						@elseif ($score->injury)
-							<x-tables.injury />
-						@elseif ($week->back_nine)
-							<x-tables.back-nine-td :score="$score" />
-						@else
-							<x-tables.week-score-td :score="$score" />
-						@endif
-					</tr>
-                @endforeach
-            </table>
-        </div>
-
-        <h3 class="lg:text-xl mb-2 font-semibold">Matchup #2</h3>
-        <div class="overflow-x-auto">
-            <table class="table table-bordered w-full mb-8">
-                <x-tables.week-score-th />
-
-                @foreach ($matchup_2 as $score)
-					@if (($loop->index + 1) % 2 == 0)
-						<tr style="border-bottom: 4px solid #333;" id="{{ $score->player_id }}">
+	<div class="w-full mb-8 space-y-2">
+		<flux:heading size="lg">Matchup #2</flux:heading>
+		<x-tables.weekly>
+			@foreach ($matchup_2 as $score)
+				<x-table.tr-body class="{{ (($loop->index + 1) % 2 == 0) ? 'border-b-4! border-zinc-500 last:border-b-0!' : '' }}" id="{{ $score->player_id }}">
+					<x-table.td>Team #{{ $score->team_name }}</x-table.td>
+					<x-table.td class="text-left! pl-2!"><a href="{{ route('player-score', ['player' => $score->player_id]) }}">{{ $score->player_name }}</a>
+						@if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
+					</x-table.td>
+					<x-table.td>{{ $score->gross > 0 ? $score->gross - $score->net : '' }}</x-table.td>
+					@if ($score->absent)
+						<x-table.td colspan="19" absent="true">ABSENT</x-table.td>
+					@elseif ($score->injury)
+						<x-table.td colspan="19" injury="true">INJURY</x-table.td>
 					@else
-						<tr id="{{ $score->player_id }}">
+						<x-scorecard.week :score="$score" />
 					@endif
-						<td>Team #{{ $score->team_name }}</td>
-						<td><a href="{{ route('player-score', ['player' => $score->player_id]) }}">{{ $score->player_name }}</a>
-							@if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
-						</td>
-						<td class="text-center">{{ $score->gross > 0 ? $score->gross - $score->net : '' }}</td>
+				</x-table.tr-body>
+			@endforeach
+		</x-tables.weekly>
+    </div>
 
-						@if ($score->absent)
-							<x-tables.absent />
-						@elseif ($score->injury)
-							<x-tables.injury />
-						@elseif ($week->back_nine)
-							<x-tables.back-nine-td :score="$score" />
-						@else
-							<x-tables.week-score-td :score="$score" />
-						@endif
-					</tr>
-                @endforeach
-				</table>
-        </div>
-
-        <h3 class="lg:text-xl mb-2 font-semibold">Matchup #3</h3>
-        <div class="overflow-x-auto">
-            <table class="table table-bordered w-full mb-8">
-                <x-tables.week-score-th />
-
-                @foreach ($matchup_3 as $score)
-					@if (($loop->index + 1) % 2 == 0)
-						<tr style="border-bottom: 4px solid #333;" id="{{ $score->player_id }}">
+	<div class="w-full mb-8 space-y-2">
+		<flux:heading size="lg">Matchup #3</flux:heading>
+		<x-tables.weekly>
+			@foreach ($matchup_3 as $score)
+				<x-table.tr-body class="{{ (($loop->index + 1) % 2 == 0) ? 'border-b-4! border-zinc-500 last:border-b-0!' : '' }}" id="{{ $score->player_id }}">
+					<x-table.td>Team #{{ $score->team_name }}</x-table.td>
+					<x-table.td class="text-left! pl-2!"><a href="{{ route('player-score', ['player' => $score->player_id]) }}">{{ $score->player_name }}</a>
+						@if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
+					</x-table.td>
+					<x-table.td>{{ $score->gross > 0 ? $score->gross - $score->net : '' }}</x-table.td>
+					@if ($score->absent)
+						<x-table.td colspan="19" absent="true">ABSENT</x-table.td>
+					@elseif ($score->injury)
+						<x-table.td colspan="19" injury="true">INJURY</x-table.td>
 					@else
-						<tr id="{{ $score->player_id }}">
+						<x-scorecard.week :score="$score" />
 					@endif
-						<td>Team #{{ $score->team_name }}</td>
-						<td><a href="{{ route('player-score', ['player' => $score->player_id]) }}">{{ $score->player_name }}</a>
-							@if ($score->substitute_id > 0) <span class="font-bold">(S)</span>@endif
-						</td>
-						<td class="text-center">{{ $score->gross > 0 ? $score->gross - $score->net : '' }}</td>
-
-						@if ($score->absent)
-							<x-tables.absent />
-						@elseif ($score->injury)
-							<x-tables.injury />
-						@elseif ($week->back_nine)
-							<x-tables.back-nine-td :score="$score" />
-						@else
-							<x-tables.week-score-td :score="$score" />
-						@endif
-					</tr>
-                @endforeach
-			</table>
-        </div>
+				</x-table.tr-body>
+			@endforeach
+		</x-tables.weekly>
     </div>
 </div>

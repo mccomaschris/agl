@@ -1,0 +1,19 @@
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td><strong>{{ $score->points }}</strong></x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>
+<x-table.td>-</x-table.td>

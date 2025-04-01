@@ -35,96 +35,73 @@ class UpdateRoundStats implements ShouldQueue
         $score = $this->score;
         $week = Week::find($score->foreign_key);
 
+        if (!$week) {
+            return; // Avoid processing if the week isn't found
+        }
+
+        // Calculate Gross Score
         $score->gross = array_sum([
             $score->hole_1, $score->hole_2, $score->hole_3,
             $score->hole_4, $score->hole_5, $score->hole_6,
             $score->hole_7, $score->hole_8, $score->hole_9
         ]);
 
-        // Calculate Net Score for Player Week
-        switch ($week->week_order) {
-            case in_array($week->week_order, range(1, 5)):
-                $score->net = $score->gross - $score->player->hc_first;
-                break;
-            case in_array($week->week_order, range(6, 10)):
-                $score->net = $score->gross - $score->player->hc_second;
-                break;
-            case in_array($week->week_order, range(11, 15)):
-                $score->net = $score->gross - $score->player->hc_third;
-                break;
-            case in_array($week->week_order, range(16, 20)):
-                $score->net = $score->gross - $score->player->hc_fourth;
-                break;
-        }
+        // Determine Net Score
+        $score->net = $this->calculateNetScore($score, $week->week_order);
 
-		if ($week->back_nine) {
-			$score->gross_par = $score->gross - 33;
-			$score->net_par = $score->net - 33;
-		} else {
-			$score->gross_par = $score->gross - 37;
-			$score->net_par = $score->net - 37;
-		}
+		// Calculate Par Differences
+        $score->gross_par = $score->gross - 37;
+        $score->net_par = $score->net - 37;
 
-        // Reset Eagle, Birdie, Par, Bogey, and Double Bogey Count
+        // Reset category counts
         $score->eagle = $score->birdie = $score->par = $score->bogey = $score->double_bogey = 0;
 
-         // Set Par 3, Par 4, and Par 5 holes
-		 if ($week->back_nine) {
-			$par_3s = [$score->hole_4, $score->hole_7, $score->hole_8];
-			$par_4s = [$score->hole_1, $score->hole_2, $score->hole_3, $score->hole_5, $score->hole_6, $score->hole_9];
-		 } else {
-			$par_3s = [$score->hole_2, $score->hole_6];
-			$par_4s = [$score->hole_1, $score->hole_3, $score->hole_4, $score->hole_8];
-			$par_5s = [$score->hole_5, $score->hole_7, $score->hole_9];
-		 }
+        // Define par values for each hole
+        $par_3s = [$score->hole_2, $score->hole_6];
+        $par_4s = [$score->hole_1, $score->hole_3, $score->hole_4, $score->hole_8];
+        $par_5s = [$score->hole_5, $score->hole_7, $score->hole_9];
 
-         // Par 3 Eagle, Birdie, Par, Bogey, and Double Bogey Count
-         foreach ($par_3s as $hole) {
-             if ($hole <= 1) {
-                 $score->eagle++;
-             } elseif ($hole == 2) {
-                 $score->birdie++;
-             } elseif ($hole == 3) {
-                 $score->par++;
-             } elseif ($hole == 4) {
-                 $score->bogey++;
-             } elseif ($hole >= 5) {
-                 $score->double_bogey++;
-             }
-         }
-
-         // Par 4 Eagle, Birdie, Par, Bogey, and Double Bogey Count
-         foreach ($par_4s as $hole) {
-             if ($hole <= 2) {
-                 $score->eagle++;
-             } elseif ($hole == 3) {
-                 $score->birdie++;
-             } elseif ($hole == 4) {
-                 $score->par++;
-             } elseif ($hole == 5) {
-                 $score->bogey++;
-             } elseif ($hole >= 6) {
-                 $score->double_bogey++;
-             }
-         }
-
-         // Par 5 Eagle, Birdie, Par, Bogey, and Double Bogey Count
-		 if (!$week->back_nine) {
-			foreach ($par_5s as $hole) {
-				if ($hole <= 3) {
-					$score->eagle++;
-				} elseif ($hole == 4) {
-					$score->birdie++;
-				} elseif ($hole == 5) {
-					$score->par++;
-				} elseif ($hole == 6) {
-					$score->bogey++;
-				} elseif ($hole >= 7) {
-					$score->double_bogey++;
-				}
-			}
-		 }
+        // Categorize scores
+        $this->categorizeScores($par_3s, 3, $score);
+        $this->categorizeScores($par_4s, 4, $score);
+        $this->categorizeScores($par_5s, 5, $score);
 
         $score->save();
+    }
+
+	/**
+     * Calculate the net score based on the quarter.
+     */
+    private function calculateNetScore(Score $score, int $weekOrder): int
+    {
+        if ($weekOrder <= 5) {
+            return $score->gross - $score->player->hc_first;
+        } elseif ($weekOrder <= 10) {
+            return $score->gross - $score->player->hc_second;
+        } elseif ($weekOrder <= 15) {
+            return $score->gross - $score->player->hc_third;
+        } else {
+            return $score->gross - $score->player->hc_fourth;
+        }
+    }
+
+	/**
+     * Categorize scores based on par values.
+     */
+    private function categorizeScores(array $holes, int $par, Score $score): void
+    {
+        foreach ($holes as $hole) {
+            if ($hole <= $par - 2) {
+                $score->eagle++;
+            } elseif ($hole == $par - 1) {
+                $score->birdie++;
+            } elseif ($hole == $par) {
+                $score->par++;
+            } elseif ($hole == $par + 1) {
+                $score->bogey++;
+            } else {
+                $score->double_bogey++;
+            }
+        }
     }
 }

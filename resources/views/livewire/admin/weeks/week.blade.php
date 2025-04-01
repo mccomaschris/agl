@@ -126,6 +126,7 @@ new class extends Component {
             <flux:button icon="ellipsis-horizontal" size="sm" variant="ghost" inset="top bottom" />
 
             <flux:menu class="min-w-32">
+                <flux:menu.item href="{{ route('week-score-edit', [$week]) }}" icon="cursor-arrow-ripple">Edit Week Scores</flux:menu.item>
                 <flux:menu.item wire:click="edit" icon="pencil-square">Edit</flux:menu.item>
                 <flux:menu.item wire:click="remove" icon="trash" variant="danger">Remove</flux:menu.item>
             </flux:menu>

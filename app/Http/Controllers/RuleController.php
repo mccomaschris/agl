@@ -9,7 +9,7 @@ class RuleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function index()
     {
         return view('rules.index');
     }

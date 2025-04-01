@@ -25,7 +25,7 @@
     <link href="/images/splash/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
     <link href="/images/splash/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 
-    <title>@yield('title', config('app.name'))</title>
+    <title>{{ $title ?? 'AGLWV' }}</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
@@ -37,10 +37,10 @@
 	<style>
 		[x-cloak] { display: none !important; }
 	</style>
-
+	@fluxAppearance
 </head>
 <body
-	class="h-screen font-sans mb-20 pb-10 bg-gray-100 @yield('body-css')"
+	class="h-screen font-sans mb-20 pb-10 bg-zinc-100 @yield('body-css')"
 	x-data="{ mobileOpen: false }"
 >
     <div id="app" class="pb-12">
@@ -49,7 +49,7 @@
 				<div class="relative flex h-16 justify-between">
 					<div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
 				  		<!-- Mobile menu button -->
-						<button @click="mobileOpen = !mobileOpen" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-gray-100 hover:text-gray-100 focus:ring-2 focus:ring-white-500 focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
+						<button @click="mobileOpen = !mobileOpen" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-zinc-100 hover:text-zinc-100 focus:ring-2 focus:ring-white-500 focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
 							<span class="absolute -inset-0.5"></span>
 
 							<span class="sr-only">Open main menu</span>
@@ -72,17 +72,17 @@
 						</div>
 
 						<div class="hidden sm:ml-6 sm:flex sm:space-x-4">
-							<a href="{{ route('team-points', ['year' => $activeYear->name]) }}" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-100 hover:border-gray-50 hover:text-white">Team Points</a>
-							<a href="{{ route('handicaps', ['year' => $activeYear->name]) }}" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-100 hover:border-gray-50 hover:text-white">Handicaps</a>
-							<a href="{{ route('group-stats', ['year' => $activeYear->name]) }}" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-100 hover:border-gray-50 hover:text-white">Group Stats</a>
-							<a href="{{ route('team-stats', ['year' => $activeYear->name]) }}" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-100 hover:border-gray-50 hover:text-white">Team Stats</a>
-							{{-- <a href="{{ route('standings', ['year' => $activeYear->name]) }}" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-100 hover:border-gray-50 hover:text-white">Standings</a> --}}
-							<a href="{{ route('schedule', ['year' => $activeYear->name]) }}" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-100 hover:border-gray-50 hover:text-white">Schedule</a>
-							<a href="{{ route('rules') }}" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-100 hover:border-gray-50 hover:text-white">Rules</a>
-							<a href="{{ route('history') }}" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-100 hover:border-gray-50 hover:text-white">History &amp; Records</a>
+							<x-nav.item route="team-points" :params="['year' => $activeYear->name]">Team Points</x-nav.item>
+							<x-nav.item route="handicaps" :params="['year' => $activeYear->name]">Handicaps</x-nav.item>
+							<x-nav.item route="group-stats" :params="['year' => $activeYear->name]">Group Stats</x-nav.item>
+							<x-nav.item route="team-stats" :params="['year' => $activeYear->name]">Team Stats</x-nav.item>
+							<x-nav.item route="schedule" :params="['year' => $activeYear->name]">Schedule</x-nav.item>
+							<x-nav.item route="rules">Rules</x-nav.item>
+							<x-nav.item route="history">History</x-nav.item>
+
 							@if(Auth::check())
-								<a href="{{ route('waitlist.index') }}" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-100 hover:border-gray-50 hover:text-white">Waitlist</a>
-								<a href="{{ route('members') }}" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-100 hover:border-gray-50 hover:text-white">Members</a>
+								<x-nav.item route="waitlist.index">Waitlist</x-nav.item>
+								<x-nav.item route="members">Members</x-nav.item>
 							@endif
 						</div>
 					</div>
@@ -91,10 +91,10 @@
 							@if(Auth::check())
 							<form action="{{ route('logout') }}" method="POST" class="lg:inline-block">
 								{{ csrf_field() }}
-								<button type="submit" class="rounded-sm bg-white px-2 py-1 text-sm font-semibold text-green-500 shadow-xs hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Logout</button>
+								<flux:button type="submit">Logout</flux:button>
 							</form>
 							@else
-								<a href="{{ route('login') }}" class="rounded-sm bg-white px-2 py-1 text-sm font-semibold text-green-500 shadow-xs hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Login</a>
+								<flux:button href="{{ route('login') }}">Login</flux:button>
 							@endif
 						</div>
 					</div>
@@ -128,5 +128,10 @@
             {{ $slot }}
         </div>
     </div>
+	@persist('toast')
+        <flux:toast />
+    @endpersist
+
+	@fluxScripts
 </body>
 </html>

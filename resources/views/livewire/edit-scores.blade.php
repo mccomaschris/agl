@@ -35,40 +35,94 @@
     </div>
 
     <div class="w-full mb-6">
-        <h3 class="lg:text-xl mb-2 font-semibold">Matchup #1</h3>
+        <flux:heading size="lg" class="mb-2">Matchup #1</flux:heading>
+		<x-table>
+			<x-table.thead>
+				<x-table.tr>
+					<x-table.th>Player</x-table.th>
+					<x-table.th class="text-center">Abs</x-table.th>
+					<x-table.th class="text-center">Win</x-table.th>
+					<x-table.th class="text-center">Sub</x-table.th>
+					<x-table.th class="text-center">1</x-table.th>
+					<x-table.th class="text-center">2</x-table.th>
+					<x-table.th class="text-center">3</x-table.th>
+					<x-table.th class="text-center">4</x-table.th>
+					<x-table.th class="text-center">5</x-table.th>
+					<x-table.th class="text-center">6</x-table.th>
+					<x-table.th class="text-center">7</x-table.th>
+					<x-table.th class="text-center">8</x-table.th>
+					<x-table.th class="text-center">9</x-table.th>
+					<x-table.th class="text-center">GROSS</x-table.th>
+					<x-table.th class="text-center">PTS</x-table.th>
+					<x-table.th></x-table.th>
+				</x-table.tr>
+			</x-table.thead>
 
-		<div class="overflow-x-auto">
-            <table class="table table-bordered w-full mb-8">
-				<x-edit-score-head />
+			@foreach ($matchup_1 as $score)
+				<livewire:edit-score :scoreId="$score->id" :key="$score->id" />
+			@endforeach
+		</x-table>
+	</div>
 
-                @foreach ($matchup_1 as $score)
-					<livewire:edit-score :scoreId="$score->id" :key="$score->id" />
-                @endforeach
-            </table>
-        </div>
+	<div class="w-full mb-6">
+        <flux:heading size="lg" class="mb-2">Matchup #2</flux:heading>
 
-        <h3 class="lg:text-xl mb-2 font-semibold">Matchup #2</h3>
+		<x-table>
+			<x-table.thead>
+				<x-table.tr>
+					<x-table.th>Player</x-table.th>
+					<x-table.th class="text-center">Abs</x-table.th>
+					<x-table.th class="text-center">Win</x-table.th>
+					<x-table.th class="text-center">Sub</x-table.th>
+					<x-table.th class="text-center">1</x-table.th>
+					<x-table.th class="text-center">2</x-table.th>
+					<x-table.th class="text-center">3</x-table.th>
+					<x-table.th class="text-center">4</x-table.th>
+					<x-table.th class="text-center">5</x-table.th>
+					<x-table.th class="text-center">6</x-table.th>
+					<x-table.th class="text-center">7</x-table.th>
+					<x-table.th class="text-center">8</x-table.th>
+					<x-table.th class="text-center">9</x-table.th>
+					<x-table.th class="text-center">GROSS</x-table.th>
+					<x-table.th class="text-center">PTS</x-table.th>
+					<x-table.th></x-table.th>
+				</x-table.tr>
+			</x-table.thead>
 
-		<div class="overflow-x-auto">
-            <table class="table table-bordered w-full mb-8">
-                <x-edit-score-head />
+			@foreach ($matchup_2 as $score)
+				<livewire:edit-score :scoreId="$score->id" :key="$score->id" />
+			@endforeach
+		</x-table>
+	</div>
 
-                @foreach ($matchup_2 as $score)
-					<livewire:edit-score :scoreId="$score->id" :key="$score->id" />
-                @endforeach
-            </table>
-        </div>
+	<div class="w-full mb-6">
+        <flux:heading size="lg" class="mb-2">Matchup #3</flux:heading>
 
-        <h3 class="lg:text-xl mb-2 font-semibold">Matchup #3</h3>
+		<x-table>
+			<x-table.thead>
+				<x-table.tr>
+					<x-table.th>Player</x-table.th>
+					<x-table.th class="text-center">Abs</x-table.th>
+					<x-table.th class="text-center">Win</x-table.th>
+					<x-table.th class="text-center">Sub</x-table.th>
+					<x-table.th class="text-center">1</x-table.th>
+					<x-table.th class="text-center">2</x-table.th>
+					<x-table.th class="text-center">3</x-table.th>
+					<x-table.th class="text-center">4</x-table.th>
+					<x-table.th class="text-center">5</x-table.th>
+					<x-table.th class="text-center">6</x-table.th>
+					<x-table.th class="text-center">7</x-table.th>
+					<x-table.th class="text-center">8</x-table.th>
+					<x-table.th class="text-center">9</x-table.th>
+					<x-table.th class="text-center">GROSS</x-table.th>
+					<x-table.th class="text-center">PTS</x-table.th>
+					<x-table.th></x-table.th>
+				</x-table.tr>
+			</x-table.thead>
 
-		<div class="overflow-x-auto">
-            <table class="table table-bordered w-full mb-8">
-                <x-edit-score-head />
-
-                @foreach ($matchup_3 as $score)
-					<livewire:edit-score :scoreId="$score->id" :key="$score->id" />
-                @endforeach
-            </table>
-        </div>
-    </div>
+			@foreach ($matchup_3 as $score)
+				<livewire:edit-score :scoreId="$score->id" :key="$score->id" />
+			@endforeach
+		</x-table>
+	</div>
 </div>

@@ -13,150 +13,140 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\Log;
 
 class UpdateHandicaps implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $player;
+    protected Player $player;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
     public function __construct(Player $player)
     {
         $this->player = $player;
     }
 
     /**
-     * Calculate the Handicap
-     *
-     * @return $hc
+     * Calculates handicap based on best half of scores
      */
-    public function calc($scores, $scores_to_count = 0, $qtr = null) {
-        if (count($scores) == 0) {
-			return 0;
-		}
+    private function calculateHandicap(array $scores): int
+    {
+        if (empty($scores)) return 0;
 
-        $total_scores = count($scores);
-        $half_scores = round($total_scores / 2, 0);
-        asort($scores, SORT_NUMERIC);
-
-		# if i count 8 scores, but i only have 7 so far, use 7
-		$deno = $half_scores;
-
-		Log::debug('Quarter: ' . $qtr . ' Total Scores: ' . $total_scores . ' Half Scores: ' . $half_scores . ' Deno: ' . $deno . ' Scores to Count: ' . $scores_to_count);
-
-        $total_score = (array_sum(array_slice($scores, 0, $half_scores, true)));
-        $hc = round(($total_score / $deno) - 37);
-        return $hc;
+        sort($scores, SORT_NUMERIC);
+        $countedScores = ceil(count($scores) / 2);
+        return round((array_sum(array_slice($scores, 0, $countedScores)) / $countedScores) - 37);
     }
 
     /**
+     * Fetches all valid scores for a player in the active season
+     */
+    private function fetchValidScores(Player $player, Year $year)
+	{
+		return Score::where('player_id', $player->id)
+			->where('score_type', 'weekly_score')
+			->where('gross', '>', 0)
+			->where('absent', false)
+			->whereNotNull('week_id') // Ensure the score is linked to a valid week
+			->where(function ($query) {
+				$query->whereNull('substitute_id')->orWhere('substitute_id', 0);
+			})
+			->whereHas('week', function ($query) use ($year) {
+				$query->where('year_id', $year->id)
+					->where('week_date', '<=', Carbon::yesterday())
+					->where(function ($q) {
+						$q->whereNull('back_nine')->orWhere('back_nine', 0);
+					});
+			})
+			->with('week')
+			->get()
+			->groupBy(fn($score) => match (true) {
+				$score->week->week_order <= 5 => 'qtr_1',
+				$score->week->week_order <= 10 => 'qtr_2',
+				$score->week->week_order <= 15 => 'qtr_3',
+				$score->week->week_order <= 20 => 'qtr_4',
+				default => 'all',
+			});
+	}
+
+
+    /**
      * Execute the job.
-     *
-     * @return void
      */
     public function handle()
     {
         $player = $this->player;
+        $year = Year::find($player->year_id);
 
-        $year = Year::where('active', 1)->first();
-
-        $current_week = Week::where('year_id', $year->id)
-            ->where('week_date', '<=', Carbon::yesterday())
-            ->orderBy('week_order', 'desc')
-            ->first();
-
-        $qtr_1_scores = [];
-        $qtr_2_scores = [];
-        $qtr_3_scores = [];
-        $qtr_4_scores = [];
-        $total_scores = [];
-
-		$weeks = Week::where('year_id', $year->id)->where('back_nine', false)->where('week_date', '<=', Carbon::yesterday())->pluck('id');
-
-        $scores = Score::with('week')->whereIn('foreign_key', $weeks)->where('score_type', 'weekly_score')->where('player_id', $player->id)
-                    ->where('gross', '>', 0)
-                    ->where('absent', false)
-                    ->where('substitute_id', false)
-                    ->get();
-
-        foreach ($scores as $score) {
-            switch ($score->week->week_order) {
-                case in_array($score->week->week_order, range(1, 5)):
-                    array_push($qtr_1_scores, $score->gross);
-                case in_array($score->week->week_order, range(1, 10)):
-                    array_push($qtr_2_scores, $score->gross);
-                case in_array($score->week->week_order, range(1, 15)):
-                    array_push($qtr_3_scores, $score->gross);
-                case in_array($score->week->week_order, range(1, 20)):
-                    array_push($qtr_4_scores, $score->gross);
-            }
+        if (!$year) {
+            logger()->warning("No active year found for player {$player->id}");
+            return;
         }
 
-        $player->hc_second = $this->calc($qtr_1_scores, 3, '2');
-        $player->hc_third = $this->calc($qtr_2_scores, 5, '3');
-        $player->hc_fourth = $this->calc($qtr_3_scores, 8, '4');
-        $player->hc_playoff = $this->calc($qtr_4_scores, 10, 'po');
+        // Get valid scores
+        $scoresByQuarter = $this->fetchValidScores($player, $year);
+
+        $quarters = ['qtr_1', 'qtr_2', 'qtr_3', 'qtr_4'];
+		$handicapFields = ['hc_second', 'hc_third', 'hc_fourth', 'hc_playoff'];
+
+		foreach ($quarters as $index => $quarter) {
+			$player->{$handicapFields[$index]} = $this->calculateHandicap(
+				isset($scoresByQuarter[$quarter]) ? $scoresByQuarter[$quarter]->pluck('gross')->toArray() : []
+			);
+		}
+
         $player->hc_18 = round($player->hc_playoff * 1.5);
 
-        if (count($qtr_4_scores) == 0) {
-            $player->hc_next_year = 0;
-        } else {
-            $player->hc_next_year = round((array_sum($qtr_4_scores) / count($qtr_4_scores)) - 37);
-        }
+        // Handicap for next year
+        $qtr4Scores = $scoresByQuarter['qtr_4'] ?? [];
+        $player->hc_next_year = empty($qtr4Scores) ? 0 : round(array_sum($qtr4Scores) / count($qtr4Scores) - 37);
 
-        // Calculate Full Handicap for 1-4 rankings
-        $total_scores = count($qtr_4_scores);
+        // Full Handicap
+        $totalScores = count($qtr4Scores);
+        $countedScores = ($player->id === 159) ? 8 : ceil($totalScores / 2);
+        $player->hc_full = ($countedScores > 0) ? round(array_sum(array_slice($qtr4Scores, 0, $countedScores)) / $countedScores - 37) : 0;
 
-        if ( $player->id === 159) {
-            $counted_scores = 8;
-        } else {
-            $counted_scores = round($total_scores / 2, 0);
-        }
-        asort($qtr_4_scores, SORT_NUMERIC);
+        // Determine current handicap based on the latest week
+        $currentWeek = Week::where('year_id', $year->id)
+            ->where('week_date', '<=', Carbon::yesterday())
+            ->orderByDesc('week_order')
+            ->first();
 
-        $total_score = (array_sum(array_slice($qtr_4_scores, 0, $counted_scores, true)));
-        if ($counted_scores == 0) {
-            $player->hc_full = 0;
-        } else {
-            $player->hc_full = ($total_score / $counted_scores) - 37;
-        }
-
-        switch ($current_week->week_order) {
-            case in_array($current_week->week_order, range(1, 4)):
-                $player->hc_current = $player->hc_first;
-                break;
-            case in_array($current_week->week_order, range(5, 9)):
-                $player->hc_current = $player->hc_second;
-                break;
-            case in_array($current_week->week_order, range(10, 14)):
-                $player->hc_current = $player->hc_third;
-                break;
-            case in_array($current_week->week_order, range(15, 20)):
-                $player->hc_current = $player->hc_fourth;
-                break;
-            default:
-                $player->hc_current = $player->hc_first;
+        if ($currentWeek) {
+            $player->hc_current = match (true) {
+                $currentWeek->week_order <= 4 => $player->hc_first,
+                $currentWeek->week_order <= 9 => $player->hc_second,
+                $currentWeek->week_order <= 14 => $player->hc_third,
+                $currentWeek->week_order <= 20 => $player->hc_fourth,
+                default => $player->hc_first,
+            };
         }
 
         $player->save();
 
-        $teams = Team::where('year_id', $year->id)->pluck('id');
-        $players = Player::whereIn('team_id', $teams)->where('substitute', '0')->orderBy('hc_full', 'asc')->get();
+        // Update handicap ranks
+        $this->updateHandicapRanks($year);
+    }
 
-        $prev = 400;
+    /**
+     * Update the ranking of players based on handicap
+     */
+    private function updateHandicapRanks(Year $year)
+    {
+        $teams = Team::where('year_id', $year->id)->pluck('id');
+
+        $players = Player::whereIn('team_id', $teams)
+            ->where('substitute', false)
+            ->orderBy('hc_full', 'asc')
+            ->get();
+
+        $prev = null;
         $rank = 0;
         $count = 0;
 
         foreach ($players as $player) {
             $count++;
 
-            if ($player->hc_full == $prev) {
+            if ($player->hc_full === $prev) {
                 $player->hc_full_rank = $rank;
             } else {
                 $player->hc_full_rank = $count;

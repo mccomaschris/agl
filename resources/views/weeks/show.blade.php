@@ -6,30 +6,20 @@
     <div class="flex flex-col gap-8 mt-8">
         @foreach ($weeks as $week)
 			<div>
-				<div class="mb-4">
-					<h2 class="text-lg font-semibold text-gray-900">Week {{ $week->week_order }} - {{ date('F d, Y', strtotime($week->week_date)) }} Matchups - {{ $week->side_games }}</h2>
+				<div class="mb-6">
+					<flux:heading size="lg">{{ $year->name }} Week {{ $week->week_order }} - {{ date('F d, Y', strtotime($week->week_date)) }} Matchups</flux:heading>
+					<flux:subheading>
+						@if($week->side_games == 'Net')
+							<flux:badge color="orange" icon="arrow-trending-down">Low Net</flux:badge>
+						@elseif($week->side_games == 'Pin')
+							<flux:badge color="blue" icon="flag">Closest to the Pin</flux:badge>
+						@elseif($week->side_games == 'Putt')
+							<flux:badge color="yellow">Low Putts</flux:badge>
+						@endif
+					</flux:subheading>
 				</div>
 
-				<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
-					<div class="w-full">
-						@include('_parts.home-team-table', [
-						'teamA' => $week->team_a,
-						'teamB' => $week->team_b,
-						])
-					</div>
-					<div class="w-full">
-						@include('_parts.home-team-table', [
-						'teamA' => $week->team_c,
-						'teamB' => $week->team_d,
-						])
-					</div>
-					<div class="w-full">
-						@include('_parts.home-team-table', [
-						'teamA' => $week->team_e,
-						'teamB' => $week->team_f,
-						])
-					</div>
-				</div>
+				<x-site.week-table :week="$week" />
 			</div>
         @endforeach
     </div>

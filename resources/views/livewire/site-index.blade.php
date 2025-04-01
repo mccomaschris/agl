@@ -1,37 +1,41 @@
 <div class="mt-12">
+	<!-- Thundr -->
 	@if ($last_week)
-		<div class="flex items-center text-sm bg-zinc-900 text-white px-4 lg:pr-8 py-4 lg:py-6 rounded shadow mb-6" role="alert">
-			<svg class="h-12 w-12 text-green-bright fill-current mr-4 lg:mr-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M3 6c0-1.1.9-2 2-2h8l4-4h2v16h-2l-4-4H5a2 2 0 0 1-2-2H1V6h2zm8 9v5H8l-1.67-5H5v-2h8v2h-2z"/></svg>
-			<div>
-				@if($this->weekUpdated)
-					<p class="md:block mt-3 mb-3">Week {{ $last_week->week_order }} scores are up! You can checkout the week's <a href="{{ route('week-score', ['week' => $last_week->id]) }}" class="font-semibold text-green-bright underline">results</a>!</p>
-				@endif
-				<p class="hidden md:block">You can also check out <a href="{{ route('team-points', ['year' => $activeYear->name]) }}" class="font-semibold text-green-bright underline">team points</a>, <a href="{{ route('handicaps', ['year' => $activeYear->name]) }}"  class="font-semibold text-green-bright underline">handicaps</a>, <a href="{{ route('group-stats', ['year' => $activeYear->name]) }}" class="font-semibold text-green-bright underline">individual stats by group</a>, and <a href="{{ route('team-stats', ['year' => $activeYear->name]) }}"  class="font-semibold text-green-bright underline">individual stats by team</a>.</p>
-			</div>
-		</div>
+		<flux:callout color="green" icon="check-circle" class="mb-12">
+			<flux:callout.heading>Week {{ $last_week->week_order }} scores are up!</flux:callout.heading>
+			<flux:callout.text>You can checkout the week's <flux:callout.link href="{{ route('week-score', ['week' => $last_week->id]) }}">results</flux:callout.link>!</flux:callout.text>
+		</flux:callout>
 	@endif
 
 	@if ($week)
-		<div class="mb-4">
-			<h2 class="text-lg font-semibold text-gray-900">Week {{ $week->week_order }}, {{ date('F d, Y', strtotime($week->week_date)) }} Matchups - {{ $week->side_games }}</h2>
-		</div>
+		<div class="space-y-6">
+			<flux:heading size="lg">{{ $year->name }} Week {{ $week->week_order }} - {{ date('F d, Y', strtotime($week->week_date)) }} Matchups</flux:heading>
+			@if($week->side_games == 'Net')
+				<flux:badge color="orange" icon="arrow-trending-down">Low Net</flux:badge>
+			@elseif($week->side_games == 'Pin')
+				<flux:badge color="blue" icon="flag">Closest to the Pin</flux:badge>
+			@elseif($week->side_games == 'Putt')
+				<flux:badge color="yellow">Low Putts</flux:badge>
+			@endif
 
-		<x-site.week-table :week="$week" />
+			<x-site.week-table :week="$week" />
+		</div>
 	@endif
 
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12 pb-12">
 		<div class="lg:col-span-2">
-			<div class="mb-4">
-				<h2 class="text-lg font-semibold text-gray-900">Team Standings</h2>
+			<div class="flex justify-between items-center">
+				<flux:heading size="lg">Team Standings</flux:heading>
+				<flux:button variant="ghost" size="sm" href="{{ route('standings', [$year]) }}">View Past Years</flux:button>
 			</div>
-			@include('_parts.standings-team', ['show_max' => true])
+			<x-tables.standings-team :year="$year" />
 		</div>
 
 		<div class="">
-			<div class="mb-4">
-				<h2 class="text-lg font-semibold text-gray-900">Individual Standings</h2>
+			<div>
+				<flux:heading size="lg">Individual Standings</flux:heading>
 			</div>
-			@include('_parts.standings-player')
+			<x-tables.standings-player :year="$year" />
 		</div>
 	</div>
 </div>

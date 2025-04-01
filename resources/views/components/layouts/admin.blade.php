@@ -8,8 +8,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
 
+	<link rel="stylesheet" href="{{ twcss('/css/main.css') }}">
 	<link rel="stylesheet" href="{{ twcss('/css/admin.css') }}">
-
 	@fluxAppearance
 </head>
 <body class="min-h-screen bg-white dark:bg-zinc-800">
@@ -28,7 +28,9 @@
 
 		<flux:spacer />
 
+
 		<flux:navlist.group heading="Tools">
+			<flux:navlist.item href="{{ route('home') }}">View Homepage</flux:navlist.item>
 			<div
 				x-data="{
 					clearCache() {
@@ -64,6 +66,10 @@
 	<flux:main>
 		{{ $slot }}
 	</flux:main>
+
+	@persist('toast')
+        <flux:toast />
+    @endpersist
 
 	@fluxScripts
 </body>

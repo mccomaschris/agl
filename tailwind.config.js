@@ -8,6 +8,8 @@ module.exports = {
 			"./resources/**/*.js",
 			'./vendor/livewire/flux-pro/stubs/**/*.blade.php',
 			'./vendor/livewire/flux/stubs/**/*.blade.php',
+			'./vendor/livewire/flux/stubs/resources/views/flux/**/*.blade.php',
+			'./vendor/livewire/flux-pro/stubs/resources/views/flux/**/*.blade.php',
 		],
     theme: {
         fontFamily: {

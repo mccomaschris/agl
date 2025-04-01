@@ -246,57 +246,6 @@ class UpdatePlayerStats implements ShouldQueue
             }
         }
 
-        // Calculate Player Quarterly Averages
-        $players = Player::where('year_id', $year->id)->where('substitute', '0')->get();
-		$weeks = Week::where('year_id', $player->year_id)->where('back_nine', false)->whereDate('week_date', '<', Carbon::today()->toDateString())->pluck('id');
-
-        foreach ($players as $player) {
-            $qtr_1_total = [];
-            $qtr_2_total = [];
-            $qtr_3_total = [];
-            $qtr_4_total = [];
-            $season_total = [];
-
-            $scores = Score::where('player_id', $player->id)
-						->whereIn('foreign_key', $weeks)
-                        ->where('score_type', 'weekly_score')
-                        ->where('gross', '>', 0)
-                        ->where('absent', 0)
-                        ->where('substitute_id', 0)
-                        ->with('week')->get();
-
-            foreach ($scores as $score) {
-
-                $week_order = $score->week->week_order;
-
-                switch ($week_order) {
-                    case in_array($week_order, range(1, 5)):
-                        array_push($qtr_1_total, $score);
-                        array_push($season_total, $score);
-                        break;
-                    case in_array($week_order, range(6, 10)):
-                        array_push($qtr_2_total, $score);
-                        array_push($season_total, $score);
-                        break;
-                    case in_array($week_order, range(11, 15)):
-                        array_push($qtr_3_total, $score);
-                        array_push($season_total, $score);
-                        break;
-                    case in_array($week_order, range(16, 20)):
-                        array_push($qtr_4_total, $score);
-                        array_push($season_total, $score);
-                        break;
-                }
-            }
-
-
-            $this->calcQuarter('qtr_1_avg', $player->id, $year->id, $qtr_1_total);
-            $this->calcQuarter('qtr_2_avg', $player->id, $year->id, $qtr_2_total);
-            $this->calcQuarter('qtr_3_avg', $player->id, $year->id, $qtr_3_total);
-            $this->calcQuarter('qtr_4_avg', $player->id, $year->id, $qtr_4_total);
-            $this->calcQuarter('season_avg', $player->id, $year->id, $season_total);
-        }
-
         // Rank Team By Stats
         $teams = Team::where('year_id', $year->id)->get();
         foreach ($teams as $team) {
