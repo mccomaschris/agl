@@ -1,7 +1,8 @@
-root_domain: www.aglwv.com
-repo: mccomaschris/agl
-branch: main
-php_version: '8.3'
-project_type: laravel
-server: thundr-01
-operating_system: ubuntu
+production:
+  root_domain: www.aglwv.com
+  repo: mccomaschris/agl
+  branch: main
+  php_version: '8.3'
+  project_type: laravel
+  server: thundr-01
+  operating_system: ubuntu

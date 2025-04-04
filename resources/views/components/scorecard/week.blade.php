@@ -19,11 +19,11 @@
 
         // Determine Tailwind CSS classes based on golf scoring rules
         $scoreClass = match (true) {
-            $difference <= -2 => 'bg-yellow-200 text-yellow-800', // Eagle or better
-            $difference == -1 => 'bg-green-200 text-green-800',   // Birdie
-            $difference == 0 => 'text-zinc-500',                 // Par
-            $difference == 1 => 'bg-red-200 text-red-800',       // Bogey
-            $difference >= 2 => 'bg-sky-200 text-sky-800',       // Double bogey or worse
+            $difference <= -2 => 'bg-yellow-200 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-200', // Eagle or better
+            $difference == -1 => 'bg-green-200 text-green-800 dark:bg-green-800 dark:text-green-200',   // Birdie
+            $difference == 0 => 'text-zinc-500 dark:text-zinc-200',                 // Par
+            $difference == 1 => 'bg-red-200 text-red-800 dark:bg-red-800 dark:text-red-200',       // Bogey
+            $difference >= 2 => 'bg-sky-200 text-sky-800 dark:bg-sky-800 dark:text-sky-200',       // Double bogey or worse
             default => '',
         };
 
@@ -64,8 +64,8 @@
     </span><strong>
 </td>
 <td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r border-zinc-300"><strong>{{ $score->points }}</strong></td>
-<td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r text-yellow-800 border-zinc-300">{{ $score->eagle}}</td>
-<td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r text-green-800 border-zinc-300">{{ $score->birdie}}</td>
+<td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r text-yellow-800 dark:text-yellow-200 border-zinc-300">{{ $score->eagle}}</td>
+<td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r text-green-800 dark:text-green-200 border-zinc-300">{{ $score->birdie}}</td>
 <td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r border-zinc-300">{{ $score->par}}</td>
-<td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r text-red-800 border-zinc-300">{{ $score->bogey}}</td>
-<td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r text-blue-800 border-zinc-300">{{ $score->double_bogey }}</td>
+<td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r text-red-800 dark:text-red-200 border-zinc-300">{{ $score->bogey}}</td>
+<td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r text-blue-800 dark:text-blue-200 border-zinc-300">{{ $score->double_bogey }}</td>

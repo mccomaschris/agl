@@ -226,26 +226,26 @@ new class extends Component {
 						<x-table.td>Dbg+</x-table.td>
 					</x-table.tr-body>
 					<x-table.tr-body>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">Totals</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($allAverages->hole_1, 1, '.', ',') }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($allAverages->hole_2, 1, '.', ',') }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($allAverages->hole_3, 1, '.', ',') }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($allAverages->hole_4, 1, '.', ',') }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($allAverages->hole_5, 1, '.', ',') }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($allAverages->hole_6, 1, '.', ',') }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($allAverages->hole_7, 1, '.', ',') }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($allAverages->hole_8, 1, '.', ',') }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($allAverages->hole_9, 1, '.', ',') }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($allAverages->avg_gross, 1, '.', ',') }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($allAverages->avg_gross_par, 1, '.', ',') }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($allAverages->avg_net, 1, '.', ',') }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($allAverages->avg_net_par, 1, '.', ',') }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ $allAverages->total_points ? $allAverages->total_points : '0' }}</x-table.td>
-						<x-table.td class="font-bold text-yellow-800! bg-zinc-100!">{{ $allAverages->total_eagles ? $allAverages->total_eagles : '0' }}</x-table.td>
-						<x-table.td class="font-bold text-green-800! bg-zinc-100!">{{ $allAverages->total_birdies ? $allAverages->total_birdies : '0' }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ $allAverages->total_pars ? $allAverages->total_pars : '0' }}</x-table.td>
-						<x-table.td class="font-bold text-red-800! bg-zinc-100!">{{ $allAverages->total_bogeys ? $allAverages->total_bogeys : '0' }}</x-table.td>
-						<x-table.td class="font-bold text-blue-800! bg-zinc-100!">{{ $allAverages->total_double_bogeys ? $allAverages->total_double_bogeys : '0' }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">Totals</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($allAverages->hole_1, 1, '.', ',') }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($allAverages->hole_2, 1, '.', ',') }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($allAverages->hole_3, 1, '.', ',') }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($allAverages->hole_4, 1, '.', ',') }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($allAverages->hole_5, 1, '.', ',') }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($allAverages->hole_6, 1, '.', ',') }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($allAverages->hole_7, 1, '.', ',') }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($allAverages->hole_8, 1, '.', ',') }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($allAverages->hole_9, 1, '.', ',') }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($allAverages->avg_gross, 1, '.', ',') }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($allAverages->avg_gross_par, 1, '.', ',') }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($allAverages->avg_net, 1, '.', ',') }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($allAverages->avg_net_par, 1, '.', ',') }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ $allAverages->total_points ? $allAverages->total_points : '0' }}</x-table.td>
+						<x-table.td class="font-bold text-yellow-800! bg-zinc-100! dark:bg-zinc-800! dark:text-yellow-200!">{{ $allAverages->total_eagles ? $allAverages->total_eagles : '0' }}</x-table.td>
+						<x-table.td class="font-bold text-green-800! bg-zinc-100! dark:bg-zinc-800! dark:text-green-200!">{{ $allAverages->total_birdies ? $allAverages->total_birdies : '0' }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ $allAverages->total_pars ? $allAverages->total_pars : '0' }}</x-table.td>
+						<x-table.td class="font-bold text-red-800! dark:text-red-200! bg-zinc-100! dark:bg-zinc-800!">{{ $allAverages->total_bogeys ? $allAverages->total_bogeys : '0' }}</x-table.td>
+						<x-table.td class="font-bold text-blue-800! bg-zinc-100! dark:bg-zinc-800!">{{ $allAverages->total_double_bogeys ? $allAverages->total_double_bogeys : '0' }}</x-table.td>
 					</x-table.tr-body>
 				</x-table.tbody>
 			</x-table>
@@ -267,7 +267,7 @@ new class extends Component {
 
 						<div class="flex items-center">
 							<div class="text-zinc-500">HC</div>
-							<div class="ml-1 text-green-500 font-bold text-xl border-b border-dotted border-zinc-500">
+							<div class="ml-1 text-green-500 font-bold text-xl border-b border-dotted border-zinc-500 dark:text-green-bright">
 								{{ $quarterDetails[$quarter]['hc'] }}
 							</div>
 						</div>

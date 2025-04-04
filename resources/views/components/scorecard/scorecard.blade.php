@@ -59,25 +59,25 @@
 		@endforeach
 		<x-table.tr-body>
 			<x-table.td class="text-base! font-bold text-zinc-900!">Totals</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ number_format($averages->hole_1, 1, '.', ',') }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ number_format($averages->hole_2, 1, '.', ',') }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ number_format($averages->hole_3, 1, '.', ',') }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ number_format($averages->hole_4, 1, '.', ',') }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ number_format($averages->hole_5, 1, '.', ',') }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ number_format($averages->hole_6, 1, '.', ',') }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ number_format($averages->hole_7, 1, '.', ',') }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ number_format($averages->hole_8, 1, '.', ',') }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ number_format($averages->hole_9, 1, '.', ',') }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ number_format($averages->avg_gross, 1, '.', ',') }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ number_format($averages->avg_gross_par, 1, '.', ',') }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ number_format($averages->avg_net, 1, '.', ',') }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ number_format($averages->avg_net_par, 1, '.', ',') }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ $averages->total_points ? $averages->total_points : '0' }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-yellow-800! bg-zinc-100!">{{ $averages->total_eagles ? $averages->total_eagles : '0' }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-green-800! bg-zinc-100!">{{ $averages->total_birdies ? $averages->total_birdies : '0' }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100!">{{ $averages->total_pars ? $averages->total_pars : '0' }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-red-800! bg-zinc-100!">{{ $averages->total_bogeys ? $averages->total_bogeys : '0' }}</x-table.td>
-			<x-table.td class="text-base! font-bold text-blue-800! bg-zinc-100!">{{ $averages->total_double_bogeys ? $averages->total_double_bogeys : '0' }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($averages->hole_1, 1, '.', ',') }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($averages->hole_2, 1, '.', ',') }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($averages->hole_3, 1, '.', ',') }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($averages->hole_4, 1, '.', ',') }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($averages->hole_5, 1, '.', ',') }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($averages->hole_6, 1, '.', ',') }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($averages->hole_7, 1, '.', ',') }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($averages->hole_8, 1, '.', ',') }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($averages->hole_9, 1, '.', ',') }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($averages->avg_gross, 1, '.', ',') }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($averages->avg_gross_par, 1, '.', ',') }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($averages->avg_net, 1, '.', ',') }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($averages->avg_net_par, 1, '.', ',') }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ $averages->total_points ? $averages->total_points : '0' }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-yellow-800!">{{ $averages->total_eagles ? $averages->total_eagles : '0' }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-green-800!">{{ $averages->total_birdies ? $averages->total_birdies : '0' }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-zinc-900! dark:text-zinc-50! dark:bg-zinc-800!">{{ $averages->total_pars ? $averages->total_pars : '0' }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-red-800!">{{ $averages->total_bogeys ? $averages->total_bogeys : '0' }}</x-table.td>
+			<x-table.td class="text-base! font-bold text-blue-800!">{{ $averages->total_double_bogeys ? $averages->total_double_bogeys : '0' }}</x-table.td>
 		</x-table.tr-body>
 	</x-table.tbody>
 </x-table>

@@ -15,14 +15,14 @@
 	</x-table.thead>
 	<x-table.tbody>
 		@foreach ($year->teamStandings as $team)
-			<x-table.tr-body class="{{ ($loop->index + 1) % 4 == 0 ? 'border-b-2 border-zinc-900' : '' }} border-r-0! text-center!">
+			<x-table.tr-body class="{{ ($loop->index + 1) % 4 == 0 ? 'border-b-2 border-zinc-900' : '' }} border-r-0! text-center! even:bg-white odd:bg-zinc-50/50 dark:bg-zinc-800! odd:dark:bg-zinc-700!">
 				<x-table.td class="border-r-0! text-center!">
 					<span class="{{ $loop->index < 4 ? 'text-green-500' : 'text-red-500 ' }} font-bold">{{ $team->rank }}</span>
 				</x-table.td>
 				<x-table.td class="text-left! border-r-0! whitespace-normal! lg:whitespace-nowrap!">
-					<span class="font-bold text-zinc-700">Team {{ $team->name }}</span>
+					<span class="font-bold text-zinc-700 dark:text-zinc-50!">Team {{ $team->name }}</span>
 					<br>
-					<span class="text-xs">
+					<span class="text-xs dark:text-zinc-300!">
 					@foreach ($team->players as $player)
 						{{ $player->user->last_name }}@if(!$loop->last), @endif
 					@endforeach
@@ -32,14 +32,14 @@
 					</div>
 					</span>
 				</x-table.td>
-				<x-table.td class="hidden sm:table-cell border-r-0!">{{ $team->won }}</x-table.td>
-				<x-table.td class="hidden sm:table-cell border-r-0!">{{ $team->lost }}</x-table.td>
-				<x-table.td class="hidden sm:table-cell border-r-0!">{{ $team->tied }}</x-table.td>
-				<x-table.td class="border-r-0! px-4! lg:px-1!">{{ $team->points }}</x-table.td>
-				<x-table.td class="hidden sm:table-cell border-r-0!">{{ $team->p1_points }}</x-table.td>
-				<x-table.td class="hidden sm:table-cell border-r-0!">{{ $team->p2_points }}</x-table.td>
-				<x-table.td class="hidden sm:table-cell border-r-0!">{{ $team->p3_points }}</x-table.td>
-				<x-table.td class="hidden sm:table-cell border-r-0!">{{ $team->p4_points }}</x-table.td>
+				<x-table.td class="hidden sm:table-cell border-r-0!  dark:text-zinc-100!">{{ $team->won }}</x-table.td>
+				<x-table.td class="hidden sm:table-cell border-r-0!  dark:text-zinc-100!">{{ $team->lost }}</x-table.td>
+				<x-table.td class="hidden sm:table-cell border-r-0!  dark:text-zinc-100!">{{ $team->tied }}</x-table.td>
+				<x-table.td class="border-r-0! px-4! lg:px-1! dark:text-zinc-100!">{{ $team->points }}</x-table.td>
+				<x-table.td class="hidden sm:table-cell border-r-0! dark:text-zinc-100!">{{ $team->p1_points }}</x-table.td>
+				<x-table.td class="hidden sm:table-cell border-r-0! dark:text-zinc-100!">{{ $team->p2_points }}</x-table.td>
+				<x-table.td class="hidden sm:table-cell border-r-0! dark:text-zinc-100!">{{ $team->p3_points }}</x-table.td>
+				<x-table.td class="hidden sm:table-cell border-r-0! dark:text-zinc-100!">{{ $team->p4_points }}</x-table.td>
 			</x-table.tr-body>
 		@endforeach
 	</x-table.tbody>

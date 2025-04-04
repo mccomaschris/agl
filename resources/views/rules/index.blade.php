@@ -1,12 +1,11 @@
 <x-layouts.app>
-	<x-slot name="header">
-		<h1 class="text-center lg:text-left text-2xl lg:text-3xl mt-6 mb-4 tracking-tight">Appliance Golf League Rules
-		</h1>
-	</x-slot>
+	<flux:heading size="xl" class="mt-8">
+		Appliance Golf League Rules
+	</flux:heading>
 
-	<div class="flex mx-0 lg:-mx-8 relative">
+	<div class="flex mx-0 lg:-mx-8 relative mt-8">
 		<div class="w-full lg:w-3/4 px-0 lg:px-8">
-			<h3 class="font-semibold mb-2 lg:text-xl" id="membership">Membership &amp; Dues</h3>
+			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100!" id="membership">Membership &amp; Dues</h3>
 			<p class="mb-3">Minimum age for a member is 25 years of age. Membership fees are $70 per year, which
 				includes the $25 kitty for each "side game" played each week (alternating between closest to the pin andd low net). Any ties during the weekly "side game" will be split between the winners. This
 				fee must be paid prior to Snowball Tournament. A new member joining the League after the season has
@@ -16,7 +15,7 @@
 			<p class="mb-3">If a member needs to take a year off to care for a seriously ill family member, a spot will
 				be held for this member the following year. </p>
 
-			<h3 class="font-semibold mb-2 lg:text-xl mt-6" id="officers">Officers</h3>
+			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100! mt-6" id="officers">Officers</h3>
 			<p class="mb-3">The League will elect a President-elect and Secretary each year at the dinner following the
 				Individual League Championship.</p>
 			<p class="mt-3">Duties of the <strong>President</strong>:</p>
@@ -50,7 +49,7 @@
 				<li>Keeps minutes of meetings, rules changes, and maintains rules</li>
 			</ol>
 
-			<h3 class="font-semibold mb-2 lg:text-xl mt-6" id="timeline">League Timeline</h3>
+			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100! mt-6" id="timeline">League Timeline</h3>
 			<p class="mb-3">The suggested league timeline is as follows:</p>
 			<ul class="mb-4 list-inside list-disc pl-6 block">
 				<li><strong>January</strong> - President should contact the golf course to set up dates for the Snowball
@@ -83,7 +82,7 @@
 			<p class="mb-3">To determine the Snowball Tournament winner average the handicap of all golfers present for
 				each team and subtract that average from their gross score.</p>
 
-			<h3 class="font-semibold mb-2 lg:text-xl mt-6" id="teams">Teams</h3>
+			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100! mt-6" id="teams">Teams</h3>
 			<p class="mb-3">There are six (6) teams composed of 4 players each.</p>
 			<p class="mb-3">At the beginning of each year, players are grouped into one of four groups, "One" players
 				through "Four" players. Returning players handicap is based on their handicap at the end of the previous
@@ -104,7 +103,7 @@
 				are paired as are #2 and #4. For weeks 10-15, players #1 and #4 will be paired with #2 and #3 paired.
 				For the last 5 weeks we will revert to the same pairings as the first five weeks.</p>
 
-			<h3 class="font-semibold mb-2 lg:text-xl mt-6" id="substitutes">Substitutes</h3>
+			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100! mt-6" id="substitutes">Substitutes</h3>
 			<p class="mb-3">In the event that a substitute player is needed to replace a member for a portion of the
 				season, the money won for team rankings and team performance at year's end will be split between the
 				member and the substitute, proportional to the weeks that each played. Money won for individual
@@ -115,7 +114,7 @@
 			<p class="mb-3">There are no substitutes allowed for playoff matches.</p>
 			<p class="mb-3"><a href="#sub-handicap">Substitute player handicap information</a></p>
 
-			<h3 class="font-semibold mb-2 lg:text-xl mt-6" id="handicaps">Handicaps</h3>
+			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100! mt-6" id="handicaps">Handicaps</h3>
 			<p class="mb-3">A player's league handicap is figured as the difference between par (currently 37 on the
 				front nine at Riviera) and the player's average score. For example, if a player's average score is 40,
 				their handicap would be 3 (40-37=3). As league play continues, a handicap may be a fraction. Fractions
@@ -155,7 +154,7 @@
 				league in week 8, his handicap will be the same for Week 8, 9, and 10 then will change with the rest of
 				the league for Week 11.</p>
 
-			<h3 class="font-semibold mb-2 lg:text-xl mt-6" id="schedule">Schedule and Cancellations</h3>
+			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100! mt-6" id="schedule">Schedule and Cancellations</h3>
 			<p class="mb-3">There are 20 regularly scheduled matches each season. In the event of rain, a maximum of
 				three make-up weeks will be played at the end of the regular season. Team Championships (9-holes, match
 				play) will be played the weeks immediately following regular season play. The Individual League
@@ -174,7 +173,7 @@
 			<p class="mb-3">If we cannot tee off at our designated time (due to weather, etc.) we can have a "shotgun"
 				start w/ groups beginning on #1, #3, and #5.</p>
 
-			<h3 class="font-semibold mb-2 lg:text-xl mt-6" id="rules-play">Rules Governing Play</h3>
+			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100! mt-6" id="rules-play">Rules Governing Play</h3>
 			<p class="mb-3">Play in the Appliance League is Match Play. You can read more about <a
 					href="http://www.usga.org/rules/rules-and-decisions.html#!rule-02">Match Play on the USGA
 					website</a>.</p>
@@ -197,7 +196,7 @@
 				tees.</p>
 			<p class="mb-3">In the event of a tie for the weekly game (low net or closest to the pin), the tie will be broken by the tied player's scoring on individual holes, using handicap, starting on hole 9 and working backward until a tie is broken.</p>
 
-			<h3 class="font-semibold mb-2 lg:text-xl mt-6" id="attendance">Attendance</h3>
+			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100! mt-6" id="attendance">Attendance</h3>
 			<p class="mb-3">Any missed matches must be made up within the current quarter of the schedule. All matches
 				must be made up and scorecards <a href="mailto:mccomas.chris@gmail.com">sent to the webmaster</a> by
 				Wednesday evening prior to the next quarter starting. If you miss Week 8, you have until the night
@@ -220,7 +219,7 @@
 				present, your threesome can tee off at its appropriate time, assuming that all of you are there and
 				ready to play.</p>
 
-			<h3 class="font-semibold mb-2 lg:text-xl mt-6" id="scoring">Scoring</h3>
+			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100! mt-6" id="scoring">Scoring</h3>
 			<p class="mb-3">Points are awarded as follows:</p>
 			<ul class="mb-4 list-inside list-disc pl-6">
 				<li>2 points for the winner of a match</li>
@@ -234,7 +233,7 @@
 				their opponents on Team 2 do show up and play, both of the Team 2 players get 2 points. The same applies
 				if all members of a team do not show up.</p>
 
-			<h3 class="font-semibold mb-2 lg:text-xl mt-6" id="team-championship">Team Championship</h3>
+			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100! mt-6" id="team-championship">Team Championship</h3>
 			<p class="mb-3">Each team accumulates points based on matches won, lost or tied. To determine the Team
 				Champion for the year, a playoff system has been devised. In the first round, the team finishing the
 				season in 1st place will play the team finishing the season in 4th place and the team finishing the
@@ -257,7 +256,7 @@
 			</p>
 			<p class="mb-3">There are no substitutes allowed for playoff matches.</p>
 
-			<h3 class="font-semibold mb-2 lg:text-xl mt-6" id="individual-championship">Individual Championship</h3>
+			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100! mt-6" id="individual-championship">Individual Championship</h3>
 			<p class="mb-3">The final event of each season is the Individual League Championship followed by a dinner,
 				wives are welcome and encouraged to attend.</p>
 			<p class="mb-3">The Individual Championship is an 18-hole, stroke-play event played on a Sunday in
@@ -265,7 +264,7 @@
 			<p class="mb-3">In the event of a tie for the championship, the winner will be determined by starting with
 				the #1 handicap hole (and up, as needed) to determine who had the low net score on that hole.</p>
 
-			<h3 class="font-semibold mb-2 lg:text-xl mt-6" id="budget">Budget and End of Year Payouts</h3>
+			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100! mt-6" id="budget">Budget and End of Year Payouts</h3>
 			<p class="mb-3">All the payouts will be at the dinner following the League Championship at the end of the
 				year with the exception of payouts for the Snowball Tournament and weekly games.</p>
 			<p class="mb-3">Dues are <strong>$70</strong> per person for a total of <strong>$1,680</strong>. Payouts are
@@ -273,49 +272,49 @@
 
 			<div class="overflow-x-auto">
 				<table class="table table-bordered w-full mb-8">
-					<tr>
-						<td>Weekly Games ($25 x 20 Weeks)</td>
-						<td>$500</td>
+					<tr class="dark:bg-zinc-800!">
+						<td class="dark:text-zinc-50!">Weekly Games ($25 x 20 Weeks)</td>
+						<td class="dark:text-zinc-50!">$500</td>
 					</tr>
-					<tr>
-						<td>Team Playoff Champions:</td>
-						<td>$120 ($30/player)</td>
+					<tr class="dark:bg-zinc-800!">
+						<td class="dark:text-zinc-50!">Team Playoff Champions:</td>
+						<td class="dark:text-zinc-50!">$120 ($30/player)</td>
 					</tr>
-					<tr>
-						<td>Individual Points Winner:</td>
-						<td>$25</td>
+					<tr class="dark:bg-zinc-800!">
+						<td class="dark:text-zinc-50!">Individual Points Winner:</td>
+						<td class="dark:text-zinc-50!">$25</td>
 					</tr>
-					<tr>
-						<td>Snowball Tournament 1st Place:</td>
-						<td>$100</td>
+					<tr class="dark:bg-zinc-800!">
+						<td class="dark:text-zinc-50!">Snowball Tournament 1st Place:</td>
+						<td class="dark:text-zinc-50!">$100</td>
 					</tr>
-					<tr>
-						<td>Individual Tournament 1st Place:</td>
-						<td>$150</td>
+					<tr class="dark:bg-zinc-800!">
+						<td class="dark:text-zinc-50!">Individual Tournament 1st Place:</td>
+						<td class="dark:text-zinc-50!">$150</td>
 					</tr>
-					<tr>
-						<td>Individual Tournament 2nd Place:</td>
-						<td>$100</td>
+					<tr class="dark:bg-zinc-800!">
+						<td class="dark:text-zinc-50!">Individual Tournament 2nd Place:</td>
+						<td class="dark:text-zinc-50!">$100</td>
 					</tr>
-					<tr>
-						<td>Individual Tournament 3rd Place:</td>
-						<td>$50</td>
+					<tr class="dark:bg-zinc-800!">
+						<td class="dark:text-zinc-50!">Individual Tournament 3rd Place:</td>
+						<td class="dark:text-zinc-50!">$50</td>
 					</tr>
-					<tr>
-						<td>Individual Tournament Closest to Pin (#6 and #17):</td>
-						<td>$40 ($20 each)</td>
+					<tr class="dark:bg-zinc-800!">
+						<td class="dark:text-zinc-50!">Individual Tournament Closest to Pin (#6 and #17):</td>
+						<td class="dark:text-zinc-50!">$40 ($20 each)</td>
 					</tr>
-					<tr>
-						<td>Individual Tournament Dinner &amp; Tip:</td>
-						<td>$400</td>
+					<tr class="dark:bg-zinc-800!">
+						<td class="dark:text-zinc-50!">Individual Tournament Dinner &amp; Tip:</td>
+						<td class="dark:text-zinc-50!">$400</td>
 					</tr>
-					<tr>
-						<td>League Web Fee:</td>
-						<td>$165</td>
+					<tr class="dark:bg-zinc-800!">
+						<td class="dark:text-zinc-50!">League Web Fee:</td>
+						<td class="dark:text-zinc-50!">$165</td>
 					</tr>
-					<tr>
-						<td class="font-bold">Total:</td>
-						<td class="font-bold">$1,660</td>
+					<tr class="dark:bg-zinc-800!">
+						<td class="font-bold dark:text-zinc-50!">Total:</td>
+						<td class="font-bold dark:text-zinc-50!">$1,660</td>
 					</tr>
 				</table>
 			</div>

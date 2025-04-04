@@ -16,7 +16,7 @@
 						</thead>
 						<tbody class="divide-y divide-gray-200">
 							@foreach ($year->playerStandings(35) as $player)
-								<tr class="even:bg-white odd:bg-zinc-50/50">
+								<tr class="even:bg-white odd:bg-zinc-50/50 dark:bg-zinc-700!!">
 									<td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-zinc-900 sm:pl-6">{{ $player->points_rank }}</td>
 									<td class="px-3 py-4 text-sm whitespace-nowrap text-zinc-500"><a class="font-semibold underline hover:no-underline" href="{{ route('player-score', ['player' => $player->id]) }}">{{ $player->user->name }}</a></td>
 									<td class="px-3 py-4 text-sm whitespace-nowrap text-zinc-500">{{ $player->won }}</td>

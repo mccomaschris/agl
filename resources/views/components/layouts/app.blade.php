@@ -40,7 +40,7 @@
 	@fluxAppearance
 </head>
 <body
-	class="h-screen font-sans mb-20 pb-10 bg-zinc-100 @yield('body-css')"
+	class="font-sans mb-20 pb-10 @yield('body-css') [:where(&amp;)]:bg-zinc-100 [:where(&amp;)]:dark:bg-zinc-900 antialiased min-h-screen theme-accent-blue"
 	x-data="{ mobileOpen: false }"
 >
     <div id="app" class="pb-12">

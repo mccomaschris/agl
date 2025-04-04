@@ -26,7 +26,7 @@
     <x-table.tbody>
         @foreach ($playerKeys as $currentPlayerKey)
             @php
-                $rowBgClass = $loop->odd ? 'bg-zinc-50' : 'border-b-4 border-zinc-500';
+                $rowBgClass = $loop->odd ? 'bg-zinc-50 dark:bg-zinc-800!' : 'border-b-4 border-zinc-500 dark:bg-zinc-700!';
             @endphp
 
             <x-table.tr-body class="{{ $rowBgClass }}">
@@ -44,14 +44,14 @@
                                 @if ($currentPlayerKey === 'fourPlayer')
                                     <x-tee :color="$player->tee_selection" />
                                 @endif
-                                <a class="font-semibold underline hover:no-underline" wire:navigate href="{{ route('player-score', ['player' => $player->id]) }}">
+                                <a class="font-semibold underline hover:no-underline dark:text-green-400!" wire:navigate href="{{ route('player-score', ['player' => $player->id]) }}">
                                     {{ $player->user->name }}
                                 </a>
                             </div>
                         @endif
                     </x-table.td>
 
-                    <x-table.td class="text-center w-[10%] {{ $team === 'teamA' ? 'border-r border-zinc-200' : '' }}">
+                    <x-table.td class="text-center w-[10%] {{ $team === 'teamA' ? 'border-r border-zinc-200' : '' }} dark:text-zinc-200!">
                         {{ $isSub ? '-' : $player->hc_current }}
                     </x-table.td>
                 @endforeach

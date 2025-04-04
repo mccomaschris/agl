@@ -20,7 +20,7 @@
 					<span class="{{ $loop->index < 4 ? 'text-green-500' : 'text-red-500 ' }} font-bold">{{ $team->rank }}</span>
 				</x-table.td>
 				<x-table.td class="text-left! border-r-0!">
-					<span class="font-bold text-zinc-700">Team {{ $team->name }}</span>
+					<span class="font-bold text-zinc-700">Team {{ $team->name }}a</span>
 					<br>
 					<span class="text-xs">
 					@foreach ($team->players as $player)

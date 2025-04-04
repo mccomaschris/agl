@@ -5,7 +5,7 @@ use Livewire\Volt\Component;
 use App\Models\User;
 use App\Jobs\ResetPassword;
 
-new class extends \Livewire\Volt\Component {
+new class extends Component {
     public User $user;
 
 	public $username;

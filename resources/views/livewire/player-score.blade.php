@@ -66,24 +66,24 @@
 					<x-table.td>Dbg+</x-table.td>
 				</x-table.tr-body>
 				<x-table.tr-body>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">Totals</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($season_avg->hole_1, 1, '.', ',') }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($season_avg->hole_2, 1, '.', ',') }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($season_avg->hole_3, 1, '.', ',') }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($season_avg->hole_4, 1, '.', ',') }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($season_avg->hole_5, 1, '.', ',') }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($season_avg->hole_6, 1, '.', ',') }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($season_avg->hole_7, 1, '.', ',') }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($season_avg->hole_8, 1, '.', ',') }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($season_avg->hole_9, 1, '.', ',') }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($season_avg->gross, 1, '.', ',') }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($season_avg->gross_par, 1, '.', ',') }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($season_avg->net, 1, '.', ',') }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ number_format($season_avg->net_par, 1, '.', ',') }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ $season_avg->points ? $season_avg->points : '0' }}</x-table.td>
-					<x-table.td class="font-bold text-yellow-800! bg-zinc-100!">{{ $season_avg->eagle ? $season_avg->eagle : '0' }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">Totals</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($season_avg->hole_1, 1, '.', ',') }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($season_avg->hole_2, 1, '.', ',') }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($season_avg->hole_3, 1, '.', ',') }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($season_avg->hole_4, 1, '.', ',') }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($season_avg->hole_5, 1, '.', ',') }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($season_avg->hole_6, 1, '.', ',') }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($season_avg->hole_7, 1, '.', ',') }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($season_avg->hole_8, 1, '.', ',') }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($season_avg->hole_9, 1, '.', ',') }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($season_avg->gross, 1, '.', ',') }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($season_avg->gross_par, 1, '.', ',') }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($season_avg->net, 1, '.', ',') }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ number_format($season_avg->net_par, 1, '.', ',') }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ $season_avg->points ? $season_avg->points : '0' }}</x-table.td>
+					<x-table.td class="font-bold text-yellow-800! bg-zinc-100! dark:bg-zinc-800! dark:text-yellow-100!">{{ $season_avg->eagle ? $season_avg->eagle : '0' }}</x-table.td>
 					<x-table.td class="font-bold text-green-800! bg-zinc-100!">{{ $season_avg->birdie ? $season_avg->birdie : '0' }}</x-table.td>
-					<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ $season_avg->par ? $season_avg->par : '0' }}</x-table.td>
+					<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ $season_avg->par ? $season_avg->par : '0' }}</x-table.td>
 					<x-table.td class="font-bold text-red-800! bg-zinc-100!">{{ $season_avg->bogey ? $season_avg->bogey : '0' }}</x-table.td>
 					<x-table.td class="font-bold text-blue-800! bg-zinc-100!">{{ $season_avg->double_bogey ? $season_avg->double_bogey : '0' }}</x-table.td>
 				</x-table.tr-body>

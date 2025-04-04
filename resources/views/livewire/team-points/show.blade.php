@@ -103,11 +103,11 @@ new class extends Component {
 					@endforeach
 					<x-table.tr-body>
 						<x-table.td colspan="21" class="font-bold text-zinc-900! text-right!">Team Total</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ $team->points }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!"></x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ $team->won }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ $team->lost }}</x-table.td>
-						<x-table.td class="font-bold text-zinc-900! bg-zinc-100!">{{ $team->tied }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ $team->points }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!"></x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ $team->won }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ $team->lost }}</x-table.td>
+						<x-table.td class="font-bold text-zinc-900! bg-zinc-100! dark:text-zinc-50! dark:bg-zinc-800!">{{ $team->tied }}</x-table.td>
 						<x-table.td class="font-bold text-zinc-900!"></x-table.td>
 					</x-table.tr-body>
 				</x-table.tbody>
