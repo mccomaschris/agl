@@ -3,7 +3,6 @@
 use Livewire\Attributes\{Layout, Title, Validate};
 use App\Jobs\UpdateHandicaps;
 use App\Jobs\UpdatePlayerStats;
-use App\Jobs\UpdateRecordVsOpponents;
 use App\Jobs\UpdateRoundStats;
 use Livewire\Volt\Component;
 use App\Models\Player;
@@ -87,11 +86,18 @@ new class extends Component {
     }
 
 	public function calculateGross()
-    {
-        $this->gross = $this->hole_1 + $this->hole_2 + $this->hole_3 + $this->hole_4 +
-                       $this->hole_5 + $this->hole_6 + $this->hole_7 + $this->hole_8 +
-                       $this->hole_9;
-    }
+	{
+		$this->gross =
+			(int) $this->hole_1 +
+			(int) $this->hole_2 +
+			(int) $this->hole_3 +
+			(int) $this->hole_4 +
+			(int) $this->hole_5 +
+			(int) $this->hole_6 +
+			(int) $this->hole_7 +
+			(int) $this->hole_8 +
+			(int) $this->hole_9;
+	}
 
 	public function save()
     {
@@ -117,7 +123,6 @@ new class extends Component {
         UpdateRoundStats::withChain([
             new UpdatePlayerStats($this->score->player),
             new UpdateHandicaps($this->score->player),
-            new UpdateRecordVsOpponents($year),
         ])->dispatch($this->score);
 
 		Flux::toast(
