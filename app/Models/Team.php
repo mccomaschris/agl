@@ -15,7 +15,7 @@ class Team extends Model
     protected $appends = ['one_player_last'];
 
     protected $fillable = [
-        'name', 'year_id', 'champions',
+        'name', 'year_id', 'champions', 'additional_points'
     ];
 
     public function year(): BelongsTo

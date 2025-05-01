@@ -68,6 +68,7 @@ Route::middleware([IsAdmin::class])->group(function () {
 	Volt::route('/admin/users/{user}', 'admin.users.show')->name('admin.users.show');
 	Volt::route('/admin/years', 'admin.years.index')->name('admin.years.index');
 	Volt::route('/admin/weeks', 'admin.weeks.index')->name('admin.weeks.index');
+	Volt::route('/admin/teams', 'admin.teams.index')->name('admin.teams.index');
 	Volt::route('/admin/scores/week/{week}/edit', 'admin.scores.edit')->name('week-score-edit');
 	// Route::get('scores/week/{week}/edit', EditScores::class)->name('week-score-edit');
 });

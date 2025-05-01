@@ -24,6 +24,7 @@
 			<flux:navlist.item icon="users" href="{{ route('admin.users.index') }}">Users</flux:navlist.item>
 			<flux:navlist.item icon="calendar" href="{{ route('admin.years.index') }}">Years</flux:navlist.item>
 			<flux:navlist.item icon="calendar-days" href="{{ route('admin.weeks.index') }}">Weeks</flux:navlist.item>
+			<flux:navlist.item icon="user-group" href="{{ route('admin.teams.index') }}">Teams</flux:navlist.item>
 		</flux:navlist>
 
 		<flux:spacer />
