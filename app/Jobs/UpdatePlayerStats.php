@@ -115,20 +115,18 @@ class UpdatePlayerStats implements ShouldQueue
             $week_order = $score->week->week_order;
 
             if (!$score->absent && $score->hole_1) {
-                if (!$score->substitute_id) {
-                    $points = $score->points;
-                    switch ($points) {
-                        case 0:
-                            $player->lost++;
-                            break;
-                        case 1:
-                            $player->tied++;
-                            break;
-                        case 2:
-                            $player->won++;
-                            break;
-                    }
-                }
+				$points = $score->points;
+				switch ($points) {
+					case 0:
+						$player->lost++;
+						break;
+					case 1:
+						$player->tied++;
+						break;
+					case 2:
+						$player->won++;
+						break;
+				}
                 $player->save();
             }
         }
