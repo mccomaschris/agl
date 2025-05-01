@@ -246,6 +246,7 @@ class UpdatePlayerStats implements ShouldQueue
 
         // Rank Team By Stats
         $teams = Team::where('year_id', $year->id)->get();
+
         foreach ($teams as $team) {
             // Reset Each Team
             $team->won = 0;
@@ -257,25 +258,24 @@ class UpdatePlayerStats implements ShouldQueue
             $team->p3_points = 0;
             $team->p4_points = 0;
 
-            $players = Player::where('team_id', $team->id)->where('substitute', '0')->get();
+            $players = Player::where('team_id', $team->id)->get();
 
             foreach ($players as $player) {
                 $team->won += $player->won;
                 $team->lost += $player->lost;
                 $team->tied += $player->tied;
 
-
                 if ($player->position == 1) {
-                    $score = Score::where('player_id', $player->id)->where('substitute_id', '>', 0)->sum('points');
+                    $score = Score::where('player_id', $player->id)->sum('points');
                     $team->p1_points += ($player->points + $score);
                 } elseif ($player->position == 2) {
-                    $score = Score::where('player_id', $player->id)->where('substitute_id', '>', 0)->sum('points');
+                    $score = Score::where('player_id', $player->id)->sum('points');
                     $team->p2_points += ($player->points + $score);
                 } elseif ($player->position == 3) {
-                    $score = Score::where('player_id', $player->id)->where('substitute_id', '>', 0)->sum('points');
+                    $score = Score::where('player_id', $player->id)->sum('points');
                     $team->p3_points += ($player->points + $score);
                 } elseif ($player->position == 4) {
-                    $score = Score::where('player_id', $player->id)->where('substitute_id', '>', 0)->sum('points');
+                    $score = Score::where('player_id', $player->id)->sum('points');
                     $team->p4_points += ($player->points + $score);
                 }
             }
