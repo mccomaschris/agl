@@ -37,7 +37,7 @@ class extends Component {
 
 			<flux:navmenu>
 				@foreach ($weeks as $item)
-					<flux:navmenu.item href="/scores/week/{{ $item->id }}/edit" wire:navigate class="{{ $item->id === $week->id ? 'text-green-700! bg-zinc-50!' : '' }}">Week {{ $item->week_order }} - {{ date('F d, Y', strtotime($item->week_date)) }} Results</flux:navmenu.item>
+					<flux:navmenu.item href="{{ route('week-score-edit', ['week' => $item]) }}" wire:navigate class="{{ $item->id === $week->id ? 'text-green-700! bg-zinc-50!' : '' }}">Week {{ $item->week_order }} - {{ date('F d, Y', strtotime($item->week_date)) }} Results</flux:navmenu.item>
 				@endforeach
 			</flux:navmenu>
 		</flux:dropdown>
