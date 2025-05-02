@@ -43,6 +43,14 @@
 		@endif
 	@endunless
 
+	@if($week->notes)
+		<flux:callout class="mb-12">
+			<flux:callout.heading class="flex gap-2 @max-md:flex-col items-start">
+				Note:
+				<flux:text>{{ $week->notes }}</flux:text>
+			</flux:callout.heading>
+		</flux:callout>
+	@endif
     <div class="w-full mb-8 space-y-2">
 		<flux:heading size="lg">Matchup #1</flux:heading>
 		<x-tables.weekly>

@@ -21,6 +21,16 @@ new class extends Component {
 	public $c_second_id = '';
 	public $ignore_scores = false;
 	public $back_nine = false;
+	public $notes = '';
+
+	#[Validate('integer|nullable')]
+	public $absent;
+
+	#[Validate('integer|nullable')]
+	public $weekly_winner;
+
+	#[Validate('integer|nullable')]
+	public $substitute_id;
 
 	public function rules()
     {
@@ -37,6 +47,7 @@ new class extends Component {
 			'c_second_id' => ['required'],
 			'ignore_scores' => ['nullable', 'boolean'],
 			'back_nine' => ['nullable', 'boolean'],
+			'notes' => ['nullable', 'string'],
 		];
     }
 
@@ -54,6 +65,7 @@ new class extends Component {
 		$this->c_second_id = $this->week->c_second_id;
 		$this->ignore_scores = $this->week->ignore_scores;
 		$this->back_nine = $this->week->back_nine;
+		$this->notes = $this->week->notes;
     }
 
     public function edit()
@@ -78,6 +90,7 @@ new class extends Component {
 			'c_second_id' => $this->c_second_id,
 			'ignore_scores' => $this->ignore_scores ? 1 : 0,
 			'back_nine' => $this->back_nine ? 1 : 0,
+			'notes' => $this->notes,
 		]);
 
         $this->modal('week-edit')->close();
@@ -181,6 +194,8 @@ new class extends Component {
 				<flux:checkbox wire:model="ignore_scores" label="Ignore Week" />
 
 				<flux:checkbox wire:model="back_nine" label="Back Nine" />
+
+				<flux:textarea wire:model="notes" label="Week notes" />
 
                 <div class="flex">
                     <flux:spacer />
