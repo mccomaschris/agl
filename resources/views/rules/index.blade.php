@@ -163,7 +163,7 @@
 				week. In effect, the schedule gets pushed back one week. If rain begins after play begins, the match
 				will be counted as complete only if all groups have completed at least 5 holes. If 5 holes are not
 				completed by all groups, the match is not counted. If a match is completed after 5 holes, the scoring
-				and handicap calculation will be based on a player's current handicap.</p>
+				and handicap calculation will be based on a player's current handicap (no holes can be won/lost based on handicap scoring).</p>
 			<p class="mb-3">In the event of rain before a match begins, it is each players responsibility to be at the
 				course and ready to play. If, however, you have been called and informed that the match has been
 				cancelled or you have called the course and found that the course is closed, you need not show up. If
