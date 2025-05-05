@@ -13,7 +13,7 @@ use Flux\Flux as FluxFlux;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class EditScore extends Component
+class OldEditScore extends Component
 {
     public $scoreId;
 
