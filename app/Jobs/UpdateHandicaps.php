@@ -48,10 +48,11 @@ class UpdateHandicaps implements ShouldQueue
 		# if i count 8 scores, but i only have 7 so far, use 7
 		$deno = $half_scores;
 
-		Log::debug('Quarter: ' . $qtr . ' Total Scores: ' . $total_scores . ' Half Scores: ' . $half_scores . ' Deno: ' . $deno . ' Scores to Count: ' . $scores_to_count);
-
         $total_score = (array_sum(array_slice($scores, 0, $half_scores, true)));
-        $hc = round(($total_score / $deno) - 37);
+
+		$sum = ($total_score / $deno);
+		Log::debug('Sum: ' . $sum);
+        $hc = round($sum - 37);
         return $hc;
     }
 
