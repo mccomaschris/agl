@@ -273,7 +273,9 @@ new class extends Component {
 						</div>
 					</div>
 
-					<x-scorecard :scores="$scoresByQuarter[$quarter]" :averages="$quarterAverages[$quarter]" />
+					{{-- <x-scorecard :scores="$scoresByQuarter[$quarter]" :averages="$quarterAverages[$quarter]" /> --}}
+					<x-scorecard :scores="$scoresByQuarter[$quarter] ?? collect()" :averages="$quarterAverages[$quarter] ?? null" />
+
 				</div>
 			@endforeach
 
