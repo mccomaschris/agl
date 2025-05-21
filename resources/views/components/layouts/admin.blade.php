@@ -12,13 +12,11 @@
 	<link rel="stylesheet" href="{{ twcss('/css/admin.css') }}">
 	@fluxAppearance
 </head>
-<body class="min-h-screen bg-white dark:bg-zinc-800">
+<body class="min-h-screen bg-white dark:bg-zinc-800 antialiased">
 	<flux:sidebar sticky stashable class="bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-700">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
-      <flux:brand href="{{ route('admin.users.index') }}" name="AGL18" class="px-2 dark:hidden" />
-		<flux:brand href="{{ route('admin.users.index') }}" name="AGL18" class="px-2 hidden dark:flex" />
 
-        <flux:brand href="{{ route('admin.users.index') }}" name="AGL18" class="px-2 dark:hidden" />
+		<flux:brand href="{{ route('admin.users.index') }}" name="AGL18" class="px-2 dark:hidden" />
 		<flux:brand href="{{ route('admin.users.index') }}" name="AGL18" class="px-2 hidden dark:flex" />
 
 		<flux:navlist variant="outline">
@@ -29,36 +27,7 @@
 			<flux:navlist.item icon="user-group" href="{{ route('admin.teams.index') }}">Teams</flux:navlist.item>
 		</flux:navlist>
 
-		<flux:spacer />
 
-		<flux:navlist.group heading="Tools">
-			<flux:navlist.item href="{{ route('home') }}">View Homepage</flux:navlist.item>
-			<div
-				x-data="{
-					clearCache() {
-							fetch('{{ route('admin.clear-cache') }}', {
-									method: 'POST',
-									headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' }
-							})
-							.then(response => response.json())
-							.then(data => {
-									if (data.success) {
-										Flux.toast({
-											heading: 'Cache Cleared',
-											text: data.message,
-											variant: 'success',
-										});
-									}
-							})
-							.catch(error => console.error('Cache clear error:', error));
-					}
-				}"
-			>
-				<flux:navlist.item @click="clearCache()" class="cursor-pointer">Clear Cache</flux:navlist.item>
-			</div>
-			<livewire:shiftweeks />
-			<livewire:weekteamrecords />
-		</flux:navlist.group>
     </flux:sidebar>
     <flux:header class="lg:hidden">
         <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
