@@ -14,9 +14,11 @@
 </head>
 <body class="min-h-screen bg-white dark:bg-zinc-800">
 	<flux:sidebar sticky stashable class="bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-700">
-		<flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
+        <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
+      <flux:brand href="{{ route('admin.users.index') }}" name="AGL18" class="px-2 dark:hidden" />
+		<flux:brand href="{{ route('admin.users.index') }}" name="AGL18" class="px-2 hidden dark:flex" />
 
-		<flux:brand href="{{ route('admin.users.index') }}" name="AGL18" class="px-2 dark:hidden" />
+        <flux:brand href="{{ route('admin.users.index') }}" name="AGL18" class="px-2 dark:hidden" />
 		<flux:brand href="{{ route('admin.users.index') }}" name="AGL18" class="px-2 hidden dark:flex" />
 
 		<flux:navlist variant="outline">
@@ -28,7 +30,6 @@
 		</flux:navlist>
 
 		<flux:spacer />
-
 
 		<flux:navlist.group heading="Tools">
 			<flux:navlist.item href="{{ route('home') }}">View Homepage</flux:navlist.item>
@@ -58,13 +59,11 @@
 			<livewire:shiftweeks />
 			<livewire:weekteamrecords />
 		</flux:navlist.group>
-	</flux:sidebar>
-
-	<flux:header class="lg:hidden">
-		<flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
-	</flux:header>
-
-	<flux:main>
+    </flux:sidebar>
+    <flux:header class="lg:hidden">
+        <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
+    </flux:header>
+    <flux:main>
 		{{ $slot }}
 	</flux:main>
 
