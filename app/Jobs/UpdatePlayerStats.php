@@ -155,6 +155,26 @@ class UpdatePlayerStats implements ShouldQueue
 
 				$player->low_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('net', '>', 0)->where('absent', 0)->where('substitute_id', 0)->min('net');
 				$player->high_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->max('net');
+
+				$averages = Score::where('score_type', 'season_avg')->where('player_id', $player->id)->first();
+
+				$averages->hole_1 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_1', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_1');
+				$averages->hole_2 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_2', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_2');
+				$averages->hole_3 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_3', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_3');
+				$averages->hole_4 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_4', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_4');
+				$averages->hole_5 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_5', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_5');
+				$averages->hole_6 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_6', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_6');
+				$averages->hole_7 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_7', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_7');
+				$averages->hole_8 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_8', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_8');
+				$averages->hole_9 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_9', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_9');
+
+				$averages->eagle = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('eagle', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('eagle');
+				$averages->birdie = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('birdie', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('birdie');
+				$averages->par = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('par', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('par');
+				$averages->bogey = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('bogey', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('bogey');
+				$averages->double_bogey = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('double_bogey', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('double_bogey');
+
+				$averages->save();
 			}
         }
 
