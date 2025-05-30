@@ -20,5 +20,5 @@ class extends Component {
 }; ?>
 
 <div>
-	<livewire:admin.device-stats />
+
 </div>
