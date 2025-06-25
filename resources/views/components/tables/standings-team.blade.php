@@ -35,7 +35,7 @@
 				<x-table.td class="hidden sm:table-cell border-r-0!  dark:text-zinc-100!">{{ $team->won }}</x-table.td>
 				<x-table.td class="hidden sm:table-cell border-r-0!  dark:text-zinc-100!">{{ $team->lost }}</x-table.td>
 				<x-table.td class="hidden sm:table-cell border-r-0!  dark:text-zinc-100!">{{ $team->tied }}</x-table.td>
-				<x-table.td class="border-r-0! px-4! lg:px-1! dark:text-zinc-100!">{{ $team->points }}</x-table.td>
+				<x-table.td class="border-r-0! px-4! lg:px-1! dark:text-zinc-100! font-bold!">{{ $team->points }}</x-table.td>
 				<x-table.td class="hidden sm:table-cell border-r-0! dark:text-zinc-100!">{{ $team->p1_points }}</x-table.td>
 				<x-table.td class="hidden sm:table-cell border-r-0! dark:text-zinc-100!">{{ $team->p2_points }}</x-table.td>
 				<x-table.td class="hidden sm:table-cell border-r-0! dark:text-zinc-100!">{{ $team->p3_points }}</x-table.td>
