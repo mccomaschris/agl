@@ -6,7 +6,7 @@
 		</div>
 
 		<div class="gap-x-2">
-			<flux:button href="/players/{{ $player->user->id }}">{{ $player->user->name }} Full History</flux:button>
+			{{-- <flux:button href="/players/{{ $player->user->id }}">{{ $player->user->name }} Full History</flux:button> --}}
 
 			@if(count($prev_seasons) > 1)
 				<flux:dropdown position="bottom" align="end">

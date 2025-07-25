@@ -166,7 +166,7 @@ new class extends Component {
 		</div>
 
 		<div class="gap-x-2">
-			<flux:button href="/players/{{ $player->user->id }}">{{ $player->user->name }} Full History</flux:button>
+			{{-- <flux:button href="/players/{{ $player->user->id }}">{{ $player->user->name }} Full History</flux:button> --}}
 
 			@if ($prev_seasons->count() > 1)
 				<flux:dropdown position="bottom" align="end">
