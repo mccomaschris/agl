@@ -10,6 +10,9 @@
 			<x-table.th>18 Hole</x-table.th>
 			<x-table.th>New Year</x-table.th>
 			<x-table.th colspan="2">Full Handicap/Rank</x-table.th>
+			@admin
+				<x-table.th colspan="2">Ten Handicap/Rank</x-table.th>
+			@endadmin
 		</x-table.tr>
 	</x-table.thead>
 	<x-table.tbody>
@@ -25,6 +28,10 @@
 				<x-table.td>{{ $player->hc_playoff }}</x-table.td>
 				<x-table.td>{{ number_format($player->hc_full, 4, '.', ',') }}</x-table.td>
 				<x-table.td>{{ $player->hc_full_rank }}</x-table.td>
+				@admin
+					<x-table.td>{{ number_format($player->hc_ten, 4, '.', ',') }}</x-table.td>
+				<x-table.td>{{ $player->hc_ten_rank }}</x-table.td>
+				@endadmin
 			</x-table.tr-body>
 		@endforeach
 	</x-table.tbody>

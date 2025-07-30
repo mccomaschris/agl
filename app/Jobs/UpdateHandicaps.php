@@ -145,6 +145,40 @@ class UpdateHandicaps implements ShouldQueue
                 $player->hc_current = $player->hc_first;
         }
 
+		$absences = Score::where('player_id', $player->id)->where('absent', true)->where('substitute_id', 0)->count();
+
+		Log::info($player->user->name . ' Absences: ' . $absences);
+
+		// Calculate hc_ten with absence-adjusted denominator
+		$gross_scores = $scores->pluck('gross')->toArray();
+		sort($gross_scores, SORT_NUMERIC);
+
+		$played_rounds = count($gross_scores);
+
+		// Only apply absence rule if player has 10 or more rounds
+		if ($played_rounds >= 10) {
+			$absences = Score::where('player_id', $player->id)
+				->where('absent', true)
+				->where('substitute_id', 0)
+				->count();
+
+			if ($absences <= 1) {
+				$deno = 10;
+			} elseif ($absences <= 3) {
+				$deno = 9;
+			} elseif ($absences <= 5) {
+				$deno = 8;
+			} else {
+				$deno = 10; // Optional: fallback if absences are too high
+			}
+		} else {
+			$deno = $played_rounds;
+		}
+
+		// Get lowest scores to use
+		$lowest_scores = array_slice($gross_scores, 0, $deno);
+		$player->hc_ten = $deno > 0 ? (array_sum($lowest_scores) / $deno) - 37 : 0;
+
         $player->save();
 
         $teams = Team::where('year_id', $year->id)->pluck('id');
@@ -167,5 +201,25 @@ class UpdateHandicaps implements ShouldQueue
             $prev = $player->hc_full;
             $player->save();
         }
+
+		$players = Player::whereIn('team_id', $teams)->where('substitute', '0')->orderBy('hc_ten', 'asc')->get();
+
+		$prev = 400;
+		$rank = 0;
+		$count = 0;
+
+		foreach ($players as $player) {
+			$count++;
+
+			if ($player->hc_ten == $prev) {
+				$player->hc_ten_rank = $rank;
+			} else {
+				$player->hc_ten_rank = $count;
+				$rank = $count;
+			}
+
+			$prev = $player->hc_ten;
+			$player->save();
+		}
     }
 }
