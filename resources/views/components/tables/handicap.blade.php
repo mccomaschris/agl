@@ -26,8 +26,12 @@
 				<x-table.td>{{ $player->hc_playoff }}</x-table.td>
 				<x-table.td>{{ $player->hc_18 }}</x-table.td>
 				<x-table.td>{{ $player->hc_playoff }}</x-table.td>
-				<x-table.td>{{ number_format($player->hc_full, 4, '.', ',') }}</x-table.td>
-				<x-table.td>{{ $player->hc_full_rank }}</x-table.td>
+				<x-table.td>
+					 {{ $player->id !== 320 ? number_format($player->hc_full, 4, '.', ',') : '' }}
+				</x-table.td>
+				<x-table.td>
+					{{ $player->id !== 320 ? $player->hc_full_rank : '' }}
+				</x-table.td>
 				@admin
 					<x-table.td>{{ number_format($player->hc_ten, 4, '.', ',') }}</x-table.td>
 				<x-table.td>{{ $player->hc_ten_rank }}</x-table.td>
