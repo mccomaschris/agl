@@ -22,6 +22,81 @@
 		</div>
 	@endif
 
+
+		<div class="flex flex-wrap mb-4">
+		<div class="w-full lg:w-1/3 mb-4 lg:pr-4">
+			<table class="table w-full mx-auto table-striped">
+				<thead>
+					<tr class="course">
+						<th class="text-center rounded-tl" colspan="2">Team 2</th>
+						<th class="text-center rounded-tr" colspan="2">Team 6</th>
+					</tr>
+				</thead>
+				<tr>
+					<td width="40%">Webb</td>
+					<td width="10%" class="text-center">0</td>
+					<td width="40%">Keeney</td>
+					<td width="10%" class="text-center">2</td>
+				</tr>
+				<tr class="border-b border-zinc-900">
+					<td width="40%">Freeman</td>
+					<td width="10%" class="text-center">5</td>
+					<td width="40%">Evans</td>
+					<td width="10%" class="text-center">5</td>
+				</tr>
+				<tr>
+					<td width="40%">S Adkins</td>
+					<td width="10%" class="text-center">6</td>
+					<td width="40%">Keyser</td>
+					<td width="10%" class="text-center">7</td>
+				</tr>
+				<tr>
+					<td width="40%">Dishman</td>
+					<td width="10%" class="text-center">7</td>
+					<td width="40%">Baumgarner</td>
+					<td width="10%" class="text-center">12</td>
+				</tr>
+			</table>
+		</div>
+		<div class="w-full lg:w-1/3">
+			<table class="table w-full mx-auto table-striped">
+				<thead>
+					<tr class="course">
+						<th class="text-center rounded-tl" colspan="2">Team 1</th>
+						<th class="text-center rounded-tr" colspan="2">Team 3</th>
+					</tr>
+				</thead>
+				<tr>
+					<td width="40%">Reed</td>
+					<td width="10%" class="text-center">-1</td>
+					<td width="40%">Bunn</td>
+					<td width="10%" class="text-center">2</td>
+				</tr>
+				<tr class="border-b border-zinc-900">
+					<td width="40%">Aliff</td>
+					<td width="10%" class="text-center">6</td>
+					<td width="40%">T Mills</td>
+					<td width="10%" class="text-center">6</td>
+				</tr>
+				<tr>
+					<td width="40%">Dumont</td>
+					<td width="10%" class="text-center">11</td>
+					<td width="40%">Chandler</td>
+					<td width="10%" class="text-center">8</td>
+				</tr>
+				<tr>
+					<td width="40%">Cutlip</td>
+					<td width="10%" class="text-center">12</td>
+					<td width="40%">Thornburg</td>
+					<td width="10%" class="text-center">13</td>
+				</tr>
+			</table>
+		</div>
+		<div class="w-full lg:w-1/3 mb-4 lg:pr-4">
+
+		</div>
+	</div>
+
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12 pb-12">
 		<div class="lg:col-span-2">
 			<div class="flex justify-between items-center">
