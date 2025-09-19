@@ -1,6 +1,10 @@
 <div class="mt-12">
-	<!-- Thundr -->
-	@if ($last_week)
+	<flux:callout color="green" icon="trophy" class="mb-12">
+		<flux:callout.heading>Congratulations!</flux:callout.heading>
+		<flux:callout.text>Congrats to Vance, Tim, Melvin and Coach for winning the 2025 championship!</flux:callout.text>
+	</flux:callout>
+
+	@if ($last_week and false)
 		<flux:callout color="green" icon="check-circle" class="mb-12">
 			<flux:callout.heading>Week {{ $last_week->week_order }} scores are up!</flux:callout.heading>
 			<flux:callout.text>You can checkout the week's <flux:callout.link href="{{ route('week-score', ['week' => $last_week->id]) }}">results</flux:callout.link>!</flux:callout.text>
@@ -22,7 +26,7 @@
 		</div>
 	@endif
 
-	<x-playoffs />
+	{{-- <x-playoffs /> --}}
 
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12 pb-12">
 		<div class="lg:col-span-2">
