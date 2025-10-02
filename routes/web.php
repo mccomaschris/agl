@@ -90,4 +90,8 @@ Route::get('/google/callback', function () {
 	}
 });
 
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok'], 200);
+});
+
 require __DIR__.'/auth.php';
