@@ -1,6 +1,6 @@
 <div class="mt-12">
 	<flux:callout color="green" icon="trophy" class="mb-12">
-		<flux:callout.heading>Congratulations!</flux:callout.heading>
+		<flux:callout.heading>Congratulations! Thundr</flux:callout.heading>
 		<flux:callout.text>Congrats to Todd Webb on winning the 2025 individual championship! Also, congrats to Vance, Tim, Melvin and Coach for winning the 2025 championship!</flux:callout.text>
 	</flux:callout>
 
