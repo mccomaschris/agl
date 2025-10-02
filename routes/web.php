@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware([IsAdmin::class])->group(function () {
 	Route::get('scorecard/print/{quarter}', [PrintScorecardController::class, 'show'])->name('scorecard.print');
-	Route::get('scores/week/{week}/edit', EditScores::class)->name('week-score-edit');
+	// Route::get('scores/week/{week}/edit', EditScores::class)->name('week-score-edit');
 
 	Volt::route('/admin/', 'admin.index')->name('admin.index');
 
@@ -70,7 +70,6 @@ Route::middleware([IsAdmin::class])->group(function () {
 	Volt::route('/admin/weeks', 'admin.weeks.index')->name('admin.weeks.index');
 	Volt::route('/admin/teams', 'admin.teams.index')->name('admin.teams.index');
 	Volt::route('/admin/scores/week/{week}/edit', 'admin.scores.edit')->name('week-score-edit');
-	// Route::get('scores/week/{week}/edit', EditScores::class)->name('week-score-edit');
 });
 
 Route::get('/google/redirect', function () {
