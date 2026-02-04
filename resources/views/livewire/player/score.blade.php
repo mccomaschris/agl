@@ -119,11 +119,8 @@ new class extends Component
     private function fetchScoresByQuarter()
     {
         return Score::select(
-            'scores.id',
             'scores.player_id',
-            'scores.foreign_key',
             'scores.foreign_key AS week_id',
-            'scores.score_type',
             'weeks.week_order', 'weeks.back_nine',
             'scores.absent', 'scores.injury', 'scores.substitute_id',
             'scores.gross', 'scores.gross_par', 'scores.net', 'scores.net_par',

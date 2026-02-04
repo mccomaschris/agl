@@ -55,20 +55,4 @@ class Score extends Model
 
         return Player::where('team_id', $opponent_team_id)->where('position', $player->position)->first();
     }
-
-    public function opponentWasAbsent(): bool
-    {
-        $opponent = $this->opponent();
-
-        if (! $opponent) {
-            return false;
-        }
-
-        $opponentScore = Score::where('player_id', $opponent->id)
-            ->where('score_type', 'weekly_score')
-            ->where('foreign_key', $this->foreign_key)
-            ->first();
-
-        return $opponentScore && $opponentScore->absent;
-    }
 }
