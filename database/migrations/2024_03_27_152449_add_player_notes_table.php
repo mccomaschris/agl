@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-		Schema::create('notes', function (Blueprint $table) {
-			$table->increments('id');
+        Schema::create('notes', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('player_id')->unsigned();
-			$table->text('note');
-			$table->boolean('active')->default(true);
-			$table->timestamps();
+            $table->text('note');
+            $table->boolean('active')->default(true);
+            $table->timestamps();
         });
     }
 

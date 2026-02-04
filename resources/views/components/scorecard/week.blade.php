@@ -63,7 +63,7 @@
         {{ $score->net_par ? number_format($score->net_par, 0, '.', ',') : '' }}
     </span><strong>
 </td>
-<td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r border-zinc-300"><strong>{{ $score->points }}</strong></td>
+<td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r border-zinc-300"><strong>{{ $score->points }}@if($score->opponentWasAbsent())<sup>*</sup>@endif</strong></td>
 <td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r text-yellow-800 dark:text-yellow-200 border-zinc-300">{{ $score->eagle}}</td>
 <td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r text-green-800 dark:text-green-200 border-zinc-300">{{ $score->birdie}}</td>
 <td class="text-center px-1 py-4 text-base! whitespace-nowrap font-bold border-r border-zinc-300">{{ $score->par}}</td>

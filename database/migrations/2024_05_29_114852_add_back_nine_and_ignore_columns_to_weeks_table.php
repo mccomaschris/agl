@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('weeks', function (Blueprint $table) {
             $table->dropColumn('ignore_scores');
-			$table->dropColumn('back_nine');
+            $table->dropColumn('back_nine');
         });
     }
 };

@@ -1,33 +1,34 @@
 <?php
 
+use App\Models\Note;
+use App\Models\Player;
+use App\Models\PlayerRecord;
+use App\Models\Score;
 use Illuminate\View\View;
 use Livewire\Volt\Component;
-use App\Models\Score;
-use App\Models\Player;
-use App\Models\Year;
-use App\Models\Week;
-use App\Models\Note;
-use Illuminate\Support\Facades\DB;
 
-new class extends Component {
-	public Player $player;
+new class extends Component
+{
+    public Player $player;
 
-	public $totalScores;
+    public $totalScores;
+
     public $handicapCount;
+
     public $handicapScores;
 
-	public function rendering(View $view)
+    public function rendering(View $view)
     {
-        $view->title($this->player->user->name . ' ' . $this->player->year->name . ' Scores');
+        $view->title($this->player->user->name.' '.$this->player->year->name.' Scores');
     }
 
-	public function mount(Player $player)
-	{
-		$this->player = $player;
+    public function mount(Player $player)
+    {
+        $this->player = $player;
         $this->calculateHandicapScores();
-	}
+    }
 
-	public function calculateHandicapScores()
+    public function calculateHandicapScores()
     {
         // Get all valid scores
         $scores = $this->player->scores
@@ -40,9 +41,9 @@ new class extends Component {
         $this->handicapScores = $scores->take($this->handicapCount);
     }
 
-	private function baseQuery()
+    private function baseQuery()
     {
-        return Score::selectRaw("
+        return Score::selectRaw('
             player_id,
             ROUND(AVG(gross), 1) AS avg_gross,
             ROUND(AVG(gross_par), 1) AS avg_gross_par,
@@ -63,10 +64,10 @@ new class extends Component {
             AVG(hole_7) AS hole_7,
             AVG(hole_8) AS hole_8,
             AVG(hole_9) AS hole_9
-        ")
-        ->join('weeks', 'scores.foreign_key', '=', 'weeks.id')
-        ->where('scores.player_id', $this->player->id)
-        ->where('scores.score_type', 'weekly_score');
+        ')
+            ->join('weeks', 'scores.foreign_key', '=', 'weeks.id')
+            ->where('scores.player_id', $this->player->id)
+            ->where('scores.score_type', 'weekly_score');
     }
 
     private function fetchQuarterAverages()
@@ -80,14 +81,14 @@ new class extends Component {
                     WHEN weeks.week_order BETWEEN 16 AND 20 THEN 'qtr_4'
                 END AS quarter
             ")
-			->where('scores.absent', false)
-			->where('scores.injury', false)
-			->where(function ($query) {
-				$query->where('weeks.back_nine', false)->orWhereNull('weeks.back_nine');
-			})
-			->where(function ($query) {
-				$query->whereNull('scores.substitute_id')->orWhere('scores.substitute_id', 0);
-			})
+            ->where('scores.absent', false)
+            ->where('scores.injury', false)
+            ->where(function ($query) {
+                $query->where('weeks.back_nine', false)->orWhereNull('weeks.back_nine');
+            })
+            ->where(function ($query) {
+                $query->whereNull('scores.substitute_id')->orWhere('scores.substitute_id', 0);
+            })
             ->groupBy('quarter', 'scores.player_id')
             ->get()
             ->keyBy('quarter');
@@ -96,14 +97,14 @@ new class extends Component {
     private function fetchAllAverages()
     {
         return $this->baseQuery()
-			->where('scores.absent', false)
-			->where('scores.injury', false)
-			->where(function ($query) {
-				$query->where('weeks.back_nine', false)->orWhereNull('weeks.back_nine');
-			})
-			->where(function ($query) {
-				$query->whereNull('scores.substitute_id')->orWhere('scores.substitute_id', 0);
-			})
+            ->where('scores.absent', false)
+            ->where('scores.injury', false)
+            ->where(function ($query) {
+                $query->where('weeks.back_nine', false)->orWhereNull('weeks.back_nine');
+            })
+            ->where(function ($query) {
+                $query->whereNull('scores.substitute_id')->orWhere('scores.substitute_id', 0);
+            })
             ->selectRaw("'all' AS quarter")
             ->groupBy('player_id')
             ->first() ?? (object) [
@@ -111,34 +112,44 @@ new class extends Component {
                 'total_points' => null, 'total_birdies' => null, 'total_eagles' => null, 'total_pars' => null,
                 'total_bogeys' => null, 'total_double_bogeys' => null,
                 'hole_1' => null, 'hole_2' => null, 'hole_3' => null, 'hole_4' => null,
-                'hole_5' => null, 'hole_6' => null, 'hole_7' => null, 'hole_8' => null, 'hole_9' => null
+                'hole_5' => null, 'hole_6' => null, 'hole_7' => null, 'hole_8' => null, 'hole_9' => null,
             ];
     }
 
     private function fetchScoresByQuarter()
     {
         return Score::select(
+            'scores.id',
             'scores.player_id',
+            'scores.foreign_key',
             'scores.foreign_key AS week_id',
+            'scores.score_type',
             'weeks.week_order', 'weeks.back_nine',
-			'scores.absent', 'scores.injury', 'scores.substitute_id',
+            'scores.absent', 'scores.injury', 'scores.substitute_id',
             'scores.gross', 'scores.gross_par', 'scores.net', 'scores.net_par',
             'scores.points', 'scores.birdie', 'scores.eagle', 'scores.par',
             'scores.bogey', 'scores.double_bogey',
             'scores.hole_1', 'scores.hole_2', 'scores.hole_3', 'scores.hole_4',
             'scores.hole_5', 'scores.hole_6', 'scores.hole_7', 'scores.hole_8', 'scores.hole_9'
         )
-        ->join('weeks', 'scores.foreign_key', '=', 'weeks.id')
-        ->where('scores.player_id', $this->player->id)
-        ->where('scores.score_type', 'weekly_score')
-        ->orderBy('weeks.week_order')
-        ->get()
-        ->groupBy(function ($score) {
-            if ($score->week_order <= 5) return 'qtr_1';
-            if ($score->week_order <= 10) return 'qtr_2';
-            if ($score->week_order <= 15) return 'qtr_3';
-            return 'qtr_4';
-        });
+            ->join('weeks', 'scores.foreign_key', '=', 'weeks.id')
+            ->where('scores.player_id', $this->player->id)
+            ->where('scores.score_type', 'weekly_score')
+            ->orderBy('weeks.week_order')
+            ->get()
+            ->groupBy(function ($score) {
+                if ($score->week_order <= 5) {
+                    return 'qtr_1';
+                }
+                if ($score->week_order <= 10) {
+                    return 'qtr_2';
+                }
+                if ($score->week_order <= 15) {
+                    return 'qtr_3';
+                }
+
+                return 'qtr_4';
+            });
     }
 
     public function with(): array
@@ -154,6 +165,10 @@ new class extends Component {
                 ->where('weekly_winner', 1)
                 ->orderBy('id', 'asc')
                 ->get(),
+            'opponentRecords' => PlayerRecord::with('opponent.user')
+                ->where('player_id', $this->player->id)
+                ->get()
+                ->sortByDesc(fn ($r) => $r->won - $r->lost),
         ];
     }
 }; ?>
@@ -384,6 +399,33 @@ new class extends Component {
 					<flux:heading size="xl" class="mb-2">{{ $handicapScores->pluck('gross')->map(fn($score) => number_format($score, 0))->join(', ', ' and ') }}</flux:heading>
 				</div>
 			</div>
+
+			@if ($opponentRecords->isNotEmpty())
+				<div class="mb-6 mt-6">
+					<flux:heading size="lg" class="mb-4">Record vs Opponents</flux:heading>
+
+					<x-table>
+						<x-table.thead>
+							<x-table.tr>
+								<x-table.th class="text-left">Opponent</x-table.th>
+								<x-table.th class="text-center">W</x-table.th>
+								<x-table.th class="text-center">L</x-table.th>
+								<x-table.th class="text-center">T</x-table.th>
+							</x-table.tr>
+						</x-table.thead>
+						<x-table.tbody>
+							@foreach ($opponentRecords as $record)
+								<x-table.tr-body>
+									<x-table.td class="text-left">{{ $record->opponent->user->name }}</x-table.td>
+									<x-table.td class="text-center text-green-600 dark:text-green-400">{{ $record->won }}</x-table.td>
+									<x-table.td class="text-center text-red-600 dark:text-red-400">{{ $record->lost }}</x-table.td>
+									<x-table.td class="text-center text-zinc-500">{{ $record->tied }}</x-table.td>
+								</x-table.tr-body>
+							@endforeach
+						</x-table.tbody>
+					</x-table>
+				</div>
+			@endif
 		</div>
 	</div>
 </div>

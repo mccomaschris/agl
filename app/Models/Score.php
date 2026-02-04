@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-use Cache;
-use DB;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Score extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
     protected $guarded = [];
 
@@ -56,5 +54,21 @@ class Score extends Model
         }
 
         return Player::where('team_id', $opponent_team_id)->where('position', $player->position)->first();
+    }
+
+    public function opponentWasAbsent(): bool
+    {
+        $opponent = $this->opponent();
+
+        if (! $opponent) {
+            return false;
+        }
+
+        $opponentScore = Score::where('player_id', $opponent->id)
+            ->where('score_type', 'weekly_score')
+            ->where('foreign_key', $this->foreign_key)
+            ->first();
+
+        return $opponentScore && $opponentScore->absent;
     }
 }

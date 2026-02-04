@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('teams', function (Blueprint $table) {
-			$table->integer('additional_points')->nullable()->default(0)->after('points');
+            $table->integer('additional_points')->nullable()->default(0)->after('points');
         });
     }
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('players', function (Blueprint $table) {
             $table->decimal('hc_ten', 8, 5)->default(0);
-			$table->integer('hc_ten_rank')->default(0);
+            $table->integer('hc_ten_rank')->default(0);
         });
     }
 
