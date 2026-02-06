@@ -7,13 +7,13 @@ use Livewire\Component;
 
 class Standings extends Component
 {
-	public Year $year;
+    public Year $year;
 
     public function render()
     {
         return view('livewire.standings', [
-			'years' => Year::orderBy('name', 'desc')->get(),
+            'years' => Year::orderBy('name', 'desc')->get(),
 
-		]);
+        ]);
     }
 }

@@ -2,48 +2,51 @@
 
 namespace App\Console\Commands;
 
+use App\Player;
+use App\PlayerRecord;
+use App\Score;
 use App\Team;
-use App\User;
 use App\Week;
 use App\Year;
-use App\Score;
-use App\Player;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use \Illuminate\Database\Eloquent\Factory;
-use App\PlayerRecord;
 
-class UpdateStats extends Command {
-	/**
-	 * The name and signature of the console command.
-	 *
-	 * @var string
-	 */
-	protected $signature = 'agl:stats {--year=}';
+class UpdateStats extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'agl:stats {--year=}';
 
-	/**
-	 * The console command description.
-	 *
-	 * @var string
-	 */
-	protected $description = 'Update player and team stats for a given year.';
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Update player and team stats for a given year.';
 
-	/**
-	 * Create a new command instance.
-	 *
-	 * @return void
-	 */
-	public function __construct() {
-		parent::__construct();
-	}
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function avgScores($array, $key)
     {
-        if (count($array) == 0 ) return 0;
+        if (count($array) == 0) {
+            return 0;
+        }
         $sum = 0;
         foreach ($array as $k => $v) {
             $sum += $v[$key];
         }
+
         return $sum / count($array);
     }
 
@@ -53,6 +56,7 @@ class UpdateStats extends Command {
         foreach ($array as $k => $v) {
             $sum += $v[$key];
         }
+
         return $sum;
     }
 
@@ -77,27 +81,36 @@ class UpdateStats extends Command {
         $bogey = $this->sumScores($scores, 'bogey');
         $double_bogey = $this->sumScores($scores, 'double_bogey');
 
-        if ($net > 0) { $net_par = $net - 37; } else { $net_par = 0;}
-        if ($gross > 0) { $gross_par = $gross - 37; } else { $gross_par = 0;}
+        if ($net > 0) {
+            $net_par = $net - 37;
+        } else {
+            $net_par = 0;
+        }
+        if ($gross > 0) {
+            $gross_par = $gross - 37;
+        } else {
+            $gross_par = 0;
+        }
 
         Score::updateOrCreate(
             ['player_id' => $player, 'score_type' => $score_type, 'foreign_key' => $year],
             ['hole_1' => $hole_1, 'hole_2' => $hole_2, 'hole_3' => $hole_3,
-             'hole_4' => $hole_4, 'hole_5' => $hole_5, 'hole_6' => $hole_6,
-             'hole_7' => $hole_7, 'hole_8' => $hole_8, 'hole_9' => $hole_9,
-             'gross' => $gross, 'gross_par' => $gross_par,
-             'net' => $net, 'net_par' => $net_par, 'points' => $points,
-             'eagle' => $eagle, 'birdie' => $birdie,
-             'par' => $par, 'bogey' => $bogey, 'double_bogey' => $double_bogey
-        ]);
+                'hole_4' => $hole_4, 'hole_5' => $hole_5, 'hole_6' => $hole_6,
+                'hole_7' => $hole_7, 'hole_8' => $hole_8, 'hole_9' => $hole_9,
+                'gross' => $gross, 'gross_par' => $gross_par,
+                'net' => $net, 'net_par' => $net_par, 'points' => $points,
+                'eagle' => $eagle, 'birdie' => $birdie,
+                'par' => $par, 'bogey' => $bogey, 'double_bogey' => $double_bogey,
+            ]);
     }
 
-	/**
-	 * Execute the console command.
-	 *
-	 * @return mixed
-	 */
-	public function handle() {
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
 
         if ($this->option('year') === null) {
             $year = Year::where('active', 1)->first();
@@ -126,14 +139,14 @@ class UpdateStats extends Command {
             $player = Player::find($score->player->id);
             $week_order = $score->week->week_order;
 
-            if (!$score->absent && $score->hole_1) {
+            if (! $score->absent && $score->hole_1) {
 
                 // Calculate Gross Score for Player Week
                 $score->gross = array_sum([
-                                    $score->hole_1, $score->hole_2, $score->hole_3,
-                                    $score->hole_4, $score->hole_5, $score->hole_6,
-                                    $score->hole_7, $score->hole_8, $score->hole_9
-                                ]);
+                    $score->hole_1, $score->hole_2, $score->hole_3,
+                    $score->hole_4, $score->hole_5, $score->hole_6,
+                    $score->hole_7, $score->hole_8, $score->hole_9,
+                ]);
 
                 // Calculate Net Score for Player Week
                 switch ($week_order) {
@@ -212,7 +225,7 @@ class UpdateStats extends Command {
                 $score->save();
 
                 // Calculate Player Record
-                if (!$score->substitute) {
+                if (! $score->substitute) {
                     $points = $score->points;
                     switch ($points) {
                         case 0:
@@ -331,7 +344,7 @@ class UpdateStats extends Command {
 
         // Rank Players by Net Average in Position Groupings
         $players = Player::whereIn('team_id', $teams)->where('net_average', '>', 0)->stats('net_average', 'asc')
-                        ->get()->groupBy('position');
+            ->get()->groupBy('position');
 
         foreach ($players as $group) {
 
@@ -363,11 +376,11 @@ class UpdateStats extends Command {
             $season_total = [];
 
             $scores = Score::where('player_id', $player->id)
-                        ->where('score_type', 'weekly_score')
-                        ->where('gross', '>', 0)
-                        ->where('absent', 0)
-                        ->where('substitute', 0)
-                        ->with('week')->get();
+                ->where('score_type', 'weekly_score')
+                ->where('gross', '>', 0)
+                ->where('absent', 0)
+                ->where('substitute', 0)
+                ->with('week')->get();
 
             foreach ($scores as $score) {
 
@@ -434,11 +447,11 @@ class UpdateStats extends Command {
         $count = 0;
 
         $teams = Team::where('year_id', $year->id)->orderBy('points', 'desc')
-                    ->orderBy('p1_points', 'desc')
-                    ->orderBy('p2_points', 'desc')
-                    ->orderBy('p3_points', 'desc')
-                    ->orderBy('p4_points', 'desc')
-                    ->get();
+            ->orderBy('p1_points', 'desc')
+            ->orderBy('p2_points', 'desc')
+            ->orderBy('p3_points', 'desc')
+            ->orderBy('p4_points', 'desc')
+            ->get();
 
         foreach ($teams as $team) {
             $count++;
@@ -464,11 +477,11 @@ class UpdateStats extends Command {
 
         foreach ($players as $player) {
             $scores = Score::where('player_id', $player->id)
-                        ->whereNotNull('absent')
-                        ->whereNotNull('injury')
-                        ->where('substitute', '0')
-                        ->whereNotNull('points')
-                        ->where('score_type', 'weekly_score')->get();
+                ->whereNotNull('absent')
+                ->whereNotNull('injury')
+                ->where('substitute', '0')
+                ->whereNotNull('points')
+                ->where('score_type', 'weekly_score')->get();
 
             foreach ($scores as $score) {
                 $week = Week::find($score->foreign_key);
@@ -498,7 +511,7 @@ class UpdateStats extends Command {
 
                 //
 
-                $this->info("Player ID " . $player->id . " vs " . $opponent->id);
+                $this->info('Player ID '.$player->id.' vs '.$opponent->id);
 
                 if ($opp_score->absent == 0) {
 
@@ -517,8 +530,7 @@ class UpdateStats extends Command {
                     $record->save();
                 }
 
-
             }
         }
-	}
+    }
 }

@@ -13,9 +13,9 @@ use Livewire\WithPagination;
 
 class UserIndex extends Component
 {
-	use WithPagination;
+    use WithPagination;
 
-	#[Validate('string|required|unique:users,username')]
+    #[Validate('string|required|unique:users,username')]
     public $username = '';
 
     #[Validate('string|required')]
@@ -24,61 +24,61 @@ class UserIndex extends Component
     #[Validate('string|email|nullable')]
     public $email = '';
 
-	#[Validate('string|nullable')]
-	public $phone = '';
+    #[Validate('string|nullable')]
+    public $phone = '';
 
     #[Validate('boolean|nullable')]
     public $admin = '';
 
-	#[Validate('boolean|nullable')]
+    #[Validate('boolean|nullable')]
     public $active = '';
 
-	#[Validate('string|nullable')]
-	public $search = '';
+    #[Validate('string|nullable')]
+    public $search = '';
 
-	public function updatedSearch()
+    public function updatedSearch()
     {
-		$this->resetPage();
+        $this->resetPage();
     }
 
-	public function remove($id)
+    public function remove($id)
     {
-		User::findOrFail($id)->delete();
+        User::findOrFail($id)->delete();
 
-		$this->resetPage();
+        $this->resetPage();
 
         Flux::modal('user-remove')->close();
     }
 
-	public function save()
+    public function save()
     {
         $this->validate();
 
-		User::create([
-			'username' => $this->username,
-			'name' => $this->name,
-			'email' => $this->email,
-			'phone' => $this->phone,
-			'admin' => $this->admin ? 1 : 0,
-			'active' => $this->active ? 1 : 0,
-			'password' => bcrypt('password'),
-		]);
+        User::create([
+            'username' => $this->username,
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'admin' => $this->admin ? 1 : 0,
+            'active' => $this->active ? 1 : 0,
+            'password' => bcrypt('password'),
+        ]);
 
-		$this->reset([ 'username', 'name', 'email', 'phone', 'admin', 'active' ]);
+        $this->reset(['username', 'name', 'email', 'phone', 'admin', 'active']);
 
         $this->modal('user-add')->close();
     }
 
-	#[Layout('components.layouts.admin')]
-	#[Title('All Users')]
+    #[Layout('components.layouts.admin')]
+    #[Title('All Users')]
     public function render()
     {
-		$users = User::when($this->search !== '', fn(Builder $query) => $query->where('name', 'like', '%'. $this->search .'%'))
-			->orderby('name', 'asc')
-			->paginate(25);
+        $users = User::when($this->search !== '', fn (Builder $query) => $query->where('name', 'like', '%'.$this->search.'%'))
+            ->orderby('name', 'asc')
+            ->paginate(25);
 
         return view('livewire.admin.user-index', [
-			'users' => $users,
-		]);
+            'users' => $users,
+        ]);
     }
 }

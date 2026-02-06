@@ -1,14 +1,15 @@
 <?php
 
-use Livewire\Attributes\Validate;
-use Livewire\Volt\Component;
-use App\Models\User;
 use App\Jobs\ResetPassword;
+use App\Models\User;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
-new class extends Component {
+new class extends Component
+{
     public User $user;
 
-	public $username;
+    public $username;
 
     #[Validate('string|required')]
     public $name = '';
@@ -16,16 +17,16 @@ new class extends Component {
     #[Validate('string|nullable|email')]
     public $email = '';
 
-	#[Validate('string|nullable')]
-	public $phone = '';
+    #[Validate('string|nullable')]
+    public $phone = '';
 
     #[Validate('boolean|nullable')]
     public $admin = false;
 
-	#[Validate('boolean|nullable')]
+    #[Validate('boolean|nullable')]
     public $active = false;
 
-	public $newPassword = '';
+    public $newPassword = '';
 
     public function mount()
     {
@@ -37,12 +38,12 @@ new class extends Component {
         $this->active = $this->user->active;
     }
 
-	protected function rules()
+    protected function rules()
     {
         return [
             'email' => [
                 'required',
-				'email',
+                'email',
                 Rule::unique('users')->ignore($this->user),
             ],
             'content' => 'required|min:5',
@@ -54,28 +55,28 @@ new class extends Component {
         $this->validate();
 
         $this->user->update([
-			'name' => $this->name,
-			'email' => $this->email,
-			'phone' => $this->phone,
-			'admin' => $this->admin ? 1 : 0,
-			'active' => $this->active ? 1 : 0,
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'admin' => $this->admin ? 1 : 0,
+            'active' => $this->active ? 1 : 0,
         ]);
 
         $this->modal('user-edit')->close();
 
-		Flux::toast('User has been saved.');
+        Flux::toast('User has been saved.');
     }
 
-	public function resetPassword()
-	{
-		ResetPassword::dispatch($this->user);
+    public function resetPassword()
+    {
+        ResetPassword::dispatch($this->user);
 
-		Flux::toast(
-			heading: 'Password reset',
-			text: 'The user\'s password has been reset and emailed.',
-			variant: 'success',
-		);
-	}
+        Flux::toast(
+            heading: 'Password reset',
+            text: 'The user\'s password has been reset and emailed.',
+            variant: 'success',
+        );
+    }
 
     public function remove()
     {

@@ -1,17 +1,19 @@
 <?php
 
-use Livewire\Attributes\{Layout, Title};
-use Livewire\Volt\Component;
-use App\Models\User;
 use App\Models\Player;
+use App\Models\User;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
+use Livewire\Component;
 
 new
 #[Layout('components.layouts.admin')]
 #[Title('Show User')]
-class extends Component {
+class extends Component
+{
     public User $user;
 
-	public function with(): array
+    public function with(): array
     {
         return [
             'players' => Player::where('user_id', $this->user->id)->orderby('year_id', 'desc')->get(),

@@ -1,11 +1,11 @@
 <?php
 
-use Livewire\Attributes\{Layout, Title};
-use Livewire\Attributes\Validate;
-use Livewire\WithPagination;
-use Livewire\Volt\Component;
-use Livewire\Attributes\On;
 use App\Models\User;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 new
 #[Layout('components.layouts.admin')]
@@ -14,7 +14,7 @@ class extends Component
 {
     use WithPagination;
 
-	#[Validate('string|required|unique:users,username')]
+    #[Validate('string|required|unique:users,username')]
     public $username = '';
 
     #[Validate('string|required')]
@@ -23,56 +23,56 @@ class extends Component
     #[Validate('string|email|nullable')]
     public $email = '';
 
-	#[Validate('string|nullable')]
-	public $phone = '';
+    #[Validate('string|nullable')]
+    public $phone = '';
 
     #[Validate('boolean|nullable')]
     public $admin = '';
 
-	#[Validate('boolean|nullable')]
+    #[Validate('boolean|nullable')]
     public $active = '';
 
-	#[Validate('string|nullable')]
-	public $search = '';
+    #[Validate('string|nullable')]
+    public $search = '';
 
-	public function updatedSearch()
+    public function updatedSearch()
     {
         $this->resetPage();
     }
 
-	public function remove($id)
+    public function remove($id)
     {
-		User::findOrFail($id)->delete();
+        User::findOrFail($id)->delete();
 
-		$this->resetPage();
+        $this->resetPage();
 
         Flux::modal('user-remove')->close();
 
-		Flux::toast('User has been deleted.');
+        Flux::toast('User has been deleted.');
     }
 
-	public function save()
+    public function save()
     {
         $this->validate();
 
-		User::create([
-			'username' => $this->username,
-			'name' => $this->name,
-			'email' => $this->email,
-			'phone' => $this->phone,
-			'admin' => $this->admin ? 1 : 0,
-			'active' => $this->active ? 1 : 0,
-			'password' => bcrypt('password'),
-		]);
+        User::create([
+            'username' => $this->username,
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'admin' => $this->admin ? 1 : 0,
+            'active' => $this->active ? 1 : 0,
+            'password' => bcrypt('password'),
+        ]);
 
-		$this->reset([ 'username', 'name', 'email', 'phone', 'admin', 'active' ]);
+        $this->reset(['username', 'name', 'email', 'phone', 'admin', 'active']);
 
         $this->modal('user-add')->close();
 
-		Flux::toast('User has been created.');
+        Flux::toast('User has been created.');
     }
 
-	protected function applySearch($query)
+    protected function applySearch($query)
     {
         return $this->search === ''
             ? $query
@@ -82,19 +82,19 @@ class extends Component
 
     public function with(): array
     {
-		$users = User::query();
+        $users = User::query();
 
-		$users = $this->applySearch($users);
+        $users = $this->applySearch($users);
 
-		$users = $users->orderby('name', 'asc')->paginate(20);
+        $users = $users->orderby('name', 'asc')->paginate(20);
 
         return [
             'users' => $users,
-			'emails' => User::where('active', 1)
-				->whereNotNull('email')
-				->where('email', '!=', '')
-				->pluck('email')
-				->toArray(),
+            'emails' => User::where('active', 1)
+                ->whereNotNull('email')
+                ->where('email', '!=', '')
+                ->pluck('email')
+                ->toArray(),
         ];
     }
 }; ?>

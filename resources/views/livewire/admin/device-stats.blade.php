@@ -1,16 +1,12 @@
 <?php
 
-use Livewire\Attributes\{Layout, Title};
-use Livewire\Attributes\Validate;
-use Illuminate\Validation\Rule;
-use Livewire\Volt\Component;
-use App\Models\Year;
 use Carbon\Carbon;
+use Livewire\Component;
 use McComasChris\MarcoAnalytics\Models\MarcoAnalytics;
 
-new
-class extends Component {
-	public $timeframe = 30; // Default timeframe in days
+new class extends Component
+{
+    public $timeframe = 30; // Default timeframe in days
 
     #[On('update-timeframe')] // Live update when timeframe changes
     public function updateTimeframe($days)
@@ -20,13 +16,13 @@ class extends Component {
 
     public function with(): array
     {
-		$startDate = Carbon::now()->subDays($this->timeframe);
+        $startDate = Carbon::now()->subDays($this->timeframe);
 
         return [
             'visitCounts' => MarcoAnalytics::where('created_at', '>=', $startDate)
-				->selectRaw("device, COUNT(*) as total")
-				->groupBy('device')
-				->pluck('total', 'device'),
+                ->selectRaw('device, COUNT(*) as total')
+                ->groupBy('device')
+                ->pluck('total', 'device'),
         ];
     }
 }; ?>

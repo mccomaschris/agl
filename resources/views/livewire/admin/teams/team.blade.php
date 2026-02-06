@@ -1,39 +1,38 @@
 <?php
 
-use Livewire\Attributes\Validate;
-use Illuminate\Validation\Rule;
-use Livewire\Volt\Component;
 use App\Models\Team;
+use Livewire\Component;
 
-new class extends Component {
-	public Team $team;
+new class extends Component
+{
+    public Team $team;
 
-	public $additional_points;
+    public $additional_points;
 
-	public function rules()
+    public function rules()
     {
         return [
-			'additional_points' => 'nullable|integer',
+            'additional_points' => 'nullable|integer',
         ];
     }
 
     public function mount(Team $team)
-	{
-		$this->team = $team;
-		$this->additional_points = $team->additional_points;
-	}
+    {
+        $this->team = $team;
+        $this->additional_points = $team->additional_points;
+    }
 
     public function update()
     {
         $this->validate();
 
         $this->team->update([
-			'additional_points' => $this->additional_points,
+            'additional_points' => $this->additional_points,
         ]);
 
-        $this->modal('team-edit-' . $this->team->id)->close();
+        $this->modal('team-edit-'.$this->team->id)->close();
 
-		Flux::toast('Team updated successfully.');
+        Flux::toast('Team updated successfully.');
     }
 }; ?>
 

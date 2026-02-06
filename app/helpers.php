@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Given a number, return the number + 'th' or 'rd' etc
  */
@@ -35,7 +36,7 @@ function last_name_clean($last): string
     }
 }
 
-if (!function_exists('str_possessive')) {
+if (! function_exists('str_possessive')) {
     /**
      * Make a string possessive.
      */
@@ -45,26 +46,28 @@ if (!function_exists('str_possessive')) {
     }
 }
 
-if (!function_exists('twcss')) {
+if (! function_exists('twcss')) {
     function twcss($path)
     {
         $fullPath = public_path($path);
 
         if (file_exists($fullPath)) {
-            return $path . '?v=' . filemtime($fullPath);
+            return $path.'?v='.filemtime($fullPath);
         }
 
         return $path; // Return original path if file doesn't exist
     }
 }
 
-function formatWinnersList($scores) {
-    $winners = $scores->map(fn($score) => $score->player->user->name)->unique();
+function formatWinnersList($scores)
+{
+    $winners = $scores->map(fn ($score) => $score->player->user->name)->unique();
 
     if ($winners->count() === 1) {
         return $winners->first();
     }
 
     $lastWinner = $winners->pop();
-    return $winners->implode(', ') . ' and ' . $lastWinner;
+
+    return $winners->implode(', ').' and '.$lastWinner;
 }

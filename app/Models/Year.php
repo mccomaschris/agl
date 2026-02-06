@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Year extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
     protected $fillable = ['name', 'active', 'start_date', 'skip_date'];
 
-	protected static function boot()
+    protected static function boot()
     {
         parent::boot();
 
@@ -63,7 +63,7 @@ class Year extends Model
     {
         return Player::where('year_id', $this->id)
             ->orderBy('points', 'desc')
-			->orderBy('won', 'desc')
+            ->orderBy('won', 'desc')
             ->take($take)
             ->get();
     }
@@ -78,8 +78,6 @@ class Year extends Model
 
     /**
      * Get the route key for the model.
-     *
-     * @return string
      */
     public function getRouteKeyName(): string
     {

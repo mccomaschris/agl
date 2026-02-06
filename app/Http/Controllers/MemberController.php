@@ -7,9 +7,6 @@ use Illuminate\View\View;
 
 class MemberController extends Controller
 {
-    /**
-     * @return View
-     */
     public function index(): View
     {
         $users = User::where('active', 1)->orderBy('name')->get();

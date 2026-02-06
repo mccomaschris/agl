@@ -1,16 +1,15 @@
 <?php
 
-use Livewire\Attributes\{Layout, Title};
-use Livewire\Attributes\Validate;
-use Illuminate\Validation\Rule;
-use Livewire\Volt\Component;
 use App\Models\Year;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
+use Livewire\Component;
 
 new
 #[Layout('components.layouts.admin')]
 #[Title('Dashboard')]
-class extends Component {
-
+class extends Component
+{
     public function with(): array
     {
         return [

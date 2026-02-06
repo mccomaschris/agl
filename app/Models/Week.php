@@ -3,18 +3,18 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Week extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
-	protected $guarded = [];
+    protected $guarded = [];
 
     protected $with = ['winners', 'year'];
 
@@ -22,8 +22,8 @@ class Week extends Model
 
     protected $casts = [
         'week_date' => 'date',
-		'ignore_scores' => 'boolean',
-		'back_nine' => 'boolean',
+        'ignore_scores' => 'boolean',
+        'back_nine' => 'boolean',
     ];
 
     /**

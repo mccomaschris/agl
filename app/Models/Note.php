@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Note extends Model
 {
-
     protected $guarded = [];
 
     protected $with = ['player'];

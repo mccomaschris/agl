@@ -4,9 +4,9 @@ namespace App\Console\Commands;
 
 use App\Models\Player;
 use App\Models\Score;
+use App\Models\Team;
 use App\Models\Week;
 use App\Models\Year;
-use App\Models\Team;
 use Illuminate\Console\Command;
 
 class PlayerWeeks extends Command
@@ -45,7 +45,7 @@ class PlayerWeeks extends Command
 
         $current_year = Year::where('name', '2022')->first();
 
-        if ($this->confirm("Do you wish to generate blank scorecards for the " . $current_year->name . "?")) {
+        if ($this->confirm('Do you wish to generate blank scorecards for the '.$current_year->name.'?')) {
             $year = $current_year->name;
         } else {
             $year = $this->ask('What year would you like to do this for?');
@@ -64,7 +64,7 @@ class PlayerWeeks extends Command
 
             foreach ($players as $player) {
 
-                 // CREATE WEEKLY STATS
+                // CREATE WEEKLY STATS
                 foreach ($weeks as $week) {
 
                     $score = Score::firstOrCreate(['player_id' => $player->id, 'score_type' => 'weekly_score', 'foreign_key' => $week]);

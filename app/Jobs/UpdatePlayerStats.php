@@ -2,19 +2,17 @@
 
 namespace App\Jobs;
 
-use App\Models\Week;
-use App\Models\Score;
-use App\Models\Year;
-use App\Models\Team;
 use App\Models\Player;
-use App\Models\PlayerRecord;
+use App\Models\Score;
+use App\Models\Team;
+use App\Models\Week;
+use App\Models\Year;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class UpdatePlayerStats implements ShouldQueue
 {
@@ -34,11 +32,14 @@ class UpdatePlayerStats implements ShouldQueue
 
     public function avgScores($array, $key)
     {
-        if (count($array) == 0 ) return 0;
+        if (count($array) == 0) {
+            return 0;
+        }
         $sum = 0;
         foreach ($array as $k => $v) {
             $sum += $v[$key];
         }
+
         return $sum / count($array);
     }
 
@@ -48,6 +49,7 @@ class UpdatePlayerStats implements ShouldQueue
         foreach ($array as $k => $v) {
             $sum += $v[$key];
         }
+
         return $sum;
     }
 
@@ -73,27 +75,27 @@ class UpdatePlayerStats implements ShouldQueue
         $double_bogey = $this->sumScores($scores, 'double_bogey');
 
         if ($net > 0) {
-			$net_par = $net - 37;
-		} else {
-			$net_par = 0;
-		}
+            $net_par = $net - 37;
+        } else {
+            $net_par = 0;
+        }
 
-		if ($gross > 0) {
-			$gross_par = $gross - 37;
-		} else {
-			$gross_par = 0;
-		}
+        if ($gross > 0) {
+            $gross_par = $gross - 37;
+        } else {
+            $gross_par = 0;
+        }
 
         Score::updateOrCreate(
             ['player_id' => $player, 'score_type' => $score_type, 'foreign_key' => $year],
             ['hole_1' => $hole_1, 'hole_2' => $hole_2, 'hole_3' => $hole_3,
-             'hole_4' => $hole_4, 'hole_5' => $hole_5, 'hole_6' => $hole_6,
-             'hole_7' => $hole_7, 'hole_8' => $hole_8, 'hole_9' => $hole_9,
-             'gross' => $gross, 'gross_par' => $gross_par,
-             'net' => $net, 'net_par' => $net_par, 'points' => $points,
-             'eagle' => $eagle, 'birdie' => $birdie,
-             'par' => $par, 'bogey' => $bogey, 'double_bogey' => $double_bogey
-        ]);
+                'hole_4' => $hole_4, 'hole_5' => $hole_5, 'hole_6' => $hole_6,
+                'hole_7' => $hole_7, 'hole_8' => $hole_8, 'hole_9' => $hole_9,
+                'gross' => $gross, 'gross_par' => $gross_par,
+                'net' => $net, 'net_par' => $net_par, 'points' => $points,
+                'eagle' => $eagle, 'birdie' => $birdie,
+                'par' => $par, 'bogey' => $bogey, 'double_bogey' => $double_bogey,
+            ]);
     }
 
     /**
@@ -110,29 +112,29 @@ class UpdatePlayerStats implements ShouldQueue
         $player->tied = 0;
 
         $weeks = Week::where('year_id', $player->year_id)->whereDate('week_date', '<', Carbon::today()->toDateString())->pluck('id');
-		$points_scores = Score::where('player_id', $player->id)->where('score_type', 'weekly_score')->whereIn('foreign_key', $weeks)->get();
+        $points_scores = Score::where('player_id', $player->id)->where('score_type', 'weekly_score')->whereIn('foreign_key', $weeks)->get();
 
         foreach ($points_scores as $score) {
             $week_order = $score->week->week_order;
 
-            if (!$score->absent && $score->hole_1) {
-				$points = $score->points;
-				switch ($points) {
-					case 0:
-						$player->lost++;
-						break;
-					case 1:
-						$player->tied++;
-						break;
-					case 2:
-						$player->won++;
-						break;
-				}
+            if (! $score->absent && $score->hole_1) {
+                $points = $score->points;
+                switch ($points) {
+                    case 0:
+                        $player->lost++;
+                        break;
+                    case 1:
+                        $player->tied++;
+                        break;
+                    case 2:
+                        $player->won++;
+                        break;
+                }
                 $player->save();
             }
         }
 
-		$scores = Score::where('player_id', $player->id)->where('score_type', 'weekly_score')->where('substitute_id', 0)->whereIn('foreign_key', $weeks)->get();
+        $scores = Score::where('player_id', $player->id)->where('score_type', 'weekly_score')->where('substitute_id', 0)->whereIn('foreign_key', $weeks)->get();
 
         $gp = $player->won + $player->lost + $player->tied;
 
@@ -140,42 +142,42 @@ class UpdatePlayerStats implements ShouldQueue
             $player->win_pct = $player->won / ($player->won + $player->lost + $player->tied);
             $player->points = ($player->won * 2) + $player->tied;
 
-			// $scores = Score::where('player_id', $player->id)->where('score_type', 'weekly_score')->where('substitute_id', 0)->whereIn('foreign_key', $weeks)->get();
-			if (count($scores) > 0 ) {
-				$weeks = Week::where('year_id', $player->year_id)->where('back_nine', false)->whereDate('week_date', '<', Carbon::today()->toDateString())->pluck('id');
+            // $scores = Score::where('player_id', $player->id)->where('score_type', 'weekly_score')->where('substitute_id', 0)->whereIn('foreign_key', $weeks)->get();
+            if (count($scores) > 0) {
+                $weeks = Week::where('year_id', $player->year_id)->where('back_nine', false)->whereDate('week_date', '<', Carbon::today()->toDateString())->pluck('id');
 
-				$player->gross_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('gross', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('gross');
-				$player->gross_par = $player->gross_average - 37;
+                $player->gross_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('gross', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('gross');
+                $player->gross_par = $player->gross_average - 37;
 
-				$player->net_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('net', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('net');
-				$player->net_par = $player->net_average - 37;
+                $player->net_average = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('net', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('net');
+                $player->net_par = $player->net_average - 37;
 
-				$player->low_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('gross', '>', 0)->where('absent', 0)->where('substitute_id', 0)->min('gross');
-				$player->high_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->max('gross');
+                $player->low_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('gross', '>', 0)->where('absent', 0)->where('substitute_id', 0)->min('gross');
+                $player->high_gross = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->max('gross');
 
-				$player->low_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('net', '>', 0)->where('absent', 0)->where('substitute_id', 0)->min('net');
-				$player->high_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->max('net');
+                $player->low_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('net', '>', 0)->where('absent', 0)->where('substitute_id', 0)->min('net');
+                $player->high_net = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->max('net');
 
-				$averages = Score::where('score_type', 'season_avg')->where('player_id', $player->id)->first();
+                $averages = Score::where('score_type', 'season_avg')->where('player_id', $player->id)->first();
 
-				$averages->hole_1 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_1', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_1');
-				$averages->hole_2 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_2', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_2');
-				$averages->hole_3 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_3', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_3');
-				$averages->hole_4 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_4', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_4');
-				$averages->hole_5 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_5', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_5');
-				$averages->hole_6 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_6', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_6');
-				$averages->hole_7 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_7', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_7');
-				$averages->hole_8 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_8', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_8');
-				$averages->hole_9 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_9', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_9');
+                $averages->hole_1 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_1', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_1');
+                $averages->hole_2 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_2', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_2');
+                $averages->hole_3 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_3', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_3');
+                $averages->hole_4 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_4', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_4');
+                $averages->hole_5 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_5', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_5');
+                $averages->hole_6 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_6', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_6');
+                $averages->hole_7 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_7', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_7');
+                $averages->hole_8 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_8', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_8');
+                $averages->hole_9 = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('hole_9', '>', 0)->where('absent', 0)->where('substitute_id', 0)->avg('hole_9');
 
-				$averages->eagle = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('eagle', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('eagle');
-				$averages->birdie = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('birdie', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('birdie');
-				$averages->par = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('par', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('par');
-				$averages->bogey = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('bogey', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('bogey');
-				$averages->double_bogey = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('double_bogey', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('double_bogey');
+                $averages->eagle = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('eagle', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('eagle');
+                $averages->birdie = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('birdie', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('birdie');
+                $averages->par = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('par', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('par');
+                $averages->bogey = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('bogey', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('bogey');
+                $averages->double_bogey = Score::where('score_type', 'weekly_score')->where('player_id', $player->id)->whereIn('foreign_key', $weeks)->where('double_bogey', '>', 0)->where('absent', 0)->where('substitute_id', 0)->sum('double_bogey');
 
-				$averages->save();
-			}
+                $averages->save();
+            }
         }
 
         $player->save();
@@ -247,7 +249,7 @@ class UpdatePlayerStats implements ShouldQueue
 
         // Rank Players by Net Average in Position Groupings
         $players = Player::where('year_id', $year->id)->where('substitute', '0')->where('net_average', '>', 0)->stats('net_average', 'asc')
-                        ->get()->groupBy('position');
+            ->get()->groupBy('position');
 
         foreach ($players as $group) {
             $prev = 400;
@@ -281,13 +283,13 @@ class UpdatePlayerStats implements ShouldQueue
             $team->p4_points = 0;
 
             $players = Player::where('team_id', $team->id)->get();
-			$points = 0;
+            $points = 0;
 
             foreach ($players as $player) {
                 $team->won += $player->won;
                 $team->lost += $player->lost;
                 $team->tied += $player->tied;
-				$team->points += $player->points;
+                $team->points += $player->points;
 
                 if ($player->position == 1) {
                     $team->p1_points = $player->points;
@@ -306,11 +308,11 @@ class UpdatePlayerStats implements ShouldQueue
         $count = 0;
 
         $teams = Team::where('year_id', $year->id)->orderBy('points', 'desc')
-                    ->orderBy('p1_points', 'desc')
-                    ->orderBy('p2_points', 'desc')
-                    ->orderBy('p3_points', 'desc')
-                    ->orderBy('p4_points', 'desc')
-                    ->get();
+            ->orderBy('p1_points', 'desc')
+            ->orderBy('p2_points', 'desc')
+            ->orderBy('p3_points', 'desc')
+            ->orderBy('p4_points', 'desc')
+            ->get();
 
         foreach ($teams as $team) {
             $count++;

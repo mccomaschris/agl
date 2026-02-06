@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 class FindUnusedBladeTemplates extends Command
 {
     protected $signature = 'cleanup:unused-views';
+
     protected $description = 'Find unused Blade templates in the Laravel application';
 
     public function handle()
@@ -26,7 +27,7 @@ class FindUnusedBladeTemplates extends Command
         if ($unusedViews->isEmpty()) {
             $this->info('No unused Blade templates found.');
         } else {
-            $this->warn("Unused Blade Templates:\n" . $unusedViews->implode("\n"));
+            $this->warn("Unused Blade Templates:\n".$unusedViews->implode("\n"));
         }
     }
 }

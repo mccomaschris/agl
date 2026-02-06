@@ -7,9 +7,6 @@ use Illuminate\View\View;
 
 class ChrisVsMikeController extends Controller
 {
-    /**
-     * @return View
-     */
     public function show(): View
     {
         $mike = Score::where('player_id', 293)->where('score_type', 'season_avg')->first();

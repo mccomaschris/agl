@@ -25,22 +25,19 @@ class GoogleSocialiteController extends Controller
             $googleUser = Socialite::driver('google')->stateless()->user();
 
             // find user in the database where the social id is the same with the id provided by Google
-			$finduser = User::where('email', $googleUser->email)->first();
+            $finduser = User::where('email', $googleUser->email)->first();
 
-            if ($finduser)  {
+            if ($finduser) {
                 // Log the user in
                 Auth::login($googleUser);
 
                 // redirect user to dashboard page
                 return redirect('/');
-            }
-            else {
+            } else {
                 return response('Unauthorized.', 401);
             }
 
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             dd($e->getMessage());
         }
     }

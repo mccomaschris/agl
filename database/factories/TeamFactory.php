@@ -14,7 +14,7 @@ class TeamFactory extends Factory
     {
         return [
             'name' => $this->faker->randomElement([1, 2, 3, 4, 5, 6]), // Ensure team names are 1-6
-			'year_id' => Year::factory(),
+            'year_id' => Year::factory(),
         ];
     }
 }

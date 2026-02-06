@@ -3,18 +3,19 @@
 namespace App\Jobs;
 
 use App\Models\Score;
+use App\Models\Week;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Models\Week;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class UpdateRoundStats implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $score;
+
     /**
      * Create a new job instance.
      *
@@ -35,7 +36,7 @@ class UpdateRoundStats implements ShouldQueue
         $score = $this->score;
         $week = Week::find($score->foreign_key);
 
-        if (!$week) {
+        if (! $week) {
             return; // Avoid processing if the week isn't found
         }
 
@@ -43,13 +44,13 @@ class UpdateRoundStats implements ShouldQueue
         $score->gross = array_sum([
             $score->hole_1, $score->hole_2, $score->hole_3,
             $score->hole_4, $score->hole_5, $score->hole_6,
-            $score->hole_7, $score->hole_8, $score->hole_9
+            $score->hole_7, $score->hole_8, $score->hole_9,
         ]);
 
         // Determine Net Score
         $score->net = $this->calculateNetScore($score, $week->week_order);
 
-		// Calculate Par Differences
+        // Calculate Par Differences
         $score->gross_par = $score->gross - 37;
         $score->net_par = $score->net - 37;
 
@@ -69,7 +70,7 @@ class UpdateRoundStats implements ShouldQueue
         $score->save();
     }
 
-	/**
+    /**
      * Calculate the net score based on the quarter.
      */
     private function calculateNetScore(Score $score, int $weekOrder): int
@@ -85,7 +86,7 @@ class UpdateRoundStats implements ShouldQueue
         }
     }
 
-	/**
+    /**
      * Categorize scores based on par values.
      */
     private function categorizeScores(array $holes, int $par, Score $score): void

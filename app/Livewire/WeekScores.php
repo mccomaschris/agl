@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
-use Carbon\Carbon;
-use App\Models\Week;
 use App\Models\Score;
+use App\Models\Week;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class WeekScores extends Component

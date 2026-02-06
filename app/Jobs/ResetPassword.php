@@ -14,7 +14,7 @@ class ResetPassword implements ShouldQueue
 {
     use Queueable;
 
-	protected $user;
+    protected $user;
 
     /**
      * Create a new job instance.
@@ -31,12 +31,12 @@ class ResetPassword implements ShouldQueue
     {
         $randomString = Str::random(12);
 
-		$newPassword = implode('-', str_split($randomString, 4));
+        $newPassword = implode('-', str_split($randomString, 4));
 
-		$this->user->update([
-            'password' => Hash::make($newPassword)
+        $this->user->update([
+            'password' => Hash::make($newPassword),
         ]);
 
-		Mail::to($this->user->email)->send(new PasswordResetMail($this->user, $newPassword));
+        Mail::to($this->user->email)->send(new PasswordResetMail($this->user, $newPassword));
     }
 }

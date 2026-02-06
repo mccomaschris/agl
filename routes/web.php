@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
-use Livewire\Volt\Volt;
 
 Route::get('/', SiteIndex::class)->name('home');
 
@@ -25,13 +24,13 @@ Route::get('agl-history', [HistoryController::class, 'index'])->name('history');
 Route::get('schedule/{year}', [WeekController::class, 'show'])->name('schedule');
 Route::get('players/{user}', [PlayerController::class, 'show'])->name('player');
 
-Volt::route('team-stats/{year}', 'team-stats.show')->name('team-stats');
-Volt::route('group-stats/{year}', 'group-stats.show')->name('group-stats');
-Volt::route('standings/{year}', 'standings.show')->name('standings');
-Volt::route('handicaps/{year}', 'handicaps.show')->name('handicaps');
-Volt::route('team-points/{year}', 'team-points.show')->name('team-points');
+Route::livewire('team-stats/{year}', 'team-stats.show')->name('team-stats');
+Route::livewire('group-stats/{year}', 'group-stats.show')->name('group-stats');
+Route::livewire('standings/{year}', 'standings.show')->name('standings');
+Route::livewire('handicaps/{year}', 'handicaps.show')->name('handicaps');
+Route::livewire('team-points/{year}', 'team-points.show')->name('team-points');
 
-Volt::route('scores/player/{player}', 'player.score')->name('player-score');
+Route::livewire('scores/player/{player}', 'player.score')->name('player-score');
 Route::get('scores/week/{week}', WeekScores::class)->name('week-score');
 
 Route::get('chris-vs-mike', [ChrisVsMikeController::class, 'show']);
@@ -44,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware([IsAdmin::class])->group(function () {
     Route::get('scorecard/print/{quarter}', [PrintScorecardController::class, 'show'])->name('scorecard.print');
 
-    Volt::route('/admin/', 'admin.index')->name('admin.index');
+    Route::livewire('/admin/', 'admin.index')->name('admin.index');
 
     Route::post('/admin/clear-cache', function () {
         Artisan::call('cache:clear');
@@ -55,12 +54,13 @@ Route::middleware([IsAdmin::class])->group(function () {
         return response()->json(['success' => true, 'message' => 'The application cache has been cleared.']);
     })->name('admin.clear-cache');
 
-    Volt::route('/admin/users', 'admin.users.index')->name('admin.users.index');
-    Volt::route('/admin/users/{user}', 'admin.users.show')->name('admin.users.show');
-    Volt::route('/admin/years', 'admin.years.index')->name('admin.years.index');
-    Volt::route('/admin/weeks', 'admin.weeks.index')->name('admin.weeks.index');
-    Volt::route('/admin/teams', 'admin.teams.index')->name('admin.teams.index');
-    Volt::route('/admin/scores/week/{week}/edit', 'admin.scores.edit')->name('week-score-edit');
+    Route::livewire('/admin/users', 'admin.users.index')->name('admin.users.index');
+    Route::livewire('/admin/users/{user}', 'admin.users.show')->name('admin.users.show');
+    Route::livewire('/admin/years', 'admin.years.index')->name('admin.years.index');
+    Route::livewire('/admin/weeks', 'admin.weeks.index')->name('admin.weeks.index');
+    Route::livewire('/admin/teams', 'admin.teams.index')->name('admin.teams.index');
+    Route::livewire('/admin/seasons/create', 'admin.seasons.create')->name('admin.seasons.create');
+    Route::livewire('/admin/scores/week/{week}/edit', 'admin.scores.edit')->name('week-score-edit');
 });
 
 Route::get('/google/redirect', function () {

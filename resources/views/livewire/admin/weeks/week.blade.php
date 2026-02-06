@@ -1,71 +1,83 @@
 <?php
 
-use Livewire\Attributes\Validate;
-use Illuminate\Validation\Rule;
-use Livewire\Volt\Component;
-use App\Models\Year;
 use App\Models\Week;
+use App\Models\Year;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
-new class extends Component {
-	public Week $week;
+new class extends Component
+{
+    public Week $week;
 
-	public $year_id = '';
-	public $week_order = '';
-	public $week_date = '';
-	public $side_games = '';
-	public $a_first_id = '';
-	public $a_second_id = '';
-	public $b_first_id = '';
-	public $b_second_id = '';
-	public $c_first_id = '';
-	public $c_second_id = '';
-	public $ignore_scores = false;
-	public $back_nine = false;
-	public $notes = '';
+    public $year_id = '';
 
-	#[Validate('integer|nullable')]
-	public $absent;
+    public $week_order = '';
 
-	#[Validate('integer|nullable')]
-	public $weekly_winner;
+    public $week_date = '';
 
-	#[Validate('integer|nullable')]
-	public $substitute_id;
+    public $side_games = '';
 
-	public function rules()
+    public $a_first_id = '';
+
+    public $a_second_id = '';
+
+    public $b_first_id = '';
+
+    public $b_second_id = '';
+
+    public $c_first_id = '';
+
+    public $c_second_id = '';
+
+    public $ignore_scores = false;
+
+    public $back_nine = false;
+
+    public $notes = '';
+
+    #[Validate('integer|nullable')]
+    public $absent;
+
+    #[Validate('integer|nullable')]
+    public $weekly_winner;
+
+    #[Validate('integer|nullable')]
+    public $substitute_id;
+
+    public function rules()
     {
         return [
             'year_id' => ['required'],
             'week_order' => ['required'],
-			'week_date' => ['required', 'date'],
-			'side_games' => ['required'],
-			'a_first_id' => ['required'],
-			'a_second_id' => ['required'],
-			'b_first_id' => ['required'],
-			'b_second_id' => ['required'],
-			'c_first_id' => ['required'],
-			'c_second_id' => ['required'],
-			'ignore_scores' => ['nullable', 'boolean'],
-			'back_nine' => ['nullable', 'boolean'],
-			'notes' => ['nullable', 'string'],
-		];
+            'week_date' => ['required', 'date'],
+            'side_games' => ['required'],
+            'a_first_id' => ['required'],
+            'a_second_id' => ['required'],
+            'b_first_id' => ['required'],
+            'b_second_id' => ['required'],
+            'c_first_id' => ['required'],
+            'c_second_id' => ['required'],
+            'ignore_scores' => ['nullable', 'boolean'],
+            'back_nine' => ['nullable', 'boolean'],
+            'notes' => ['nullable', 'string'],
+        ];
     }
 
     public function mount()
     {
         $this->year_id = $this->week->year_id;
-		$this->week_order = $this->week->week_order;
-		$this->week_date = $this->week->week_date;
-		$this->side_games = $this->week->side_games;
-		$this->a_first_id = $this->week->a_first_id;
-		$this->a_second_id = $this->week->a_second_id;
-		$this->b_first_id = $this->week->b_first_id;
-		$this->b_second_id = $this->week->b_second_id;
-		$this->c_first_id = $this->week->c_first_id;
-		$this->c_second_id = $this->week->c_second_id;
-		$this->ignore_scores = $this->week->ignore_scores;
-		$this->back_nine = $this->week->back_nine;
-		$this->notes = $this->week->notes;
+        $this->week_order = $this->week->week_order;
+        $this->week_date = $this->week->week_date;
+        $this->side_games = $this->week->side_games;
+        $this->a_first_id = $this->week->a_first_id;
+        $this->a_second_id = $this->week->a_second_id;
+        $this->b_first_id = $this->week->b_first_id;
+        $this->b_second_id = $this->week->b_second_id;
+        $this->c_first_id = $this->week->c_first_id;
+        $this->c_second_id = $this->week->c_second_id;
+        $this->ignore_scores = $this->week->ignore_scores;
+        $this->back_nine = $this->week->back_nine;
+        $this->notes = $this->week->notes;
     }
 
     public function edit()
@@ -77,25 +89,25 @@ new class extends Component {
     {
         $this->validate();
 
-		$this->week->update([
-			'year_id' => $this->year_id,
-			'week_order' => $this->week_order,
-			'week_date' => $this->week_date,
-			'side_games' => $this->side_games,
-			'a_first_id' => $this->a_first_id,
-			'a_second_id' => $this->a_second_id,
-			'b_first_id' => $this->b_first_id,
-			'b_second_id' => $this->b_second_id,
-			'c_first_id' => $this->c_first_id,
-			'c_second_id' => $this->c_second_id,
-			'ignore_scores' => $this->ignore_scores ? 1 : 0,
-			'back_nine' => $this->back_nine ? 1 : 0,
-			'notes' => $this->notes,
-		]);
+        $this->week->update([
+            'year_id' => $this->year_id,
+            'week_order' => $this->week_order,
+            'week_date' => $this->week_date,
+            'side_games' => $this->side_games,
+            'a_first_id' => $this->a_first_id,
+            'a_second_id' => $this->a_second_id,
+            'b_first_id' => $this->b_first_id,
+            'b_second_id' => $this->b_second_id,
+            'c_first_id' => $this->c_first_id,
+            'c_second_id' => $this->c_second_id,
+            'ignore_scores' => $this->ignore_scores ? 1 : 0,
+            'back_nine' => $this->back_nine ? 1 : 0,
+            'notes' => $this->notes,
+        ]);
 
         $this->modal('week-edit')->close();
 
-		Flux::toast('Week updated successfully.');
+        Flux::toast('Week updated successfully.');
     }
 
     public function remove()
@@ -103,7 +115,7 @@ new class extends Component {
         $this->modal('week-remove')->show();
     }
 
-	public function with(): array
+    public function with(): array
     {
         return [
             'years' => Year::orderby('name', 'desc')->get(),

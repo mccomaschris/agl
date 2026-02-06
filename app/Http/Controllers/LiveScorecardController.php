@@ -13,10 +13,6 @@ use Illuminate\View\View;
 
 class LiveScorecardController extends Controller
 {
-    /**
-     * @param  Week|null  $week
-     * @return RedirectResponse|View
-     */
     public function show(?Week $week = null): RedirectResponse|View
     {
         if ($week == null) {

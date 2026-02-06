@@ -4,9 +4,9 @@ namespace App\Console\Commands;
 
 use App\Player;
 use App\Score;
+use App\Team;
 use App\Week;
 use App\Year;
-use App\Team;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Redis;
@@ -42,15 +42,19 @@ class Handicaps extends Command
      *
      * @return $hc
      */
-    public function calc($scores) {
+    public function calc($scores)
+    {
 
-        if (count($scores) == 0) return 0;
+        if (count($scores) == 0) {
+            return 0;
+        }
         $total_scores = count($scores);
         $counted_scores = round($total_scores / 2, 0);
         asort($scores, SORT_NUMERIC);
 
         $total_score = (array_sum(array_slice($scores, 0, $counted_scores, true)));
         $hc = round(($total_score / $counted_scores) - 37);
+
         return $hc;
 
     }
@@ -87,10 +91,10 @@ class Handicaps extends Command
             $total_scores = [];
 
             $scores = Score::with('week')->where('score_type', 'weekly_score')->where('player_id', $player->id)
-                                ->where('gross', '>', 0)
-                                ->where('absent', false)
-                                ->where('substitute_id', '0')
-                                ->get();
+                ->where('gross', '>', 0)
+                ->where('absent', false)
+                ->where('substitute_id', '0')
+                ->get();
 
             foreach ($scores as $score) {
                 switch ($score->week->week_order) {
@@ -116,7 +120,7 @@ class Handicaps extends Command
             } else {
                 $player->hc_next_year = round((array_sum($qtr_4_scores) / count($qtr_4_scores)) - 37);
             }
-            
+
             // Calculate Full Handicap for 1-4 rankings
             $total_scores = count($qtr_4_scores);
             $counted_scores = round($total_scores / 2, 0);
@@ -149,7 +153,6 @@ class Handicaps extends Command
 
             $player->save();
         }
-
 
         // Rank Players in Ascending Order By Full Handicap for 1-4 Rankings
         $players = Player::whereIn('team_id', $teams)->where('substitute', '0')->orderBy('hc_full', 'asc')->get();
@@ -225,8 +228,6 @@ class Handicaps extends Command
         //     $player->hc_third = $this->calcHC($player, "qtr_2");
         //     $player->hc_fourth = $this->calcHC($player, "qtr_3");
         //     $player->hc_18 = round($player->hc_fourth * 1.5);
-
-
 
         //     $rounds = round(Redis::get("calc:hc:{$player->id}:qtr_4:rounds") / 2, 0);
 

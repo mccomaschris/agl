@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Player extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
     protected $guarded = [];
 
@@ -19,9 +19,9 @@ class Player extends Model
 
     protected $appends = ['ten'];
 
-	protected $casts = [
-		'champion' => 'boolean',
-		'on_leave' => 'boolean',
+    protected $casts = [
+        'champion' => 'boolean',
+        'on_leave' => 'boolean',
     ];
 
     public function user(): BelongsTo
@@ -39,7 +39,7 @@ class Player extends Model
         return $this->belongsTo(Year::class);
     }
 
-	public function sub(): BelongsTo
+    public function sub(): BelongsTo
     {
         return $this->belongsTo(User::class, 'substitute');
     }

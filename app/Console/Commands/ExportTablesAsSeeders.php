@@ -10,22 +10,23 @@ use Illuminate\Support\Str;
 class ExportTablesAsSeeders extends Command
 {
     protected $signature = 'export:seeders'; // Accept multiple table names as arguments
+
     protected $description = 'Export database tables as Laravel seeders';
 
     public function handle()
     {
         $seedersPath = database_path('seeders');
 
-		$tables = [
-			'player_records',
-			'players',
-			'scores',
-			'teams',
-			'users',
-			'waitlist',
-			'weeks',
-			'years',
-		];
+        $tables = [
+            'player_records',
+            'players',
+            'scores',
+            'teams',
+            'users',
+            'waitlist',
+            'weeks',
+            'years',
+        ];
 
         foreach ($tables as $table) {
             $this->info("Exporting table: $table");
@@ -34,10 +35,11 @@ class ExportTablesAsSeeders extends Command
 
             if (empty($records)) {
                 $this->warn("No records found in table: $table");
+
                 continue;
             }
 
-			$seederClassName = ucfirst(Str::camel($table)) . 'Seeder';
+            $seederClassName = ucfirst(Str::camel($table)).'Seeder';
             $seederFilePath = "$seedersPath/{$seederClassName}.php";
 
             $seederContent = $this->generateSeederClass($seederClassName, $table, $records);

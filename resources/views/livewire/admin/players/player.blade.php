@@ -1,13 +1,15 @@
 <?php
 
-use Livewire\Attributes\Validate;
-use Livewire\Volt\Component;
 use App\Models\Player;
-use App\Models\User;
 use App\Models\Team;
+use App\Models\User;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
-new class extends Component {
+new class extends Component
+{
     public int $playerId;
+
     public Player $player;
 
     #[Validate('integer|required')]
@@ -16,8 +18,8 @@ new class extends Component {
     #[Validate('boolean|nullable')]
     public $on_leave = '';
 
-	#[Validate('boolean|nullable')]
-	public $champion = '';
+    #[Validate('boolean|nullable')]
+    public $champion = '';
 
     #[Validate('integer|required')]
     public $team_id = null;
@@ -28,11 +30,11 @@ new class extends Component {
     #[Validate('integer|required')]
     public $position = '';
 
-	#[Validate('string|nullable')]
+    #[Validate('string|nullable')]
     public $tee_selection = null;
 
-	#[Validate('integer|nullable')]
-	public $substitute = null;
+    #[Validate('integer|nullable')]
+    public $substitute = null;
 
     public function mount()
     {
@@ -41,9 +43,9 @@ new class extends Component {
         $this->team_id = $this->player->team_id;
         $this->year_id = $this->player->year_id;
         $this->position = $this->player->position;
-		$this->tee_selection = $this->player->tee_selection;
-		$this->champion = $this->player->champion;
-		$this->substitute = $this->player->substitute;
+        $this->tee_selection = $this->player->tee_selection;
+        $this->champion = $this->player->champion;
+        $this->substitute = $this->player->substitute;
     }
 
     public function edit()
@@ -63,7 +65,7 @@ new class extends Component {
             'tee_selection' => $this->tee_selection,
             'on_leave' => $this->on_leave ? 1 : 0,
             'champion' => $this->champion ? 1 : 0,
-			'substitute' => $this->substitute,
+            'substitute' => $this->substitute,
         ]);
 
         $this->modal('player-edit')->close();

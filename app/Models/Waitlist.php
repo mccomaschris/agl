@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Waitlist extends Model
 {
-
     protected $table = 'waitlist';
 
     protected $guarded = [];

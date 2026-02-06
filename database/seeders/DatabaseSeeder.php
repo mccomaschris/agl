@@ -14,14 +14,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-			UsersSeeder::class,
-			YearsSeeder::class,
-			WeeksSeeder::class,
-			WaitlistSeeder::class,
-			TeamsSeeder::class,
-			PlayersSeeder::class,
-			PlayerRecordsSeeder::class,
-			ScoresSeeder::class,
-		]);
+            UsersSeeder::class,
+            YearsSeeder::class,
+            WeeksSeeder::class,
+            WaitlistSeeder::class,
+            TeamsSeeder::class,
+            PlayersSeeder::class,
+            PlayerRecordsSeeder::class,
+        ]);
     }
 }

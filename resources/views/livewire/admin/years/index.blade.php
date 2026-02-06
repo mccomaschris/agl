@@ -1,70 +1,74 @@
 <?php
 
-use Livewire\Attributes\{Layout, Title};
-use Livewire\Attributes\Validate;
-use Illuminate\Validation\Rule;
-use Livewire\WithPagination;
-use Livewire\Volt\Component;
 use App\Models\Year;
+use Illuminate\Validation\Rule;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 new
 #[Layout('components.layouts.admin')]
 #[Title('All Years')]
-class extends Component {
+class extends Component
+{
     use WithPagination;
 
-	public $name = '';
-	public $start_date = '';
-	public $skip_date = '';
-	public $active = '';
+    public $name = '';
 
-	public function rules()
+    public $start_date = '';
+
+    public $skip_date = '';
+
+    public $active = '';
+
+    public function rules()
     {
         return [
             'name' => [
                 'required',
-				'string',
+                'string',
                 Rule::unique('years'),
             ],
             'start_date' => 'nullable|date',
-			'skip_date' => 'nullable|date',
-			'active' => 'nullable|boolean',
+            'skip_date' => 'nullable|date',
+            'active' => 'nullable|boolean',
         ];
     }
 
-	public function remove($id)
+    public function remove($id)
     {
-		Year::findOrFail($id)->delete();
+        Year::findOrFail($id)->delete();
 
-		$this->resetPage();
+        $this->resetPage();
 
         Flux::modal('year-remove')->close();
 
-		Flux::toast('Year deleted successfully.');
+        Flux::toast('Year deleted successfully.');
     }
 
-	public function save()
+    public function save()
     {
         $this->validate();
 
-		$year = Year::create([
-			'name' => $this->name,
-			'active' => $this->active ? 1 : 0,
-			'start_date' => $this->start_date,
-			'skip_date' => $this->skip_date,
-		]);
+        $year = Year::create([
+            'name' => $this->name,
+            'active' => $this->active ? 1 : 0,
+            'start_date' => $this->start_date,
+            'skip_date' => $this->skip_date,
+        ]);
 
-		$others = Year::where('active', 1)->where('id', '!=', $year->id)->get();
+        $others = Year::where('active', 1)->where('id', '!=', $year->id)->get();
 
-		foreach($others as $other) {
-			$other->update(['active' => 0]);
-		}
+        foreach ($others as $other) {
+            $other->update(['active' => 0]);
+        }
 
-		$this->reset(['name', 'active', 'start_date', 'skip_date']);
+        $this->reset(['name', 'active', 'start_date', 'skip_date']);
 
         $this->modal('year-add')->close();
 
-		Flux::toast('Year created successfully.');
+        Flux::toast('Year created successfully.');
     }
 
     public function with(): array

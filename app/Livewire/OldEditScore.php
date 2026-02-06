@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Livewire;
-use Flux;
+
 use App\Jobs\UpdateHandicaps;
 use App\Jobs\UpdatePlayerStats;
 use App\Jobs\UpdateRecordVsOpponents;
@@ -9,7 +9,7 @@ use App\Jobs\UpdateRoundStats;
 use App\Models\Player;
 use App\Models\Score;
 use App\Models\Year;
-use Flux\Flux as FluxFlux;
+use Flux;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -86,14 +86,14 @@ class OldEditScore extends Component
         $this->gross = $this->hole_1 + $this->hole_2 + $this->hole_3 + $this->hole_4 + $this->hole_5 + $this->hole_6 + $this->hole_7 + $this->hole_8 + $this->hole_9;
     }
 
-	public function updated($propertyName)
+    public function updated($propertyName)
     {
         if (str_starts_with($propertyName, 'hole_')) {
             $this->calculateGross();
         }
     }
 
-	public function calculateGross()
+    public function calculateGross()
     {
         $this->gross = $this->hole_1 + $this->hole_2 + $this->hole_3 + $this->hole_4 +
                        $this->hole_5 + $this->hole_6 + $this->hole_7 + $this->hole_8 +
@@ -132,12 +132,12 @@ class OldEditScore extends Component
             new UpdateRecordVsOpponents($year),
         ])->dispatch($this->score);
 
-		Flux::toast(
-			heading: 'Score updated.',
-			text: $player->user->name . ' score has been updated.',
-			variant: 'success',
-		);
-	}
+        Flux::toast(
+            heading: 'Score updated.',
+            text: $player->user->name.' score has been updated.',
+            variant: 'success',
+        );
+    }
 
     public function render()
     {

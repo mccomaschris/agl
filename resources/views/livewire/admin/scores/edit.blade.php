@@ -1,15 +1,17 @@
 <?php
 
-use Livewire\Attributes\{Layout, Title};
-use Livewire\Volt\Component;
 use App\Models\Week;
 use Carbon\Carbon;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
+use Livewire\Component;
 
 new
 #[Layout('components.layouts.admin')]
 #[Title('Edit Scores')]
-class extends Component {
-	public Week $week;
+class extends Component
+{
+    public Week $week;
 
     public function mount(Week $week)
     {
@@ -19,7 +21,7 @@ class extends Component {
     public function with(): array
     {
         return [
-			'week' => $this->week,
+            'week' => $this->week,
             'matchup_1' => $this->week->matchup('a'),
             'matchup_2' => $this->week->matchup('b'),
             'matchup_3' => $this->week->matchup('c'),

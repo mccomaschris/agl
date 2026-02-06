@@ -5,7 +5,7 @@ use App\Models\Player;
 use App\Models\PlayerRecord;
 use App\Models\Score;
 use Illuminate\View\View;
-use Livewire\Volt\Component;
+use Livewire\Component;
 
 new class extends Component
 {

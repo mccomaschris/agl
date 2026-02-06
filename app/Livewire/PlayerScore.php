@@ -44,8 +44,8 @@ class PlayerScore extends Component
 
     public function render()
     {
-		$year = Year::where('active', 1)->first();
-		$weeks = Week::where('year_id', $year->id)->where('back_nine', false)->pluck('id');
+        $year = Year::where('active', 1)->first();
+        $weeks = Week::where('year_id', $year->id)->where('back_nine', false)->pluck('id');
 
         return view('livewire.player-score', [
             'qtr_1' => Score::where('score_type', 'weekly_score')->with('week')->where('player_id',

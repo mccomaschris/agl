@@ -2,12 +2,10 @@
 
 namespace App\Livewire;
 
-use App\Models\Score as ModelsScore;
 use Livewire\Component;
 
 class Score extends Component
 {
-
     public $score;
 
     protected $rules = [

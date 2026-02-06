@@ -1,18 +1,17 @@
 <?php
 
-use Livewire\Attributes\{Layout, Title};
-use Livewire\Attributes\Validate;
-use Illuminate\Validation\Rule;
-use Livewire\WithPagination;
-use Livewire\Volt\Component;
 use App\Models\Team;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 new
 #[Layout('components.layouts.admin')]
 #[Title('All Teams')]
-class extends Component {
+class extends Component
+{
     use WithPagination;
-
 
     public function with(): array
     {

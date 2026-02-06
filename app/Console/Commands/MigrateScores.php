@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Score;
 use App\Round;
+use App\Score;
+use Illuminate\Console\Command;
 
 class MigrateScores extends Command
 {

@@ -4,28 +4,27 @@ use App\Jobs\UpdateRoundStats;
 use App\Models\Player;
 use App\Models\Score;
 use App\Models\Week;
-use App\Models\Year;
 
 uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
 
 it('correctly calculates round statistics', function () {
     // Create a player with known handicaps
     $player = Player::factory()->create([
-        'hc_first'  => 5,
+        'hc_first' => 5,
         'hc_second' => 7,
-        'hc_third'  => 8,
+        'hc_third' => 8,
         'hc_fourth' => 10,
     ]);
 
     // Create a week in the first quarter
     $week = Week::factory()->create([
         'week_order' => 4, // Should use hc_first
-        'back_nine'  => false,
+        'back_nine' => false,
     ]);
 
     // Create a score with predefined hole values
     $score = Score::factory()->create([
-        'player_id'  => $player->id,
+        'player_id' => $player->id,
         'foreign_key' => $week->id,
         'hole_1' => 4, 'hole_2' => 2, 'hole_3' => 4,
         'hole_4' => 4, 'hole_5' => 5, 'hole_6' => 2,

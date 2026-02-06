@@ -1,10 +1,12 @@
 <?php
 
-use Livewire\Volt\Component;
 use App\Models\Year;
+use Livewire\Component;
 
-new class extends Component {
+new class extends Component
+{
     public $selectedYear;
+
     public $years;
 
     public function mount()

@@ -2,10 +2,10 @@
 
 namespace App\Mail;
 
+use App\Models\Waitlist;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Waitlist;
 
 class AddedToWaitlist extends Mailable
 {

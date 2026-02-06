@@ -1,108 +1,119 @@
 <?php
 
-use Livewire\Attributes\{Layout, Title};
-use Livewire\Attributes\Validate;
-use Illuminate\Validation\Rule;
-use Livewire\WithPagination;
-use Livewire\Volt\Component;
 use App\Models\Week;
 use App\Models\Year;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 new
 #[Layout('components.layouts.admin')]
 #[Title('All Weeks')]
-class extends Component {
+class extends Component
+{
     use WithPagination;
 
-	public $year_id = '';
-	public $week_order = '';
-	public $week_date = '';
-	public $side_games = '';
-	public $a_first_id = '';
-	public $a_second_id = '';
-	public $b_first_id = '';
-	public $b_second_id = '';
-	public $c_first_id = '';
-	public $c_second_id = '';
-	public $ignore_scores = false;
-	public $back_nine = false;
+    public $year_id = '';
 
-	public $selectedYear = null;
+    public $week_order = '';
 
-	public function updatedSelectedYear()
-	{
-		$this->resetPage();
-	}
+    public $week_date = '';
 
-	public function rules()
+    public $side_games = '';
+
+    public $a_first_id = '';
+
+    public $a_second_id = '';
+
+    public $b_first_id = '';
+
+    public $b_second_id = '';
+
+    public $c_first_id = '';
+
+    public $c_second_id = '';
+
+    public $ignore_scores = false;
+
+    public $back_nine = false;
+
+    public $selectedYear = null;
+
+    public function updatedSelectedYear()
+    {
+        $this->resetPage();
+    }
+
+    public function rules()
     {
         return [
             'year_id' => ['required'],
             'week_order' => ['required'],
-			'week_date' => ['required', 'date'],
-			'side_games' => ['required'],
-			'a_first_id' => ['required'],
-			'a_second_id' => ['required'],
-			'b_first_id' => ['required'],
-			'b_second_id' => ['required'],
-			'c_first_id' => ['required'],
-			'c_second_id' => ['required'],
-			'ignore_scores' => ['nullable', 'boolean'],
-			'back_nine' => ['nullable', 'boolean'],
-		];
+            'week_date' => ['required', 'date'],
+            'side_games' => ['required'],
+            'a_first_id' => ['required'],
+            'a_second_id' => ['required'],
+            'b_first_id' => ['required'],
+            'b_second_id' => ['required'],
+            'c_first_id' => ['required'],
+            'c_second_id' => ['required'],
+            'ignore_scores' => ['nullable', 'boolean'],
+            'back_nine' => ['nullable', 'boolean'],
+        ];
     }
 
-	public function remove($id)
+    public function remove($id)
     {
-		Year::findOrFail($id)->delete();
+        Year::findOrFail($id)->delete();
 
-		$this->resetPage();
+        $this->resetPage();
 
         Flux::modal('week-remove')->close();
 
-		Flux::toast('Week deleted successfully.');
+        Flux::toast('Week deleted successfully.');
     }
 
-	public function save()
+    public function save()
     {
         $this->validate();
 
-		$week = Week::create([
-			'year_id' => $this->year_id,
-			'week_order' => $this->week_order,
-			'week_date' => $this->week_date,
-			'side_games' => $this->side_games,
-			'a_first_id' => $this->a_first_id,
-			'a_second_id' => $this->a_second_id,
-			'b_first_id' => $this->b_first_id,
-			'b_second_id' => $this->b_second_id,
-			'c_first_id' => $this->c_first_id,
-			'c_second_id' => $this->c_second_id,
-			'ignore_scores' => $this->ignore_scores ? 1 : 0,
-			'back_nine' => $this->back_nine ? 1 : 0,
-		]);
+        $week = Week::create([
+            'year_id' => $this->year_id,
+            'week_order' => $this->week_order,
+            'week_date' => $this->week_date,
+            'side_games' => $this->side_games,
+            'a_first_id' => $this->a_first_id,
+            'a_second_id' => $this->a_second_id,
+            'b_first_id' => $this->b_first_id,
+            'b_second_id' => $this->b_second_id,
+            'c_first_id' => $this->c_first_id,
+            'c_second_id' => $this->c_second_id,
+            'ignore_scores' => $this->ignore_scores ? 1 : 0,
+            'back_nine' => $this->back_nine ? 1 : 0,
+        ]);
 
-		$this->reset([
-			'year_id',
-			'week_order',
-			'week_date',
-			'side_games',
-			'a_first_id',
-			'a_second_id',
-			'b_first_id',
-			'b_second_id',
-			'c_first_id',
-			'c_second_id',
-			'ignore_scores',
-			'back_nine',
-		]);
+        $this->reset([
+            'year_id',
+            'week_order',
+            'week_date',
+            'side_games',
+            'a_first_id',
+            'a_second_id',
+            'b_first_id',
+            'b_second_id',
+            'c_first_id',
+            'c_second_id',
+            'ignore_scores',
+            'back_nine',
+        ]);
 
         $this->modal('week-add')->close();
 
-		Flux::toast('Week created successfully.');
+        Flux::toast('Week created successfully.');
     }
 
-	protected function applyFilter($query)
+    protected function applyFilter($query)
     {
         return $this->selectedYear === null
             ? $query
@@ -112,15 +123,15 @@ class extends Component {
 
     public function with(): array
     {
-		$weeks = Week::query();
+        $weeks = Week::query();
 
-		$weeks = $this->applyFilter($weeks);
+        $weeks = $this->applyFilter($weeks);
 
-		$weeks = $weeks->orderby('week_date', 'desc')->paginate(25);
+        $weeks = $weeks->orderby('week_date', 'desc')->paginate(25);
 
         return [
             'weeks' => $weeks,
-			'years' => Year::orderby('name', 'desc')->get(),
+            'years' => Year::orderby('name', 'desc')->get(),
         ];
     }
 }; ?>

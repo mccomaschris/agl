@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 class FindUnusedControllers extends Command
 {
     protected $signature = 'cleanup:unused-controllers';
+
     protected $description = 'Find unused controllers in the Laravel application';
 
     public function handle()
@@ -16,7 +17,7 @@ class FindUnusedControllers extends Command
 
         $controllerPath = app_path('Http/Controllers');
         $controllers = collect(File::allFiles($controllerPath))
-            ->map(fn ($file) => str_replace(['.php', '/'], ['', '\\'], 'App\\Http\\Controllers\\' . $file->getRelativePathname()))
+            ->map(fn ($file) => str_replace(['.php', '/'], ['', '\\'], 'App\\Http\\Controllers\\'.$file->getRelativePathname()))
             ->map(fn ($class) => str_replace('\\\\', '\\', $class));
 
         // Define directories to search, excluding large ones
@@ -46,7 +47,7 @@ class FindUnusedControllers extends Command
         if ($unusedControllers->isEmpty()) {
             $this->info('No unused controllers found.');
         } else {
-            $this->warn("Unused Controllers:\n" . $unusedControllers->implode("\n"));
+            $this->warn("Unused Controllers:\n".$unusedControllers->implode("\n"));
         }
     }
 }

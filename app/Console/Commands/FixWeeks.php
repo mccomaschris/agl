@@ -30,16 +30,16 @@ class FixWeeks extends Command
     {
         $year = Year::where('active', 1)->first();
 
-		$weeks = Week::where('year_id', $year->id)->get();
+        $weeks = Week::where('year_id', $year->id)->get();
 
-		foreach ($weeks as $week) {
-			$week->a_first_id = Team::where('year_id', $year->id)->where('name', $week->a_first_id)->first()->id;
-			$week->a_second_id = Team::where('year_id', $year->id)->where('name', $week->a_second_id)->first()->id;
-			$week->b_first_id = Team::where('year_id', $year->id)->where('name', $week->b_first_id)->first()->id;
-			$week->b_second_id = Team::where('year_id', $year->id)->where('name', $week->b_second_id)->first()->id;
-			$week->c_first_id = Team::where('year_id', $year->id)->where('name', $week->c_first_id)->first()->id;
-			$week->c_second_id = Team::where('year_id', $year->id)->where('name', $week->c_second_id)->first()->id;
-			$week->save();
-		}
+        foreach ($weeks as $week) {
+            $week->a_first_id = Team::where('year_id', $year->id)->where('name', $week->a_first_id)->first()->id;
+            $week->a_second_id = Team::where('year_id', $year->id)->where('name', $week->a_second_id)->first()->id;
+            $week->b_first_id = Team::where('year_id', $year->id)->where('name', $week->b_first_id)->first()->id;
+            $week->b_second_id = Team::where('year_id', $year->id)->where('name', $week->b_second_id)->first()->id;
+            $week->c_first_id = Team::where('year_id', $year->id)->where('name', $week->c_first_id)->first()->id;
+            $week->c_second_id = Team::where('year_id', $year->id)->where('name', $week->c_second_id)->first()->id;
+            $week->save();
+        }
     }
 }

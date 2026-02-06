@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Team extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
     protected $appends = ['one_player_last'];
 
     protected $fillable = [
-        'name', 'year_id', 'champions', 'additional_points'
+        'name', 'year_id', 'champions', 'additional_points',
     ];
 
     public function year(): BelongsTo

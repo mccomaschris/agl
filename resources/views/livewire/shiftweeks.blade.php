@@ -1,32 +1,34 @@
 <?php
 
-use Livewire\Volt\Component;
-use Carbon\Carbon;
 use App\Models\Week;
+use Carbon\Carbon;
+use Livewire\Component;
 
-new class extends Component {
-	public $startDate;
-	public $weeksToAdd;
+new class extends Component
+{
+    public $startDate;
 
-	public function mount()
-	{
-		$this->startDate = Carbon::now();
-		$this->weeksToAdd = 1;
-	}
+    public $weeksToAdd;
 
-	public function update()
+    public function mount()
+    {
+        $this->startDate = Carbon::now();
+        $this->weeksToAdd = 1;
+    }
+
+    public function update()
     {
         $weeks = Week::where('week_date', '>=', $this->startDate)->get();
 
-		foreach ($weeks as $week) {
-			$week->update([
-				'week_date' => Carbon::parse($week->week_date)->addWeeks((int) $this->weeksToAdd),
-			]);
-		}
+        foreach ($weeks as $week) {
+            $week->update([
+                'week_date' => Carbon::parse($week->week_date)->addWeeks((int) $this->weeksToAdd),
+            ]);
+        }
 
-		$this->modal('shift-weeks')->close();
+        $this->modal('shift-weeks')->close();
 
-		Flux::toast('Weeks have been shifted.');
+        Flux::toast('Weeks have been shifted.');
     }
 }; ?>
 

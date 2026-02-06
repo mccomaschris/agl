@@ -1,22 +1,23 @@
 <?php
 
-use Illuminate\View\View;
-use Livewire\Volt\Component;
-use App\Models\Year;
 use App\Models\Player;
 use App\Models\Team;
+use App\Models\Year;
+use Illuminate\View\View;
+use Livewire\Component;
 
-new class extends Component {
-	public Year $year;
+new class extends Component
+{
+    public Year $year;
 
-	public function rendering(View $view)
+    public function rendering(View $view)
     {
-        $view->title($this->year->name . ' Group Stats');
+        $view->title($this->year->name.' Group Stats');
     }
 
     public function with(): array
     {
-		return [
+        return [
             'years' => Year::orderBy('name', 'desc')->get(),
             'teams' => Team::where('year_id', $this->year->id)->pluck('id'),
             'ones' => Player::with('weekly_scores')->where('year_id', $this->year->id)->where('position', 1)->get(),

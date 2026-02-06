@@ -4,15 +4,15 @@ namespace App\Jobs;
 
 use App\Models\Player;
 use App\Models\Score;
-use App\Models\Week;
 use App\Models\Team;
+use App\Models\Week;
 use App\Models\Year;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
 class UpdateHandicaps implements ShouldQueue
@@ -36,23 +36,25 @@ class UpdateHandicaps implements ShouldQueue
      *
      * @return $hc
      */
-    public function calc($scores, $scores_to_count = 0, $qtr = null) {
+    public function calc($scores, $scores_to_count = 0, $qtr = null)
+    {
         if (count($scores) == 0) {
-			return 0;
-		}
+            return 0;
+        }
 
         $total_scores = count($scores);
         $half_scores = round($total_scores / 2, 0);
         asort($scores, SORT_NUMERIC);
 
-		# if i count 8 scores, but i only have 7 so far, use 7
-		$deno = $half_scores;
+        // if i count 8 scores, but i only have 7 so far, use 7
+        $deno = $half_scores;
 
         $total_score = (array_sum(array_slice($scores, 0, $half_scores, true)));
 
-		$sum = ($total_score / $deno);
-		Log::debug('Sum: ' . $sum);
+        $sum = ($total_score / $deno);
+        Log::debug('Sum: '.$sum);
         $hc = round($sum - 37);
+
         return $hc;
     }
 
@@ -78,13 +80,13 @@ class UpdateHandicaps implements ShouldQueue
         $qtr_4_scores = [];
         $total_scores = [];
 
-		$weeks = Week::where('year_id', $year->id)->where('back_nine', false)->where('week_date', '<=', Carbon::yesterday())->pluck('id');
+        $weeks = Week::where('year_id', $year->id)->where('back_nine', false)->where('week_date', '<=', Carbon::yesterday())->pluck('id');
 
         $scores = Score::with('week')->whereIn('foreign_key', $weeks)->where('score_type', 'weekly_score')->where('player_id', $player->id)
-                    ->where('gross', '>', 0)
-                    ->where('absent', false)
-                    ->where('substitute_id', false)
-                    ->get();
+            ->where('gross', '>', 0)
+            ->where('absent', false)
+            ->where('substitute_id', false)
+            ->get();
 
         foreach ($scores as $score) {
             switch ($score->week->week_order) {
@@ -114,7 +116,7 @@ class UpdateHandicaps implements ShouldQueue
         // Calculate Full Handicap for 1-4 rankings
         $total_scores = count($qtr_4_scores);
 
-        if ( $player->id === 159) {
+        if ($player->id === 159) {
             $counted_scores = 8;
         } else {
             $counted_scores = round($total_scores / 2, 0);
@@ -145,39 +147,39 @@ class UpdateHandicaps implements ShouldQueue
                 $player->hc_current = $player->hc_first;
         }
 
-		$absences = Score::where('player_id', $player->id)->where('absent', true)->where('substitute_id', 0)->count();
+        $absences = Score::where('player_id', $player->id)->where('absent', true)->where('substitute_id', 0)->count();
 
-		Log::info($player->user->name . ' Absences: ' . $absences);
+        Log::info($player->user->name.' Absences: '.$absences);
 
-		// Calculate hc_ten with absence-adjusted denominator
-		$gross_scores = $scores->pluck('gross')->toArray();
-		sort($gross_scores, SORT_NUMERIC);
+        // Calculate hc_ten with absence-adjusted denominator
+        $gross_scores = $scores->pluck('gross')->toArray();
+        sort($gross_scores, SORT_NUMERIC);
 
-		$played_rounds = count($gross_scores);
+        $played_rounds = count($gross_scores);
 
-		// Only apply absence rule if player has 10 or more rounds
-		if ($played_rounds >= 10) {
-			$absences = Score::where('player_id', $player->id)
-				->where('absent', true)
-				->where('substitute_id', 0)
-				->count();
+        // Only apply absence rule if player has 10 or more rounds
+        if ($played_rounds >= 10) {
+            $absences = Score::where('player_id', $player->id)
+                ->where('absent', true)
+                ->where('substitute_id', 0)
+                ->count();
 
-			if ($absences <= 1) {
-				$deno = 10;
-			} elseif ($absences <= 3) {
-				$deno = 9;
-			} elseif ($absences <= 5) {
-				$deno = 8;
-			} else {
-				$deno = 10; // Optional: fallback if absences are too high
-			}
-		} else {
-			$deno = $played_rounds;
-		}
+            if ($absences <= 1) {
+                $deno = 10;
+            } elseif ($absences <= 3) {
+                $deno = 9;
+            } elseif ($absences <= 5) {
+                $deno = 8;
+            } else {
+                $deno = 10; // Optional: fallback if absences are too high
+            }
+        } else {
+            $deno = $played_rounds;
+        }
 
-		// Get lowest scores to use
-		$lowest_scores = array_slice($gross_scores, 0, $deno);
-		$player->hc_ten = $deno > 0 ? (array_sum($lowest_scores) / $deno) - 37 : 0;
+        // Get lowest scores to use
+        $lowest_scores = array_slice($gross_scores, 0, $deno);
+        $player->hc_ten = $deno > 0 ? (array_sum($lowest_scores) / $deno) - 37 : 0;
 
         $player->save();
 
@@ -202,24 +204,24 @@ class UpdateHandicaps implements ShouldQueue
             $player->save();
         }
 
-		$players = Player::whereIn('team_id', $teams)->where('substitute', '0')->orderBy('hc_ten', 'asc')->get();
+        $players = Player::whereIn('team_id', $teams)->where('substitute', '0')->orderBy('hc_ten', 'asc')->get();
 
-		$prev = 400;
-		$rank = 0;
-		$count = 0;
+        $prev = 400;
+        $rank = 0;
+        $count = 0;
 
-		foreach ($players as $player) {
-			$count++;
+        foreach ($players as $player) {
+            $count++;
 
-			if ($player->hc_ten == $prev) {
-				$player->hc_ten_rank = $rank;
-			} else {
-				$player->hc_ten_rank = $count;
-				$rank = $count;
-			}
+            if ($player->hc_ten == $prev) {
+                $player->hc_ten_rank = $rank;
+            } else {
+                $player->hc_ten_rank = $count;
+                $rank = $count;
+            }
 
-			$prev = $player->hc_ten;
-			$player->save();
-		}
+            $prev = $player->hc_ten;
+            $player->save();
+        }
     }
 }

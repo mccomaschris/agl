@@ -12,9 +12,6 @@ use Illuminate\View\View;
 
 class WaitlistController extends Controller
 {
-    /**
-     * @return View
-     */
     public function index(): View
     {
         $members = Waitlist::where('active', 1)->orderby('created_at', 'asc')->get();
@@ -22,11 +19,6 @@ class WaitlistController extends Controller
         return view('waitlist.index', compact('members'));
     }
 
-    /**
-     * @param  Request  $request
-     * @param  Waitlist  $waitlist
-     * @return RedirectResponse
-     */
     public function store(Request $request, Waitlist $waitlist): RedirectResponse
     {
         $this->validate($request, [

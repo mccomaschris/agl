@@ -3,17 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
-use App\Models\Score;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class PlayerController extends Controller
 {
-    /**
-     * @param  User  $user
-     * @return View
-     */
     public function show(User $user): View
     {
         $seasons = Player::where('user_id', $user->id)->pluck('id');

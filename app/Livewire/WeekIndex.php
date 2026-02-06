@@ -2,30 +2,30 @@
 
 namespace App\Livewire;
 
-use Livewire\Attributes\Layout;
-use Livewire\WithPagination;
-use Livewire\Component;
 use App\Models\Week;
 use App\Models\Year;
+use Livewire\Attributes\Layout;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class WeekIndex extends Component
 {
-	use WithPagination;
+    use WithPagination;
 
-	public $yearFilter = '';
+    public $yearFilter = '';
 
-	#[Layout('components.admin')]
+    #[Layout('components.admin')]
     public function render()
     {
-		$query = Week::query();
+        $query = Week::query();
 
-		if ($this->yearFilter) {
-			$query->where('year_id', $this->yearFilter);
-		}
+        if ($this->yearFilter) {
+            $query->where('year_id', $this->yearFilter);
+        }
 
         return view('livewire.week-index', [
-			'weeks' => $query->orderby('id', 'desc')->paginate(20),
-			'years' => Year::orderby('name', 'desc')->get(),
-		]);
+            'weeks' => $query->orderby('id', 'desc')->paginate(20),
+            'years' => Year::orderby('name', 'desc')->get(),
+        ]);
     }
 }

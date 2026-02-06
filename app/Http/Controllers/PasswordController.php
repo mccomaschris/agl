@@ -17,13 +17,13 @@ class PasswordController extends Controller
     public function edit()
     {
         $user = Auth::user();
+
         return view('users.password.change', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

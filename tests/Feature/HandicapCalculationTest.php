@@ -14,15 +14,14 @@ it('calculates quarter 1 handicap correctly for a player with all rounds', funct
     $player = Player::factory()->create(['year_id' => $year->id]);
 
     // Create Weeks 1-5
-    $weeks = collect(range(1, 5))->map(fn ($weekOrder) =>
-        Week::factory()->create([
-            'year_id' => $year->id,
-            'week_order' => $weekOrder,
-            'week_date' => now()->subWeeks(10 - $weekOrder),
-        ])
+    $weeks = collect(range(1, 5))->map(fn ($weekOrder) => Week::factory()->create([
+        'year_id' => $year->id,
+        'week_order' => $weekOrder,
+        'week_date' => now()->subWeeks(10 - $weekOrder),
+    ])
     );
 
-	$savedWeeks = Week::all(); // Fetches all Score records in the test database
+    $savedWeeks = Week::all(); // Fetches all Score records in the test database
     dump($savedWeeks->toArray()); // See what is actually stored
 
     // Assign scores to the player for those **exact weeks**
@@ -58,15 +57,14 @@ it('calculates quarter 1 handicap correctly for a player who missed a round', fu
     $player = Player::factory()->create(['year_id' => $year->id]);
 
     // Create Weeks 1-5
-    $weeks = collect(range(1, 4))->map(fn ($weekOrder) =>
-        Week::factory()->create([
-            'year_id' => $year->id,
-            'week_order' => $weekOrder,
-            'week_date' => now()->subWeeks(10 - $weekOrder),
-        ])
+    $weeks = collect(range(1, 4))->map(fn ($weekOrder) => Week::factory()->create([
+        'year_id' => $year->id,
+        'week_order' => $weekOrder,
+        'week_date' => now()->subWeeks(10 - $weekOrder),
+    ])
     );
 
-	$savedWeeks = Week::all(); // Fetches all Score records in the test database
+    $savedWeeks = Week::all(); // Fetches all Score records in the test database
     dump($savedWeeks->toArray()); // See what is actually stored
 
     // Assign scores to the player for those **exact weeks**
@@ -102,12 +100,11 @@ it('calculates quarter 2 handicap correctly for a player with all rounds', funct
     $player = Player::factory()->create(['year_id' => $year->id]);
 
     // Create Weeks 1-10
-    $weeks = collect(range(1, 10))->map(fn ($weekOrder) =>
-        Week::factory()->create([
-            'year_id' => $year->id,
-            'week_order' => $weekOrder,
-            'week_date' => now()->subWeeks(25 - $weekOrder),
-        ])
+    $weeks = collect(range(1, 10))->map(fn ($weekOrder) => Week::factory()->create([
+        'year_id' => $year->id,
+        'week_order' => $weekOrder,
+        'week_date' => now()->subWeeks(25 - $weekOrder),
+    ])
     );
 
     // Assign scores to the player for those **exact weeks**
@@ -136,12 +133,11 @@ it('calculates quarter 2 handicap correctly for a player who missed a round', fu
     $player = Player::factory()->create(['year_id' => $year->id]);
 
     // Create Weeks 1-10
-    $weeks = collect(range(1, 10))->map(fn ($weekOrder) =>
-        Week::factory()->create([
-            'year_id' => $year->id,
-            'week_order' => $weekOrder,
-            'week_date' => now()->subWeeks(25 - $weekOrder),
-        ])
+    $weeks = collect(range(1, 10))->map(fn ($weekOrder) => Week::factory()->create([
+        'year_id' => $year->id,
+        'week_order' => $weekOrder,
+        'week_date' => now()->subWeeks(25 - $weekOrder),
+    ])
     );
 
     // Assign scores to the player for those **exact weeks**
@@ -170,12 +166,11 @@ it('calculates quarter 2 handicap correctly for a player who missed 2 rounds', f
     $player = Player::factory()->create(['year_id' => $year->id]);
 
     // Create Weeks 1-10
-    $weeks = collect(range(1, 10))->map(fn ($weekOrder) =>
-        Week::factory()->create([
-            'year_id' => $year->id,
-            'week_order' => $weekOrder,
-            'week_date' => now()->subWeeks(25 - $weekOrder),
-        ])
+    $weeks = collect(range(1, 10))->map(fn ($weekOrder) => Week::factory()->create([
+        'year_id' => $year->id,
+        'week_order' => $weekOrder,
+        'week_date' => now()->subWeeks(25 - $weekOrder),
+    ])
     );
 
     // Assign scores to the player for those **exact weeks**

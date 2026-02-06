@@ -1,23 +1,25 @@
 <?php
 
-use Livewire\Attributes\{Layout, Title, Validate};
 use App\Jobs\UpdateHandicaps;
 use App\Jobs\UpdatePlayerStats;
 use App\Jobs\UpdateRoundStats;
-use Livewire\Volt\Component;
 use App\Models\Player;
 use App\Models\Score;
 use App\Models\Year;
-use Carbon\Carbon;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
-new class extends Component {
-	public $scoreId;
-	public $isOdd;
+new class extends Component
+{
+    public $scoreId;
 
-	public Score $score;
-	public $gross;
+    public $isOdd;
 
-	#[Validate('integer|nullable')]
+    public Score $score;
+
+    public $gross;
+
+    #[Validate('integer|nullable')]
     public $absent;
 
     #[Validate('integer|nullable')]
@@ -59,9 +61,9 @@ new class extends Component {
     public function mount($scoreId, $isOdd)
     {
         $this->score = Score::find($scoreId);
-		$this->isOdd = $isOdd;
+        $this->isOdd = $isOdd;
 
-		$this->absent = (bool) $this->score->absent;
+        $this->absent = (bool) $this->score->absent;
         $this->weekly_winner = (bool) $this->score->weekly_winner;
         $this->substitute_id = (bool) $this->score->substitute_id;
         $this->hole_1 = intval($this->score->hole_1);
@@ -78,28 +80,28 @@ new class extends Component {
         $this->calculateGross();
     }
 
-	public function updated($propertyName)
+    public function updated($propertyName)
     {
         if (str_starts_with($propertyName, 'hole_')) {
             $this->calculateGross();
         }
     }
 
-	public function calculateGross()
-	{
-		$this->gross =
-			(int) $this->hole_1 +
-			(int) $this->hole_2 +
-			(int) $this->hole_3 +
-			(int) $this->hole_4 +
-			(int) $this->hole_5 +
-			(int) $this->hole_6 +
-			(int) $this->hole_7 +
-			(int) $this->hole_8 +
-			(int) $this->hole_9;
-	}
+    public function calculateGross()
+    {
+        $this->gross =
+            (int) $this->hole_1 +
+            (int) $this->hole_2 +
+            (int) $this->hole_3 +
+            (int) $this->hole_4 +
+            (int) $this->hole_5 +
+            (int) $this->hole_6 +
+            (int) $this->hole_7 +
+            (int) $this->hole_8 +
+            (int) $this->hole_9;
+    }
 
-	public function save()
+    public function save()
     {
         $this->score->hole_1 = $this->hole_1;
         $this->score->hole_2 = $this->hole_2;
@@ -125,30 +127,31 @@ new class extends Component {
             new UpdateHandicaps($this->score->player),
         ])->dispatch($this->score);
 
-		Flux::toast(
-			heading: 'Score updated.',
-			text: $player->user->name . ' score has been updated.',
-			variant: 'success',
-		);
-	}
-	public function with(): array
+        Flux::toast(
+            heading: 'Score updated.',
+            text: $player->user->name.' score has been updated.',
+            variant: 'success',
+        );
+    }
+
+    public function with(): array
     {
         return [
-			'score' => $this->score,
-			'gross' => $this->gross,
-			'hole_1' => $this->hole_1,
-			'hole_2' => $this->hole_2,
-			'hole_3' => $this->hole_3,
-			'hole_4' => $this->hole_4,
-			'hole_5' => $this->hole_5,
-			'hole_6' => $this->hole_6,
-			'hole_7' => $this->hole_7,
-			'hole_8' => $this->hole_8,
-			'hole_9' => $this->hole_9,
-			'points' => $this->points,
-			'absent' => $this->absent,
-			'weekly_winner' => $this->weekly_winner,
-			'substitute_id' => $this->substitute_id,
+            'score' => $this->score,
+            'gross' => $this->gross,
+            'hole_1' => $this->hole_1,
+            'hole_2' => $this->hole_2,
+            'hole_3' => $this->hole_3,
+            'hole_4' => $this->hole_4,
+            'hole_5' => $this->hole_5,
+            'hole_6' => $this->hole_6,
+            'hole_7' => $this->hole_7,
+            'hole_8' => $this->hole_8,
+            'hole_9' => $this->hole_9,
+            'points' => $this->points,
+            'absent' => $this->absent,
+            'weekly_winner' => $this->weekly_winner,
+            'substitute_id' => $this->substitute_id,
 
         ];
     }

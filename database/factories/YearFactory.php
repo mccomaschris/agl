@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Year;
 use App\Models\Team;
+use App\Models\Year;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class YearFactory extends Factory
@@ -14,7 +14,7 @@ class YearFactory extends Factory
     {
         return [
             'name' => $this->faker->year, // Example: "2025"
-            'active' => !Year::where('active', true)->exists(), // Ensure only one year is active
+            'active' => ! Year::where('active', true)->exists(), // Ensure only one year is active
         ];
     }
 

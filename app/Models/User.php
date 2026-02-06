@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'username',
-		'admin',
+        'admin',
         'active',
         'phone',
     ];
@@ -44,8 +44,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-		'admin' => 'boolean',
-		'active' => 'boolean',
+        'admin' => 'boolean',
+        'active' => 'boolean',
     ];
 
     /**

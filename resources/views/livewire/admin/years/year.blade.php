@@ -1,29 +1,32 @@
 <?php
 
-use Livewire\Attributes\Validate;
-use Illuminate\Validation\Rule;
-use Livewire\Volt\Component;
 use App\Models\Year;
+use Illuminate\Validation\Rule;
+use Livewire\Component;
 
-new class extends Component {
-	public Year $year;
+new class extends Component
+{
+    public Year $year;
 
-	public $name = '';
-	public $start_date = '';
-	public $skip_date = '';
-	public $active = '';
+    public $name = '';
 
-	public function rules()
+    public $start_date = '';
+
+    public $skip_date = '';
+
+    public $active = '';
+
+    public function rules()
     {
         return [
             'name' => [
                 'required',
-				'string',
+                'string',
                 Rule::unique('years')->ignore($this->year->id),
             ],
             'start_date' => 'nullable|date',
-			'skip_date' => 'nullable|date',
-			'active' => 'nullable|boolean',
+            'skip_date' => 'nullable|date',
+            'active' => 'nullable|boolean',
         ];
     }
 
@@ -40,15 +43,15 @@ new class extends Component {
         $this->validate();
 
         $this->year->update([
-			'name' => $this->name,
-			'active' => $this->active ? 1 : 0,
-			'start_date' => $this->start_date,
-			'skip_date' => $this->skip_date,
+            'name' => $this->name,
+            'active' => $this->active ? 1 : 0,
+            'start_date' => $this->start_date,
+            'skip_date' => $this->skip_date,
         ]);
 
-        $this->modal('year-edit' . $this->year->id)->close();
+        $this->modal('year-edit'.$this->year->id)->close();
 
-		Flux::toast('Year updated successfully.');
+        Flux::toast('Year updated successfully.');
     }
 }; ?>
 
