@@ -35,7 +35,21 @@ class extends Component
     #[Validate('string|nullable')]
     public $search = '';
 
+    public $filterActive = '';
+
+    public $filterAdmin = '';
+
     public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedFilterActive()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedFilterAdmin()
     {
         $this->resetPage();
     }
@@ -76,8 +90,7 @@ class extends Component
     {
         return $this->search === ''
             ? $query
-            : $query
-                ->where('name', 'like', '%'.$this->search.'%');
+            : $query->where('name', 'like', '%'.$this->search.'%');
     }
 
     public function with(): array
@@ -85,6 +98,14 @@ class extends Component
         $users = User::query();
 
         $users = $this->applySearch($users);
+
+        if ($this->filterActive !== '') {
+            $users->where('active', $this->filterActive);
+        }
+
+        if ($this->filterAdmin !== '') {
+            $users->where('admin', $this->filterAdmin);
+        }
 
         $users = $users->orderby('name', 'asc')->paginate(20);
 
@@ -129,8 +150,18 @@ class extends Component
 		</div>
     </div>
 
-	<div class="mt-8 w-full lg:w-1/3">
-		<flux:input wire:model.live="search" placeholder="Search users..." />
+	<div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-4">
+		<flux:input wire:model.live="search" placeholder="Search users..." class="" />
+		<flux:select wire:model.live="filterActive">
+			<flux:select.option value="">All statuses</flux:select.option>
+			<flux:select.option value="1">Active</flux:select.option>
+			<flux:select.option value="0">Inactive</flux:select.option>
+		</flux:select>
+		<flux:select wire:model.live="filterAdmin">
+			<flux:select.option value="">All roles</flux:select.option>
+			<flux:select.option value="1">Admin</flux:select.option>
+			<flux:select.option value="0">Non-admin</flux:select.option>
+		</flux:select>
 	</div>
 
 

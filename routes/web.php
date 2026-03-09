@@ -3,10 +3,8 @@
 use App\Http\Controllers\Admin\PrintScorecardController;
 use App\Http\Controllers\ChrisVsMikeController;
 use App\Http\Controllers\HistoryController;
-use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\RuleController;
-use App\Http\Controllers\WaitlistController;
 use App\Http\Controllers\WeekController;
 use App\Http\Middleware\IsAdmin;
 use App\Livewire\SiteIndex;
@@ -36,8 +34,8 @@ Route::get('scores/week/{week}', WeekScores::class)->name('week-score');
 Route::get('chris-vs-mike', [ChrisVsMikeController::class, 'show']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('members', [MemberController::class, 'index'])->name('members');
-    Route::resource('waitlist', WaitlistController::class);
+    Route::livewire('members', 'members.index')->name('members');
+    Route::livewire('waitlist', 'waitlist.index')->name('waitlist.index');
 });
 
 Route::middleware([IsAdmin::class])->group(function () {
@@ -61,6 +59,7 @@ Route::middleware([IsAdmin::class])->group(function () {
     Route::livewire('/admin/teams', 'admin.teams.index')->name('admin.teams.index');
     Route::livewire('/admin/seasons/create', 'admin.seasons.create')->name('admin.seasons.create');
     Route::livewire('/admin/scores/week/{week}/edit', 'admin.scores.edit')->name('week-score-edit');
+    Route::livewire('/admin/waitlist', 'admin.waitlist.index')->name('admin.waitlist.index');
 });
 
 Route::get('/google/redirect', function () {

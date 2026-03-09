@@ -2,6 +2,7 @@
 
 use App\Jobs\ResetPassword;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -46,7 +47,6 @@ new class extends Component
                 'email',
                 Rule::unique('users')->ignore($this->user),
             ],
-            'content' => 'required|min:5',
         ];
     }
 
@@ -62,7 +62,7 @@ new class extends Component
             'active' => $this->active ? 1 : 0,
         ]);
 
-        $this->modal('user-edit')->close();
+        $this->modal('user-edit-'.$this->user->id)->close();
 
         Flux::toast('User has been saved.');
     }

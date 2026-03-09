@@ -26,6 +26,7 @@
 			<flux:navlist.item icon="calendar" href="{{ route('admin.years.index') }}">Years</flux:navlist.item>
 			<flux:navlist.item icon="calendar-days" href="{{ route('admin.weeks.index') }}">Weeks</flux:navlist.item>
 			<flux:navlist.item icon="user-group" href="{{ route('admin.teams.index') }}">Teams</flux:navlist.item>
+			<flux:navlist.item icon="queue-list" href="{{ route('admin.waitlist.index') }}">Waitlist</flux:navlist.item>
 			<flux:navlist.item icon="plus-circle" href="{{ route('admin.seasons.create') }}">New Season</flux:navlist.item>
 		</flux:navlist>
 

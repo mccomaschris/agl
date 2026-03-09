@@ -14,7 +14,7 @@ class WaitlistController extends Controller
 {
     public function index(): View
     {
-        $members = Waitlist::where('active', 1)->orderby('created_at', 'asc')->get();
+        $members = Waitlist::where('active', 1)->orderByRaw('`order` IS NULL ASC, `order` ASC')->orderBy('created_at', 'asc')->get();
 
         return view('waitlist.index', compact('members'));
     }

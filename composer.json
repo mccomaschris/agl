@@ -14,6 +14,7 @@
         "laravel/horizon": "^5.31",
         "laravel/socialite": "^5.18",
         "laravel/tinker": "^2.8",
+        "livewire/blaze": "^1.0",
         "livewire/flux-pro": "^2.0",
         "livewire/livewire": "^4.0",
         "mccomaschris/marco-analytics": "dev-main",
