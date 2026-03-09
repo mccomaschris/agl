@@ -68,14 +68,12 @@ class extends Component
             <flux:table.columns>
                 <flux:table.column>Name</flux:table.column>
                 <flux:table.column>Projected HC</flux:table.column>
-                <flux:table.column>Added By</flux:table.column>
             </flux:table.columns>
             <flux:table.rows>
                 @forelse ($members as $member)
                     <flux:table.row>
                         <flux:table.cell variant="strong">{{ $member->name }}</flux:table.cell>
                         <flux:table.cell>{{ $member->projected_hc }}</flux:table.cell>
-                        <flux:table.cell>{{ $member->user->name }}</flux:table.cell>
                     </flux:table.row>
                 @empty
                     <flux:table.row>
