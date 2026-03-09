@@ -73,7 +73,7 @@ h1, h2, h3, h4, h4, h6 {
     }
 }
 
-@screen lg {
+@media (width >= theme(--breakpoint-lg)) {
     .alert {
         @apply w-auto mx-0 left-auto;
         min-width: 400px;

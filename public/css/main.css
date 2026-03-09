@@ -14990,7 +14990,7 @@ ui-toast-group {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
-  @screen lg {
+  @media (width >= 64rem) {
     .nav-item {
       margin-inline: calc(var(--spacing) * 0);
       margin-top: calc(var(--spacing) * 0);
@@ -15011,7 +15011,7 @@ ui-toast-group {
       transform: translateY(0);
     }
   }
-  @screen xl {
+  @media (width >= 80rem) {
     .nav-item {
       margin-inline: calc(var(--spacing) * 1);
       padding-inline: calc(var(--spacing) * 3);
@@ -15101,7 +15101,7 @@ ui-toast-group {
     background-color: var(--color-black-grey);
     color: var(--color-zinc-200);
   }
-  @screen lg {
+  @media (width >= 64rem) {
     .table th {
       padding-inline: calc(var(--spacing) * 1);
       padding-block: calc(var(--spacing) * 2);
@@ -15222,7 +15222,7 @@ ui-toast-group {
       transform: rotate(359deg);
     }
   }
-  @screen lg {
+  @media (width >= 64rem) {
     .alert {
       left: auto;
       margin-inline: calc(var(--spacing) * 0);

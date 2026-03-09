@@ -20,7 +20,7 @@
 }
 
 
-@screen lg {
+@media (width >= theme(--breakpoint-lg)) {
     .nav-item {
         @apply w-auto inline-block mt-0 rounded py-2 px-2 mx-0 border-0;
         transition: all .25s ease-in;
@@ -35,7 +35,7 @@
     }
 }
 
-@screen xl {
+@media (width >= theme(--breakpoint-xl)) {
     .nav-item {
         @apply px-3 mx-1;
     }

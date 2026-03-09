@@ -61,7 +61,7 @@ td.absent_row {
     @apply text-zinc-200 bg-black-grey border-black-grey;
 }
 
-@screen lg {
+@media (width >= theme(--breakpoint-lg)) {
     .table th {
         @apply px-1 py-2;
     }
