@@ -67,6 +67,15 @@ new class extends Component
         Flux::toast('User has been saved.');
     }
 
+    public function toggleActive()
+    {
+        $this->user->update(['active' => ! $this->user->active]);
+
+        $this->active = $this->user->active;
+
+        Flux::toast($this->user->active ? 'User marked active.' : 'User marked inactive.');
+    }
+
     public function resetPassword()
     {
         ResetPassword::dispatch($this->user);
@@ -118,6 +127,7 @@ new class extends Component
 				<flux:modal.trigger :name="'user-edit-'.$user->id">
 					<flux:menu.item icon="pencil-square">Edit</flux:menu.item>
 				</flux:modal.trigger>
+				<flux:menu.item wire:click="toggleActive" icon="arrow-path">Mark {{ $user->active ? 'Inactive' : 'Active' }}</flux:menu.item>
 				<flux:menu.item wire:click="resetPassword" icon="lock-closed">Reset Password</flux:menu.item>
 				<flux:modal.trigger :name="'user-remove-'.$user->id">
 					<flux:menu.item icon="trash" variant="danger">Remove</flux:menu.item>

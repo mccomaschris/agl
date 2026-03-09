@@ -35,10 +35,12 @@ class extends Component
         $this->reset(['name', 'projected_hc']);
     }
 
+    public $filterActive = '1';
+
     public function with(): array
     {
         return [
-            'members' => Waitlist::where('active', 1)
+            'members' => Waitlist::when($this->filterActive !== '', fn ($q) => $q->where('active', $this->filterActive))
                 ->orderByRaw('`order` IS NULL ASC, `order` ASC')
                 ->orderBy('created_at', 'asc')
                 ->get(),
@@ -54,7 +56,14 @@ class extends Component
 
 <div class="flex flex-col lg:flex-row gap-8">
     <div class="flex-1 min-w-0">
-        <flux:heading size="lg" class="mb-4">Current Waiting List</flux:heading>
+        <div class="flex items-center justify-between mb-4">
+            <flux:heading size="lg">Current Waiting List</flux:heading>
+            <flux:select wire:model.live="filterActive" class="w-36">
+                <flux:select.option value="">All</flux:select.option>
+                <flux:select.option value="1">Active</flux:select.option>
+                <flux:select.option value="0">Inactive</flux:select.option>
+            </flux:select>
+        </div>
         <flux:table>
             <flux:table.columns>
                 <flux:table.column>Name</flux:table.column>
