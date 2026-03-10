@@ -187,7 +187,7 @@
 			<p class="mb-3">The ball can be played up and can be moved one hand's width (tip of little finger to tip of
 				thumb, both extended) anywhere except the green to improve the lie. We want to have fun playing this
 				gentleman's game.</p>
-			<p class="mb-3">In that Riviera has a history of not manicuring the bunkers players may lift the ball in the bunker and
+			<p class="mb-3">In that Riviera has a history of not manicuring the bunkers players may remove the ball from the bunker and place the behind the bunker in a straight line from the pin. The ball <b>MUST</b> be behind the bunker and your next shot <b>MUST</b> be back over the bunker. Players also may lift the ball in the bunker and
 				rake the area where the ball came to rest raked. Shots <strong>MUST</strong> be played from the bunker.</p>
 			<p class="mb-3">Number four players must declare their intention to play white or yellow tees prior to the
 				annual Snowball Tournament. The player will be required to play the ENTIRE season and playoffs from the
@@ -197,15 +197,7 @@
 			<p class="mb-3">In the event of a tie for the weekly game (low net or closest to the pin), the tie will be broken by the tied player's scoring on individual holes, using handicap, starting on hole 9 and working backward until a tie is broken.</p>
 
 			<h3 class="font-semibold mb-2 lg:text-xl dark:text-zinc-100! mt-6" id="attendance">Attendance</h3>
-			<p class="mb-3">Any missed matches must be made up within the current quarter of the schedule. All matches
-				must be made up and scorecards <a href="mailto:mccomas.chris@gmail.com">sent to the webmaster</a> by
-				Wednesday evening prior to the next quarter starting. If you miss Week 8, you have until the night
-				before Week 11's Thursday play to make-up your match and send your scorecard to the website to ensure
-				handicaps are updated and ready for Week 11.</p>
-			<p class="mb-3">Opposing players are obligated to make every effort to accommodate the player who is missing
-				the match. The proper handicap will be applied to the match that would be applied should the match be
-				played at the scheduled date. If you pre-play a Thursday match and that regular Thursday match is rained
-				out, your pre-play match is also considered rained out and is null and void.</p>
+			<p class="mb-3">For the 2026 season make-ups are <b>not</b> allowed.</p>
 			<p class="mb-3">If during this time a player misses five matches he will be replaced immediately.</p>
 			<p class="mb-3">In the event of medical issue, serious injury or illness, either to the player or a family
 				member that needs their care, accommodations will be made to replace that player with a temporary player
