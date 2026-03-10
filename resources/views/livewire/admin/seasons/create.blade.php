@@ -267,7 +267,7 @@ class extends Component
         }
     }
 
-    protected function createWeek(int $yearId, int $weekOrder, Carbon $weekDate, string $previousGame): Week
+    protected function createWeek(int $yearId, int $weekOrder, Carbon $weekDate, string $previousGame, \Illuminate\Support\Collection $teamMap): Week
     {
         $sideGames = $previousGame === 'Net' ? 'Pin' : 'Net';
 
@@ -293,17 +293,20 @@ class extends Component
             'week_order' => $weekOrder,
             'week_date' => $weekDate,
             'side_games' => $sideGames,
-            'a_first_id' => $weekMatches[0],
-            'a_second_id' => $weekMatches[1],
-            'b_first_id' => $weekMatches[2],
-            'b_second_id' => $weekMatches[3],
-            'c_first_id' => $weekMatches[4],
-            'c_second_id' => $weekMatches[5],
+            'a_first_id' => $teamMap[$weekMatches[0]],
+            'a_second_id' => $teamMap[$weekMatches[1]],
+            'b_first_id' => $teamMap[$weekMatches[2]],
+            'b_second_id' => $teamMap[$weekMatches[3]],
+            'c_first_id' => $teamMap[$weekMatches[4]],
+            'c_second_id' => $teamMap[$weekMatches[5]],
         ]);
     }
 
     protected function createWeeks(Year $year): void
     {
+        // Map team name (1-6) to actual team DB ID
+        $teamMap = Team::where('year_id', $year->id)->pluck('id', 'name');
+
         $startWeek = new Carbon($this->startDate);
         $skipWeek = $this->skipDate ? new Carbon($this->skipDate) : null;
         $previousGame = 'Putts';
@@ -317,7 +320,7 @@ class extends Component
                 if ($weekOrder > $this->weekCount) {
                     break;
                 }
-                $week = $this->createWeek($year->id, $weekOrder, $startWeek, $previousGame);
+                $week = $this->createWeek($year->id, $weekOrder, $startWeek, $previousGame, $teamMap);
                 $startWeek = $week->week_date->addWeek();
                 $previousGame = $week->side_games;
             }

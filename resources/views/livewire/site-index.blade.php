@@ -1,7 +1,8 @@
 <div class="mt-12">
-	<flux:callout color="green" icon="trophy" class="mb-12">
-		<flux:callout.heading>Congratulations!</flux:callout.heading>
-		<flux:callout.text>Congrats to Todd Webb on winning the 2025 individual championship! Also, congrats to Vance, Tim, Melvin and Coach for winning the 2025 championship!</flux:callout.text>
+
+    <flux:callout color="green" icon="snowflake" class="mb-12">
+		<flux:callout.heading>Snowball Tournament</flux:callout.heading>
+		<flux:callout.text>The 2026 Snowball Tournament will be Sunday, April 12 at 12pm.</flux:callout.text>
 	</flux:callout>
 
 	@if ($last_week and false)
