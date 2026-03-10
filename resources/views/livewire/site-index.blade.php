@@ -2,12 +2,12 @@
 
     <flux:callout color="green" icon="snowflake" class="mb-12">
 		<flux:callout.heading>Snowball Tournament</flux:callout.heading>
-		<flux:callout.text>The 2026 Snowball Tournament will be Sunday, April 12 at 12pm.</flux:callout.text>
+		<flux:callout.text>The 2026 Snowball Tournament will be Sunday, April 12 at 1pm.</flux:callout.text>
 	</flux:callout>
 
 	@if ($last_week and false)
 		<flux:callout color="green" icon="check-circle" class="mb-12">
-			<flux:callout.heading>Week {{ $last_week->week_order }} scores are up!</flux:callout.heading>
+			<flux:callout.heading>Week {{ $last_week->week_order }} scores are up!</flux:uallout.heading>
 			<flux:callout.text>You can checkout the week's <flux:callout.link href="{{ route('week-score', ['week' => $last_week->id]) }}">results</flux:callout.link>!</flux:callout.text>
 		</flux:callout>
 	@endif
