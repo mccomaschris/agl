@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <meta name="theme-color" content="#04954A">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -44,8 +45,8 @@
 	class="font-sans mb-20 pb-10 @yield('body-css') [:where(&amp;)]:bg-zinc-100 [:where(&amp;)]:dark:bg-zinc-900 antialiased min-h-screen theme-accent-blue"
 	x-data="{ mobileOpen: false }"
 >
-    <div id="app" class="pb-12">
-		<nav class="bg-green-500 shadow-sm">
+    <div id="app" class="pb-24 sm:pb-12">
+		<nav class="bg-green-500 shadow-sm" style="padding-top: env(safe-area-inset-top)">
 			<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 				<div class="relative flex h-16 justify-between">
 					<div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -105,17 +106,17 @@
 
 			<div x-show="mobileOpen" x-cloak id="mobile-menu">
 			  	<div class="space-y-1 pt-2 pb-4">
-					<a href="{{ route('team-points', ['year' => $activeYear->name]) }}" class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Team Points</a>
-					<a href="{{ route('handicaps', ['year' => $activeYear->name]) }}" class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Handicaps</a>
-					<a href="{{ route('group-stats', ['year' => $activeYear->name]) }}" class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Group Stats</a>
-					<a href="{{ route('team-stats', ['year' => $activeYear->name]) }}" class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Team Stats</a>
-					<a href="{{ route('standings', ['year' => $activeYear->name]) }}" class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Standings</a>
-					<a href="{{ route('schedule', ['year' => $activeYear->name]) }}" class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Schedule</a>
-					<a href="{{ route('rules') }}" class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Rules</a>
-					<a href="{{ route('history') }}" class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">History &amp; Records</a>
+					<a href="{{ route('team-points', ['year' => $activeYear->name]) }}" wire:navigate class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Team Points</a>
+					<a href="{{ route('handicaps', ['year' => $activeYear->name]) }}" wire:navigate class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Handicaps</a>
+					<a href="{{ route('group-stats', ['year' => $activeYear->name]) }}" wire:navigate class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Group Stats</a>
+					<a href="{{ route('team-stats', ['year' => $activeYear->name]) }}" wire:navigate class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Team Stats</a>
+					<a href="{{ route('standings', ['year' => $activeYear->name]) }}" wire:navigate class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Standings</a>
+					<a href="{{ route('schedule', ['year' => $activeYear->name]) }}" wire:navigate class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Schedule</a>
+					<a href="{{ route('rules') }}" wire:navigate class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Rules</a>
+					<a href="{{ route('history') }}" wire:navigate class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">History &amp; Records</a>
 					@if(Auth::check())
-						<a href="{{ route('waitlist.index') }}" class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Waitlist</a>
-						<a href="{{ route('members') }}" class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Members</a>
+						<a href="{{ route('waitlist.index') }}" wire:navigate class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Waitlist</a>
+						<a href="{{ route('members') }}" wire:navigate class="block border-l-4 border-green-800 bg-green-500 py-2 pr-4 pl-3 text-base font-medium text-white">Members</a>
 					@endif
 				</div>
 			</div>
@@ -129,10 +130,18 @@
             {{ $slot }}
         </div>
     </div>
+    <x-bottom-nav />
+
 	@persist('toast')
         <flux:toast />
     @endpersist
 
 	@fluxScripts
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js');
+        }
+    </script>
 </body>
 </html>

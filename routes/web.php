@@ -17,6 +17,8 @@ use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', SiteIndex::class)->name('home');
 
+Route::get('/offline', fn () => view('offline'))->name('offline');
+
 Route::get('rules', [RuleController::class, 'index'])->name('rules');
 Route::get('agl-history', [HistoryController::class, 'index'])->name('history');
 Route::get('schedule/{year}', [WeekController::class, 'show'])->name('schedule');

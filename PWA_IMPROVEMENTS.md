@@ -102,9 +102,9 @@ Key pages (Team Points, Handicaps) have wide tables that require horizontal scro
 
 | # | Item | Status |
 |---|------|--------|
-| 1 | Bottom navigation bar | ⬜ todo |
-| 2 | `wire:navigate` on nav links | ⬜ todo |
+| 1 | Bottom navigation bar | ✅ done |
+| 2 | `wire:navigate` on nav links | ✅ done |
 | 3 | Fix web manifest | ✅ done |
-| 4 | iOS status bar + safe area | ⬜ todo |
-| 5 | Service worker fix | ⬜ todo |
-| 6 | Table scroll improvements | ⬜ todo |
+| 4 | iOS status bar + safe area | ✅ done |
+| 5 | Service worker fix | ✅ done |
+| 6 | Table scroll improvements | ✅ done |
