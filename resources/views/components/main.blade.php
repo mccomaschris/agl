@@ -38,7 +38,7 @@
 		[x-cloak] { display: none !important; }
 	</style>
 </head>
-<body class="h-screen font-sans mb-20 pb-10 @yield('body-css')">
+<body class="h-screen font-sans mb-20 pb-10 [:where(&)]:bg-zinc-100 [:where(&)]:dark:bg-zinc-900 @yield('body-css')">
     <div id="app">
          <!-- NEW NAV START -->
 		 <div class="bg-green-500">
