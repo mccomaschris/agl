@@ -36,7 +36,7 @@
 
     <button
         type="button"
-        @click="mobileOpen = !mobileOpen"
+        @click="mobileOpen = !mobileOpen; if (mobileOpen) window.scrollTo({ top: 0, behavior: 'smooth' })"
         class="flex-1 flex flex-col items-center justify-center py-2 gap-0.5 text-xs font-medium text-zinc-500"
     >
         <svg x-show="!mobileOpen" class="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
