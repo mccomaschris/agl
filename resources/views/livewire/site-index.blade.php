@@ -7,6 +7,13 @@
 		</flux:callout>
 	@endforeach
 
+	@if ($last_week && $this->weekUpdated)
+		<flux:callout color="green" icon="check-circle" class="mb-12">
+			<flux:callout.heading>Week {{ $last_week->week_order }} scores are up!</flux:callout.heading>
+			<flux:callout.text>You can checkout the week's <flux:callout.link href="{{ route('week-score', ['week' => $last_week->id]) }}">results</flux:callout.link>!</flux:callout.text>
+		</flux:callout>
+	@endif
+
 	@if ($week)
 		<div class="space-y-6">
 			<flux:heading size="lg">{{ $year->name }} Week {{ $week->week_order }} - {{ date('F d, Y', strtotime($week->week_date)) }} Matchups</flux:heading>
