@@ -112,7 +112,7 @@ class UpdatePlayerStats implements ShouldQueue
         $player->tied = 0;
 
         $weeks = Week::where('year_id', $player->year_id)->whereDate('week_date', '<', Carbon::today()->toDateString())->pluck('id');
-        $points_scores = Score::where('player_id', $player->id)->where('score_type', 'weekly_score')->whereIn('foreign_key', $weeks)->get();
+        $points_scores = Score::where('player_id', $player->id)->where('score_type', 'weekly_score')->where('substitute_id', 0)->whereIn('foreign_key', $weeks)->get();
 
         foreach ($points_scores as $score) {
             $week_order = $score->week->week_order;
@@ -270,6 +270,8 @@ class UpdatePlayerStats implements ShouldQueue
         }
 
         // Rank Team By Stats
+        $pastWeeks = Week::where('year_id', $year->id)->whereDate('week_date', '<', Carbon::today()->toDateString())->pluck('id');
+
         $teams = Team::where('year_id', $year->id)->get();
         foreach ($teams as $team) {
             // Reset Each Team
@@ -283,22 +285,31 @@ class UpdatePlayerStats implements ShouldQueue
             $team->p4_points = 0;
 
             $players = Player::where('team_id', $team->id)->get();
-            $points = 0;
 
             foreach ($players as $player) {
-                $team->won += $player->won;
-                $team->lost += $player->lost;
-                $team->tied += $player->tied;
-                $team->points += $player->points;
+                $subScores = Score::where('player_id', $player->id)
+                    ->where('score_type', 'weekly_score')
+                    ->where('substitute_id', '>', 0)
+                    ->whereIn('foreign_key', $pastWeeks)
+                    ->get();
+
+                $team->won += $player->won + $subScores->where('points', 2)->count();
+                $team->lost += $player->lost + $subScores->where('points', 0)->count();
+                $team->tied += $player->tied + $subScores->where('points', 1)->count();
+
+                $subPoints = $subScores->sum('points');
+
+                $positionPoints = $player->points + $subPoints;
+                $team->points += $positionPoints;
 
                 if ($player->position == 1) {
-                    $team->p1_points = $player->points;
+                    $team->p1_points = $positionPoints;
                 } elseif ($player->position == 2) {
-                    $team->p2_points = $player->points;
+                    $team->p2_points = $positionPoints;
                 } elseif ($player->position == 3) {
-                    $team->p3_points = $player->points;
+                    $team->p3_points = $positionPoints;
                 } elseif ($player->position == 4) {
-                    $team->p4_points = $player->points;
+                    $team->p4_points = $positionPoints;
                 }
             }
 
