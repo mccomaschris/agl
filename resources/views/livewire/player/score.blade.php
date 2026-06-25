@@ -266,10 +266,10 @@ new class extends Component
 				@php
 					// Define mappings for weeks and handicap based on the quarter
 					$quarterDetails = [
-						'qtr_1' => ['weeks' => 'Weeks 1-5', 'hc' => $player->hc_first],
-						'qtr_2' => ['weeks' => 'Weeks 6-10', 'hc' => $player->hc_second],
-						'qtr_3' => ['weeks' => 'Weeks 11-15', 'hc' => $player->hc_third],
-						'qtr_4' => ['weeks' => 'Weeks 16-20', 'hc' => $player->hc_fourth],
+						'qtr_1' => ['weeks' => 'Weeks 1-5', 'hc' => format_handicap($player->hc_first)],
+						'qtr_2' => ['weeks' => 'Weeks 6-10', 'hc' => format_handicap($player->hc_second)],
+						'qtr_3' => ['weeks' => 'Weeks 11-15', 'hc' => format_handicap($player->hc_third)],
+						'qtr_4' => ['weeks' => 'Weeks 16-20', 'hc' => format_handicap($player->hc_fourth)],
 					];
 				@endphp
 

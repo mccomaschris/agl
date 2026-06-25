@@ -59,6 +59,17 @@ if (! function_exists('twcss')) {
     }
 }
 
+function format_handicap($hc, int $decimals = 0): string
+{
+    if ($hc > 0) {
+        return '-'.number_format($hc, $decimals, '.', ',');
+    } elseif ($hc < 0) {
+        return '+'.number_format(abs($hc), $decimals, '.', ',');
+    }
+
+    return number_format(0, $decimals, '.', ',');
+}
+
 function formatWinnersList($scores)
 {
     $winners = $scores->map(fn ($score) => $score->player->user->name)->unique();

@@ -52,7 +52,7 @@
                     </x-table.td>
 
                     <x-table.td class="text-center w-[10%] {{ $team === 'teamA' ? 'border-r border-zinc-200' : '' }} dark:text-zinc-200!">
-                        {{ $isSub ? '-' : $player->hc_current }}
+                        {{ $isSub ? '-' : format_handicap($player->hc_current) }}
                     </x-table.td>
                 @endforeach
             </x-table.tr-body>

@@ -19,21 +19,21 @@
 		@foreach ($players as $player)
 			<x-table.tr-body>
 				<x-table.td><a class="font-semibold underline hover:no-underline" href="{{ route('player-score', ['player' => $player->id]) }}">{{ $player->user->name }}</a></x-table.td>
-				<x-table.td>{{ $player->hc_first }}</x-table.td>
-				<x-table.td>{{ $player->hc_second }}</x-table.td>
-				<x-table.td>{{ $player->hc_third }}</x-table.td>
-				<x-table.td>{{ $player->hc_fourth }}</x-table.td>
-				<x-table.td>{{ $player->hc_playoff }}</x-table.td>
-				<x-table.td>{{ $player->hc_18 }}</x-table.td>
-				<x-table.td>{{ $player->hc_playoff }}</x-table.td>
+				<x-table.td>{{ format_handicap($player->hc_first) }}</x-table.td>
+				<x-table.td>{{ format_handicap($player->hc_second) }}</x-table.td>
+				<x-table.td>{{ format_handicap($player->hc_third) }}</x-table.td>
+				<x-table.td>{{ format_handicap($player->hc_fourth) }}</x-table.td>
+				<x-table.td>{{ format_handicap($player->hc_playoff) }}</x-table.td>
+				<x-table.td>{{ format_handicap($player->hc_18) }}</x-table.td>
+				<x-table.td>{{ format_handicap($player->hc_playoff) }}</x-table.td>
 				<x-table.td>
-					 {{ $player->id !== 320 ? number_format($player->hc_full, 4, '.', ',') : '' }}
+					 {{ $player->id !== 320 ? format_handicap($player->hc_full, 4) : '' }}
 				</x-table.td>
 				<x-table.td>
 					{{ $player->id !== 320 ? $player->hc_full_rank : '' }}
 				</x-table.td>
 				@admin
-					<x-table.td>{{ number_format($player->hc_ten, 4, '.', ',') }}</x-table.td>
+					<x-table.td>{{ format_handicap($player->hc_ten, 4) }}</x-table.td>
 				<x-table.td>{{ $player->hc_ten_rank }}</x-table.td>
 				@endadmin
 			</x-table.tr-body>

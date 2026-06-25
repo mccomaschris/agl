@@ -19,17 +19,17 @@
 		@foreach ($players as $player)
 			<tr>
 				<td><a href="{{ route('player-score', ['player' => $player->id]) }}">{{ $player->user->name }}</a></td>
-				<td class="text-center">{{ $player->hc_first }}</td>
-				<td class="text-center">{{ $player->hc_second }}</td>
-				<td class="text-center">{{ $player->hc_third }}</td>
-				<td class="text-center">{{ $player->hc_fourth }}</td>
-				<td class="text-center">{{ $player->hc_playoff }}</td>
-				<td class="text-center">{{ $player->hc_18 }}</td>
-				<td class="text-center">{{ $player->hc_playoff }}</td>
-				<td class="text-center">{{ number_format($player->hc_full, 4, '.', ',') }}</td>
+				<td class="text-center">{{ format_handicap($player->hc_first) }}</td>
+				<td class="text-center">{{ format_handicap($player->hc_second) }}</td>
+				<td class="text-center">{{ format_handicap($player->hc_third) }}</td>
+				<td class="text-center">{{ format_handicap($player->hc_fourth) }}</td>
+				<td class="text-center">{{ format_handicap($player->hc_playoff) }}</td>
+				<td class="text-center">{{ format_handicap($player->hc_18) }}</td>
+				<td class="text-center">{{ format_handicap($player->hc_playoff) }}</td>
+				<td class="text-center">{{ format_handicap($player->hc_full, 4) }}</td>
 				<td class="text-center" width="5%">{{ $player->hc_full_rank }}</td>
                 @admin
-                <td class="text-center">{{ number_format($player->ten, 4, '.', ',') }}</td>
+                <td class="text-center">{{ format_handicap($player->ten, 4) }}</td>
                 @endadmin
 			</tr>
 		@endforeach

@@ -96,7 +96,7 @@
 
 				<div class="flex items-center">
 					<div class="text-zinc-500">HC</div>
-					<div class="ml-1 text-green-500 font-bold text-xl border-b border-dotted border-zinc-500">{{ $player->hc_first }}</div>
+					<div class="ml-1 text-green-500 font-bold text-xl border-b border-dotted border-zinc-500">{{ format_handicap($player->hc_first) }}</div>
 				</div>
 			</div>
 
@@ -109,7 +109,7 @@
 
 				<div class="flex items-center">
 					<div class="text-zinc-500">HC</div>
-					<div class="ml-1 text-green-500 font-bold text-xl border-b border-dotted border-zinc-500">{{ $player->hc_second }}</div>
+					<div class="ml-1 text-green-500 font-bold text-xl border-b border-dotted border-zinc-500">{{ format_handicap($player->hc_second) }}</div>
 				</div>
 			</div>
 
@@ -122,7 +122,7 @@
 
 				<div class="flex items-center">
 					<div class="text-zinc-500">HC</div>
-					<div class="ml-1 text-green-500 font-bold text-xl border-b border-dotted border-zinc-500">{{ $player->hc_third }}</div>
+					<div class="ml-1 text-green-500 font-bold text-xl border-b border-dotted border-zinc-500">{{ format_handicap($player->hc_third) }}</div>
 				</div>
 			</div>
 
@@ -135,7 +135,7 @@
 
 				<div class="flex items-center">
 					<div class="text-zinc-500">HC</div>
-					<div class="ml-1 text-green-500 font-bold text-xl border-b border-dotted border-zinc-500">{{ $player->hc_fourth }}</div>
+					<div class="ml-1 text-green-500 font-bold text-xl border-b border-dotted border-zinc-500">{{ format_handicap($player->hc_fourth) }}</div>
 				</div>
 			</div>
 
