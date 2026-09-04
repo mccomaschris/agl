@@ -28,10 +28,10 @@
 					<x-table.td class="text-center w-[10%] dark:text-zinc-200!">-5</x-table.td>
 				</x-table.tr-body>
 				<x-table.tr-body class="bg-zinc-50 dark:bg-zinc-800!">
-					<x-table.td class="w-[40%] border-r-0! pl-2! pr-2!">S Adkins</x-table.td>
-					<x-table.td class="text-center w-[10%] dark:text-zinc-200! border-r border-zinc-200">-6</x-table.td>
-					<x-table.td class="w-[40%] border-r-0! pl-2! pr-2! text-left!">Dishman</x-table.td>
-					<x-table.td class="text-center w-[10%] dark:text-zinc-200!">-4</x-table.td>
+					<x-table.td class="w-[40%] border-r-0! pl-2! pr-2!">Dishman</x-table.td>
+					<x-table.td class="text-center w-[10%] dark:text-zinc-200! border-r border-zinc-200">-4</x-table.td>
+					<x-table.td class="w-[40%] border-r-0! pl-2! pr-2! text-left!">S Adkins</x-table.td>
+					<x-table.td class="text-center w-[10%] dark:text-zinc-200!">-6</x-table.td>
 				</x-table.tr-body>
 				<x-table.tr-body class="bg-zinc-50 dark:bg-zinc-800!">
 					<x-table.td class="w-[40%] border-r-0! pl-2! pr-2!">R Mills</x-table.td>
