@@ -29,7 +29,7 @@
 		</div>
 	@endif
 
-	{{-- <x-playoffs /> --}}
+	<x-playoffs />
 
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12 pb-12">
 		<div class="lg:col-span-2">
