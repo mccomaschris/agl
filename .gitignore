@@ -13,6 +13,7 @@ npm-debug.log
 yarn-error.log
 .DS_Store
 .php_cs.cache
+/.amp/portals/
 
 /storage/framework/thundr-files/
 /storage/logs/

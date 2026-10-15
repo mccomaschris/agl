@@ -1,0 +1,168 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$repo_root"
+
+log_step() {
+    printf '\n==> %s\n' "$1"
+}
+
+install_apt_packages() {
+    local missing_packages=()
+    local package
+
+    for package in "$@"; do
+        if ! dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -q '^install ok installed$'; then
+            missing_packages+=("$package")
+        fi
+    done
+
+    if ((${#missing_packages[@]} == 0)); then
+        return
+    fi
+
+    sudo apt-get update -qq
+    sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends "${missing_packages[@]}"
+}
+
+setup_started=$SECONDS
+
+log_step 'Installing system packages and PHP 8.4'
+step_started=$SECONDS
+install_apt_packages ca-certificates curl git gnupg sqlite3 unzip
+
+if ! apt-cache show php8.4-cli >/dev/null 2>&1; then
+    key_file="$(mktemp)"
+    trap 'rm -f "$key_file"' EXIT
+    curl -fsSL https://packages.sury.org/php/apt.gpg -o "$key_file"
+    sudo install -m 0644 "$key_file" /etc/apt/keyrings/php.gpg
+    printf 'deb [signed-by=/etc/apt/keyrings/php.gpg] https://packages.sury.org/php/ bookworm main\n' \
+        | sudo tee /etc/apt/sources.list.d/php.list >/dev/null
+    sudo apt-get update -qq
+fi
+
+install_apt_packages \
+    php8.4-cli \
+    php8.4-curl \
+    php8.4-mbstring \
+    php8.4-sqlite3 \
+    php8.4-xml
+
+if [[ "$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')" != '8.4' ]]; then
+    sudo update-alternatives --set php /usr/bin/php8.4
+fi
+printf 'System packages ready in %ss.\n' "$((SECONDS - step_started))"
+
+log_step 'Installing Composer'
+step_started=$SECONDS
+if ! command -v composer >/dev/null 2>&1; then
+    installer_file="$(mktemp)"
+    expected_signature="$(curl -fsSL https://composer.github.io/installer.sig)"
+    curl -fsSL https://getcomposer.org/installer -o "$installer_file"
+    actual_signature="$(php -r "echo hash_file('sha384', '$installer_file');")"
+
+    if [[ "$actual_signature" != "$expected_signature" ]]; then
+        printf 'Composer installer signature verification failed.\n' >&2
+        exit 1
+    fi
+
+    sudo php "$installer_file" --quiet --install-dir=/usr/local/bin --filename=composer
+    rm -f "$installer_file"
+fi
+printf 'Composer ready in %ss.\n' "$((SECONDS - step_started))"
+
+log_step 'Installing the Node.js version pinned by .nvmrc'
+step_started=$SECONDS
+export NVM_DIR="$HOME/.nvm"
+nvm_version='v0.40.3'
+
+if [[ ! -s "$NVM_DIR/nvm.sh" ]]; then
+    mkdir -p "$NVM_DIR"
+    curl -fsSL "https://github.com/nvm-sh/nvm/archive/refs/tags/${nvm_version}.tar.gz" \
+        | tar -xz --strip-components=1 -C "$NVM_DIR"
+fi
+
+# shellcheck disable=SC1091
+source "$NVM_DIR/nvm.sh" --no-use
+node_version="$(tr -d '[:space:]' < .nvmrc)"
+nvm install --no-progress "$node_version"
+nvm use --silent "$node_version"
+
+profile_marker='# agl Node.js toolchain'
+if ! grep -Fqx "$profile_marker" "$HOME/.bash_profile" 2>/dev/null; then
+    cat >> "$HOME/.bash_profile" <<EOF
+
+$profile_marker
+if [[ "\${PWD}" == "$repo_root" || "\${PWD}" == "$repo_root/"* ]]; then
+    export NVM_DIR="\$HOME/.nvm"
+    # shellcheck disable=SC1091
+    [[ ! -s "\$NVM_DIR/nvm.sh" ]] || source "\$NVM_DIR/nvm.sh" --no-use
+    nvm use --silent >/dev/null
+fi
+EOF
+fi
+printf 'Node.js ready in %ss.\n' "$((SECONDS - step_started))"
+
+log_step 'Preparing the local Laravel environment'
+step_started=$SECONDS
+mkdir -p \
+    bootstrap/cache \
+    storage/app/public \
+    storage/framework/cache/data \
+    storage/framework/sessions \
+    storage/framework/testing \
+    storage/framework/views \
+    storage/logs
+touch database/database.sqlite
+
+if [[ ! -f .env ]]; then
+    cat > .env <<'EOF'
+APP_NAME=AGL
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost
+
+LOG_CHANNEL=stack
+LOG_LEVEL=debug
+
+DB_CONNECTION=sqlite
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DRIVER=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+
+MAIL_MAILER=log
+MAIL_FROM_ADDRESS=hello@example.com
+MAIL_FROM_NAME="${APP_NAME}"
+EOF
+fi
+
+if ! grep -Eq '^APP_KEY=.+$' .env; then
+    app_key="base64:$(php -r 'echo base64_encode(random_bytes(32));')"
+    sed -i "s|^APP_KEY=.*$|APP_KEY=$app_key|" .env
+fi
+printf 'Laravel environment ready in %ss.\n' "$((SECONDS - step_started))"
+
+log_step 'Installing locked PHP dependencies'
+step_started=$SECONDS
+composer install --no-interaction --prefer-dist --no-progress
+printf 'PHP dependencies ready in %ss.\n' "$((SECONDS - step_started))"
+
+log_step 'Installing locked frontend dependencies'
+step_started=$SECONDS
+npm ci --no-audit --no-fund
+printf 'Frontend dependencies ready in %ss.\n' "$((SECONDS - step_started))"
+
+log_step 'Migrating the local SQLite database'
+step_started=$SECONDS
+php artisan migrate --force --no-interaction
+if [[ ! -e public/storage ]]; then
+    php artisan storage:link --no-interaction
+fi
+printf 'Local database ready in %ss.\n' "$((SECONDS - step_started))"
+
+printf '\nOrb setup completed in %ss.\n' "$((SECONDS - setup_started))"
