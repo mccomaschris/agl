@@ -72,6 +72,24 @@ if ! command -v composer >/dev/null 2>&1; then
 fi
 printf 'Composer ready in %ss.\n' "$((SECONDS - step_started))"
 
+log_step 'Installing the Laravel Cloud CLI'
+step_started=$SECONDS
+composer_global_bin="$(composer config --global bin-dir --absolute)"
+
+if [[ ! -x "$composer_global_bin/cloud" ]]; then
+    composer global require laravel/cloud-cli --no-interaction --prefer-dist --no-progress
+fi
+
+cloud_profile_marker='# Laravel Cloud CLI'
+if ! grep -Fqx "$cloud_profile_marker" "$HOME/.bash_profile" 2>/dev/null; then
+    cat >> "$HOME/.bash_profile" <<EOF
+
+$cloud_profile_marker
+export PATH="$composer_global_bin:\$PATH"
+EOF
+fi
+printf 'Laravel Cloud CLI ready in %ss.\n' "$((SECONDS - step_started))"
+
 log_step 'Installing the Node.js version pinned by .nvmrc'
 step_started=$SECONDS
 export NVM_DIR="$HOME/.nvm"
