@@ -5,8 +5,9 @@ use App\Models\Player;
 use App\Models\Score;
 use App\Models\Week;
 use App\Models\Year;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 it('calculates quarter 1 handicap correctly for a player with all rounds', function () {
     // Arrange
@@ -21,9 +22,6 @@ it('calculates quarter 1 handicap correctly for a player with all rounds', funct
     ])
     );
 
-    $savedWeeks = Week::all(); // Fetches all Score records in the test database
-    dump($savedWeeks->toArray()); // See what is actually stored
-
     // Assign scores to the player for those **exact weeks**
     $scores = collect([40, 42, 38, 36, 39])->map(function ($score, $index) use ($player, $weeks) {
         return Score::factory()->create([
@@ -33,10 +31,6 @@ it('calculates quarter 1 handicap correctly for a player with all rounds', funct
             'gross' => $score,
         ]);
     });
-
-    // ✅ Fetch the actual saved scores from the database and dump them
-    $savedScores = Score::all(); // Fetches all Score records in the test database
-    dump($savedScores->toArray()); // See what is actually stored
 
     // Act
     (new UpdateHandicaps($player))->handle();
@@ -64,9 +58,6 @@ it('calculates quarter 1 handicap correctly for a player who missed a round', fu
     ])
     );
 
-    $savedWeeks = Week::all(); // Fetches all Score records in the test database
-    dump($savedWeeks->toArray()); // See what is actually stored
-
     // Assign scores to the player for those **exact weeks**
     $scores = collect([40, 42, 38, 36])->map(function ($score, $index) use ($player, $weeks) {
         return Score::factory()->create([
@@ -76,10 +67,6 @@ it('calculates quarter 1 handicap correctly for a player who missed a round', fu
             'gross' => $score,
         ]);
     });
-
-    // ✅ Fetch the actual saved scores from the database and dump them
-    $savedScores = Score::all(); // Fetches all Score records in the test database
-    dump($savedScores->toArray()); // See what is actually stored
 
     // Act
     (new UpdateHandicaps($player))->handle();
